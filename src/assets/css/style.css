@@ -1,0 +1,546 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: #e6ecf0;
+  font-family: Helvetica, Arial, sans-serif;
+  text-rendering: optimizeLegibility !important;
+  -webkit-font-smoothing: antialiased !important;
+}
+
+input,
+button {
+  outline: 0;
+}
+
+#custom-profile-css .content {
+  max-width: 1170px;
+  margin: 0 auto;
+  padding: 0 30px;
+}
+
+#custom-profile-css .main-header {
+  height: 46px;
+  background: #fff;
+  box-shadow: 0 1px 1px rgba(0, 0, 0, 0.25);
+  position: sticky;
+  top: 0;
+  z-index: 1;
+}
+
+#custom-profile-css .main-header .content {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+#custom-profile-css .main-header nav ul {
+  display: flex;
+  list-style: none;
+  margin-bottom: 0;
+}
+
+#custom-profile-css .main-header nav ul li {
+  display: flex;
+  align-items: center;
+
+  font-size: 13px;
+  color: #667580;
+  font-weight: bold;
+
+  margin-left: 30px;
+}
+
+#custom-profile-css .main-header nav ul li:first-child {
+  margin: 0;
+}
+
+#custom-profile-css .main-header nav ul li img {
+  margin-right: 7px;
+}
+
+#custom-profile-css .main-header div.side {
+  display: flex;
+}
+
+#custom-profile-css .main-header div.side input {
+  width: 220px;
+  border: 1px solid #e6ecf0;
+  height: 34px;
+  padding: 0 30px 0 12px;
+  border-radius: 16px;
+  color: #667581;
+  font-size: 12px;
+  background: #f5f8fa url("../img/search.svg") no-repeat 190px center;
+}
+
+#custom-profile-css .main-header div.side img {
+  height: 34px;
+  width: 34px;
+  border-radius: 50%;
+  margin: 0 15px;
+}
+
+.btn-tweet {
+  height: 34px;
+  background: #3bb9e3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 90px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #fff;
+  border: 0;
+  border-radius: 16px;
+}
+
+#custom-profile-css div.banner {
+  height: 380px;
+  width: 100%;
+  background: #3bb9e3;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  color: #fff;
+}
+
+#custom-profile-css div.bar {
+  height: 59px;
+  background: #fff;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.25);
+}
+
+#custom-profile-css .bar .content {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 285px;
+  height: 100%;
+}
+
+#custom-profile-css .bar .content ul {
+  display: flex;
+  list-style: none;
+  height: 100%;
+  margin-bottom: 0;
+}
+
+#custom-profile-css .bar .content ul li {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 0 15px;
+  position: relative;
+}
+
+#custom-profile-css .bar .content ul li.active::after {
+  content: "";
+  width: 100%;
+  height: 2px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  background: #3bb9e3;
+}
+
+#custom-profile-css .bar .content ul li span {
+  color: #667580;
+  font-size: 12px;
+  font-weight: bold;
+}
+
+#custom-profile-css .bar .content ul li strong {
+  color: #667580;
+  font-size: 18px;
+  font-weight: bold;
+  margin-top: 2px;
+}
+
+#custom-profile-css .bar .content ul li.active strong {
+  color: #3bb9e3;
+}
+
+#custom-profile-css .bar .content .actions {
+  display: flex;
+}
+
+#custom-profile-css .actions button {
+  height: 34px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 90px;
+  font-weight: bold;
+  font-size: 14px;
+  background: #fff;
+  color: #3bb9e3;
+  border: 1px solid #3bb9e3;
+  border-radius: 16px;
+
+  margin-right: 20px;
+}
+
+#custom-profile-css div.wrapper-content {
+  display: flex;
+}
+
+.profile img.avatar {
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  border: 3px solid #fff;
+  margin-top: -130px;
+}
+
+#custom-profile-css div.wrapper-content aside.profile h1 {
+  font-size: 21px;
+  color: #1f2226;
+  margin-top: 10px;
+}
+
+#custom-profile-css div.wrapper-content aside.profile span {
+  font-size: 14px;
+  color: #53626c;
+}
+
+#custom-profile-css div.wrapper-content aside.profile p {
+  font-size: 14px;
+  color: #1f2226;
+  margin-top: 15px;
+}
+
+#custom-profile-css div.wrapper-content aside.profile ul {
+  margin-top: 20px;
+  list-style: none;
+}
+
+#custom-profile-css div.wrapper-content aside.profile ul.list li {
+  font-size: 14px;
+  color: #657786;
+
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
+}
+
+#custom-profile-css div.wrapper-content aside.profile ul.list li:first-child {
+  margin: 0;
+}
+
+#custom-profile-css div.wrapper-content aside.profile ul.list li img {
+  margin-right: 10px;
+}
+
+#custom-profile-css div.wrapper-content aside.profile .widget {
+  margin-top: 20px;
+}
+
+#custom-profile-css div.wrapper-content aside.profile .widget strong {
+  font-weight: normal;
+  color: #3bb9e3;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+#custom-profile-css div.wrapper-content aside.profile .widget strong img {
+  margin-right: 5px;
+}
+
+#custom-profile-css div.wrapper-content aside.profile .followers ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#custom-profile-css div.wrapper-content aside.profile .followers ul li {
+  width: 45px;
+  height: 45px;
+  background: #d0d5d9;
+  border-radius: 50%;
+  flex: 1 0 auto;
+  margin: 0 5px 5px 0;
+}
+
+#custom-profile-css div.wrapper-content aside.profile .images ul {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+#custom-profile-css div.wrapper-content aside.profile .images ul li {
+  width: 80px;
+  height: 80px;
+  background: #d0d5d9;
+  border-radius: 8px;
+  flex: 1 0 auto;
+  margin: 0 5px 5px 0;
+}
+
+#custom-profile-css div.wrapper-content section.timeline {
+  background: #fff;
+  margin: 10px 0 0;
+}
+
+#custom-profile-css div.wrapper-content section.timeline nav {
+  border-bottom: 1px solid #e6ecf0;
+  padding: 10px 15px;
+}
+
+#custom-profile-css div.wrapper-content section.timeline nav a {
+  text-decoration: none;
+  color: #3bb9e3;
+  font-size: 18px;
+  font-weight: bold;
+  margin-left: 20px;
+}
+
+#custom-profile-css div.wrapper-content section.timeline nav a:first-child {
+  margin: 0;
+}
+
+#custom-profile-css div.wrapper-content section.timeline nav a.active {
+  color: #1f2226;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets {
+  list-style: none;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li {
+  border-bottom: 1px solid #e6ecf0;
+  padding: 10px 15px;
+  display: flex;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li > img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .info {
+  margin-left: 10px;
+  display: flex;
+  flex-direction: column;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .info strong {
+  font-size: 14px;
+  color: #1f2326;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .info strong span {
+  font-weight: normal;
+  font-size: 13px;
+  color: #7b8b9a;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .info p {
+  font-size: 14px;
+  color: #1f2326;
+  margin-top: 5px;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .actions {
+  display: flex;
+  margin-top: 20px;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .actions a {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  color: #667580;
+  font-weight: bold;
+  font-size: 12px;
+  margin-left: 30px;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .actions a:first-child {
+  margin-left: 0px;
+}
+
+#custom-profile-css div.wrapper-content section.timeline ul.tweets li .actions a img {
+  margin-right: 5px;
+}
+
+.wrapper-content aside.widgets {
+  margin-top: 10px;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .widget {
+  background: #fff;
+  padding: 15px;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .widget .title {
+  display: flex;
+  align-items: baseline;
+  padding-bottom: 20px;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .widget .title strong {
+  font-size: 18px;
+  color: #1f2226;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .widget .title a {
+  font-size: 12px;
+  color: #3bb9e3;
+  text-decoration: none;
+  position: relative;
+  padding-left: 10px;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .widget .title a::before {
+  content: "";
+  width: 2px;
+  height: 2px;
+  border-radius: 50%;
+  background: #222;
+  position: absolute;
+  left: 4px;
+  top: 6px;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul {
+  list-style: none;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li {
+  display: flex;
+  justify-content: space-between;
+  border-bottom: 1px solid #ccd6dd;
+  padding-bottom: 10px;
+  margin-bottom: 10px;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li:last-child {
+  border: 0;
+  padding-bottom: 0;
+  margin-bottom: 0;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li .profile {
+  display: flex;
+  justify-content: space-between;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li .profile img {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li .profile .info {
+  margin-left: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li .profile .info strong {
+  font-size: 14px;
+  color: #1f2326;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li .profile .info strong span {
+  font-weight: normal;
+  color: #9a9a9a;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li .profile .info button {
+  height: 27px;
+  margin-top: 4px;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  width: 90px;
+  font-weight: bold;
+  font-size: 14px;
+  color: #3bb9e3;
+  background: #fff;
+  border: 1px solid #3bb9e3;
+  border-radius: 16px;
+}
+
+#custom-profile-css div.wrapper-content aside.widgets .follow ul li > a {
+  font-size: 14px;
+  color: #ccd6dd;
+  text-decoration: none;
+}
+
+@media (min-width: 768px) and (max-width: 991.98px) {
+  #custom-profile-css .btn-tweet {
+    display: none;
+  }
+}
+
+@media (min-width: 480px) and (max-width: 767.98px) {
+  #custom-profile-css .main-header {
+    display: none;
+  }
+  #custom-profile-css .profile img.avatar {
+    width: 120px;
+    height: 120px;
+    margin-top: -100px;
+  }
+  #custom-profile-css .bar .content {
+    padding: 0 30px;
+  }
+  #custom-profile-css .bar .content ul li {
+    display: none;
+  }
+  #custom-profile-css .wrapper-content aside.widgets {
+    margin-bottom: 100px;
+  }
+  #custom-profile-css .footer-menu {
+    display: block;
+  }
+}
+
+@media (max-width: 479.98px) {
+  #custom-profile-css .content {
+    padding: 0 15px;
+  }
+  #custom-profile-css .main-header {
+    display: none;
+  }
+  #custom-profile-css .profile img.avatar {
+    width: 100px;
+    height: 100px;
+    margin-top: -90px;
+  }
+  #custom-profile-css .bar .content {
+    padding: 0 30px;
+  }
+  #custom-profile-css .bar .content ul li {
+    display: none;
+  }
+  #custom-profile-css .actions button {
+    margin-right: 0;
+  }
+  #custom-profile-css .more-btn {
+    display: none;
+  }
+  #custom-profile-css .wrapper-content aside.widgets {
+    margin-bottom: 100px;
+  }
+  #custom-profile-css .footer-menu {
+    display: block;
+  }
+}
