@@ -1,24 +1,32 @@
-import React from "react";
-import { withRouter, Link } from "react-router-dom";
+import React from 'react'
 import {
-  Button,
   Container,
   Divider,
+  Dropdown,
   Grid,
   Header,
-  Icon,
   Image,
   List,
   Menu,
-  Responsive,
   Segment,
-  Sidebar,
-  Visibility,
-  Label,
-  Input,
-  Card,
-  Dropdown
+  Button
 } from 'semantic-ui-react'
+import { Link, Route, Switch, withRouter } from "react-router-dom";
+import Signup from "../Components/Signup";
+import Login from "../Components/Login";
+import Home from "../Components/Home";
+import StrainForm from '../Components/StrainForm'
+import UserContentDisplay from '../Components/UserContentDisplay'
+import Search from '../Components/Search'
+import NewDispensaryForm from '../Components/NewDispensaryForm'
+import EditDispensaryForm from '../Components/EditDispensaryForm'
+import NewStrainForm from '../Components/StrainForm'
+import EditStrainForm from '../Components/EditStrainForm'
+import Profile from '../Components/Profile.js'
+import StrainProfile from '../Components/StrainProfile.js'
+import StrainReview from '../Components/StrainReview.js'
+
+import Error from "../Components/Error";
 
 import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
@@ -38,495 +46,126 @@ import MobileNavBar from "../Components/MobileNavBar"
 
 import "../assets/css/bundle.css";
 
+
+
+
+
+
 const GuestContainerLayout = (props) => {
-  console.log(props);
 
-  return (
-    <React.Fragment>
-      <div id="custom-css-product">
-        <header className="main-header">
-          <div className="container content">
-            <nav>
-              <ul>
-                <li>
-                  <img src={home} alt="Home" /> Home
-                </li>
-                <li>
-                  <img src={notification} alt="Notifications" />
-                  Notifications
-                </li>
-                <li>
-                  <img src={message} alt="Messages" /> Messages
-                </li>
-              </ul>
-            </nav>
-            <img src={logo} alt="Logo Twitter" />
-            <div className="side">
-              <input type="text" placeholder="Search on Twitter" />
-              <img src={avatar} alt="Avatar" />
-              <button className="btn-tweet">Tweet</button>
-            </div>
-          </div>
-        </header>
+     console.log(props)
 
-        <div className="page-detail" style={{ marginTop: "50px" }}>
-          <div className="container">
-            <div className="row">
-              <div className="col-md-12">
-                <div className="section-1-title-breadcrumb-rating u-s-m-b-8">
-                  <div className="product-title">
-                    <h1>
-                      <Link to="/">Casual Hoodie Full Cotton</Link>
-                    </h1>
-                  </div>
-                  <ul className="bread-crumb">
-                    <li className="has-separator">
-                      <Link to="/">Home</Link>
-                    </li>
-                    <li className="has-separator">
-                      <Link to="/">Men's Clothing</Link>
-                    </li>
-                    <li className="has-separator">
-                      <Link to="/">Tops</Link>
-                    </li>
-                    <li className="is-marked">
-                      <Link to="/">Hoodies</Link>
-                    </li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-            <div className="row">
-              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                <div className="thumbnail-row">
-                  <Link>
-                    <img src={p1} alt="Product" />
-                  </Link>
-                  <Link>
-                    <img src={p2} alt="Product" />
-                  </Link>
-                  <Link>
-                    <img src={p3} alt="Product" />
-                  </Link>
-                  <Link>
-                    <img src={p4} alt="Product" />
-                  </Link>
-                  <Link>
-                    <img src={p1} alt="Product" />
-                  </Link>
-
-                </div>
-                <div className="zoom-area">
-                  <img
-                    id="zoom-pro"
-                    className="img-fluid"
-                    src={p1}
-                    data-zoom-image="images/product/product@4x.jpg"
-                    alt="Zoom"
-                  />
-                  <span className="favouite">
-                    <img src={heart} alt="like" className="fav" />
-                  </span>
-                </div>
-              </div>
-              <div className="col-sm-12 col-md-6 col-lg-6 col-xl-6">
-                <div className="all-information-wrapper">
-                  <div className="section-3-price-original-discount u-s-p-y-14">
-                    <div className="price">
-                      <h4>$55.00</h4>
-                    </div>
-                    <div className="product-rating">
-                      <div
-                        className="star"
-                        title="4.5 out of 5 - based on 23 Reviews"
-                      >
-                        <span style={{ width: "67px" }}></span>
-                      </div>
-                      <span>23</span>
-                    </div>
-                  </div>
-                  <div className="section-5-product-variants u-s-p-y-14">
-                    <div className="section-6-social-media-quantity-actions u-s-p-y-14">
-                      <form action="#" className="post-form">
-                        <div className="form-group custom-dropdown">
-                          <label for="exampleFormControlSelect1">
-                            Quantity
-                          </label>
-                          <select
-                            className="form-control"
-                            id="exampleFormControlSelect1"
-                          >
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                          </select>
-                        </div>
-                      </form>
-                    </div>
-                    <div className="size-group">
-                      <h6 className="information-heading u-s-m-b-8">
-                        Size Group
-                        <span className="h-text-normal">Mens</span>
-                      </h6>
-                      <div className="u-s-m-b-11">
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          Mens
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          Mens Tall
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          Mens Big
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          Mens Big and Tall
-                        </button>
-                      </div>
-                    </div>
-                    <div className="size">
-                      <h6 className="information-heading u-s-m-b-8">
-                        Size
-                        <span className="h-text-normal">L</span>
-                      </h6>
-                      <div className="u-s-m-b-11">
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          S
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          M
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          L
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          XL
-                        </button>
-                      </div>
-                    </div>
-                    <div className="color">
-                      <h6 className="information-heading u-s-m-b-8">
-                        Color
-                        <span className="h-text-normal">Black</span>
-                      </h6>
-                      <div className="color u-s-m-b-11">
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          <img src={c1} alt="c1" className="c1" />
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          <img src={c2} alt="c2" className="c1" />
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          <img src={c3} alt="c3" className="c1" />
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          <img src={c1} alt="c1" className="c1" />
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          <img src={c2} alt="c2" className="c1" />
-                        </button>
-                        <button type="button" className="btn btn-outline-dark btn-m ml-0">
-                          <img src={c3} alt="c3" className="c1" />
-                        </button>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
+return (
+<div id="custom-css-product">
+    <header className="main-header">
+      <div className="container content">
+        <nav>
+          <ul>
+            <li>
+              <img src={home} alt="Home" /> Home
+            </li>
+            <li>
+              <img src={notification} alt="Notifications" />
+              Notifications
+            </li>
+            <li>
+              <img src={message} alt="Messages" /> Messages
+            </li>
+          </ul>
+        </nav>
+        <img src={logo} alt="Logo Twitter" />
+        <div className="side">
+          <input type="text" placeholder="Search on Twitter" />
+          <img src={avatar} alt="Avatar" />
+          <button className="btn-tweet">Tweet</button>
         </div>
-
-        <div className="container wrapper">
-          <div className="row">
-            <div className="col-12">
-              <div className="card">
-                <div className="card-body">
-                  <h4 className="review-header">So Comfortable</h4>
-                  <div
-                    className="star review-star"
-                    title="4.5 out of 5 - based on 23 Reviews"
-                  >
-                    <span style={{ width: "75px" }}></span>
-                  </div>
-                  <p className="timestamp">
-                    Babe - 2 days ago, <spna>Verified purchaser</spna>
-                  </p>
-                  <p className="text-justify review-text">
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing Lorem Ipsum
-                    passages, and more recently with desktop publishing software
-                    like Aldus PageMaker including versions of Lorem Ipsum.
-                  </p>
-
-                  <div className="row">
-                    <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                      <div className="c100 p100 small green">
-                        <span>5.0</span>
-                        <div className="slice">
-                          <div className="bar"></div>
-                          <div className="fill"></div>
-                        </div>
-                      </div>
-                      <div className="rating-info">
-                        <h5>Comfort</h5>
-                        <p>out of 5</p>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                      <div className="c100 p100 small green">
-                        <span>5.0</span>
-                        <div className="slice">
-                          <div className="bar"></div>
-                          <div className="fill"></div>
-                        </div>
-                      </div>
-                      <div className="rating-info">
-                        <h5>Style</h5>
-                        <p>out of 5</p>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                      <div className="c100 p100 small green">
-                        <span>5.0</span>
-                        <div className="slice">
-                          <div className="bar"></div>
-                          <div className="fill"></div>
-                        </div>
-                      </div>
-                      <div className="rating-info">
-                        <h5>Value</h5>
-                        <p>out of 5</p>
-                      </div>
-                    </div>
-                    <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                      <div className="c100 p100 small green">
-                        <span>5.0</span>
-                        <div className="slice">
-                          <div className="bar"></div>
-                          <div className="fill"></div>
-                        </div>
-                      </div>
-                      <div className="rating-info">
-                        <h5>Sizing</h5>
-                        <p>out of 5</p>
-                      </div>
-                    </div>
-                  </div>
-
-                  <p className="mt-3 mb-3">Did you find this review helpful?</p>
-
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary btn-block"
-                  >
-                    Helpful
-                  </button>
-                  <button
-                    type="button"
-                    className="btn btn-outline-secondary btn-block"
-                  >
-                    Not Helpful
-                  </button>
-                  <div className="d-flex justify-content-end mt-4">
-                    <u>Report review</u>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className="container wrapper">
-                <div className="card">
-                  <div className="card-body">
-          <div className="row">
-            <div className="col-12">
-
-
-              <h2 className="text-center">Guest Ratings &amp; Reviews</h2>
-              <div className="row">
-                <div className="col-6 d-flex flex-column justify-content-center align-items-center self-review-star">
-                  <span>4.0</span>
-                  <div
-                    className="star"
-                    title="4.5 out of 5 - based on 23 Reviews"
-                  >
-                    <span style={{ width: "60px" }}></span>
-
-                  </div>
-                  <p>86 star ratings</p>
-                </div>
-                <div className="col-6 d-flex flex-column justify-content-center align-items-center">
-                  <div className="c100 p100 small green">
-                    <span>5.0</span>
-                    <div className="slice">
-                      <div className="bar"></div>
-                      <div className="fill"></div>
-                    </div>
-                  </div>
-                  <h4 className="review-propositon">69% would recommend</h4>
-                  <p>36 recommendations</p>
-                </div>
-              </div>
-              <div className="row mt-3 mb-3">
-                <div className="col-12">
-                  <div className="d-flex">
-                    <div className="bar-side">
-                      <div>5 star</div>
-                    </div>
-                    <div className="middle">
-                      <div className="bar-container">
-                        <div className="bar-5"></div>
-                      </div>
-                    </div>
-                    <div className="bar-side right">
-                      <div>150</div>
-                    </div>
-                  </div>
-
-                  <div className="d-flex">
-                    <div className="bar-side">
-                      <div>4 star</div>
-                    </div>
-                    <div className="middle">
-                      <div className="bar-container">
-                        <div className="bar-4"></div>
-                      </div>
-                    </div>
-                    <div className="bar-side right">
-                      <div>63</div>
-                    </div>
-                  </div>
-
-                  <div className="d-flex">
-                    <div className="bar-side">
-                      <div>3 star</div>
-                    </div>
-                    <div className="middle">
-                      <div className="bar-container">
-                        <div className="bar-3"></div>
-                      </div>
-                    </div>
-                    <div className="bar-side right">
-                      <div>15</div>
-                    </div>
-                  </div>
-
-                  <div className="d-flex">
-                    <div className="bar-side">
-                      <div>2 star</div>
-                    </div>
-                    <div className="middle">
-                      <div className="bar-container">
-                        <div className="bar-2"></div>
-                      </div>
-                    </div>
-                    <div className="bar-side right">
-                      <div>6</div>
-                    </div>
-                  </div>
-
-                  <div className="d-flex">
-                    <div className="bar-side">
-                      <div>1 star</div>
-                    </div>
-                    <div className="middle">
-                      <div className="bar-container">
-                        <div className="bar-1"></div>
-                      </div>
-                    </div>
-                    <div className="bar-side right">
-                      <div>20</div>
-                    </div>
-                  </div>
-                </div>
-              </div>
-              <div className="row">
-                <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                  <div className="c100 p100 small green">
-                    <span>5.0</span>
-                    <div className="slice">
-                      <div className="bar"></div>
-                      <div className="fill"></div>
-                    </div>
-                  </div>
-                  <div className="rating-info">
-                    <h5>Comfort</h5>
-                    <p>out of 5</p>
-                  </div>
-                </div>
-                <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                  <div className="c100 p100 small green">
-                    <span>5.0</span>
-                    <div className="slice">
-                      <div className="bar"></div>
-                      <div className="fill"></div>
-                    </div>
-                  </div>
-                  <div className="rating-info">
-                    <h5>Style</h5>
-                    <p>out of 5</p>
-                  </div>
-                </div>
-                <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                  <div className="c100 p100 small green">
-                    <span>5.0</span>
-                    <div className="slice">
-                      <div className="bar"></div>
-                      <div className="fill"></div>
-                    </div>
-                  </div>
-                  <div className="rating-info">
-                    <h5>Value</h5>
-                    <p>out of 5</p>
-                  </div>
-                </div>
-                <div className="col-md-4 col-6 d-flex align-items-center mt-3">
-                  <div className="c100 p100 small green">
-                    <span>5.0</span>
-                    <div className="slice">
-                      <div className="bar"></div>
-                      <div className="fill"></div>
-                    </div>
-                  </div>
-                  <div className="rating-info">
-                    <h5>Sizing</h5>
-                    <p>out of 5</p>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div className="row mt-4 pb-5 d-flex flex-column customer-review-image" style={{height: "295px"}}>
-            <h2 className="text-center">Review images</h2>
-            <div className="d-flex justify-content-center">
-              <Link>
-                <img src={p1} className="review-image" alt="Product" />
-              </Link>
-              <Link>
-                <img src={p2} className="review-image" alt="Product" />
-              </Link>
-              <Link>
-                <img src={p2} className="review-image" alt="Product" />
-              </Link>
-            </div>
-          </div>
-        </div>
-    </div>
-    </div>
-    </div>
       </div>
+    </header>
 
-    </React.Fragment>
-  );
-};
-//When logged in nav bar available <MobileNavBar active="product" />
+    <Container text style={{ marginTop: '2em' }}>
+    <Switch>
+        <Route
+            path="/strains/:strain_name/strainreview/:id"
+            render={() => <StrainReview submitNewStrainReviewHandler={props.submitNewStrainReviewHandler} submitCommentHandler={props.submitCommentHandler} />}
+            />
+        <Route path="/strains/:strain_name/:id"
+            render={() => <StrainProfile user={props.user}  strains={props.strains} submitCommentHandler={props.submitCommentHandler}/>} />
+        <Route
+            path="/:username/newstrain"
+            render={() => <NewStrainForm submitHandler={props.submitHandler} user={props.user} />}
+            />
+            <Route
+                path="/:username/editstrain/:id"
+                render={() => <EditStrainForm editStrainHandler={props.editStrainHandler} user={props.user} />}
+                />
+        <Route
+            path="/:username/newdispensary"
+            render={() => <NewDispensaryForm submitHandler={props.submitHandler} user={props.user} />}
+            />
+            <Route
+                path="/:namespace/editdispensary/:id"
+                render={() => <EditDispensaryForm editDispensaryHandler={props.editDispensaryHandler} user={props.user} dispensary={props.dispensary} />}
+                />
+        <Route
+            path="/signup"
+            render={() => <Signup signUpSubmitHandler={props.signUpSubmitHandler} />}
+            />
+        <Route
+            path="/login"
+            render={() => <Login loginHandler={props.loginHandler} />}
+            />
+        <Route path="/strains" render={renderProps => {
+          return (
+            <div>
+            <Search></Search>
+            <UserContentDisplay strains={props.strains} user={props.user} deleteDispensaryRequest={props.deleteDispensaryRequest}/>
+            </div>
+          )
+        }} />
+        <Route path="/home" render={() => <Home/>} />
+        <Route path="/" component={Error} />
+    </Switch>
+    </Container>
 
-export default withRouter(GuestContainerLayout);
+    <div class="fixed-bottom">
+        <div>
+            <Grid divided inverted stackable>
+                <Grid.Row>
+                    <Grid.Column width={3}>
+                        <Header inverted as='h4' content='About' />
+                        <List link inverted>
+                            <List.Item as='a'>Sitemap</List.Item>
+                            <List.Item as='a'>Contact Us</List.Item>
+                            <List.Item as='a'>Religious Ceremonies</List.Item>
+                            <List.Item as='a'>Gazebo Plans</List.Item>
+                        </List>
+                    </Grid.Column>
+                    <Grid.Column width={3}>
+                        <Header inverted as='h4' content='Services' />
+                        <List link inverted>
+                            <List.Item as='a'>Banana Pre-Order</List.Item>
+                            <List.Item as='a'>DNA FAQ</List.Item>
+                            <List.Item as='a'>How To Access</List.Item>
+                            <List.Item as='a'>Favorite X-Men</List.Item>
+                        </List>
+                    </Grid.Column>
+                    <Grid.Column width={7}>
+                        <Header as='h4' inverted>
+                            Footer Header
+                        </Header>
+                        <p>
+                            Extra space for a call to action inside the footer that could help re-engage users.
+                        </p>
+                    </Grid.Column>
+                </Grid.Row>
+            </Grid>
+
+        </div>
+    </div>
+
+
+</div>
+)
+}
+
+export default withRouter(GuestContainerLayout)

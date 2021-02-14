@@ -14,7 +14,10 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  Form,
+  Popup
 } from 'semantic-ui-react'
+import { GoogleLogin } from 'react-google-login';
 
 class Signup extends Component {
  state = {
@@ -50,67 +53,84 @@ componentDidCatch = (error, info) => {
  render() {
 
 
-   return (
-       <Segment style={{ padding: '8em 0em' }} vertical>
-         <Grid container stackable verticalAlign='middle'>
-           <Grid.Row>
-             <Grid.Column width={8}>
-               <Header as='h3' style={{ fontSize: '2em' }}>
-                 Register Your Account
-               </Header>
-               <p style={{ fontSize: '1.33em' }}>
-                 Password Should At Least Be 6 Characters
-               </p>
-               <p style={{ fontSize: '1.33em' }}>
-                 Email Should Be An Actual Email
-               </p>
-               <Header as='h3' style={{ fontSize: '2em' }}>
-                 Must Be At Least 21 Years Old 
-               </Header>
-             </Grid.Column>
-             <Grid.Column floated='right' width={6}>
-                 <div class="ui form">
-                     <form onSubmit={this.theSubmitHandler}>
-                         <label>Username:</label>
-                         <input
-                             type="text"
-                             placeholder="username"
-                             value={this.state.username}
-                             onChange={this.changeHandler}
-                             />
-                         <label>Password:</label>
-                         <input
-                             type="password"
-                             placeholder="password"
-                             value={this.state.password}
-                             onChange={this.changeHandler}
-                             />
-                         <label>Date of Birth:</label>
-                         <input
-                             type="date"
-                             placeholder="dob"
-                             onChange={this.changeHandler}
-                             />
-                         <label>Email:</label>
-                         <input
-                             type="text"
-                             placeholder="email"
-                             value={this.state.email}
-                             onChange={this.changeHandler}
-                             />
-                         <button>Sign Up</button>
-                     </form>
+     const responseGoogleSuccess = (response) => {
+         console.log(response.profileObj);
 
-                 </div>
-             </Grid.Column>
-           </Grid.Row>
-           <Grid.Row>
-             <Grid.Column textAlign='center'>
-               <Button size='huge'>Go Back</Button>
-             </Grid.Column>
-           </Grid.Row>
-         </Grid>
-       </Segment>
+         debugger
+
+         this.setState({
+             username: response.profileObj.givenName,
+             password: "",
+             dob: this.state.dob,
+             email: response.profileObj.email,
+             googleID: response.profileObj.googleId
+         });
+}
+const responseGoogleFailure = (response) => {
+console.log("FUCK",response);
+}
+
+
+
+   return (
+       <Segment basic>
+             <Segment raised>
+                      <Header as='h2' color='teal' textAlign='center'>
+                         Sign-Up with an Email
+                       </Header>
+                       <Form size='large'>
+
+                           <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' onChange={this.changeHandler} />
+                           <Form.Input fluid icon='mail' iconPosition='left' placeholder='Email' onChange={this.changeHandler} />
+                       <Form.Input
+                             onChange={this.changeHandler}
+                             fluid
+                             icon='lock'
+                             iconPosition='left'
+                             placeholder='Password'
+                             type='password'
+                           />
+                       <Form.Input type='date' placeholder='dob' fluid onChange={this.changeHandler} min="1900-01-01" max="2000-01-01"/>
+
+                           <Button color='teal' fluid size='large' onClick={this.theSubmitHandler}>
+                             Sign Up
+                           </Button>
+                       </Form>
+                   </Segment>
+
+               <Divider horizontal>Or</Divider>
+
+           <Segment raised>
+               <Header as='h2' color='teal' textAlign='center'>
+                  Sign-Up With Google
+                </Header>
+                <Form size='large' >
+
+               <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' onChange={this.changeHandler} />
+                   <Popup content="Password Must be More than 6 Characters" position='left' trigger={
+                           <Form.Input
+                         onChange={this.changeHandler}
+                         fluid
+                         icon='lock'
+                         iconPosition='left'
+                         placeholder='Password'
+                         type='password'
+                       />}/>
+                   <Form.Input type='date' fluid onChange={this.changeHandler} min="1900-01-01" max="2000-01-01"/>
+                           <GoogleLogin
+                               clientId="692197655220-r5gp6i79ejhkslft6ifshug96d5vssa0.apps.googleusercontent.com"
+                               buttonText="Login"
+                               onSuccess={responseGoogleSuccess}
+                               onFailure={responseGoogleFailure}
+                               cookiePolicy={'single_host_origin'}
+                               >
+
+          <span> Signup</span>
+
+                           </GoogleLogin>
+                       </Form>
+                           </Segment>
+         </Segment>
 
    );
  }

@@ -24,27 +24,9 @@ state ={ username:'', password_digest:''}
  };
 
  render() {
-   return (
-       <div class="ui form">
-     <form onSubmit={this.submitHandler}>
-         <label>Username</label>
-       <input
-         type="text"
-         placeholder="username"
-         value={this.state.username}
-         onChange={this.changeHandler}
-       />
-         <label>Password</label>
-       <input
-         type="password"
-         placeholder="password_digest"
-         value={this.state.password_digest}
-         onChange={this.changeHandler}
-       />
-   <button>Log-in</button>
-   </form>
-</div>
-   );
+   return(
+       <div></div>
+   )
  }
 }
 
