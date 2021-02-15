@@ -31,7 +31,7 @@ import Error from "../Components/Error";
 import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
-import logo from "../assets/img/logo.svg";
+import logo from "../assets/img/mybudslogo.png";
 import avatar from "../assets/img/avatar.png";
 import p1 from "../assets/img/p1.jpg";
 import p2 from "../assets/img/p2.jpg";
@@ -73,11 +73,9 @@ return (
             </li>
           </ul>
         </nav>
-        <img src={logo} alt="Logo Twitter" />
         <div className="side">
-          <input type="text" placeholder="Search on Twitter" />
-          <img src={avatar} alt="Avatar" />
-          <button className="btn-tweet">Tweet</button>
+            <img src={logo}/>
+          <input type="text" placeholder="Search on My Buds" />
         </div>
       </div>
     </header>

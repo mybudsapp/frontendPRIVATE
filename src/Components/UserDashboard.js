@@ -37,6 +37,11 @@ import {
   faDollarSign,
   faClipboard,
   faComment,
+  faStore,
+  faBarcode,
+  faSearchPlus,
+  faGrin,
+  faCogs
 } from "@fortawesome/free-solid-svg-icons";
 
 import MobileNavBar from "./MobileNavBar"
@@ -132,38 +137,103 @@ class UserDashboard extends React.Component {
 
     return (
       <React.Fragment>
+          <div id="custom-css-product">
+              <header className="main-header">
+                <div className="container content">
+                  <nav>
+                    <ul>
+                      <li>
+                        <img src={home} alt="Home" /> Home
+                      </li>
+                      <li>
+                        <img src={notification} alt="Notifications" />
+                        Notifications
+                      </li>
+                      <li>
+                        <img src={message} alt="Messages" /> Messages
+                      </li>
+                    </ul>
+                  </nav>
+                  <div className="side">
+
+                    <input type="text" placeholder="Search on My Buds" />
+                  </div>
+                </div>
+              </header>
+          </div>
         <div id="wrapper">
           <ul
             className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
             id="accordionSidebar"
           >
+          <li>
             <Link
               to="/"
               className="sidebar-brand d-flex align-items-center justify-content-center"
             >
-              <div className="sidebar-brand-text mx-3">Logo</div>
+              <div className="sidebar-brand-text mx-3">Dashboard</div>
             </Link>
-
+        </li>
+        <li className="nav-item active">
             <hr className="sidebar-divider my-0" />
 
-            <li className="nav-item active">
+
               <Link to="/" className="nav-link" href="index.html">
                 <FontAwesomeIcon
-                  icon={faTachometerAlt}
+                  icon={faStore}
                   className="mr-2"
                 ></FontAwesomeIcon>
-                <span>Dashboard</span>
+            <span>Shops</span>
               </Link>
-            </li>
+          </li>
+
+            <li className="nav-item active">
+            <Link to="/" className="nav-link" href="index.html">
+              <FontAwesomeIcon
+                icon={faBarcode}
+                className="mr-2"
+              ></FontAwesomeIcon>
+          <span>Products</span>
+            </Link>
+        </li>
+            <li className="nav-item active">
+          <Link to="/" className="nav-link" href="index.html">
+            <FontAwesomeIcon
+              icon={faSearchPlus}
+              className="mr-2"
+            ></FontAwesomeIcon>
+        <span>Explore</span>
+          </Link>
+      </li>
+
+      <li className="nav-item active">
+        <Link to="/" className="nav-link" href="index.html">
+          <FontAwesomeIcon
+            icon={faGrin}
+            className="mr-2"
+          ></FontAwesomeIcon>
+      <span>Buddies</span>
+        </Link>
+    </li>
+    <li className="nav-item active">
+        <hr className="sidebar-divider my-0" />
+          <Link to="/" className="nav-link" href="index.html">
+            <FontAwesomeIcon
+              icon={faCogs}
+              className="mr-2"
+            ></FontAwesomeIcon>
+        <span>Settings</span>
+          </Link>
+      </li>
           </ul>
 
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
-              <nav className="navbar navbar-expand navbar-light bg-white topbar mb-4 static-top shadow"></nav>
+
 
               <div className="container-fluid">
                 <div className="d-sm-flex align-items-center justify-content-between mb-4">
-                  <h1 className="h3 mb-0 text-gray-800">Dashboard</h1>
+
                 </div>
 
                 <div className="row">

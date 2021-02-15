@@ -75,9 +75,9 @@ console.log("FUCK",response);
    return (
        <Segment basic>
              <Segment raised>
-                      <Header as='h2' color='teal' textAlign='center'>
+                      <h3>
                          Sign-Up with an Email
-                       </Header>
+                     </h3>
                        <Form size='large'>
 
                            <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' onChange={this.changeHandler} />
@@ -101,9 +101,9 @@ console.log("FUCK",response);
                <Divider horizontal>Or</Divider>
 
            <Segment raised>
-               <Header as='h2' color='teal' textAlign='center'>
+               <h3>
                   Sign-Up With Google
-                </Header>
+              </h3>
                 <Form size='large' >
 
                <Form.Input fluid icon='user' iconPosition='left' placeholder='Username' onChange={this.changeHandler} />

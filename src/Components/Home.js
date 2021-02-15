@@ -21,6 +21,7 @@ import {Route, Link, Switch, withRouter} from 'react-router-dom'
 
 
 
+
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
 
@@ -36,7 +37,7 @@ const HomepageHeading = ({ mobile }) => (
 
   <Container text>
     <Header
-      as='h1'
+      as='h2'
       content='My Buds'
       inverted
       style={{
@@ -184,21 +185,7 @@ class MobileContainer extends Component {
             style={{ minHeight: 350, padding: '1em 0em' }}
             vertical
           >
-            <Container>
-              <Menu inverted pointing secondary size='large'>
-                <Menu.Item onClick={this.handleToggle}>
-                  <Icon name='sidebar' />
-                </Menu.Item>
-                <Menu.Item position='right'>
-                  <Button as='a' inverted>
-                    Log in
-                  </Button>
-                  <Button as='a' inverted style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
-                </Menu.Item>
-              </Menu>
-            </Container>
+
             <HomepageHeading mobile />
           </Segment>
           {children}
@@ -229,27 +216,27 @@ const Home = () => (
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Grid.Column width={8}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <h3 style={{ fontSize: '2em', color: 'black'}}>
               An Application For Beginners and New Comers
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
+          </h3>
+            <p style={{ fontSize: '1.33em'}}>
               We all need a helping hand or guidance when starting something new and experimental.
               Why not be guided by your friends or people that have been where you have been?
             </p>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <h3 style={{ fontSize: '2em', color: 'black'}}>
               We Strive to Make Things Clear
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              //some lorem epsum about my buds here 
+          </h3>
+            <p style={{ fontSize: '1.33em'}}>
+              some lorem epsum about my buds here
             </p>
           </Grid.Column>
           <Grid.Column floated='right' width={6}>
-            <Image bordered rounded size='large' src='/images/wireframe/white-image.png' />
+            <Image/>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
           <Grid.Column textAlign='center'>
-            <Button size='huge'>Check Them Out</Button>
+
           </Grid.Column>
         </Grid.Row>
       </Grid>
@@ -258,55 +245,46 @@ const Home = () => (
       <Grid celled='internally' columns='equal' stackable>
         <Grid.Row textAlign='center'>
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <h3 as='h3' style={{ fontSize: '2em' }}>
               "What a Company"
-            </Header>
+          </h3>
             <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
           </Grid.Column>
           <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <Header as='h3' style={{ fontSize: '2em' }}>
+            <h3 as='h3' style={{ fontSize: '2em' }}>
               "I shouldn't have gone with their competitor."
-            </Header>
-            <p style={{ fontSize: '1.33em' }}>
-              <Image avatar src='/images/avatar/large/nan.jpg' />
-              <b>Nan</b> Chief Fun Officer Acme Toys
-            </p>
+          </h3>
           </Grid.Column>
         </Grid.Row>
       </Grid>
     </Segment>
     <Segment style={{ padding: '8em 0em' }} vertical>
       <Container text>
-        <Header as='h3' style={{ fontSize: '2em' }}>
+        <h3 as='h3' style={{ fontSize: '2em' }}>
           Breaking The Grid, Grabs Your Attention
-        </Header>
-        <p style={{ fontSize: '1.33em' }}>
+      </h3>
+        <p >
           Instead of focusing on content creation and hard work, we have learned how to master the
           art of doing nothing by providing massive amounts of whitespace and generic content that
           can seem massive, monolithic and worth your attention.
         </p>
-        <Button as='a' size='large'>
-          Read More
-        </Button>
+
         <Divider
-          as='h4'
           className='header'
           horizontal
           style={{ margin: '3em 0em', textTransform: 'uppercase' }}
         >
-          <a href='#'>Case Studies</a>
+
         </Divider>
-        <Header as='h3' style={{ fontSize: '2em' }}>
+        <h3 as='h3' style={{ fontSize: '2em' }}>
           Did We Tell You About Our Bananas?
-        </Header>
+      </h3>
         <p style={{ fontSize: '1.33em' }}>
           Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
           it's really true. It took years of gene splicing and combinatory DNA research, but our
           bananas can really dance.
         </p>
-        <Button as='a' size='large'>
-          I'm Still Quite Interested
-        </Button>
+
       </Container>
     </Segment>
     <Segment inverted vertical style={{ padding: '5em 0em' }}>
@@ -314,7 +292,7 @@ const Home = () => (
         <Grid divided inverted stackable>
           <Grid.Row>
             <Grid.Column width={3}>
-              <Header inverted as='h4' content='About' />
+              <h3 inverted as='h4' content='About' />
               <List link inverted>
                 <List.Item as='a'>Sitemap</List.Item>
                 <List.Item as='a'>Contact Us</List.Item>
@@ -323,7 +301,7 @@ const Home = () => (
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
-              <Header inverted as='h4' content='Services' />
+              <h3 inverted as='h4' content='Services' />
               <List link inverted>
                 <List.Item as='a'>Banana Pre-Order</List.Item>
                 <List.Item as='a'>DNA FAQ</List.Item>
@@ -332,9 +310,9 @@ const Home = () => (
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
-              <Header as='h4' inverted>
+              <h3>
                 Footer Header
-              </Header>
+            </h3>
               <p>
                 Extra space for a call to action inside the footer that could help re-engage users.
               </p>
