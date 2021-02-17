@@ -50,6 +50,8 @@ import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
 
+import avatar from "../assets/img/avatar.png"
+
 import "../assets/css/sb-admin-2.css";
 
 const getWidth = () => {
@@ -161,70 +163,103 @@ class UserDashboard extends React.Component {
                 </div>
               </header>
           </div>
+
+
         <div id="wrapper">
           <ul
             className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
             id="accordionSidebar"
           >
-          <li>
+          <li class="nav-item">
+              <br></br>
             <Link
-              to="/"
+              to="/profile"
               className="sidebar-brand d-flex align-items-center justify-content-center"
             >
-              <div className="sidebar-brand-text mx-3">Dashboard</div>
-            </Link>
+            <Avatar size={67} round={true} src={avatar}></Avatar>
+        </Link>
+        <Link
+          to="/dashboard"
+          className="sidebar-brand d-flex align-items-center justify-content-center"
+        >
+        <div className="sidebar-brand-text mx-3">Dashboard</div>
+    </Link>
         </li>
-        <li className="nav-item active">
+        <li className="nav-item">
             <hr className="sidebar-divider my-0" />
 
 
-              <Link to="/" className="nav-link" href="index.html">
+              <Button to="/" className="nav-link" color='teal' name='Shops' onClick={this.handleItemClick}>
                 <FontAwesomeIcon
                   icon={faStore}
                   className="mr-2"
                 ></FontAwesomeIcon>
             <span>Shops</span>
-              </Link>
+            </Button>
           </li>
 
-            <li className="nav-item active">
-            <Link to="/" className="nav-link" href="index.html">
+            <li className="nav-item">
+            <Button color='olive' to="/" className="nav-link" name='Products' onClick={this.handleItemClick}>
               <FontAwesomeIcon
                 icon={faBarcode}
                 className="mr-2"
               ></FontAwesomeIcon>
           <span>Products</span>
-            </Link>
+          </Button>
         </li>
-            <li className="nav-item active">
-          <Link to="/" className="nav-link" href="index.html">
+            <li className="nav-item">
+          <Button  color='violet' to="/explore"  as={Link} className="nav-link" >
             <FontAwesomeIcon
               icon={faSearchPlus}
               className="mr-2"
             ></FontAwesomeIcon>
         <span>Explore</span>
-          </Link>
+        </Button >
       </li>
 
-      <li className="nav-item active">
-        <Link to="/" className="nav-link" href="index.html">
+      <li className="nav-item">
+        <Button color='purple' to="/" className="nav-link" href="index.html">
           <FontAwesomeIcon
             icon={faGrin}
             className="mr-2"
           ></FontAwesomeIcon>
       <span>Buddies</span>
-        </Link>
+      </Button>
     </li>
-    <li className="nav-item active">
-        <hr className="sidebar-divider my-0" />
-          <Link to="/" className="nav-link" href="index.html">
+    <hr className="sidebar-divider my-0" />
+    <li className="nav-item">
+          <Button name='Settings' color="blue" className="nav-link" onClick={this.handleItemClick}>
             <FontAwesomeIcon
               icon={faCogs}
               className="mr-2"
             ></FontAwesomeIcon>
         <span>Settings</span>
-          </Link>
+        </Button>
       </li>
+      <br></br>
+      <br></br>
+      <br></br>
+      <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+          <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+
+      <div class="sidebar-card">
+              <p class="text-center mb-2"><strong>Terms of Service</strong> </p>
+              <p class="text-center mb-2"><strong>Privacy Policy</strong> </p>
+              <p class="text-center mb-2"><strong>Licenses</strong></p>
+
+
+          </div>
+
+
           </ul>
 
           <div id="content-wrapper" className="d-flex flex-column">
@@ -236,115 +271,24 @@ class UserDashboard extends React.Component {
 
                 </div>
 
-                <div className="row">
-                  <div className="col-xl-3 col-md-6 mb-4">
-                    <div className="card border-left-primary shadow h-100 py-2">
-                      <div className="card-body">
-                        <div className="row no-gutters align-items-center">
-                          <div className="col mr-2">
-                            <div className="text-xs font-weight-bold text-primary text-uppercase mb-1">
-                              Earnings (Monthly)
-                            </div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              $40,000
-                            </div>
-                          </div>
-                          <div className="col-auto">
-                            <FontAwesomeIcon
-                              icon={faCalendar}
-                              className="fa-4x text-gray-300"
-                            ></FontAwesomeIcon>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="col-xl-3 col-md-6 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2">
-                      <div className="card-body">
-                        <div className="row no-gutters align-items-center">
-                          <div className="col mr-2">
-                            <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                              Earnings (Annual)
-                            </div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              $215,000
-                            </div>
-                          </div>
-                          <div className="col-auto">
-                            <FontAwesomeIcon
-                              icon={faDollarSign}
-                              className="fa-4x text-gray-300"
-                            ></FontAwesomeIcon>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
 
-                  <div className="col-xl-3 col-md-6 mb-4">
-                    <div className="card border-left-info shadow h-100 py-2">
-                      <div className="card-body">
-                        <div className="row no-gutters align-items-center">
-                          <div className="col mr-2">
-                            <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
-                              Tasks
-                            </div>
-                            <div className="row no-gutters align-items-center">
-                              <div className="col-auto">
-                                <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
-                                  50%
-                                </div>
-                              </div>
-                              <div className="col">
-                                <div className="progress progress-sm mr-2">
-                                  <div
-                                    className="progress-bar bg-info"
-                                    role="progressbar"
-                                    style={{ width: "50%" }}
-                                    aria-valuenow="50"
-                                    aria-valuemin="0"
-                                    aria-valuemax="100"
-                                  ></div>
-                                </div>
-                              </div>
-                            </div>
-                          </div>
-                          <div className="col-auto">
-                            <FontAwesomeIcon
-                              icon={faClipboard}
-                              className="fa-4x text-gray-300"
-                            ></FontAwesomeIcon>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
+                    <UserContentDisplay
+                        activeItem={activeItem}
+                        user={this.props.user}
+                        dispensaries={this.props.dispensaries}
+                        gallery={this.props.gallery}
+                        strains={this.props.strains}
+                        handleAddPhoto={this.props.handleAddPhoto}
+                        handleShowPhoto={this.props.handleShowPhoto}
+                        handleDeletePhoto={this.props.handleDeletePhoto}
+                        deleteDispensaryRequest={this.props.deleteDispensaryRequest}
+                        deleteStrainRequest={this.props.deleteStrainRequest}
+                        submitCommentHandler={this.props.submitCommentHandler}
+                        />
 
-                  <div className="col-xl-3 col-md-6 mb-4">
-                    <div className="card border-left-warning shadow h-100 py-2">
-                      <div className="card-body">
-                        <div className="row no-gutters align-items-center">
-                          <div className="col mr-2">
-                            <div className="text-xs font-weight-bold text-warning text-uppercase mb-1">
-                              Pending Requests
-                            </div>
-                            <div className="h5 mb-0 font-weight-bold text-gray-800">
-                              18
-                            </div>
-                          </div>
-                          <div className="col-auto">
-                            <FontAwesomeIcon
-                              icon={faComment}
-                              className="fa-4x text-gray-300"
-                            ></FontAwesomeIcon>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-                </div>
+
+
               </div>
             </div>
           </div>
