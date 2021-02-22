@@ -1,13 +1,16 @@
-
 import React, {Component} from 'react'
-import {Card,Form, Label, Button, Segment} from 'semantic-ui-react'
+import {Card,Form, Label, Button, Segment, Header, Icon} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
+import SearchLocationInput from './SearchLocationInput'
+
+
 
 class NewDispensaryForm extends Component {
 
 state = {
 
 }
+
 
 
 changeHandler = (e) => {
@@ -54,50 +57,98 @@ theSubmitHandler = (e) => {
     console.log("the state once submit handler is hit", this.state)
     this.props.submitHandler(this.state, token);
 
-    // gotta make the set the new state for new dispensarh
-    // this.setState({
-    //     newStrain :{
-    //         Mental:  '000',
-    //         Physical: '000',
-    //         Velocity: '000',
-    //         Flavor: '000',
-    //         Overall: '000'
-    //     }
-    // })
-    ;
 };
 
+onAddressSelect = (googleInfo) => {
 
+
+    this.setState({
+        googleInfo,
+        place_id: googleInfo.place_id,
+        address: googleInfo.formatted_address,
+        store: googleInfo.types.includes('store')
+    })
+}
 
 
 
 
 render() {
 
+//     const { isLoaded, loadError} = LoadScript({
+//     googleMapsApiKey: "AIzaSyDVees6AhLJ4o0EfQfVXKQuUM7HvLP31ro",
+//     libraries: ["places"],
+// })
+
+//
+//      const responseGoogleSuccess = (response) => {
+//          console.log(response.profileObj);
+//
+//          debugger
+//
+//          this.setState({
+//              username: response.profileObj.givenName,
+//              password: "",
+//              dob: this.state.dob,
+//              email: response.profileObj.email,
+//              googleID: response.profileObj.googleId
+//          });
+// }
+// const responseGoogleFailure = (response) => {
+// console.log("FUCK",response);
+// }
+//
+//
+//
+//  const containerStyle = {
+//   width: '50vw',
+//   height: '50vw'
+// };
+//
+// const center = {
+//   lat: -3.745,
+//   lng: -38.523
+// };
+//
+//
+//   const {map, setMap} = this.state
+//
+//   //
+//
+
+
+
+
+  // <LoadScript
+  //     googleMapsApiKey="AIzaSyDVees6AhLJ4o0EfQfVXKQuUM7HvLP31ro"
+  //     >
+  //     <GoogleMap
+  //         mapContainerStyle={containerStyle}
+  //         center={center}
+  //         zoom={13}
+  //         onLoad={map => {
+  //             const bounds = new window.google.maps.LatLngBounds();
+  //             map.fitBounds(bounds);
+  //         }}
+  //
+  //         >
+  //
+  //     </GoogleMap>
+  // </LoadScript>
+
     return(
-
+        <div>
+            <Header as='h2' icon textAlign='center'>
+     <Icon name='building outline' circular color='grey' />
+     <h1>New Store / Dispensary</h1>
+   </Header>
+        <Segment>
+            <SearchLocationInput onAddressSelect={this.onAddressSelect} onChange={() => null} />
+        </Segment>
         <Segment raised>
-
-                <img src="https://i0.wp.com/www.cssscript.com/wp-content/uploads/2018/03/Simple-Location-Picker.png?fit=561%2C421&ssl=1"></img>
-
             <div class="ui form" encType="multipart/form-data" user={this.props.user.id}>
-            <h3>New Dispensary</h3>
              <form onSubmit={e => this.theSubmitHandler(e)} >
 
-             <label>State:</label>
-               <input
-                 type="text"
-                 placeholder="state"
-                 value={this.state.state}
-                 onChange={this.changeHandler}
-               />
-           <label>City:</label>
-               <input
-                 type="text"
-                 placeholder="city"
-                 value={this.state.city}
-                 onChange={this.changeHandler}
-               />
            <label>Name Space:</label>
                <input
                  type="text"
@@ -111,18 +162,13 @@ render() {
                  value={this.state.email}
                  onChange={this.changeHandler}
                />
-               <label>Avatar</label>
-                   <input
-                     type="text"
-                     placeholder="email"
-                     value={this.state.email}
-                     onChange={this.changeHandler}
-                   />
-                   <button>Submit</button>
+           <br></br>
+           <br></br>
+           <Button>Submit</Button>
              </form>
-
          </div>
          </Segment>
+     </div>
 
     )
 }

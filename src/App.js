@@ -233,6 +233,9 @@ class App extends Component {
   };
 
   submitDispensaryHandler = (newDispensary, user_id) => {
+
+
+
     fetch("http://localhost:3000/api/v1/dispensaries", {
       method: "POST",
       headers: {

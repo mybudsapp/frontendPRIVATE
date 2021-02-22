@@ -2,7 +2,7 @@ import React, {Component} from "react";
 import Avatar from 'react-avatar'
 import StrainCard from "./StrainCard"
 import {Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Label} from "semantic-ui-react"
-
+import avatar from "../assets/img/avatar.png"
 
 class EditProfile extends Component {
 
@@ -147,6 +147,7 @@ class EditProfile extends Component {
             <React.Fragment>
             <Card fluid>
               <Card.Content textAlign="center">
+                  <Avatar size={67} round={true} src={avatar}></Avatar>
                  <h1>USERNAME</h1>
                  <h2>LOCATION</h2>
                  <h3>BIO</h3>
@@ -157,13 +158,13 @@ class EditProfile extends Component {
                 <h1>Edit Profile</h1>
                     <Form>
         <Form.Group widths='equal'>
+            <Form.Input fluid label='Avatar' encType="multipart/form-data" placeholder='avatar' type='file' value={this.state.user.avatar} onChange={(e) => this.handleAvatar(e)}/>
           <Form.Field
             id='form-input-control-first-name'
             control={Input}
             label='Username'
             placeholder='Username'
           />
-
           <Form.Field
             control={Select}
             options={genderOptions}
