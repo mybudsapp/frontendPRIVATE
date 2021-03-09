@@ -30,11 +30,7 @@ import * as Survey from "survey-react";
 
 class App extends Component {
   state = {
-    user: {
-      friendships: [],
-      strain_reviews: [],
-      gallery: [],
-    },
+    user: {},
     token: "",
     displayStrainReviewForm: false,
     displayPhotoForm: false,
@@ -51,56 +47,61 @@ class App extends Component {
   //----------------------Life Cycle Methods should go here--------------------//
 
   componentDidMount = () => {
+
+
     let token = localStorage.token;
 
-    if (token) {
-      fetch("http://localhost:3000/api/v1/current_user", {
+
+//     fetch("http://localhost:3000/user", {
+//        method: "GET",
+//        headers: {
+//          "content-type": "application/json",
+//          accepts: "application/json",
+//        },
+//      }).then((resp) => resp.json())
+//          .then((userData) => this.setState({
+//              user: userData[0]
+//          }));
+//
+// console.log("stikdkdk", this.state)
+    if (Boolean(token)) {
+      fetch("http://localhost:3000/api/v1/users/sign_in", {
         method: "GET",
         headers: {
           Authorization: `${token}`,
           "content-type": "application/json",
           accepts: "application/json",
         },
-      })
-        .then((resp) => resp.json())
-        .then((userData) => {
+      }).then((res) => {
+          if (!res.ok) {
+            res.text().then(this.props.history.push("/home"))
+          } else {
+            return res.json().then((userData) => {
           this.setState({
             user: { ...userData.user },
           });
         })
-        .then(console.log(() => this.props.history.push("/dashboard/")));
-    } else {
-      fetch("http://localhost:3000/api/v1/strains/", {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          accepts: "application/json",
-        },
-      }).then((res) => {
-        if (!res.ok) {
-          res.text().then((text) => alert(text));
-        } else {
-          return res.json().then((strainData) => {
-            this.setState({ strains: strainData });
-          });
-        }
-      });
+        .then(() => this.props.history.push("/dashboard/"));
+    }})} else {
+        this.props.history.push("/home")
     }
 
-    let map;
+    // fetch("http://localhost:3000/api/v1/strains/", {
+    //   method: "GET",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     accepts: "application/json",
+    //   },
+    // }).then((res) => {
+    //   if (!res.ok) {
+    //     res.text().then((text) => alert(text));
+    //   } else {
+    //     return res.json().then((strainData) => {
+    //       this.setState({ strains: strainData });
+    //     });
+    //   }
+    // });
 
-    fetch(
-      "https://maps.googleapis.com/maps/api/js?key=AIzaSyDVees6AhLJ4o0EfQfVXKQuUM7HvLP31ro&libraries=places&callback=initMap",
-      {
-        method: "GET",
-        headers: {
-          "content-type": "application/json",
-          accepts: "application/json",
-        },
-      }
-    )
-      .then((res) => res.json())
-      .then(console.log());
 
     // var map;
     //
@@ -136,21 +137,21 @@ class App extends Component {
     // }
     // }
 
-    fetch("http://localhost:3000/api/v1/strains/", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-      },
-    }).then((res) => {
-      if (!res.ok) {
-        res.text().then((text) => alert(text));
-      } else {
-        return res.json().then((strainData) => {
-          this.setState({ strains: strainData });
-        });
-      }
-    });
+    // fetch("http://localhost:3000/api/v1/strains/", {
+    //   method: "GET",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     accepts: "application/json",
+    //   },
+    // }).then((res) => {
+    //   if (!res.ok) {
+    //     res.text().then((text) => alert(text));
+    //   } else {
+    //     return res.json().then((strainData) => {
+    //       this.setState({ strains: strainData });
+    //     });
+    //   }
+    // });
   };
 
   //---------------------------------------------------------------------------------------
@@ -392,8 +393,7 @@ class App extends Component {
           .then((userData) => {
             this.setState({
               user: { ...userData.user },
-              token: userData.jwt,
-              avatar: userData.user.avatar,
+              token: userData.jwt
             });
           })
           .then(() => localStorage.setItem("token", this.state.token))
@@ -403,7 +403,7 @@ class App extends Component {
   };
 
   loginSubmitHandler = (userInfo) => {
-    fetch("http://localhost:3000/api/v1/login", {
+    fetch("http://localhost:3000/api/v1/users/sign_in", {
       method: "POST",
       headers: {
         "content-type": "application/json",
@@ -419,8 +419,7 @@ class App extends Component {
           .then((userData) => {
             this.setState({
               user: { ...userData.user },
-              token: userData.jwt,
-              avatar: userData.user.avatar,
+              token: userData.jwt
             });
           })
           .then(() => localStorage.setItem("token", this.state.token))
@@ -878,7 +877,7 @@ class App extends Component {
 
         {console.log(
           "This is the new personality =>",
-          this.state.user.personality_type
+          this.state
         )}
 
         <Switch>
@@ -887,7 +886,7 @@ class App extends Component {
             render={(props) => {
               return (
                 <GuestContainerLayout
-                  submitHandler={this.signupSubmitHandler}
+                  signupSubmitHandler={this.signupSubmitHandler}
                 />
               );
             }}

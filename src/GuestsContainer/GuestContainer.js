@@ -9,7 +9,8 @@ import {
   List,
   Menu,
   Segment,
-  Button
+  Button,
+  Input
 } from 'semantic-ui-react'
 import { Link, Route, Switch, withRouter } from "react-router-dom";
 import Signup from "../Components/Signup";
@@ -53,7 +54,11 @@ import "../assets/css/bundle.css";
 
 const GuestContainerLayout = (props) => {
 
-     console.log(props)
+    const options = [
+  { key: 'Strain', text: 'Strain', value: 'Strain' },
+  { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
+  { key: 'Shop', text: 'Shop', value: 'Shop' },
+]
 
 return (
 <div id="custom-css-product">
@@ -61,9 +66,11 @@ return (
       <div className="container content">
         <nav>
           <ul>
+              <Link to="/home">
             <li>
               <img src={home} alt="Home" /> Home
             </li>
+        </Link>
             <li>
               <img src={notification} alt="Notifications" />
               Notifications
@@ -73,10 +80,12 @@ return (
             </li>
           </ul>
         </nav>
-        <div className="side">
-            <img src={logo}/>
-          <input type="text" placeholder="Search on My Buds" />
-        </div>
+        <Input
+            size='mini'
+label={<Dropdown defaultValue='Strain' compact options={options} />}
+labelPosition='right'
+placeholder='Search on My Buds'
+/>
       </div>
     </header>
 
@@ -106,7 +115,7 @@ return (
                 />
         <Route
             path="/signup"
-            render={() => <Signup signUpSubmitHandler={props.signUpSubmitHandler} />}
+            render={() => <Signup signupSubmitHandler={props.signupSubmitHandler} />}
             />
         <Route
             path="/login"

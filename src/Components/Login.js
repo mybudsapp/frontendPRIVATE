@@ -22,7 +22,7 @@ import {
 class Login extends Component{
 
 
-state ={ username:'', password_digest:''}
+state ={ username:'', password:''}
 
  changeHandler = e => {
    this.setState({
@@ -35,7 +35,7 @@ state ={ username:'', password_digest:''}
    this.props.loginHandler(this.state);
    this.setState({
      username: "",
-     password_digest: ""
+     password: ""
    });
  };
 
@@ -66,12 +66,25 @@ console.log("FUCK",response);
   <label>Password</label>
 <input
   type="password"
-  placeholder="password_digest"
-  value={this.state.password_digest}
+  placeholder="password"
+  value={this.state.password}
   onChange={this.changeHandler}
 />
-<button>Log-in</button>
+<br></br>
+<br></br>
+<Button>Log-in</Button>
+<br></br>
+
 </form>
+<ul>
+<li>
+    <a to="/home">Forgot Password?</a>
+
+</li>
+
+<li>
+</li>
+<br></br>
 <Button size='huge'>
 <GoogleLogin
     clientId="692197655220-r5gp6i79ejhkslft6ifshug96d5vssa0.apps.googleusercontent.com"
@@ -80,7 +93,12 @@ console.log("FUCK",response);
     onFailure={responseGoogleFailure}
     cookiePolicy={'single_host_origin'}
     />
+
+
 </Button>
+</ul>
+
+
 </div>
 
    )

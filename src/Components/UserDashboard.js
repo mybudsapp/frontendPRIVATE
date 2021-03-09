@@ -111,21 +111,21 @@ class UserDashboard extends React.Component {
   componentDidMount = () => {
     // dashboard fetches members gallery, strain reviews, strains, and dispensaries
 
-    fetch("http://localhost:3000/api/v1/dispensaries/", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-      },
-    }).then((res) => {
-      if (!res.ok) {
-        res.text().then((text) => alert(text));
-      } else {
-        return res.json().then((dispensaryData) => {
-          this.setState({ dispensary: true, dispensaries: dispensaryData });
-        });
-      }
-    });
+    // fetch("http://localhost:3000/api/v1/dispensaries/", {
+    //   method: "GET",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     accepts: "application/json",
+    //   },
+    // }).then((res) => {
+    //   if (!res.ok) {
+    //     res.text().then((text) => alert(text));
+    //   } else {
+    //     return res.json().then((dispensaryData) => {
+    //       this.setState({ dispensary: true, dispensaries: dispensaryData });
+    //     });
+    //   }
+    // });
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -134,8 +134,15 @@ class UserDashboard extends React.Component {
     const activityFeedToDisplay = this.state.activityFeed;
     const { activeItem } = this.state;
 
+    const options = [
+  { key: 'Strain', text: 'Strain', value: 'Strain' },
+  { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
+  { key: 'Shop', text: 'Shop', value: 'Shop' },
+]
     //using active item to display what needed to display,
     // the component was saved to the state
+
+    const {user} = this.props
 
     return (
       <React.Fragment>
@@ -144,23 +151,30 @@ class UserDashboard extends React.Component {
                 <div className="container content">
                   <nav>
                     <ul>
-                      <li>
+                        <li>
+                        <p><Icon name='at' size="large" />{this.props.user.username}</p>
+                        </li>
+                  <li>
                         <img src={home} alt="Home" /> Home
                       </li>
                       <li>
                         <img src={notification} alt="Notifications" />
                         Notifications
                       </li>
-                      <li>
-                        <img src={message} alt="Messages" /> Messages
-                      </li>
                     </ul>
                   </nav>
-                  <div className="side">
 
-                    <input type="text" placeholder="Search on My Buds" />
-                  </div>
+
+                      <Input
+                          size='mini'
+      label={<Dropdown defaultValue='Strain' compact options={options} />}
+      labelPosition='right'
+      placeholder='Search on My Buds'
+    />
+{user? <Button onClick={this.props.logOutHandler}>Sign Out</Button> : null}
+
                 </div>
+
               </header>
           </div>
 
@@ -172,6 +186,7 @@ class UserDashboard extends React.Component {
           >
           <li class="nav-item">
               <br></br>
+
             <Link
               to="/profile"
               className="sidebar-brand d-flex align-items-center justify-content-center"
@@ -242,14 +257,9 @@ class UserDashboard extends React.Component {
       <br></br>
           <br></br>
           <br></br>
-          <br></br>
-          <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
-              <br></br>
+
+
+
 
       <div class="sidebar-card">
               <p class="text-center mb-2"><strong>Terms of Service</strong> </p>
@@ -258,6 +268,7 @@ class UserDashboard extends React.Component {
 
 
           </div>
+
 
 
           </ul>

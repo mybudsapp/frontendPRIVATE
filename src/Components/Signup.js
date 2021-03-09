@@ -37,7 +37,9 @@ class Signup extends Component {
 
  theSubmitHandler = (e) => {
      e.preventDefault()
-     this.props.submitHandler(this.state);
+
+     this.props.signupSubmitHandler(this.state);
+
      this.setState({
          username: "",
          password: "",
@@ -74,6 +76,7 @@ console.log("FUCK",response);
 
    return (
        <Segment basic>
+           {console.log(this.props)}
              <Segment raised>
                       <h3>
                          Sign-Up with an Email
