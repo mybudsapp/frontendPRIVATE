@@ -52,7 +52,7 @@ class UserShopContainer extends Component{
                 })
             }
 
-            
+
 
 
 
@@ -90,7 +90,7 @@ class UserShopContainer extends Component{
                         <Segment
                             circular style={ {width:80, height:80} }
                             >
-                            <Link to={user + "/newdispensary"}  >
+                            <Link to={user + "/newstore"}  >
                                 <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
                                     <i class="large icons">
                                         <i class="building icon"></i>

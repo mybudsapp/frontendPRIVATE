@@ -106,7 +106,7 @@ placeholder='Search on My Buds'
                 render={() => <EditStrainForm editStrainHandler={props.editStrainHandler} user={props.user} />}
                 />
         <Route
-            path="/:username/newdispensary"
+            path="/:username/newstore"
             render={() => <NewDispensaryForm submitHandler={props.submitHandler} user={props.user} />}
             />
             <Route

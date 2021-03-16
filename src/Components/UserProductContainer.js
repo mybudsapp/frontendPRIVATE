@@ -13,7 +13,9 @@ import {
   faSearchPlus,
   faGrin,
   faCogs,
-  faCannabis
+  faCannabis,
+  faBong,
+  faBirthdayCake
 } from "@fortawesome/free-solid-svg-icons";
 import StrainCard from "./StrainCard"
 import ProductCard from "./ProductCard"
@@ -107,7 +109,7 @@ class UserProductContainer extends Component{
 
     render(){
 
-        const user = "/"
+        const user = "/" + this.props.user.username
 
 
         return(
@@ -139,7 +141,7 @@ class UserProductContainer extends Component{
                         <Segment
                             circular style={ {width:80, height:80} }
                             >
-                            <Link to={user + "/newdispensary"}  >
+                            <Link to={user + "/newstrain"}  >
                                 <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
                                     <i class="large icons">
                                         <i class="tree icon"></i>
@@ -157,21 +159,33 @@ class UserProductContainer extends Component{
                     <div className="card border-left-success shadow h-100 py-2">
                       <div className="card-body">
                         <div className="row no-gutters align-items-center">
-                          <div className="col mr-2">
                             <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Concentrates 
+                                Concentrates
                             </div>
+                            <div className="col-auto">
+                                <FontAwesomeIcon
+                                    icon={faGrin}
+                                    className="fa-4x text-gray-300"
+                                    ></FontAwesomeIcon>
+                            </div>
+                          <div className="col mr-2">
                             <div className="h5 mb-0 font-weight-bold text-gray-800">
                             </div>
+                            <div className="col-auto">
+                            <Segment
+                                circular style={ {width:80, height:80} }
+                                >
+                                <Link to={user + "/newstrain"}  >
+                                    <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+                                        <i class="large icons">
+                                            <i class="diamond icon"></i>
+                                            <i class="top right corner add icon"></i>
+                                        </i>
+                                    </Menu.Item>
+                                </Link>
+                            </Segment>
 
                           </div>
-                          <div className="col-auto">
-                              <div className="col-auto">
-                                <FontAwesomeIcon
-                                  icon={faGrin}
-                                  className="fa-4x text-gray-300"
-                                ></FontAwesomeIcon>
-                              </div>
                           </div>
                         </div>
                       </div>
@@ -182,19 +196,36 @@ class UserProductContainer extends Component{
                        <div className="card border-left-success shadow h-100 py-2">
                            <div className="card-body">
                                <div className="row no-gutters align-items-center">
-                                   <div className="col mr-2">
-                                       <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                           Glass
-                                       </div>
-                                       <div className="h5 mb-0 font-weight-bold text-gray-800">
-                                           $215,000
-                                       </div>
+                                   <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
+                                       Glass
                                    </div>
                                    <div className="col-auto">
                                        <FontAwesomeIcon
-                                           icon={faDollarSign}
+                                           icon={faBong}
                                            className="fa-4x text-gray-300"
                                            ></FontAwesomeIcon>
+
+
+
+                                           <div className="col mr-2">
+                                             <div className="h5 mb-0 font-weight-bold text-gray-800">
+                                             </div>
+                                             <div className="col-auto">
+                                             <Segment
+                                                 circular style={ {width:80, height:80} }
+                                                 >
+                                                 <Link to={user + "/newstrain"}  >
+                                                     <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+                                                         <i class="large icons">
+                                                             <i class="add icon"></i>
+                                                         </i>
+                                                     </Menu.Item>
+                                                 </Link>
+                                             </Segment>
+
+                                           </div>
+                                           </div>
+
                                    </div>
                                </div>
                            </div>
@@ -211,6 +242,18 @@ class UserProductContainer extends Component{
                                        <div className="text-xs font-weight-bold text-info text-uppercase mb-1">
                                            Consumables - Edibles
                                        </div>
+                                       <Segment
+                                           circular style={ {width:80, height:80} }
+                                           >
+                                           <Link to={user + "/newstrain"}  >
+                                               <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+                                                   <i class="large icons">
+                                                       <i class="food icon"></i>
+                                                       <i class="top right corner add icon"></i>
+                                                   </i>
+                                               </Menu.Item>
+                                           </Link>
+                                       </Segment>
                                        <div className="row no-gutters align-items-center">
                                            <div className="col-auto">
                                                <div className="h5 mb-0 mr-3 font-weight-bold text-gray-800">
@@ -233,7 +276,7 @@ class UserProductContainer extends Component{
                                    </div>
                                    <div className="col-auto">
                                        <FontAwesomeIcon
-                                           icon={faClipboard}
+                                           icon={faBirthdayCake}
                                            className="fa-4x text-gray-300"
                                            ></FontAwesomeIcon>
                                    </div>

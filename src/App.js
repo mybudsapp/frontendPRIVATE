@@ -187,17 +187,17 @@ class App extends Component {
   };
 
   //---------------------------Dispensary functions------------------------//
-  editDispensaryHandler = (newDispensary, dispensary_id) => {
+  editDispensaryHandler = (newStore, store_id) => {
     // needs token, auth???
 
-    if (newDispensary.avatar) {
+    if (newStore.avatar) {
       const fd = new formData();
 
-      fd.append("avatar", newDispensary.avatar);
+      fd.append("avatar", newStore.avatar);
 
       axios
         .patch(
-          `http://localhost:3000/api/v1/dispensaries/${dispensary_id}`,
+          `http://localhost:3000/api/v1/stores/${store_id}`,
           fd,
           {
             headers: { "Content-Type": "application/x-www-form-urlencoded" },
@@ -205,7 +205,7 @@ class App extends Component {
         )
         .then(
           fetch(
-            `http://localhost:3000/api/v1/dispensaries/${dispensary_id}`,
+            `http://localhost:3000/api/v1/stores/${store_id}`,
             {
               method: "PATCH",
               headers: {
@@ -213,45 +213,45 @@ class App extends Component {
                 "content-type": "application/json",
                 accepts: "application/json",
               },
-              body: JSON.stringify({ dispensary: newDispensary }),
+              body: JSON.stringify({ store: newStore }),
             },
-            console.log("PATCHESSSS", newDispensary)
+            console.log("PATCHESSSS", newStore)
           )
         )
-        .then(console.log("PATCHESSS", newDispensary));
+        .then(console.log("PATCHESSS", newStore));
     } else {
-      fetch(`http://localhost:3000/api/v1/dispensaries/${dispensary_id}`, {
+      fetch(`http://localhost:3000/api/v1/stores/${store_id}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
           accepts: "application/json",
         },
-        body: JSON.stringify({ dispensary: newDispensary }),
+        body: JSON.stringify({ store: newStore }),
       })
         .then((res) => res.json())
-        .then(console.log("noPATTCHES", newDispensary));
+        .then(console.log("noPATTCHES", newStore));
     }
   };
 
-  submitDispensaryHandler = (newDispensary, user_id) => {
+  submitStoreHandler = (newStore, user_id) => {
 
 
 
-    fetch("http://localhost:3000/api/v1/dispensaries", {
+    fetch("http://localhost:3000/api/v1/stores", {
       method: "POST",
       headers: {
         "content-type": "application/json",
         accepts: "application/json",
       },
-      body: JSON.stringify({ dispensary: newDispensary }),
+      body: JSON.stringify({ store: newStore }),
     }).then((res) => {
       if (!res.ok) {
         res.text().then((text) => alert(text));
       } else {
         return res
           .json()
-          .then((dispensaryData) => {
-            this.setState({ dispensary: { ...dispensaryData.dispensary } });
+          .then((storeData) => {
+            this.setState({ store: { ...storeData.store } });
           })
           .then(window.location.reload());
       }
@@ -259,9 +259,9 @@ class App extends Component {
   };
 
   deleteDispensaryRequest = (e) => {
-    let dispensary_id = e.target.parentElement.getAttribute("dispensary");
+    let store_id = e.target.parentElement.getAttribute("store");
 
-    return fetch(`http://localhost:3000/api/v1/dispensaries/${dispensary_id}`, {
+    return fetch(`http://localhost:3000/api/v1/stores/${store_id}`, {
       method: "DELETE",
       headers: {
         "content-type": "application/json",
@@ -907,7 +907,7 @@ class App extends Component {
                       user={this.state.user}
                       avatar={this.state.avatar}
                       history={this.props.history}
-                      dispensaries={this.state.user.dispensaries}
+                      stores={this.state.user.stores}
                       strains={this.state.user.strains}
                       gallery={this.state.user.gallery}
                       handleViewUserProfile={this.handleViewUserProfile}
@@ -1018,13 +1018,13 @@ class App extends Component {
           />
 
           <Route
-            path="/:username/newdispensary"
+            path="/:username/newstore"
             render={() => (
               <GuestContainerLayout
                 user={this.state.user}
                 strains={this.state.strains}
                 user={this.state.user}
-                submitHandler={this.submitDispensaryHandler}
+                submitHandler={this.submitStoreHandler}
               />
             )}
           />
@@ -1069,7 +1069,7 @@ class App extends Component {
             )}
           />
           <Route
-            path="/newstrain"
+            path="/:username/newstrain"
             render={() => <GuestContainerLayout strains={this.state.strains} />}
           />
           <Route path="/" component={Home} />
