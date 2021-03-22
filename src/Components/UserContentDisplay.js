@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import {Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select} from "semantic-ui-react"
+import {Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select} from "semantic-ui-react"
 
 import {Link, withRouter} from 'react-router-dom'
-import DispensaryCard from "./DispensaryCard"
+import StoreCard from "./StoreCard"
 import StrainCard from "./StrainCard"
 import PhotoCard from "./PhotoCard"
 import EditProfile from "./EditProfile"
@@ -73,19 +73,19 @@ buddiesDisplay = () => {
         }
 
 
-dispensariesDisplay = () => {
-
-
-            let dispensaries = []
-
-            if(this.props.dispensaries){
-                dispensaries = this.props.dispensaries
-            }else{
-                return null
-            }
-            return dispensaries.map(dispensary => {
-          return <DispensaryCard dispensary={dispensary} user={this.props.user} deleteDispensaryRequest={this.props.deleteDispensaryRequest} sendThisDispensaryToEdit={this.props.sendThisDispensaryToEdit} raised/>
-        })
+// dispensariesDisplay = () => {
+//
+//         console.log(this.props)
+//             let stores = []
+//
+//             if(this.props.stores){
+//                 stores = this.props.stores
+//             }else{
+//                 return null
+//             }
+//             return stores.map(dispensary => {
+//           return <StoreCard dispensary={dispensary} user={this.props.user} deleteDispensaryRequest={this.props.deleteDispensaryRequest} sendThisDispensaryToEdit={this.props.sendThisDispensaryToEdit} raised/>
+//         })
 
         // <div className="row">
         //   <div className="col-xl-3 col-md-6 mb-4">
@@ -179,7 +179,7 @@ dispensariesDisplay = () => {
 
 
 
-    }
+
 
 
 
@@ -222,70 +222,7 @@ productsDisplay = () => {
 
 
 render(){
-    // const products  = this.props.strains.map(strain => <Card><h1>strain.name{console.log("CONTENT DISP{LAY}", strains)}</h1></Card>)
 
-    const genderOptions = [
-  { key: 'm', text: 'Male', value: 'male' },
-  { key: 'f', text: 'Female', value: 'female' },
-  { key: 'o', text: 'Other', value: 'other' },
-]
-
-const stateOptions = [
-    {key: "AL", text: "Alabama", value: "Alabama"},
-{key: "AK", text: "Alaska", value: "Alaska"},
-{key: "AS", text: "Alaska", value: "American Samoa"},
-{key: "AZ", text: "Arizona", value: "Arizona"},
-{key: "AR", text: "Arkansas", value: "Arkansas"},
-{key: "CA", text: "California", value: "California"},
-{key: "C0", text: "Colorado", value: "Colorado"},
-{key: "CT", text: "Connecticut", value: "Connecticut"},
-{key: "DE", text: "Delaware", value: "Delaware"},
-{key: "DC", text: "District Of Columbia", value: "District Of Columbia"},
-{key: "FL", text: "Florida", value: "Florida"},
-{key: "GA", text: "Georgia", value: "Georgia"},
-{key: "HI", text: "Hawaii", value: "Hawaii"},
-{key: "ID", text: "Idaho", value: "Idaho"},
-{key: "IL", text: "Illinois", value: "Illinois"},
-{key: "IN", text: "Indiana", value: "Indiana"},
-{key: "IA", text: "Iowa", value: "Iowa"},
-{key: "KS", text: "Kansas", value: "Kansas"},
-{key: "KY", text: "Kentucky", value: "Kentucky"},
-{key: "LA", text: "Louisiana", value: "Louisiana"},
-{key: "ME", text: "Maine", value: "Maine"},
-{key: "MD", text: "Maryland", value: "Maryland"},
-{key: "MA", text: "Massachusetts", value: "Massachusetts"},
-{key: "MI", text: "Michigan", value: "Michigan"},
-{key: "MN", text: "Minnesota", value: "Minnesota"},
-{key: "MS", text: "Mississippi", value: "Mississippi"},
-{key: "MO", text: "Missouri", value: "Missouri"},
-{key: "MT", text: "Montana", value: "Montana"},
-{key: "NE", text: "Nebraska", value: "Nebraska"},
-{key: "NV", text: "Nevada", value: "Nevada"},
-{key: "NH", text: "New Hampshire", value: "New Hampshire"},
-{key: "NJ", text: "New Jersey", value: "New Jersey"},
-{key: "NM", text: "New Mexico", value: "New Mexico"},
-{key: "NY", text: "New York", value: "New York"},
-{key: "NC", text: "North Carolina", value: "North Carolina"},
-{key: "ND", text: "North Dakota", value: "North Dakota"},
-{key: "OH", text: "Ohio", value: "Ohio"},
-{key: "OK", text: "Oklahoma", value: "Oklahoma"},
-{key: "OR", text: "Oregon", value: "Oregon"},
-{key: "PA", text: "Pennsylvania", value: "Pennsylvania"},
-{key: "PR", text: "Puerto Rico", value: "Puerto Rico"},
-{key: "PA", text: "Rhode Island", value: "Rhode Island"},
-{key: "SC", text: "South Carolina", value: "South Carolina"},
-{key: "SD", text: "South Dakota", value: "South Dakota"},
-{key: "TN", text: "Tennessee", value: "Tennessee"},
-{key: "TX", text: "Texas", value: "Texas"},
-{key: "UT", text: "Utah", value: "Utah"},
-{key: "VT", text: "Vermont", value: "Vermont"},
-{key: "VI", text: "Virgin Islands", value: "Virgin Islands"},
-{key: "VA", text: "Virginia", value: "Virginia"},
-{key: "WA", text: "Washington", value: "Washington"},
-{key: "WV", text: "West Virginia", value: "West Virginia"},
-{key: "WI", text: "Wisconsin", value: "Wisconsin"},
-{key: "WY", text: "Wyoming", value: "Wyoming"},
-]
 
 
     if(this.props.activeItem === 'Shops'){
@@ -293,7 +230,45 @@ const stateOptions = [
         const user = "/" + this.props.user.username
 
         return(
-                <UserShopContainer user={this.props.user}/>
+                <div>
+                    <Grid columns={2}>
+                        <FontAwesomeIcon
+                        icon={faStore}
+                        className="fa-4x text-gray-300"></FontAwesomeIcon>
+                                <h1>Stores</h1>
+
+                <UserShopContainer user={this.props.user} stores={this.props.stores} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest} showEdit={this.props.showEdit} handleShowEdit={this.props.handleShowEdit} handleShowEditClose={this.props.handleShowEditClose}/>
+                    <br></br>
+                    <Grid.Row >
+                        <Grid.Column>
+                          <Segment>Total Followers</Segment>
+                          <Segment>Total Reviews</Segment>
+                        </Grid.Column>
+                      <Grid.Column>
+                          <br></br>
+
+                      <Segment
+
+                          raised
+                          circular style={ {width:80, height:80} }
+                          >
+                          <Link to={user + "/newstore"}>
+
+                              <i class="large icons">
+                                  <i class="building icon"></i>
+                                  <i class="top right corner add icon"></i>
+                              </i>
+
+                          </Link>
+                      </Segment>
+                  </Grid.Column>
+                    </Grid.Row>
+                  </Grid>
+                   <br></br>
+                    <br></br>
+                     <br></br>
+                    <br></br>
+        </div>
 
         )
     } else if(this.props.activeItem === 'Gallery'){
@@ -363,7 +338,7 @@ const stateOptions = [
 // if(strains.length > 1){
 
 
-//some logic here to condionially render whatever the user has, dispensaries, strains, notifications
+//some logic here to condionially render whatever the user has, stores, strains, notifications
 // pictures, strainreviews
 
 

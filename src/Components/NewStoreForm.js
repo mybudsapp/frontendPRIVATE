@@ -5,7 +5,7 @@ import SearchLocationInput from './SearchLocationInput'
 
 
 
-class NewDispensaryForm extends Component {
+class NewStoreForm extends Component {
 
 state = {
 
@@ -68,10 +68,12 @@ theSubmitHandler = (e) => {
 
 onAddressSelect = (googleInfo) => {
 
+
+
     this.setState({
         googleplaceID: googleInfo.place_id,
         city: googleInfo.formatted_address.split(", ")[1],
-        address: googleInfo.formatted_address,
+        address: googleInfo.formatted_address.split(", ")[0],
         store: googleInfo.types.includes('store')
     })
 
@@ -260,4 +262,4 @@ render() {
 
 }
 
-export default NewDispensaryForm
+export default NewStoreForm

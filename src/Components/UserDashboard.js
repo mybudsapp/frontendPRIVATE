@@ -143,6 +143,7 @@ class UserDashboard extends React.Component {
     // the component was saved to the state
 
     const {user} = this.props
+    const {stores} = this.props
 
     return (
       <React.Fragment>
@@ -287,13 +288,17 @@ class UserDashboard extends React.Component {
                     <UserContentDisplay
                         activeItem={activeItem}
                         user={this.props.user}
-                        dispensaries={this.props.dispensaries}
+                        stores={stores}
                         gallery={this.props.gallery}
                         strains={this.props.strains}
                         handleAddPhoto={this.props.handleAddPhoto}
                         handleShowPhoto={this.props.handleShowPhoto}
                         handleDeletePhoto={this.props.handleDeletePhoto}
-                        deleteDispensaryRequest={this.props.deleteDispensaryRequest}
+                        deleteStoreRequest={this.props.deleteStoreRequest}
+                        editStoreRequest={this.props.editStoreHandler}
+                        showEdit={this.props.showEdit}
+                        handleShowEdit={this.props.handleShowEdit}
+                        handleShowEditClose={this.props.handleShowEditClose}
                         deleteStrainRequest={this.props.deleteStrainRequest}
                         submitCommentHandler={this.props.submitCommentHandler}
                         />
@@ -564,7 +569,7 @@ class MobileContainer extends Component {
             user={this.state.user}
             dispensaries={this.state.user.dispensaries}
             strains={this.state.user.strains}
-            deleteDispensaryRequest={this.state.deleteDispensaryRequest}
+            deleteStoreRequest={this.state.deleteStoreRequest}
             deleteStrainRequest={this.state.deleteStrainRequest}
           />
         </Segment>

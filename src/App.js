@@ -18,6 +18,7 @@ import Home from "./Components/Home";
 import UserDashboard from "./Components/UserDashboard.js";
 import Profile from "./Components/Profile.js";
 import EditProfile from "./Components/EditProfile.js";
+import EditStoreForm from './Components/EditStoreForm'
 import { useAlert } from "react-alert";
 import { Card, Segment, Menu, Sidebar, Icon, Button } from "semantic-ui-react";
 import Modal from "react-bootstrap/Modal";
@@ -42,6 +43,7 @@ class App extends Component {
     personalityTestCompleted: false,
     firstTime: false,
     showAddPhoto: false,
+    showEdit: false
   };
 
   //----------------------Life Cycle Methods should go here--------------------//
@@ -186,11 +188,24 @@ class App extends Component {
     this.props.history.push("/Home");
   };
 
-  //---------------------------Dispensary functions------------------------//
-  editDispensaryHandler = (newStore, store_id) => {
+  //---------------------------store functions------------------------//
+
+
+
+
+
+
+
+
+  editStoreHandler = (e, newStore, store_id) => {
     // needs token, auth???
 
-    if (newStore.avatar) {
+    e.preventDefault()
+
+console.log("ITSBEENHIOT")
+
+
+    if (newStore.avatar? true : false) {
       const fd = new formData();
 
       fd.append("avatar", newStore.avatar);
@@ -218,7 +233,7 @@ class App extends Component {
             console.log("PATCHESSSS", newStore)
           )
         )
-        .then(console.log("PATCHESSS", newStore));
+        .then(window.location.reload());
     } else {
       fetch(`http://localhost:3000/api/v1/stores/${store_id}`, {
         method: "PATCH",
@@ -229,12 +244,15 @@ class App extends Component {
         body: JSON.stringify({ store: newStore }),
       })
         .then((res) => res.json())
-        .then(console.log("noPATTCHES", newStore));
+        .then(window.location.reload());
     }
   };
 
-  submitStoreHandler = (newStore, user_id) => {
 
+
+
+
+  submitStoreHandler = (newStore, user_id) => {
 
 
     fetch("http://localhost:3000/api/v1/stores", {
@@ -258,8 +276,12 @@ class App extends Component {
     });
   };
 
-  deleteDispensaryRequest = (e) => {
-    let store_id = e.target.parentElement.getAttribute("store");
+  deleteStoreRequest = (e) => {
+
+
+     let store_id = e.target.parentElement.parentElement.getAttribute("store");
+
+
 
     return fetch(`http://localhost:3000/api/v1/stores/${store_id}`, {
       method: "DELETE",
@@ -276,11 +298,33 @@ class App extends Component {
     });
   };
 
+   handleShowEdit = (store_id, namespace) => {
+    this.setState({
+        store_namespace: namespace,
+        store_id: store_id,
+        showEdit: true
+    });
+  };
+
+  handleShowEditClose = () => {
+    this.setState({ showEdit: !this.state.showEdit });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
   //---------------------------Strain functions------------------------//
   editStrainHandler = (newStrain, strain_id) => {
-    debugger;
-    console.log("fucking debugger", strain_id);
-    // needs token, auth???
+
+
 
     if (newStrain.avatar) {
       const fd = new formData();
@@ -836,6 +880,7 @@ class App extends Component {
 
     return (
       <React.Fragment>
+
         <Modal centered={true} size="lg" show={showAddPhoto}>
           <Modal.Header>
             <h3>Add Photo</h3>
@@ -875,10 +920,21 @@ class App extends Component {
           </Modal.Footer>
         </Modal>
 
-        {console.log(
-          "This is the new personality =>",
-          this.state
-        )}
+        <Modal centered={true} size="lg" show={this.state.showEdit} >
+
+          <Modal.Header>
+            <h3>Edit</h3>
+          </Modal.Header>
+          <Modal.Body>
+           <EditStoreForm user={this.state.user} namespace={this.state.store_namespace} storeid={this.state.store_id} editStoreHandler={this.editStoreHandler}></EditStoreForm>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleShowEditClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
 
         <Switch>
           <Route
@@ -916,8 +972,11 @@ class App extends Component {
                       handleNewStrainReviewClick={
                         this.handleNewStrainReviewClick
                       }
-                      deleteDispensaryRequest={this.deleteDispensaryRequest}
-                      sendThisDispensaryToEdit={this.sendThisDispensaryToEdit}
+                      deleteStoreRequest={this.deleteStoreRequest}
+                      editStoreHandler={this.editStoreHandler}
+                      showEdit={this.state.showEdit}
+                      handleShowEdit={this.handleShowEdit}
+                      handleShowEditClose={this.handleShowEditClose}
                       deleteStrainRequest={this.deleteStrainRequest}
                       sendThisStrainToEdit={this.sendThisStrainToEdit}
                       handleShowPersonality={this.handleShowPersonality}
@@ -1040,12 +1099,12 @@ class App extends Component {
             )}
           />
           <Route
-            path="/:namespace/editdispensary/:id"
+            path="/:namespace/editstore/:id"
             render={() => (
               <GuestContainerLayout
                 strains={this.state.strains}
                 user={this.state.user}
-                editDispensaryHandler={this.editDispensaryHandler}
+                editStoreHandler={this.editStoreHandler}
               />
             )}
           />

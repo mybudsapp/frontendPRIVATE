@@ -19,8 +19,8 @@ import Home from "../Components/Home";
 import StrainForm from '../Components/StrainForm'
 import UserContentDisplay from '../Components/UserContentDisplay'
 import Search from '../Components/Search'
-import NewDispensaryForm from '../Components/NewDispensaryForm'
-import EditDispensaryForm from '../Components/EditDispensaryForm'
+import NewStoreForm from '../Components/NewStoreForm'
+import EditStoreForm from '../Components/EditStoreForm'
 import NewStrainForm from '../Components/StrainForm'
 import EditStrainForm from '../Components/EditStrainForm'
 import Profile from '../Components/Profile.js'
@@ -107,11 +107,11 @@ placeholder='Search on My Buds'
                 />
         <Route
             path="/:username/newstore"
-            render={() => <NewDispensaryForm submitHandler={props.submitHandler} user={props.user} />}
+            render={() => <NewStoreForm submitHandler={props.submitHandler} user={props.user} />}
             />
             <Route
-                path="/:namespace/editdispensary/:id"
-                render={() => <EditDispensaryForm editDispensaryHandler={props.editDispensaryHandler} user={props.user} dispensary={props.dispensary} />}
+                path="/:namespace/editstore/:id"
+                render={() => <EditStoreForm editStoreHandler={props.editStoreHandler} user={props.user} store={props.store} />}
                 />
         <Route
             path="/signup"
