@@ -84,7 +84,9 @@ theSubmitHandler = (e) => {
 
 
     console.log("the state once submit handler is hit", this.state)
-    this.props.submitHandler(this.state, token);
+    this.props.submitStrainHandler(this.state, token);
+
+
 
     // gotta make the set the new state for new dispensarh
     // this.setState({
@@ -107,15 +109,15 @@ render() {
 
     const dispensariesOptions = () => {
 
-        let dispensaries = []
+        let stores = []
 
-        if(this.props.user.dispensaries){
-            dispensaries = this.props.user.dispensaries
+        if(this.props.user.stores){
+            stores = this.props.user.stores
         }else{
             return <h1> No Dispensary </h1>
         }
-        return dispensaries.map(dispensary => {
-            return <option value={dispensary.id} >{dispensary.namespace}</option>;
+        return stores.map(store => {
+            return <option value={store.id} >{store.namespace}</option>;
             })
         }
 
@@ -123,15 +125,15 @@ render() {
 
     return(
 
-        <Segment raised>
+        <Segment raised textAlign="left">
                 <input
                   type="file"
                   placeholder="avatar"
-                  value={this.state.email}
+
                   onChange={this.changeHandler}
                 />
 
-            <img id="strainavatar" src="https://cdn.dribbble.com/users/2313464/screenshots/6379726/weed_3000_-_2000_2x.jpg"></img>
+
 
             <div class="ui form" encType="multipart/form-data" user={this.props.user.id}  >
             <h3>New Strain </h3>
@@ -141,18 +143,17 @@ render() {
                <input
                  type="text"
                  name="strain_name"
-                 value={this.state.state}
                  onChange={this.changeHandler}
                />
            <br></br>
            <label> Location: </label>
-            <select name="dispensary"  onChange={this.changeHandler}>
+            <select name="store"  onChange={this.changeHandler}>
                 <option value="error">Choose Which Location</option>
                 {dispensariesOptions()}
              </select>
            <br></br>
-           <label>Type:</label>
-               <select name="type" id="type" onChange={this.changeHandler}>
+           <label>Strain Type:</label>
+               <select name="strain_type" id="strain_type" onChange={this.changeHandler}>
                    <option value="error">Choose the Type</option>
        <option value="Sativa">Sativa</option>
        <option value="Indica" >Indica </option>
@@ -163,13 +164,29 @@ render() {
        <input
          type="text"
          name="description"
-         value={this.state.state}
          onChange={this.changeHandler}
        />
+   <br></br>
+        <label>Price Per Gram:</label>
+         <br></br>
+            <input
+              type="integer"
+              name="price"
+              onChange={this.changeHandler}
+            />
+            <br></br>
+            <label>Company:</label>
+                <input
+                  type="text"
+                  name="growcompany"
+                  onChange={this.changeHandler}
+                />
+
                    <button>Submit</button>
              </form>
 
          </div>
+
          </Segment>
 
     )

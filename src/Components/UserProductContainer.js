@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import {Link, withRouter} from 'react-router-dom';
-import {Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select} from "semantic-ui-react"
+import {Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Item} from "semantic-ui-react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTachometerAlt,
@@ -17,6 +17,7 @@ import {
   faBong,
   faBirthdayCake
 } from "@fortawesome/free-solid-svg-icons";
+import StrainForm from "./StrainForm"
 import StrainCard from "./StrainCard"
 import ProductCard from "./ProductCard"
 
@@ -28,7 +29,18 @@ class UserProductContainer extends Component{
 
 
 
+    state = {
+        newStrainForm: false
+    }
 
+    newStrainButtonPressed = () => {
+
+        this.setState({
+            newStrainForm: !this.state.newStrainForm
+        })
+
+
+    }
 
         strainProductsDisplay = () => {
 
@@ -40,8 +52,8 @@ class UserProductContainer extends Component{
                     }else{
                         return null
                     }
-                    return products.map(product => {
-                  return <ProductCard product={product} user={this.props.user} deleteDispensaryRequest={this.props.deleteDispensaryRequest} sendThisDispensaryToEdit={this.props.sendThisDispensaryToEdit} raised/>
+                    return products.map(strain => {
+                  return <StrainCard strain={strain} user={this.props.user} deleteDispensaryRequest={this.props.deleteDispensaryRequest} sendThisDispensaryToEdit={this.props.sendThisDispensaryToEdit} raised/>
                 })
             }
 
@@ -74,7 +86,7 @@ class UserProductContainer extends Component{
                           return <ProductCard product={product} user={this.props.user} deleteDispensaryRequest={this.props.deleteDispensaryRequest} sendThisDispensaryToEdit={this.props.sendThisDispensaryToEdit} raised/>
                         })
                     }
-
+//
                     glassProductsDisplay = () => {
 
 
@@ -115,45 +127,66 @@ class UserProductContainer extends Component{
         return(
 
             <div>
+           <div>
 
-                <div className="row">
-                  <div className="col-xl-3 col-md-6 mb-4">
-                    <div className="card border-left-success shadow h-100 py-2">
-                      <div className="card-body">
-                        <div className="row no-gutters align-items-center">
-                          <div className="col mr-2">
-                            <div className="text-xs font-weight-bold text-success text-uppercase mb-1">
-                                Strains
-                                <Card.Group itemsPerRow={3} doubling raised>
+<Segment color='green'>
+<Grid divided='vertically' textAlign="center" divided padded>
+    <Grid.Row columns={2}>
+      <Grid.Column>
+          <FontAwesomeIcon
+            icon={faCannabis}
+            className="fa-4x text-gray-300"
+          ></FontAwesomeIcon>
 
-                            </Card.Group>
-                            </div>
-                          </div>
-                          <div className="col-auto">
-                              <div className="col-auto">
-                                <FontAwesomeIcon
-                                  icon={faCannabis}
-                                  className="fa-4x text-gray-300"
-                                ></FontAwesomeIcon>
-                              </div>
-                          </div>
-                        </div>
-                        <Segment
-                            circular style={ {width:80, height:80} }
-                            >
-                            <Link to={user + "/newstrain"}  >
-                                <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
-                                    <i class="large icons">
-                                        <i class="tree icon"></i>
-                                        <i class="top right corner add icon"></i>
-                                    </i>
-                                </Menu.Item>
-                            </Link>
-                        </Segment>
+      <h1>
+          Strains
+      </h1>
+      </Grid.Column>
+      <Grid.Column textAlign="center">
+          <Menu.Item as='a' onClick={this.newStrainButtonPressed}>
+              <i class="large icons">
+                  <i class="tree icon"></i>
+                  <i class="top right corner add icon"></i>
+              </i>
+          </Menu.Item>
+      </Grid.Column>
+      <Grid.Column>
+          {this.state.newStrainForm? <StrainForm user={this.props.user} submitStrainHandler={this.props.submitStrainHandler}/> : null}
+      </Grid.Column>
+  </Grid.Row>
+</Grid>
+</Segment>
 
-                      </div>
-                    </div>
-                  </div>
+
+
+
+<Segment color='teal'>
+<Grid divided='vertically' textAlign="center" divided padded>
+    <Grid.Row columns={3}>
+      <Grid.Column>
+          <FontAwesomeIcon
+              icon={faGrin}
+              className="fa-4x text-gray-300"
+              ></FontAwesomeIcon>
+      <h1>
+          Concentrates
+      </h1>
+      </Grid.Column>
+      <Grid.Column>
+          <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+              <i class="large icons">
+                  <i class="diamond icon"></i>
+                  <i class="top right corner add icon"></i>
+              </i>
+          </Menu.Item>
+      </Grid.Column>
+      <Grid.Column>
+          {this.state.newStrainForm? <StrainForm user={this.props.user}/> : null}
+      </Grid.Column>
+  </Grid.Row>
+</Grid>
+</Segment>
+
 
                   <div className="col-xl-3 col-md-6 mb-4">
                     <div className="card border-left-success shadow h-100 py-2">

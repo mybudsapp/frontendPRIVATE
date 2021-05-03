@@ -1,6 +1,6 @@
 import React from 'react'
 import PropTypes from 'prop-types'
-import {Card, Segment, Menu, Image, Button} from "semantic-ui-react"
+import {Card, Segment, Menu, Image, Button, Popup} from "semantic-ui-react"
 import {Link, withRouter} from 'react-router-dom'
 
 const StrainCard = props => {
@@ -10,28 +10,19 @@ const StrainCard = props => {
     const user = props.user
 
     return (
-        <Card raised>
-            <Card.Content id={props.strain.id} name={props.strain.strain_name} centered>
-              <div  id={props.strain.id} name={props.strain.strain_name}>
+        <Card id={props.strain.id} name={props.strain.strain_name} raised>
+            <Card.Content centered>
+              <div >
                       <Image centered fluid id="strainavatar" src="https://cdn.dribbble.com/users/2313464/screenshots/6379726/weed_3000_-_2000_2x.jpg"></Image>
               </div>
-
-              <Card.Header>{props.strain.strain_name}</Card.Header>
+              <p>{props.strain.name}</p>
               <Card.Meta>{props.strain.strain_type}</Card.Meta>
               <Card.Description>
-                {props.strain.description}
+                  By <br></br>
+                {props.strain.growcompany}
               </Card.Description>
             </Card.Content>
-            <Card.Content centered>
-                <div>
 
-              <Link to={viewstrainpage}>
-                <Button basic color='green'  id={props.strain.id}>
-                  View Profile
-                </Button>
-                </Link>
-              </div>
-            </Card.Content>
             {user? <Card.Content extra fluid>
             <Link to={viewstrainpage}>
               <Button basic color='green'  id={props.strain.id}>
@@ -39,6 +30,9 @@ const StrainCard = props => {
               </Button>
               </Link>
           </Card.Content> : null}
+          <Button basic color='red'  id={props.strain.id} onClick={e => props.deleteStrainRequest(e)}>
+            X
+          </Button>
           </Card>
     )
 }

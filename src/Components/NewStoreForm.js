@@ -232,7 +232,7 @@ render() {
                <input
                  type="text"
                  placeholder="description"
-                 value={this.state.email}
+                
                  onChange={this.changeHandler}
                />
            <br></br>

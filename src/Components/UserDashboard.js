@@ -59,7 +59,7 @@ const getWidth = () => {
 
   return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth;
 };
-
+//
 class UserDashboard extends React.Component {
   //okay so the dashboard is going to be geared towards dispensaries owners, they might have more than one dispensary
   //and several strains, they should be able to see all of the strains they've brought to the market and
@@ -144,6 +144,7 @@ class UserDashboard extends React.Component {
 
     const {user} = this.props
     const {stores} = this.props
+    const {strains} = this.props
 
     return (
       <React.Fragment>
@@ -290,13 +291,14 @@ class UserDashboard extends React.Component {
                         user={this.props.user}
                         stores={stores}
                         gallery={this.props.gallery}
-                        strains={this.props.strains}
+                        strains={strains}
                         handleAddPhoto={this.props.handleAddPhoto}
                         handleShowPhoto={this.props.handleShowPhoto}
                         handleDeletePhoto={this.props.handleDeletePhoto}
                         deleteStoreRequest={this.props.deleteStoreRequest}
                         editStoreRequest={this.props.editStoreHandler}
                         showEdit={this.props.showEdit}
+                        submitStrainHandler={this.props.submitStrainHandler}
                         handleShowEdit={this.props.handleShowEdit}
                         handleShowEditClose={this.props.handleShowEditClose}
                         deleteStrainRequest={this.props.deleteStrainRequest}

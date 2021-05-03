@@ -22,6 +22,8 @@ import {
   faGrin,
   faCogs
 } from "@fortawesome/free-solid-svg-icons";
+//
+
 
 
 
@@ -187,13 +189,15 @@ productsDisplay = () => {
 
         let products = []
 
-        if(this.props.products){
-            products = this.props.products
+
+
+        if(this.props.strains){
+            products = this.props.strains
         }else{
             return <h1> No Strains Here Bud </h1>
         }
         return products.map(strain => {
-      return <StrainCard strain={strain} user={this.props.user} deleteStrainRequest={this.props.deleteStrainRequest}  raised/>;
+      return <StrainCard strain={strain} user={this.props.user} deleteStrainRequest={this.props.deleteStrainRequest} deleteStrainRequest={this.props.deleteStrainRequest} raised/>;
     })
     }
 
@@ -301,7 +305,18 @@ render(){
         const user = "/" + this.props.user.username
 
             return(
-                <UserProductContainer user={this.props.user}/>
+                <div>
+                    <FontAwesomeIcon
+                        icon={faBarcode}
+                        className="fa-4x text-gray-300"></FontAwesomeIcon>
+                    <h1>Products</h1>
+                    <Card.Group itemsPerRow={8}>
+                    {this.productsDisplay()}
+                </Card.Group>
+                    <br></br>
+                    <UserProductContainer user={this.props.user} stores={this.props.stores} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest} showEdit={this.props.showEdit} handleShowEdit={this.props.handleShowEdit} handleShowEditClose={this.props.handleShowEditClose} submitStrainHandler={this.props.submitStrainHandler}/>
+
+          </div>
     )
 }else if(this.props.activeItem === 'StrainReviews'){
 
@@ -312,10 +327,10 @@ render(){
                 {this.strainReviewsDisplay()}
             </Card.Group>
         )
-    }else if(this.props.strains){
+    }else if(this.props.products){
     return(
         <Card.Group itemsPerRow={3} doubling raised>
-            {this.strainsDisplay()}
+            {this.productsDisplay()}
         </Card.Group>)
 }else if(this.props.activeItem === 'Settings'){
 

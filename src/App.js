@@ -310,6 +310,9 @@ console.log("ITSBEENHIOT")
     this.setState({ showEdit: !this.state.showEdit });
   };
 
+  handleShowErrorClose = () =>{
+      this.setState({ hasError: !this.state.hasError})
+  }
 
 
 
@@ -366,6 +369,12 @@ console.log("ITSBEENHIOT")
   };
 
   submitStrainHandler = (newStrain, user_id) => {
+
+      this.setState({
+          newStrain: newStrain
+      })
+
+
     fetch("http://localhost:3000/api/v1/strains", {
       method: "POST",
       headers: {
@@ -374,9 +383,18 @@ console.log("ITSBEENHIOT")
       },
       body: JSON.stringify({ strain: newStrain }),
     }).then((res) => {
+        console.log()
       if (!res.ok) {
-        res.text().then((text) => alert(text));
-      } else {
+          res.text().then(text =>
+
+        this.setState({
+            errorMessage: text,
+        hasError: true
+        })
+
+    )} else {
+
+
         return res
           .json()
           .then((strainData) => {
@@ -387,8 +405,57 @@ console.log("ITSBEENHIOT")
     });
   };
 
+
+  submitFixedStrainRequest = () => {
+
+      console.log("ponderiver")
+
+      fetch("http://localhost:3000/api/v1/strains", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json",
+        },
+        body: JSON.stringify({ strain: this.state.newStrain, sameGrower: true}),
+      }).then((res) => {
+        if (!res.ok) {
+            res.text().then(text =>
+
+          this.setState({
+              errorMessage: text,
+          hasError: true
+          })
+
+      )} else {
+
+          return res
+            .json()
+            .then((strainData) => {
+              this.setState({ strain: { ...strainData.strain } });
+            })
+            .then(window.location.reload());
+        }
+      });
+  }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
   deleteStrainRequest = (e) => {
-    let strain_id = e.target.parentElement.getAttribute("strain");
+      
+
+    let strain_id = e.target.parentElement.getAttribute("id");
+
 
     return fetch(`http://localhost:3000/api/v1/strains/${strain_id}`, {
       method: "DELETE",
@@ -677,6 +744,13 @@ console.log("ITSBEENHIOT")
     this.setState({ personalityTest: true });
   };
 
+  displayError = () => {
+      return <div>
+          this.state.error
+      </div>
+  }
+
+
   render() {
     const sendDataToServer = (survey) => {
       //send Ajax request to your web server.
@@ -920,6 +994,21 @@ console.log("ITSBEENHIOT")
           </Modal.Footer>
         </Modal>
 
+        <Modal centered={true} size="lg" show={hasError} >
+
+          <Modal.Header>
+            <h3>Something Went Wrong...</h3>
+          </Modal.Header>
+          <Modal.Body>
+           <Error message={this.state.errorMessage} submitFixedStrainRequest={this.submitFixedStrainRequest} closeErrorWindow={this.handleShowErrorClose}/>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleShowErrorClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <Modal centered={true} size="lg" show={this.state.showEdit} >
 
           <Modal.Header>
@@ -982,6 +1071,7 @@ console.log("ITSBEENHIOT")
                       handleShowPersonality={this.handleShowPersonality}
                       handleAddPhoto={this.handleAddPhoto}
                       handleDeletePhoto={this.deletePhotoRequest}
+                      submitStrainHandler={this.submitStrainHandler}
                       logOutHandler={this.logOutHandler}
                     />
                   );
