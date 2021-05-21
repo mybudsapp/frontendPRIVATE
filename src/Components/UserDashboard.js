@@ -41,7 +41,8 @@ import {
   faBarcode,
   faSearchPlus,
   faGrin,
-  faCogs
+  faCogs,
+  faAddressCard
 } from "@fortawesome/free-solid-svg-icons";
 
 import MobileNavBar from "./MobileNavBar"
@@ -130,6 +131,10 @@ class UserDashboard extends React.Component {
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
 
+  handleShowPersonality = () => {
+
+  }
+
   render() {
     const activityFeedToDisplay = this.state.activityFeed;
     const { activeItem } = this.state;
@@ -145,6 +150,7 @@ class UserDashboard extends React.Component {
     const {user} = this.props
     const {stores} = this.props
     const {strains} = this.props
+    const {products} = this.props
 
     return (
       <React.Fragment>
@@ -253,7 +259,17 @@ class UserDashboard extends React.Component {
         <span>Settings</span>
         </Button>
       </li>
+      <li className="nav-item">
+            <Button name='Personality Test' color="blue" className="nav-link" onClick={this.props.handleShowPersonality}>
+              <FontAwesomeIcon
+                icon={faAddressCard}
+                className="mr-2"
+              ></FontAwesomeIcon>
+          <span>Personality Test</span>
+          </Button>
+        </li>
       <br></br>
+
       <br></br>
       <br></br>
       <br></br>
@@ -289,6 +305,7 @@ class UserDashboard extends React.Component {
                     <UserContentDisplay
                         activeItem={activeItem}
                         user={this.props.user}
+                        products={products}
                         stores={stores}
                         gallery={this.props.gallery}
                         strains={strains}
@@ -299,10 +316,14 @@ class UserDashboard extends React.Component {
                         editStoreRequest={this.props.editStoreHandler}
                         showEdit={this.props.showEdit}
                         submitStrainHandler={this.props.submitStrainHandler}
+                        handleShowPersonality={this.props.handleShowPersonality}
                         handleShowEdit={this.props.handleShowEdit}
                         handleShowEditClose={this.props.handleShowEditClose}
                         deleteStrainRequest={this.props.deleteStrainRequest}
                         submitCommentHandler={this.props.submitCommentHandler}
+                        submitProductHandler={this.props.submitProductHandler}
+                        deleteStrainRequest={this.props.deleteStrainRequest}
+                        deleteProductRequest={this.props.deleteProductRequest}
                         />
 
 

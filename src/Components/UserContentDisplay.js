@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select} from "semantic-ui-react"
+import {Label, Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select} from "semantic-ui-react"
 
 import {Link, withRouter} from 'react-router-dom'
 import StoreCard from "./StoreCard"
@@ -7,6 +7,9 @@ import StrainCard from "./StrainCard"
 import PhotoCard from "./PhotoCard"
 import EditProfile from "./EditProfile"
 import StrainReviewCard from './StrainReviewCard'
+import ProductCard from './ProductCard'
+import StrainForm from "./StrainForm"
+import ProductForm from "./ProductForm"
 import UserShopContainer from './UserShopContainer'
 import UserProductContainer from './UserProductContainer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -20,7 +23,11 @@ import {
   faBarcode,
   faSearchPlus,
   faGrin,
-  faCogs
+  faCogs,
+  faFillDrip,
+  faCannabis,
+  faUtensils,
+  faToolbox
 } from "@fortawesome/free-solid-svg-icons";
 //
 
@@ -32,6 +39,7 @@ class UserContentDisplay extends Component{
 
 
     state = {
+        newStrainForm: false
     }
 
 
@@ -180,29 +188,6 @@ buddiesDisplay = () => {
 
 
 
-
-
-
-
-
-productsDisplay = () => {
-
-        let products = []
-
-
-
-        if(this.props.strains){
-            products = this.props.strains
-        }else{
-            return <h1> No Strains Here Bud </h1>
-        }
-        return products.map(strain => {
-      return <StrainCard strain={strain} user={this.props.user} deleteStrainRequest={this.props.deleteStrainRequest} deleteStrainRequest={this.props.deleteStrainRequest} raised/>;
-    })
-    }
-
-
-
     strainReviewsDisplay = () => {
 
 
@@ -221,7 +206,23 @@ productsDisplay = () => {
         })
         }
 
+        newStrainButtonPressed = () => {
 
+            this.setState({
+                newStrainForm: !this.state.newStrainForm
+            })
+
+
+        }
+
+        newProductButtonPressed = () => {
+
+            this.setState({
+                newProductForm: !this.state.newProductForm
+            })
+
+
+        }
 
 
 
@@ -306,15 +307,98 @@ render(){
 
             return(
                 <div>
-                    <FontAwesomeIcon
-                        icon={faBarcode}
-                        className="fa-4x text-gray-300"></FontAwesomeIcon>
-                    <h1>Products</h1>
-                    <Card.Group itemsPerRow={8}>
-                    {this.productsDisplay()}
-                </Card.Group>
+
+                        <Grid columns={2}>
+
+                            <FontAwesomeIcon
+                            icon={faBarcode}
+                            className="fa-4x text-gray-300"></FontAwesomeIcon>
+                        <h1>Items</h1>
+
+
+                        <UserProductContainer
+                            activeItem={this.props.activeItem}
+                            user={this.props.user}
+                            strains={this.props.strains}
+                            products={this.props.products}
+                            deleteStoreRequest={this.props.deleteStoreRequest}
+                            editStoreRequest={this.props.editStoreRequest}
+                            showEdit={this.props.showEdit}
+                            handleShowEdit={this.props.handleShowEdit}
+                            handleShowEditClose={this.props.handleShowEditClose}
+                            submitStrainHandler={this.props.submitStrainHandler}
+                            deleteStrainRequest={this.props.deleteStrainRequest}
+                            submitProductHandler={this.props.submitProductHandler}
+                            deleteProductRequest={this.props.deleteProductRequest}
+                            deleteStrainRequest={this.props.deleteStrainRequest}
+                            />
+
+                        <br></br>
+                        <Grid.Row >
+                            <Grid.Column>
+
+                            </Grid.Column>
+                          <Grid.Column>
+                              <br></br>
+
+                      </Grid.Column>
+                        </Grid.Row>
+                      </Grid>
+                      {this.state.newStrainForm? <StrainForm user={this.props.user} submitStrainHandler={this.props.submitStrainHandler}/> : null}
+                       {this.state.newProductForm? <ProductForm user={this.props.user} submitProductHandler={this.props.submitProductHandler}/> : null}
+
+
                     <br></br>
-                    <UserProductContainer user={this.props.user} stores={this.props.stores} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest} showEdit={this.props.showEdit} handleShowEdit={this.props.handleShowEdit} handleShowEditClose={this.props.handleShowEditClose} submitStrainHandler={this.props.submitStrainHandler}/>
+
+
+
+
+
+
+<Segment>
+                        <span>Add New Item To the Store</span>
+                        <Label.Group color='olive' circular >
+                        <Grid columns='equal' centered padded>
+                            <Grid.Row centered columns={4}>
+   <Grid.Column>
+    <Label onClick={this.newStrainButtonPressed}><FontAwesomeIcon
+        icon={faCannabis}
+        className="fa-sm text-white-300"
+        ></FontAwesomeIcon><span>Strain</span></Label>
+   </Grid.Column>
+   <Grid.Column>
+       <Label onClick={this.newProductButtonPressed}> <FontAwesomeIcon
+           icon={faFillDrip}
+           className="fa-sm text-white-300"
+           ></FontAwesomeIcon> <span>Concentrates</span></Label>
+
+   </Grid.Column>
+   <Grid.Column>
+       <Label onClick={this.newProductButtonPressed} >
+       <FontAwesomeIcon
+           icon={faUtensils}
+           className="fa-sm text-white-300"
+           ></FontAwesomeIcon>
+       <span> Edibles</span> </Label>
+   </Grid.Column>
+   <Grid.Column>
+       <Label onClick={this.newProductButtonPressed}>
+       <FontAwesomeIcon
+           icon={faToolbox}
+           className="fa-sm text-white-300"
+           ></FontAwesomeIcon>
+        <span>Accessories</span></Label>
+   </Grid.Column>
+
+
+
+
+        </Grid.Row>
+</Grid>
+</Label.Group>
+                    </Segment>
+<br></br>
+<br></br>
 
           </div>
     )
@@ -327,11 +411,23 @@ render(){
                 {this.strainReviewsDisplay()}
             </Card.Group>
         )
-    }else if(this.props.products){
-    return(
-        <Card.Group itemsPerRow={3} doubling raised>
-            {this.productsDisplay()}
-        </Card.Group>)
+}else if(this.props.activeItem === 'Settings'){
+
+    const user = "/" + this.props.user.username
+
+        return(
+
+                <EditProfile/>
+
+)}else if(this.props.activeItem === 'Personality'){
+
+        const user = "/" + this.props.user.username
+
+        return(
+            <Card.Group itemsPerRow={3} doubling raised>
+                {this.strainReviewsDisplay()}
+            </Card.Group>
+        )
 }else if(this.props.activeItem === 'Settings'){
 
     const user = "/" + this.props.user.username

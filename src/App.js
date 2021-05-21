@@ -158,6 +158,10 @@ class App extends Component {
 
   //---------------------------------------------------------------------------------------
 
+
+
+
+
   //------------------Strain Review Functions-----------------////
 
   submitNewStrainReviewHandler = (newStrainReview) => {
@@ -177,23 +181,25 @@ class App extends Component {
       } else {
         return res
           .json()
-          .then(() => this.props.history.goBack())
+          .then(res => console.log(res))
           .then(window.location.reload());
       }
     });
   };
+
+
+
+
 
   logOutHandler = () => {
     localStorage.removeItem("token");
     this.props.history.push("/Home");
   };
 
+
+
+
   //---------------------------store functions------------------------//
-
-
-
-
-
 
 
 
@@ -441,20 +447,10 @@ console.log("ITSBEENHIOT")
 
 
 
-
-
-
-
-
-
-
-
-
-
   deleteStrainRequest = (e) => {
-      
 
-    let strain_id = e.target.parentElement.getAttribute("id");
+
+    let strain_id = e.target.parentElement.parentElement.getAttribute("id");
 
 
     return fetch(`http://localhost:3000/api/v1/strains/${strain_id}`, {
@@ -484,6 +480,169 @@ console.log("ITSBEENHIOT")
       );
     // this.props.history.push("/explore/" + String(this.state.otherStrain.strain_name))
   };
+
+  //---------------------------Products Functions------------------------//
+
+
+
+
+  editProductHandler = (newProduct, product_id) => {
+
+
+
+    if (newProduct.avatar) {
+      const fd = new formData();
+
+      fd.append("avatar", newProduct.avatar);
+
+      axios
+        .patch(`http://localhost:3000/api/v1/products/${product_id}`, fd, {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        })
+        .then(
+          fetch(
+            `http://localhost:3000/api/v1/products/${product_id}`,
+            {
+              method: "PATCH",
+              headers: {
+                // Authorization: `${token}`,
+                "content-type": "application/json",
+                accepts: "application/json",
+              },
+              body: JSON.stringify({ product: newProduct }),
+            },
+            console.log("PATCHESSSS", newProduct)
+          )
+        )
+        .then(console.log("PATCHESSS", newProduct));
+    } else {
+      fetch(`http://localhost:3000/api/v1/products/${product_id}`, {
+        method: "PATCH",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json",
+        },
+        body: JSON.stringify({ product: newProduct }),
+      })
+        .then((res) => res.json())
+        .then(console.log("noPATTCHES", newProduct));
+    }
+  };
+
+  submitProductHandler = (newProduct, user_id) => {
+
+      this.setState({
+          newProduct: newProduct
+      })
+
+
+    fetch("http://localhost:3000/api/v1/products", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({ product: newProduct }),
+    }).then((res) => {
+        console.log()
+      if (!res.ok) {
+          res.text().then(text =>
+
+        this.setState({
+            errorMessage: text,
+        hasError: true
+        })
+
+    )} else {
+
+
+        return res
+          .json()
+          .then((productData) => {
+            this.setState({ product: { ...productData.product } });
+          })
+          .then(window.location.reload());
+      }
+    });
+  };
+
+
+  submitFixedProductRequest = () => {
+
+      console.log("ponderiver")
+
+      fetch("http://localhost:3000/api/v1/products", {
+        method: "POST",
+        headers: {
+          "content-type": "application/json",
+          accepts: "application/json",
+        },
+        body: JSON.stringify({ product: this.state.newProduct, sameGrower: true}),
+      }).then((res) => {
+        if (!res.ok) {
+            res.text().then(text =>
+
+          this.setState({
+              errorMessage: text,
+          hasError: true
+          })
+
+      )} else {
+
+          return res
+            .json()
+            .then((productData) => {
+              this.setState({ product: { ...productData.strain } });
+            })
+            .then(window.location.reload());
+        }
+      });
+  }
+
+
+
+
+  deleteProductRequest = (e) => {
+
+
+    let product_id = e.target.parentElement.parentElement.getAttribute("id");
+
+
+    return fetch(`http://localhost:3000/api/v1/products/${product_id}`, {
+      method: "DELETE",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+      },
+    }).then((res) => {
+      if (!res.ok) {
+        res.text().then((text) => alert(text));
+      } else {
+        window.location.reload();
+      }
+    });
+  };
+
+  handleViewProductProfile = (e) => {
+    console.log("is this shit even being hit");
+
+    fetch(`http://localhost:3000/api/v1/products/${e.target.id}`)
+      .then((res) => res.json())
+      .then((productData) =>
+        this.setState({
+          selectedProduct: { ...productData },
+        })
+      );
+    // this.props.history.push("/explore/" + String(this.state.otherStrain.strain_name))
+  };
+
+
+
+
+
+
+
+
 
   //-----------------------Fetch&API Handlers Should Go Here---------------------------------
 
@@ -767,7 +926,7 @@ console.log("ITSBEENHIOT")
         body: JSON.stringify({ survey: survey.data }),
       }).then((res) => {
         if (!res.ok) {
-          res.text().then((text) => alert(text));
+          res.text().then((text) => console.log(text));
         } else {
           return res.json().then(window.location.reload());
         }
@@ -775,7 +934,7 @@ console.log("ITSBEENHIOT")
 
       console.log(survey.data, "this is the numeical score");
 
-      alert("The results are:" + JSON.stringify(survey.data));
+      alert("Your New Personality Type is....." + this.state.user.personality_type);
     };
 
     //change the first pages in the survey, explaining the points of the personalitytests
@@ -1050,28 +1209,25 @@ console.log("ITSBEENHIOT")
                   return (
                     <UserDashboard
                       user={this.state.user}
+                      handleViewUserProfile={this.handleViewUserProfile}
                       avatar={this.state.avatar}
                       history={this.props.history}
                       stores={this.state.user.stores}
-                      strains={this.state.user.strains}
-                      gallery={this.state.user.gallery}
-                      handleViewUserProfile={this.handleViewUserProfile}
-                      handleNewPostClick={this.handleNewPostClick}
-                      handleNewPhotoClick={this.handleNewPhotoClick}
-                      handleNewStrainReviewClick={
-                        this.handleNewStrainReviewClick
-                      }
                       deleteStoreRequest={this.deleteStoreRequest}
                       editStoreHandler={this.editStoreHandler}
-                      showEdit={this.state.showEdit}
-                      handleShowEdit={this.handleShowEdit}
-                      handleShowEditClose={this.handleShowEditClose}
+                      strains={this.state.user.strains}
+                      submitStrainHandler={this.submitStrainHandler}
                       deleteStrainRequest={this.deleteStrainRequest}
                       sendThisStrainToEdit={this.sendThisStrainToEdit}
+                      products={this.state.user.products}
+                      submitProductHandler={this.submitProductHandler}
+                      deleteProductRequest={this.deleteProductRequest}
+                      submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
+                      handleShowEdit={this.handleShowEdit}
+                      handleShowEditClose={this.handleShowEditClose}
                       handleShowPersonality={this.handleShowPersonality}
                       handleAddPhoto={this.handleAddPhoto}
                       handleDeletePhoto={this.deletePhotoRequest}
-                      submitStrainHandler={this.submitStrainHandler}
                       logOutHandler={this.logOutHandler}
                     />
                   );
@@ -1156,7 +1312,7 @@ console.log("ITSBEENHIOT")
             )}
           />
           <Route
-            path="/strains/:strain_name/:id"
+            path="/strains/:name/:id"
             render={() => (
               <GuestContainerLayout
                 user={this.state.user}

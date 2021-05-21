@@ -92,11 +92,11 @@ placeholder='Search on My Buds'
     <Container text style={{ marginTop: '2em' }}>
     <Switch>
         <Route
-            path="/strains/:strain_name/strainreview/:id"
+            path="/strains/:name/strainreview/:id"
             render={() => <StrainReview submitNewStrainReviewHandler={props.submitNewStrainReviewHandler} submitCommentHandler={props.submitCommentHandler} />}
             />
-        <Route path="/strains/:strain_name/:id"
-            render={() => <StrainProfile user={props.user}  strains={props.strains} submitCommentHandler={props.submitCommentHandler}/>} />
+        <Route path="/strains/:name/:id"
+            render={() => <StrainProfile user={props.user}  strains={props.strains} submitCommentHandler={props.submitCommentHandler} submitNewStrainReviewHandler={props.submitNewStrainReviewHandler}/>} />
         <Route
             path="/:username/newstrain"
             render={() => <NewStrainForm submitHandler={props.submitHandler} user={props.user} />}

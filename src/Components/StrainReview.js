@@ -143,7 +143,7 @@ return(
     <Image centered fluid id="strainavatar" src="https://cdn.dribbble.com/users/2313464/screenshots/6379726/weed_3000_-_2000_2x.jpg"></Image>
     <Segment>
     <Header as='h2' textAlign='center'>
-            {strain.strain_name}
+            {strain.name}
           </Header>
           <Header >{strain.strain_type}</Header>
     </Segment>
@@ -312,10 +312,7 @@ return(
   <Button  onClick={this.submitHandler} basic color='green'>Submit</Button>
   </Segment>
   </Segment>
-  <Segment raised textAlign='center'>
-    <h3>Review Comments</h3>
-    <Image size="tiny" centered src="https://cloudcar.com/wp-content/uploads/2018/06/gif-bounce-arrow.gif"></Image>
-  </Segment>
+
 </ResponsiveContainer>
 )
 }
