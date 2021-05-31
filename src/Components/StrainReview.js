@@ -96,21 +96,7 @@ class StrainReview extends Component {
           fetch(`http://localhost:3000/api/v1/strains/${strainID}`).then(res => res.json()).then(strainData =>
             this.setState({
                 strain: {...strainData}})
-            ).then(
-              fetch("http://localhost:3000/api/v1/current_user", {
-                method: "GET",
-                headers: {
-                  Authorization: `${token}`,
-                  "content-type": "application/json",
-                  accepts: "application/json"
-                }
-              })
-                .then(resp => resp.json())
-                .then(userData => {
-                  this.setState({
-                    user: { ...userData.user }
-                  });
-              }))
+            )
       }
 
 //document.getElementById("myH2").style.color = "#ff0000"
@@ -140,7 +126,7 @@ render(){
 return(
     <ResponsiveContainer functions={this.props}>
     <Segment raised textAlign='center'>
-    <Image centered fluid id="strainavatar" src="https://cdn.dribbble.com/users/2313464/screenshots/6379726/weed_3000_-_2000_2x.jpg"></Image>
+    
     <Segment>
     <Header as='h2' textAlign='center'>
             {strain.name}
@@ -444,7 +430,7 @@ strain: {}}
 
       <Segment raised textAlign='center'>
       <Segment raised textAlign='center'>
-      <Image centered fluid id="strainavatar" src="https://cdn.dribbble.com/users/2313464/screenshots/6379726/weed_3000_-_2000_2x.jpg"></Image>
+      
       <Segment>
       <Header as='h2' textAlign='center'>
               {strain.strain_name}

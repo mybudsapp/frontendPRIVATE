@@ -51,7 +51,7 @@ import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
 
-import avatar from "../assets/img/avatar.png"
+
 
 import "../assets/css/sb-admin-2.css";
 
@@ -151,6 +151,8 @@ class UserDashboard extends React.Component {
     const {stores} = this.props
     const {strains} = this.props
     const {products} = this.props
+    const {avatar} = this.props
+
 
     return (
       <React.Fragment>
@@ -199,7 +201,7 @@ class UserDashboard extends React.Component {
               to="/profile"
               className="sidebar-brand d-flex align-items-center justify-content-center"
             >
-            <Avatar size={67} round={true} src={avatar}></Avatar>
+            {avatar? <Avatar src={avatar.url}></Avatar> : null}
         </Link>
         <Link
           to="/dashboard"
@@ -324,6 +326,7 @@ class UserDashboard extends React.Component {
                         submitProductHandler={this.props.submitProductHandler}
                         deleteStrainRequest={this.props.deleteStrainRequest}
                         deleteProductRequest={this.props.deleteProductRequest}
+                        submitHandler={this.props.submitHandler}
                         />
 
 

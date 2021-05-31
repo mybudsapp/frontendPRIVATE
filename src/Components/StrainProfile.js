@@ -44,47 +44,44 @@ import StrainReview from "../Components/StrainReview"
 class StrainProfile extends Component{
 
     state = {
-series: [{ name: "Indica Buddies",
-  data: [44, 55, 41, 64, 22]
-}, { name: "Sativa Buddies",
-  data: [53, 32, 33, 52, 13]
-}],
-options: {
-  chart: {
-      toolbar: {
-      show: false
-  },
-    type: 'bar',
-    height: 430
-  },
-  plotOptions: {
-    bar: {
-      horizontal: true,
-      dataLabels: {
-        position: 'top',
-      },
-    }
-  },
-  dataLabels: {
-    enabled: true,
-    offsetX: -6,
-    style: {
-      fontSize: '12px',
-      colors: ['#fff']
-    }
-  },
-  stroke: {
-    show: true,
-    width: 1,
-    colors: ['#fff']
-  },
-  xaxis: {
-    categories: ["Physical", "Mental", "Velocity", "Flavor", "Overall"],
-  },
 }
 
-
-}
+// calculateTheStrainScore = (strain) => {
+//
+//
+//
+//
+//     const allowedIndicaScores = ["mental_indica_score", "physical_indica_score", "velocity_indica_score", "flavor_indica_score", "overall_indica_score"];
+//
+//     const indicaScoresFiltered = Object.keys(strain)
+//       .filter(key => allowedIndicaScores.includes(key))
+//       .reduce((obj, key) => {
+//         obj[key] = strain[key];
+//         return obj;
+//       }, {});
+//
+//
+//       const allowedSativaScores = ["mental_sativa_score", "physical_sativa_score", "velocity_sativa_score", "flavor_sativa_score", "overall_sativa_score"];
+//
+//       const sativaScoresFiltered = Object.keys(strain)
+//         .filter(key => allowedSativaScores.includes(key))
+//         .reduce((obj, key) => {
+//           obj[key] = strain[key];
+//           return obj;
+//         }, {});
+//
+//
+//
+//       const sativaBuddyScores = Object.values(sativaScoresFiltered)
+//       const indicaBuddyScores = Object.values(indicaScoresFiltered)
+//
+//
+//     console.log(strain, sativaBuddyScores, indicaBuddyScores)
+//
+//
+//
+//
+// }
 
 
 componentDidMount = () => {
@@ -96,42 +93,8 @@ componentDidMount = () => {
     let strain_id = document.location.href.substring(document.location.href.lastIndexOf('/') + 1)
 
 
-    //
-    //
-    //
-    // {make 2 new arrays with strain scores, indica buddies, sativa buddies}
-    //
-    //
-    // function indicaBuddyScores(strain) {
-    //
-    //
-    //
-    //     t.float "strainData.mental_indica_score"
-    // t.float "strainData.physical_indica_score"
-    // t.float "strainData.velocity_indica_score"
-    // t.float "strainData.flavor_indica_score"
-    // t.float "strainData.overall_indica_score"
-    //
-    //
-    //     this.setState({
-    //         series: [{ name: "Indica Buddies",
-    //           data: [44, 55, 41, 64, 22]
-    //         }, { name: "Sativa Buddies",
-    //           data: [53, 32, 33, 52, 13]
-    //         }]
-    // }
-    //
-    // function filterByType(product, props) {
-    //     if (product.producttype == "Concentrate"){
-    //         return <ProductCard product={product}
-    //             user={props.user}
-    //             submitProductHandler={props.submitProductHandler}
-    //             deleteProductRequest={props.deleteProductRequest}
-    //             raised/>
-    //
-    //
-    //
-    //
+
+
 
 
 
@@ -148,9 +111,74 @@ componentDidMount = () => {
       } else {
         return res.json().then((strainData) => {
 
-      this.setState({
-        strain: { ...strainData}
-      })
+
+            const allowedIndicaScores = ["mental_indica_score", "physical_indica_score", "velocity_indica_score", "flavor_indica_score", "overall_indica_score"];
+
+            const indicaScoresFiltered = Object.keys(strainData)
+            .filter(key => allowedIndicaScores.includes(key))
+            .reduce((obj, key) => {
+                obj[key] = strainData[key];
+                return obj;
+            }, {});
+
+
+            const allowedSativaScores = ["mental_sativa_score", "physical_sativa_score", "velocity_sativa_score", "flavor_sativa_score", "overall_sativa_score"];
+
+            const sativaScoresFiltered = Object.keys(strainData)
+            .filter(key => allowedSativaScores.includes(key))
+            .reduce((obj, key) => {
+                obj[key] = strainData[key];
+                return obj;
+            }, {});
+
+            const sativaBuddyScores = Object.values(sativaScoresFiltered)
+            const indicaBuddyScores = Object.values(indicaScoresFiltered)
+
+
+
+
+            this.setState({
+                strain: strainData,
+                series: [{ name: "Indica Buddies",
+                  data: [...indicaBuddyScores],
+                  colors: '#e83e8c'
+                }, { name: "Sativa Buddies",
+                  data: [...sativaBuddyScores],
+                  colors: '#20c997'
+              }],
+              options: {
+                chart: {
+                    toolbar: {
+                    show: false
+                },
+                  type: 'bar',
+                  height: 500
+                },
+                plotOptions: {
+                  bar: {
+                    horizontal: true,
+                    dataLabels: {
+                      position: 'top',
+                    },
+                  }
+                },
+                dataLabels: {
+                  enabled: true,
+                  offsetX: -6,
+                  style: {
+                    fontSize: '12px'
+                  }
+                },
+                stroke: {
+                  show: true,
+                  width: 14,
+                  colors: ['#e83e8c', '#20c997']
+                },
+                xaxis: {
+                  categories: ["Physical", "Mental", "Velocity", "Flavor", "Overall"],
+                }
+              }
+})
     })
 }
 })
@@ -162,7 +190,55 @@ componentDidMount = () => {
 
 
 
+
+
+
+
 }
+
+
+
+
+    // let strain = this.state.strain
+    //
+    // const allowedIndicaScores = ["mental_indica_score", "physical_indica_score", "velocity_indica_score", "flavor_indica_score", "overall_indica_score"];
+    //
+    // const indicaScoresFiltered = Object.keys(strain)
+    //   .filter(key => allowedIndicaScores.includes(key))
+    //   .reduce((obj, key) => {
+    //     obj[key] = strain[key];
+    //     return obj;
+    //   }, {});
+    //
+    //
+    //   const allowedSativaScores = ["mental_sativa_score", "physical_sativa_score", "velocity_sativa_score", "flavor_sativa_score", "overall_sativa_score"];
+    //
+    //   const sativaScoresFiltered = Object.keys(strain)
+    //     .filter(key => allowedSativaScores.includes(key))
+    //     .reduce((obj, key) => {
+    //       obj[key] = strain[key];
+    //       return obj;
+    //     }, {});
+    //
+    //
+    //
+    //   const sativaBuddyScores = Object.values(sativaScoresFiltered)
+    //   const indicaBuddyScores = Object.values(indicaScoresFiltered)
+
+
+    // console.log(strain, sativaBuddyScores, indicaBuddyScores)
+
+    // this.setState({
+    //     series: [{ name: "Indica Buddies",
+    //       data: [indicaBuddyScores]
+    //     }, { name: "Sativa Buddies",
+    //       data: [sativaBuddyScores]
+    //     }]
+    // })
+
+
+
+
 
 
 
@@ -591,7 +667,8 @@ calculateTheStrainScore = (strain) => {
       const sativaBuddyScores = Object.values(sativaScoresFiltered)
       const indicaBuddyScores = Object.values(indicaScoresFiltered)
 
-    console.log(sativaBuddyScores)
+
+    console.log(strain, sativaBuddyScores, indicaBuddyScores)
 
 
 }
@@ -607,10 +684,8 @@ render(){
 
       {strain? <div id="custom-css-product">
 
-<Segment>
-    {
-        this.calculateTheStrainScore(strain)
-    }
+<div>
+
     <div className="page-detail" style={{ marginTop: "50px" }}>
       <div className="container">
         <div className="row">
@@ -660,16 +735,16 @@ render(){
     <br></br>
     <br></br>
     <StrainReview submitNewStrainReviewHandler={this.props.submitNewStrainReviewHandler}/>
-        <Segment raised textAlign='center'>
+        <div raised textAlign='center'>
           <h3>Review Comments</h3>
 
           <CommentDisplay photoID={this.state.currentPhotoId} comments={this.state.currentPhotoComments} commentType="photo" submitCommentHandler={this.submitCommentHandler} />
-        </Segment>
+        </div>
 
 
         </div>
         </div>
-    </Segment>
+    </div>
 </div>
 : null}
 

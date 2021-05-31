@@ -81,6 +81,7 @@ class App extends Component {
             return res.json().then((userData) => {
           this.setState({
             user: { ...userData.user },
+            avatar: { ...userData.user.avatar}
           });
         })
         .then(() => this.props.history.push("/dashboard/"));
@@ -972,6 +973,8 @@ console.log("ITSBEENHIOT")
               description:
                 "You let others know your happy, verbally or physically.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
               showTitle: true,
             },
@@ -984,6 +987,8 @@ console.log("ITSBEENHIOT")
               description:
                 "You do not like to think of what someone else might need.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
             {
@@ -994,6 +999,8 @@ console.log("ITSBEENHIOT")
               description:
                 "You keep most of your emotions and story to yourself. ",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
             {
@@ -1003,6 +1010,8 @@ console.log("ITSBEENHIOT")
               title: "I hate to seem pushy. ",
               description: "You go out of your way to seem NOT pushy.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
           ],
@@ -1018,6 +1027,8 @@ console.log("ITSBEENHIOT")
                 "I see beauty in things that most people wouldn't notice. ",
               description: "You are no stranger to daydreams.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
             {
@@ -1027,6 +1038,8 @@ console.log("ITSBEENHIOT")
               title: "I am not easily annoyed. ",
               description: 'You have a tolerance for people\'s "mistakes".',
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
             {
@@ -1036,6 +1049,8 @@ console.log("ITSBEENHIOT")
               title: "I take advantage of others.",
               description: "You take when you can.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
             {
@@ -1045,6 +1060,8 @@ console.log("ITSBEENHIOT")
               title: "I take interest in other people's lives. ",
               description: "You care about their story.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
           ],
@@ -1059,6 +1076,8 @@ console.log("ITSBEENHIOT")
               title: "I'm up for anything, twice!",
               description: "You are less fearful of consequences.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
             {
@@ -1068,6 +1087,8 @@ console.log("ITSBEENHIOT")
               title: "I'm hard to get to know.",
               description: "You wait for others to lead the way.",
               descriptionLocation: "underInput",
+              labelTrue: "True",
+              labelFalse: "False",
               hideNumber: true,
             },
             {
@@ -1076,6 +1097,8 @@ console.log("ITSBEENHIOT")
               indent: 2,
               title: 'I can easily be "stirred-up" or agitated.',
               description: "Your mood can swing, easily.",
+              labelTrue: "True",
+              labelFalse: "False",
               descriptionLocation: "underInput",
               hideNumber: true,
             },
@@ -1229,6 +1252,7 @@ console.log("ITSBEENHIOT")
                       handleAddPhoto={this.handleAddPhoto}
                       handleDeletePhoto={this.deletePhotoRequest}
                       logOutHandler={this.logOutHandler}
+                      submitHandler={this.submitHandler}
                     />
                   );
                 } else {

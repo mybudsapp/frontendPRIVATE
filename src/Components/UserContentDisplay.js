@@ -307,6 +307,55 @@ render(){
 
             return(
                 <div>
+                    {this.state.newStrainForm? <StrainForm user={this.props.user} submitStrainHandler={this.props.submitStrainHandler}/> : null}
+                     {this.state.newProductForm? <ProductForm user={this.props.user} submitProductHandler={this.props.submitProductHandler}/> : null}
+
+                     <Segment>
+                                             <span>Add New Item To the Store</span>
+                                             <Label.Group color='olive' circular >
+                                             <Grid columns='equal' centered padded>
+                                                 <Grid.Row centered columns={4}>
+                        <Grid.Column>
+                         <Label onClick={this.newStrainButtonPressed}><FontAwesomeIcon
+                             icon={faCannabis}
+                             className="fa-sm text-white-300"
+                             ></FontAwesomeIcon><span>Strain</span></Label>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Label onClick={this.newProductButtonPressed}> <FontAwesomeIcon
+                                icon={faFillDrip}
+                                className="fa-sm text-white-300"
+                                ></FontAwesomeIcon> <span>Concentrates</span></Label>
+
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Label onClick={this.newProductButtonPressed} >
+                            <FontAwesomeIcon
+                                icon={faUtensils}
+                                className="fa-sm text-white-300"
+                                ></FontAwesomeIcon>
+                            <span> Edibles</span> </Label>
+                        </Grid.Column>
+                        <Grid.Column>
+                            <Label onClick={this.newProductButtonPressed}>
+                            <FontAwesomeIcon
+                                icon={faToolbox}
+                                className="fa-sm text-white-300"
+                                ></FontAwesomeIcon>
+                             <span>Accessories</span></Label>
+                        </Grid.Column>
+
+
+
+
+                             </Grid.Row>
+                     </Grid>
+                     </Label.Group>
+                                         </Segment>
+                                         <br></br>
+                                         <br></br>
+
+
 
                         <Grid columns={2}>
 
@@ -315,7 +364,7 @@ render(){
                             className="fa-4x text-gray-300"></FontAwesomeIcon>
                         <h1>Items</h1>
 
-
+                        {console.log(this.props.strains)}
                         <UserProductContainer
                             activeItem={this.props.activeItem}
                             user={this.props.user}
@@ -355,48 +404,7 @@ render(){
 
 
 
-<Segment>
-                        <span>Add New Item To the Store</span>
-                        <Label.Group color='olive' circular >
-                        <Grid columns='equal' centered padded>
-                            <Grid.Row centered columns={4}>
-   <Grid.Column>
-    <Label onClick={this.newStrainButtonPressed}><FontAwesomeIcon
-        icon={faCannabis}
-        className="fa-sm text-white-300"
-        ></FontAwesomeIcon><span>Strain</span></Label>
-   </Grid.Column>
-   <Grid.Column>
-       <Label onClick={this.newProductButtonPressed}> <FontAwesomeIcon
-           icon={faFillDrip}
-           className="fa-sm text-white-300"
-           ></FontAwesomeIcon> <span>Concentrates</span></Label>
 
-   </Grid.Column>
-   <Grid.Column>
-       <Label onClick={this.newProductButtonPressed} >
-       <FontAwesomeIcon
-           icon={faUtensils}
-           className="fa-sm text-white-300"
-           ></FontAwesomeIcon>
-       <span> Edibles</span> </Label>
-   </Grid.Column>
-   <Grid.Column>
-       <Label onClick={this.newProductButtonPressed}>
-       <FontAwesomeIcon
-           icon={faToolbox}
-           className="fa-sm text-white-300"
-           ></FontAwesomeIcon>
-        <span>Accessories</span></Label>
-   </Grid.Column>
-
-
-
-
-        </Grid.Row>
-</Grid>
-</Label.Group>
-                    </Segment>
 <br></br>
 <br></br>
 
@@ -411,15 +419,7 @@ render(){
                 {this.strainReviewsDisplay()}
             </Card.Group>
         )
-}else if(this.props.activeItem === 'Settings'){
-
-    const user = "/" + this.props.user.username
-
-        return(
-
-                <EditProfile/>
-
-)}else if(this.props.activeItem === 'Personality'){
+}else if(this.props.activeItem === 'Personality Test'){
 
         const user = "/" + this.props.user.username
 
@@ -434,7 +434,7 @@ render(){
 
         return(
 
-                <EditProfile/>
+                <EditProfile user={this.props.user}  submitHandler={this.props.submitHandler}/>
 
 )
 }else{
