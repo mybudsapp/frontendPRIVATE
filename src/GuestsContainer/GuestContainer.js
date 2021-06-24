@@ -24,7 +24,7 @@ import EditStoreForm from '../Components/EditStoreForm'
 import NewStrainForm from '../Components/StrainForm'
 import EditStrainForm from '../Components/EditStrainForm'
 import Profile from '../Components/Profile.js'
-import StrainProfile from '../Components/StrainProfile.js'
+import ProductProfile from '../Components/ProductProfile.js'
 import StrainReview from '../Components/StrainReview.js'
 
 import Error from "../Components/Error";
@@ -95,8 +95,8 @@ placeholder='Search on My Buds'
             path="/strains/:name/strainreview/:id"
             render={() => <StrainReview submitNewStrainReviewHandler={props.submitNewStrainReviewHandler} submitCommentHandler={props.submitCommentHandler} />}
             />
-        <Route path="/strains/:name/:id"
-            render={() => <StrainProfile user={props.user}  strains={props.strains} submitCommentHandler={props.submitCommentHandler} submitNewStrainReviewHandler={props.submitNewStrainReviewHandler}/>} />
+        <Route path="/product"
+            render={() => <ProductProfile user={props.user}  submitCommentHandler={props.submitCommentHandler} submitNewStrainReviewHandler={props.submitNewStrainReviewHandler}/>} />
         <Route
             path="/:username/newstrain"
             render={() => <NewStrainForm submitHandler={props.submitHandler} user={props.user} />}
@@ -121,7 +121,7 @@ placeholder='Search on My Buds'
             path="/login"
             render={() => <Login loginHandler={props.loginHandler} />}
             />
-        <Route path="/strains" render={renderProps => {
+        <Route path="/strain" render={renderProps => {
           return (
             <div>
             <Search></Search>

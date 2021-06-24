@@ -13,7 +13,7 @@ import {
   faSearchPlus,
   faGrin,
   faCogs,
-  faCannabis,
+  faTshirt,
   faBong,
   faBirthdayCake,
   faUtensils,
@@ -46,103 +46,48 @@ class UserProductContainer extends Component{
 
     }
 
-        strainProductsDisplay = () => {
+        clothesProductsDisplay = (products) => {
 
 
-                    let strains = []
 
-                    if(this.props.strains){
-                        strains = this.props.strains
-                    }else{
-                        return null
-                    }
-                    return strains.map(strain => {
-                  return <StrainCard strain={strain} user={this.props.user}
-                      deleteStrainRequest={this.props.deleteStrainRequest}
-                      raised/>
+     return products.filter(product => product.producttype === "Clothes").map(filteredProduct => <ProductCard product={filteredProduct} />)
 
 
-                })
             }
 
 
 
 
-            concentratesProductsDisplay = () => {
+            suppliesDisplay = (products) => {
+
+                    return products.filter(product => product.producttype === "Supplies").map(filteredProduct => <ProductCard product={filteredProduct} />)
 
 
-                        let products = []
+}
 
-                        function filterByType(product, props) {
-                            if (product.producttype == "Concentrate"){
-                                return <ProductCard product={product}
-                                    user={props.user}
-                                    submitProductHandler={props.submitProductHandler}
-                                    deleteProductRequest={props.deleteProductRequest}
-                                    raised/>
-                            }
-                        }
+                foodItemsDisplay = (products) => {
 
-                        if(this.props.products){
-                            products = this.props.products
-                        }else{
-                            return null
-                        }
-                        return products.map(product => filterByType(product, this.props))
-                }
-
-                edibleProductsDisplay = () => {
+                    return products.filter(product => product.producttype === "Food").map(filteredProduct => <ProductCard product={filteredProduct} />)
 
 
-                            let products = []
-
-                            function filterByType(product, props) {
-                                if (product.producttype == "Edible"){
-                                    return <ProductCard product={product}
-                                        user={props.user}
-                                        submitProductHandler={props.submitProductHandler}
-                                        deleteProductRequest={props.deleteProductRequestsubmit}
-                                        raised/>
-                                }
-                            }
-
-                            if(this.props.products){
-                                products = this.props.products
-                            }else{
-                                return null
-                            }
-                            return products.map(product => filterByType(product, this.props))
                     }
 //
 
 
-                    accessoriesProductsDisplay = () => {
+                    accessoriesProductsDisplay = (products) => {
 
-
-                                let products = []
-
-                                function filterByType(product, props) {
-                                    if (product.producttype == "Accessory"){
-                                        return <ProductCard product={product} user={props.user}
-                                            submitProductHandler={props.submitProductHandler}
-                                            deleteProductRequest={props.deleteProductRequestsubmit}
-                                            raised/>
-                                    }
-                                }
-
-                                if(this.props.products){
-                                    products = this.props.products
-                                }else{
-                                    return null
-                                }
-                                return products.map(product => filterByType(product, this.props))
-                        }
+                        return products.filter(product => product.producttype === "Accessories").map(filteredProduct => <ProductCard product={filteredProduct} />)
+                    }
 
 
 
     render(){
 
-        const user = "/" + this.props.user.username
+
+
+
+
+
 
 
         return(
@@ -153,15 +98,15 @@ class UserProductContainer extends Component{
 <Segment raised >
 
     <FontAwesomeIcon
-        icon={faCannabis}
+        icon={faTshirt}
         className="fa-2x text-gray-300"
         ></FontAwesomeIcon>
 
     <h1>
-        Strains
+        Clothes
     </h1>
     <Item.Group divided>
-          {this.strainProductsDisplay()}
+         {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products) : <span>This is crazy</span>}
   </Item.Group>
 
 
@@ -183,10 +128,10 @@ class UserProductContainer extends Component{
         ></FontAwesomeIcon>
 
     <h1>
-        Concentrates
+        Supplies
     </h1>
     <Item.Group divided>
-          {this.concentratesProductsDisplay()}
+        {this.props.products.length > 0 ? this.suppliesDisplay(this.props.products) : <span>This is crazy</span>}
   </Item.Group>
 
 
@@ -209,10 +154,10 @@ class UserProductContainer extends Component{
         ></FontAwesomeIcon>
 
 <h1>
-    Edibles
+    Food
 </h1>
 <Item.Group divided>
-      {this.edibleProductsDisplay()}
+    {this.props.products.length > 0 ? this.foodItemsDisplay(this.props.products) : <span>This is crazy</span>}
 </Item.Group>
 
 
@@ -238,7 +183,7 @@ class UserProductContainer extends Component{
     Accessories
 </h1>
 <Item.Group divided>
-      {this.accessoriesProductsDisplay()}
+    {this.props.products.length > 0 ? this.accessoriesProductsDisplay(this.props.products) : <span>This is crazy</span>}
 </Item.Group>
 
 

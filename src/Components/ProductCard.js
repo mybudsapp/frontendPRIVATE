@@ -4,30 +4,31 @@ import {Card, Segment, Menu, Image, Button, Item} from "semantic-ui-react"
 import {Link, withRouter} from 'react-router-dom'
 
 const ProductCard = props => {
-    const editproductpage = "/" + props.product.productname + "/editproduct/" + props.product.id
-    const viewproductpage = "/products/" + props.product.productname + "/" + props.product.id
+
 //find out props to see if there is a user, if user then edit, if not,
-    const user = props.user
+
 
     return (
 
             <Item id={props.product.id} name={props.product.productname} >
+                {console.log(props)}
                 <Item.Image size="small" id="productavatar" src="https://img.icons8.com/bubbles/2x/product.png"></Item.Image>
 
                 <Item.Header>{props.product.productname}</Item.Header>
 
             <Item.Content >
-                  <Item.Meta>{props.product.producttype}</Item.Meta>
-                  <Item.Description>
-                      By <br></br>
-                  {props.product.producer}
+                <Item.Description>
+                      By
+                  <h3>
+                      {props.product.producer}
+                  </h3>
                 </Item.Description>
             </Item.Content>
-              <Link to={viewproductpage}>
+
                 <Button basic color='green'  id={props.product.id}>
                   View Profile
                 </Button>
-                </Link>
+
 
                   <Link>
               <Button basic color='red'  id={props.product.id} onClick={e => props.deleteProductRequest(e)}>
@@ -37,6 +38,7 @@ const ProductCard = props => {
 
 
       </Item>
+
     )
     // <Card.Content id={props.product.id} name={props.product.productname} centered>
     //   <div  id={props.product.id} name={props.product.productname}>

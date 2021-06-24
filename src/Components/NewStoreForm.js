@@ -62,7 +62,7 @@ theSubmitHandler = (e) => {
     let token = localStorage.getItem('token')
 
     console.log("the state once submit handler is hit", this.state)
-    this.props.submitHandler(this.state, token);
+    this.props.storesDisplay(this.state, true);
 
 };
 
@@ -209,7 +209,7 @@ render() {
             {console.log(this.state)}
             <Header as='h2' icon textAlign='center'>
      <Icon name='building outline' circular color='grey' />
-     <h1>New Store / Dispensary</h1>
+     <h1>New Store</h1>
      {store? null :  <Message
     warning
     header='Must be a Store on Google'
@@ -219,7 +219,7 @@ render() {
             <SearchLocationInput onAddressSelect={this.onAddressSelect} onChange={() => null} />
         </Segment>
         <Segment raised>
-            <div class="ui form" encType="multipart/form-data" user={this.props.user.id}>
+            <div class="ui form" encType="multipart/form-data" >
              <form onSubmit={e => this.theSubmitHandler(e)} >
 
            <label>Name Space:</label>
@@ -232,7 +232,7 @@ render() {
                <input
                  type="text"
                  placeholder="description"
-                
+
                  onChange={this.changeHandler}
                />
            <br></br>

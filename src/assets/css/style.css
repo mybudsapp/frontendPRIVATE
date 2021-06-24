@@ -102,16 +102,44 @@ button {
 }
 
 #custom-profile-css div.banner {
-  height: 380px;
+
+    height:100%;
   width: 100%;
   background: #3bb9e3;
+
 
   display: flex;
   align-items: center;
   justify-content: center;
 
+
+  object-fit: cover;
+
+
+
   color: #fff;
 }
+
+#custom-profile-css div.banner img{
+    height:100%;
+  width: 100%;
+  background: #3bb9e3;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+
+
+
+  color: #fff;
+}
+
+.object-fit_fill { object-fit: contain}
+
+/* img[class] {
+  width: 100%;
+ height: 39em;
+} */
 
 #custom-profile-css div.bar {
   height: 59px;
@@ -257,6 +285,7 @@ button {
 
 #custom-profile-css div.wrapper-content aside.profile .widget strong img {
   margin-right: 5px;
+
 }
 
 #custom-profile-css div.wrapper-content aside.profile .followers ul {
@@ -274,6 +303,12 @@ button {
   margin: 0 5px 5px 0;
 }
 
+
+
+
+
+
+
 #custom-profile-css div.wrapper-content aside.profile .images ul {
   list-style: none;
   display: flex;
@@ -285,7 +320,7 @@ button {
   height: 80px;
   background: #d0d5d9;
   border-radius: 8px;
-  flex: 1 0 auto;
+  
   margin: 0 5px 5px 0;
 }
 
@@ -539,6 +574,7 @@ button {
   }
   #custom-profile-css .wrapper-content aside.widgets {
     margin-bottom: 100px;
+    justify-content: center;
   }
   #custom-profile-css .footer-menu {
     display: block;

@@ -53,12 +53,13 @@ changeHandler = (e) => {
 
 
 
-        this.setState({ product: {
+
+
+        this.setState({
     ...this.state.product,
     user_id: e.target.parentElement.parentElement.getAttribute("user"),
     [e.target.name]: e.target.value
-
-}}, () => {
+}, () => {
 console.log('from else if',this.state)
 })
 
@@ -79,12 +80,12 @@ theSubmitHandler = (e) => {
 
     e.preventDefault()
 
-    let token = localStorage.getItem('token')
+    const setOfProducts = this.props.products.push(this.state)
 
 
 
     console.log("the state once submit handler is hit", this.state)
-    this.props.submitProductHandler(this.state, token);
+    this.props.submitProductHandler(setOfProducts);
 
 
 
@@ -135,7 +136,7 @@ render() {
 
 
 
-            <div class="ui form" encType="multipart/form-data" user={this.props.user.id}  >
+            <div class="ui form" encType="multipart/form-data"  >
             <h3>New Product  </h3>
              <form onSubmit={e => this.theSubmitHandler(e)} >
 
@@ -149,14 +150,15 @@ render() {
            <label> Location: </label>
             <select name="store"  onChange={this.changeHandler}>
                 <option value="error">Choose Which Location</option>
-                {dispensariesOptions()}
+                <option value="your store here" >Your Store Here</option>
              </select>
            <br></br>
            <label>Product Type:</label>
                <select name="producttype" id="producttype" onChange={this.changeHandler}>
                    <option value="error">Choose the Type</option>
-       <option value="Concentrate">Concentrate</option>
-       <option value="Edible" >Edible </option>
+       <option value="Clothes">Clothes</option>
+       <option value="Food" >Food </option>
+       <option value="Supplies">Supplies</option>
        <option value="Accessory">Accessory</option>
    </select>
    <br></br>

@@ -22,7 +22,7 @@ export default class MobileNavBar extends Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/strains/DoubleDutchBus/3" class={this.props.active === "product" ? "active" : null}>
+                  <Link to="product" class={this.props.active === "product" ? "active" : null}>
                     <img src={mobileProduct} alt="product" />
                   </Link>
                 </li>

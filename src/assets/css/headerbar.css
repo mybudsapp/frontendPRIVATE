@@ -1,9 +1,8 @@
-.fixed-bottom {
+.fixed-top {
   display: none;
 }
 
-.footer-menu {
-  
+.header-menu {
   padding: 10px 0;
   background-color: #f5f5fa;
   display: flex !important;
@@ -13,7 +12,7 @@
   box-shadow: 0px 7px 20px;
 }
 
-.footer-menu ul {
+.header-menu ul {
   margin: 0;
   padding: 0;
   display: flex;
@@ -21,11 +20,11 @@
   align-items: center;
 }
 
-.footer-menu ul li {
+.header-menu ul li {
   list-style: none;
 }
 
-.footer-menu ul li a {
+.header-menu ul li a {
   width: 40px;
   height: 40px;
   display: flex;
@@ -37,13 +36,13 @@
     -5px -5px 10px rgb(255 255 255 / 50%);
 }
 
-.footer-menu ul li a.active {
+.header-menu ul li a.active {
   background-image: url('../img/pressed@2x.svg');
   box-shadow: unset;
 }
 
 @media (max-width: 768px) {
-  .fixed-bottom {
+  .fixed-header {
     display: block;
   }
 }

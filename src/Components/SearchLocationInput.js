@@ -146,7 +146,7 @@ onMarkerClick = (props, marker, e) => {
           <div>
             <Input fluid
               {...getInputProps({
-                placeholder: 'Smoke Shop or Dispensary ...',
+                placeholder: 'Your Business must be registered as a Store on Google',
                 className: 'location-search-input',
               })}
             icon='search' />

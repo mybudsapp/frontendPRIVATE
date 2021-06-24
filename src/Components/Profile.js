@@ -14,6 +14,8 @@ import {
   Sidebar,
   Visibility,
   Card,
+  Input,
+  Dropdown
 } from "semantic-ui-react";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
@@ -24,7 +26,7 @@ import MobileNavBar from "./MobileNavBar"
 import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
-import avatar from "../assets/img/avatar.png";
+
 import place from "../assets/img/place.svg";
 import url from "../assets/img/url.svg";
 import joined from "../assets/img/joined.svg";
@@ -65,6 +67,14 @@ class Profile extends Component {
   };
 
   render() {
+      const avatar = "https://images.unsplash.com/photo-1528763380143-65b3ac89a3ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=335&q=80"
+      const options = [
+    { key: 'Products', text: 'Products', value: 'Products' },
+    { key: 'Buddies', text: 'Buddies', value: 'Buddies' },
+    { key: 'Shop', text: 'Shop', value: 'Shop' },
+  ]
+
+
     return (
       <div id="custom-profile-css">
         <header className="main-header">
@@ -82,24 +92,27 @@ class Profile extends Component {
                 </li>
               </ul>
             </nav>
-            <img src={logo} alt="Logo Twitter" />
+
             <div className="side">
-              <input type="text" placeholder="Search on Twitter" />
-              <img src={avatar} alt="Avatar" />
-              <button className="btn-tweet">Tweet</button>
+                <Input
+                    size='mini'
+  label={<Dropdown defaultValue='Products' compact options={options} />}
+  labelPosition='right'
+  placeholder='Search on My Buds'
+  />
             </div>
           </div>
         </header>
 
-        <div className="banner">
-          <h1>Image</h1>
+        <div className="banner" >
+            <img class="object-fit_fill" src='https://images.unsplash.com/photo-1506765515384-028b60a970df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=468&h=180&q=80'/>
         </div>
 
         <div className="bar">
           <div className="content">
             <ul>
               <li className="active">
-                <span>Tweet</span>
+                <span>Post</span>
                 <strong>1234</strong>
               </li>
               <li>
@@ -126,8 +139,8 @@ class Profile extends Component {
             <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
               <aside className="profile">
                 <img className="avatar" src={avatar} alt="Beatriz Cantilho" />
-                <h1>Beatriz Cantilho</h1>
-                <span>@bcantilho</span>
+                <h1>Your Username Here</h1>
+                <span>@yourusernamehere</span>
                 <p>Software developer and sometimes gamer</p>
 
                 <ul className="list">
@@ -135,7 +148,7 @@ class Profile extends Component {
                     <img src={place} alt="place" /> Halifax, Canadá
                   </li>
                   <li>
-                    <img src={url} alt="url" /> bcantilho.dev
+                    <img src={url} alt="url" /> jancarlos.dev
                   </li>
                   <li>
                     <img src={joined} alt="joined" /> Joined January 2017
@@ -150,12 +163,12 @@ class Profile extends Component {
                     <img src={images} alt="images" /> 360 Photos and videos
                   </strong>
                   <ul>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
-                    <li></li>
+                    <li><img src="https://images.unsplash.com/photo-1537372660699-9b2f1b4d47d4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img> </li>
+                    <li><img src="https://images.unsplash.com/photo-1622495546323-5dac33dedb01?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80" width="80" height="80"></img></li>
+                    <li><img src="https://images.unsplash.com/photo-1623555448479-22c56bfc26ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80" width="80" height="80"></img></li>
+                    <li><img src="https://images.unsplash.com/photo-1623557415599-b1c648cedc07?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" width="80" height="80"></img></li>
+                    <li><img src="https://images.unsplash.com/photo-1623552564094-c659f7a8150c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img></li>
+                    <li><img src="https://images.unsplash.com/photo-1623363435794-e12cc4b206db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=672&q=80" width="80" height="80"></img></li>
                   </ul>
                 </div>
               </aside>
@@ -164,9 +177,9 @@ class Profile extends Component {
               <section className="timeline">
                 <nav>
                   <Link to="/" className="active">
-                    Tweets
+                    Posts
                   </Link>
-                  <Link to="/">Tweets and replies</Link>
+                  <Link to="/">Posts and Reviews</Link>
                   <Link to="/">Medias</Link>
                 </nav>
 
@@ -208,9 +221,7 @@ class Profile extends Component {
                         <Link to="/">
                           <img src={comments} alt="Comments" /> 9
                         </Link>
-                        <Link to="/">
-                          <img src={retweet} alt="Retweet" /> 15
-                        </Link>
+
                         <Link to="/">
                           <img src={like} alt="Like" /> 20
                         </Link>
@@ -231,9 +242,7 @@ class Profile extends Component {
                         <Link to="/">
                           <img src={comments} alt="Comments" /> 9
                         </Link>
-                        <Link to="/">
-                          <img src={retweet} alt="Retweet" /> 15
-                        </Link>
+
                         <Link to="/">
                           <img src={like} alt="Like" /> 20
                         </Link>
@@ -254,9 +263,7 @@ class Profile extends Component {
                         <Link to="/">
                           <img src={comments} alt="Comments" /> 9
                         </Link>
-                        <Link to="/">
-                          <img src={retweet} alt="Retweet" /> 15
-                        </Link>
+
                         <Link to="/">
                           <img src={like} alt="Like" /> 20
                         </Link>
@@ -278,10 +285,10 @@ class Profile extends Component {
                   <ul>
                     <li>
                       <div className="profile">
-                        <img src={avatar} alt="Avatar" />
+                        <img src="https://images.unsplash.com/photo-1623589252717-5f82f490ad78?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Avatar" />
                         <div className="info">
                           <strong>
-                            Spade <span>@spade_be</span>
+                            Troy_jade <span>@troy_jade</span>
                           </strong>
                           <button>Follow</button>
                         </div>
@@ -290,10 +297,10 @@ class Profile extends Component {
                     </li>
                     <li>
                       <div className="profile">
-                        <img src={avatar} alt="Avatar" />
+                        <img src="https://images.unsplash.com/photo-1623113527138-b7b030cd9c0b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Avatar" />
                         <div className="info">
                           <strong>
-                            Spade <span>@spade_be</span>
+                            Jojo_12 <span>@jojo_12</span>
                           </strong>
                           <button>Follow</button>
                         </div>
@@ -302,7 +309,7 @@ class Profile extends Component {
                     </li>
                     <li>
                       <div className="profile">
-                        <img src={avatar} alt="Avatar" />
+                        <img src="https://images.unsplash.com/photo-1623265041640-8973a7afe898?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Avatar" />
                         <div className="info">
                           <strong>
                             Spade <span>@spade_be</span>

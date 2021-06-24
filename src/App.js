@@ -28,6 +28,7 @@ import Quiz from "react-quiz-component";
 import { quiz } from "./Components/quiz";
 import "survey-react/survey.css";
 import * as Survey from "survey-react";
+import ProductProfile from "./Components/ProductProfile"
 
 class App extends Component {
   state = {
@@ -42,7 +43,7 @@ class App extends Component {
     showPersonality: false,
     personalityTestCompleted: false,
     firstTime: false,
-    showAddPhoto: false,
+    showWelcome: false,
     showEdit: false
   };
 
@@ -66,28 +67,28 @@ class App extends Component {
 //          }));
 //
 // console.log("stikdkdk", this.state)
-    if (Boolean(token)) {
-      fetch("http://localhost:3000/api/v1/users/sign_in", {
-        method: "GET",
-        headers: {
-          Authorization: `${token}`,
-          "content-type": "application/json",
-          accepts: "application/json",
-        },
-      }).then((res) => {
-          if (!res.ok) {
-            res.text().then(this.props.history.push("/home"))
-          } else {
-            return res.json().then((userData) => {
-          this.setState({
-            user: { ...userData.user },
-            avatar: { ...userData.user.avatar}
-          });
-        })
-        .then(() => this.props.history.push("/dashboard/"));
-    }})} else {
-        this.props.history.push("/home")
-    }
+    // if (Boolean(token)) {
+    //   fetch("http://localhost:3000/api/v1/users/sign_in", {
+    //     method: "GET",
+    //     headers: {
+    //       Authorization: `${token}`,
+    //       "content-type": "application/json",
+    //       accepts: "application/json",
+    //     },
+    //   }).then((res) => {
+    //       if (!res.ok) {
+    //         res.text().then(this.props.history.push("/home"))
+    //       } else {
+    //         return res.json().then((userData) => {
+    //       this.setState({
+    //         user: { ...userData.user },
+    //         avatar: { ...userData.user.avatar}
+    //       });
+    //     })
+    //     .then(() => this.props.history.push("/dashboard/"));
+    // }})} else {
+    //     this.props.history.push("/home")
+    // }
 
     // fetch("http://localhost:3000/api/v1/strains/", {
     //   method: "GET",
@@ -674,30 +675,32 @@ console.log("ITSBEENHIOT")
   };
 
   loginSubmitHandler = (userInfo) => {
-    fetch("http://localhost:3000/api/v1/users/sign_in", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-      },
-      body: JSON.stringify({ user: userInfo }),
-    }).then((res) => {
-      if (!res.ok) {
-        res.text().then((text) => alert(text));
-      } else {
-        return res
-          .json()
-          .then((userData) => {
-            this.setState({
-              user: { ...userData.user },
-              token: userData.jwt
-            });
-          })
-          .then(() => localStorage.setItem("token", this.state.token))
-          .then(this.props.history.push("/dashboard/"));
-      }
-    });
-  };
+    // fetch("http://localhost:3000/api/v1/users/sign_in", {
+    //   method: "POST",
+    //   headers: {
+    //     "content-type": "application/json",
+    //     accepts: "application/json",
+    //   },
+    //   body: JSON.stringify({ user: userInfo }),
+    // }).then((res) => {
+    //   if (!res.ok) {
+    //     res.text().then((text) => alert(text));
+    //   } else {
+    //     return res
+    //       .json()
+    //       .then((userData) => {
+    //         this.setState({
+    //           user: { ...userData.user },
+    //           token: userData.jwt
+    //         });
+    //       })
+    //       .then(() => localStorage.setItem("token", this.state.token))
+
+
+          // .then(
+              this.props.history.push("/dashboard/")
+          // );
+}
 
   submitHandler = (userinfo, token, user_id) => {
     const fd = new formData();
@@ -884,12 +887,12 @@ console.log("ITSBEENHIOT")
 
   //---------------------------------------------------------------------------------------
 
-  handleAddPhoto = () => {
-    this.setState({ showAddPhoto: true });
+  handleShowWelcome = () => {
+    this.setState({ showWelcome: true });
   };
 
-  handleShowPhotoclose = () => {
-    this.setState({ showAddPhoto: !this.state.showAddPhoto });
+  handleCloseWelcome = () => {
+    this.setState({ showWelcome: !this.state.showWelcome });
   };
 
   handleShowPersonality = () => {
@@ -1117,7 +1120,7 @@ console.log("ITSBEENHIOT")
 
     const { showPersonality } = this.state;
 
-    const { showAddPhoto } = this.state;
+    const { showWelcome } = this.state;
 
     const { user } = this.state;
 
@@ -1137,15 +1140,15 @@ console.log("ITSBEENHIOT")
     return (
       <React.Fragment>
 
-        <Modal centered={true} size="lg" show={showAddPhoto}>
+        <Modal centered={true} size="lg" show={showWelcome}>
           <Modal.Header>
-            <h3>Add Photo</h3>
+            <h3>Welcome to My Buds! (Proof of Concept)</h3>
           </Modal.Header>
           <Modal.Body>
-            <PhotoForm submitPhotoHandler={this.submitPhotoHandler} />
+            <span>The New Customer Relationship Management Application for the new consumer and new age businesses!</span>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleShowPhotoclose}>
+            <Button variant="secondary" onClick={this.handleCloseWelcome}>
               Close
             </Button>
           </Modal.Footer>
@@ -1224,11 +1227,9 @@ console.log("ITSBEENHIOT")
               <GuestContainerLayout loginHandler={this.loginSubmitHandler} />
             )}
           />
-          {this.state.user ? (
             <Route
-              path="/dashboard/"
+              path="/dashboard"
               render={(props) => {
-                if (this.state.user) {
                   return (
                     <UserDashboard
                       user={this.state.user}
@@ -1249,18 +1250,13 @@ console.log("ITSBEENHIOT")
                       handleShowEdit={this.handleShowEdit}
                       handleShowEditClose={this.handleShowEditClose}
                       handleShowPersonality={this.handleShowPersonality}
-                      handleAddPhoto={this.handleAddPhoto}
+                      handleShowWelcome={this.handleShowWelcome}
                       handleDeletePhoto={this.deletePhotoRequest}
                       logOutHandler={this.logOutHandler}
                       submitHandler={this.submitHandler}
                     />
-                  );
-                } else {
-                  return <GuestContainerLayout />;
-                }
-              }}
+                  )}}
             />
-          ) : null}
           <Route
             path="/edit"
             render={() => (
@@ -1327,9 +1323,9 @@ console.log("ITSBEENHIOT")
             )}
           />
           <Route
-            path="/strains"
+            path="/product"
             render={() => (
-              <GuestContainerLayout
+              <ProductProfile
                 strains={this.state.strains}
                 submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
               />

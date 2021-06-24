@@ -36,6 +36,7 @@ const HomepageHeading = ({ mobile }) => (
 
 
   <Container text>
+
     <Header
       as='h2'
       content='My Buds'
@@ -159,6 +160,9 @@ class MobileContainer extends Component {
         getWidth={getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}
       >
+      <Segment textAlign="left" className="fixed-menu" >
+          <Icon name='bars' onClick={this.handleToggle} />
+      </Segment>
         <Sidebar
           as={Menu}
           animation='push'
@@ -167,15 +171,10 @@ class MobileContainer extends Component {
           vertical
           visible={sidebarOpened}
         >
-          <Menu.Item as='a' active>
-            Home
-          </Menu.Item>
-
-          <Menu.Item as='a'>Work</Menu.Item>
-          <Menu.Item as='a'>Company</Menu.Item>
-          <Menu.Item as='a'>Careers</Menu.Item>
-          <Menu.Item as='a'>Log in</Menu.Item>
-          <Menu.Item as='a'>Sign Up</Menu.Item>
+            <Menu.Item as='a' href="/product">Product Page</Menu.Item>
+            <Menu.Item as='a'href="/profile">Profile</Menu.Item>
+          <Menu.Item as='a' href="/dashboard">Dashboard</Menu.Item>
+          <Menu.Item as='a' href="/explore">Explore</Menu.Item>
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
@@ -186,7 +185,7 @@ class MobileContainer extends Component {
             vertical
           >
 
-            <HomepageHeading mobile />
+            <HomepageHeading mobile handleToggle={this.handleToggle}/>
           </Segment>
           {children}
         </Sidebar.Pusher>
