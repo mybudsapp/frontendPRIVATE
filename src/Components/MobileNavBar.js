@@ -12,6 +12,7 @@ export default class MobileNavBar extends Component {
   render() {
     return (
       <div class="fixed-bottom">
+          {console.log(this.props)}
         <nav class="footer-menu">
           <div class="container">
             <div class="menu">
@@ -27,15 +28,11 @@ export default class MobileNavBar extends Component {
                   </Link>
                 </li>
                 <li>
-                  <Link to="/" class={this.props.active === "search" ? "active" : null}>
+                  <Link to="/Explore" class={this.props.active === "explore" ? "active" : null}>
                     <img src={mobileSearch} alt="search" />
                   </Link>
                 </li>
-                <li>
-                  <Link to="/" class={this.props.active === "notification" ? "active" : null}>
-                    <img src={mobileNotification} alt="Notifications" />
-                  </Link>
-                </li>
+        
                 <li>
                   <Link to="/profile" class={this.props.active === "profile" ? "active" : null}>
                     <img src={mobileUser} alt="user" />

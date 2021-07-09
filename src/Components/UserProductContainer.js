@@ -71,7 +71,7 @@ class UserProductContainer extends Component{
 
 
                     }
-//
+
 
 
                     accessoriesProductsDisplay = (products) => {
@@ -106,7 +106,7 @@ class UserProductContainer extends Component{
         Clothes
     </h1>
     <Item.Group divided>
-         {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products) : <span>This is crazy</span>}
+         {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products) : <span>No Items</span>}
   </Item.Group>
 
 
@@ -131,7 +131,7 @@ class UserProductContainer extends Component{
         Supplies
     </h1>
     <Item.Group divided>
-        {this.props.products.length > 0 ? this.suppliesDisplay(this.props.products) : <span>This is crazy</span>}
+        {this.props.products.length > 0 ? this.suppliesDisplay(this.props.products) : <span>No Items</span>}
   </Item.Group>
 
 
@@ -157,7 +157,7 @@ class UserProductContainer extends Component{
     Food
 </h1>
 <Item.Group divided>
-    {this.props.products.length > 0 ? this.foodItemsDisplay(this.props.products) : <span>This is crazy</span>}
+    {this.props.products.length > 0 ? this.foodItemsDisplay(this.props.products) : <span>No Items</span>}
 </Item.Group>
 
 
@@ -183,7 +183,7 @@ class UserProductContainer extends Component{
     Accessories
 </h1>
 <Item.Group divided>
-    {this.props.products.length > 0 ? this.accessoriesProductsDisplay(this.props.products) : <span>This is crazy</span>}
+    {this.props.products.length > 0 ? this.accessoriesProductsDisplay(this.props.products) : <span>No Items</span>}
 </Item.Group>
 
 

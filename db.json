@@ -1,8 +1,11 @@
 {
-  "user": [
-    { "id": 1, "username": "El Mambo", "email": "asdasdas@asdasd.com", "personality_type": "Sativa", "default": "None", "token": "ASDdadsderfefSs" }
+  "users": [
+    {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+    {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA", "avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}, {"id":1, "username": "userName2021", "location": "USA","avatar": "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
   ],
-  "Shops": [
-    { "id": 1, "namespace": "MABMO Dispensary", "description": "the dopest", "address": "Smokey Smoke Shop, South Hiawassee Road, Orlando, FL, USA", "State": "FL", "City": "Orlando" }],
-  "Products": { "name": "typicode" }
+  "Products": [
+      {"id": 1, "productname": "Product", "producttype": "Clothes"}, {"id": 1, "productname": "Product", "producttype": "Supplies"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Clothes"}, {"id": 1, "productname": "Product", "producttype": "Clothes"}, {"id": 1, "productname": "Product", "producttype": "Foods"},
+      {"id": 1, "productname": "Product", "producttype": "Accessories"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Accessories"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Supplies"}
+  ]
+
 }

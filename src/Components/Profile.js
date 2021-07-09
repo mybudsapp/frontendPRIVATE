@@ -325,7 +325,7 @@ class Profile extends Component {
             </div>
           </div>
         </div>
-        <MobileNavBar active="profile" />
+        {getWidth() > 650? null : <MobileNavBar active="profile" handleAddPostForm={this.props.handleAddPostForm}/>}
       </div>
     );
   }

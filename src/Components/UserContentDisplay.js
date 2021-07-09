@@ -114,7 +114,6 @@ buddiesDisplay = () => {
 
         storesDisplay = (store) => {
 
-
             this.setState({
                 store,
                 showStoreForm: !this.state.showStoreForm
@@ -194,21 +193,19 @@ render(){
 
 
         return(
-            <Segment vertical textAlign="center">
+            <Segment padded='very' vertical>
+                <Segment>
+                    <h3>This Is Your Store's Dashboard...</h3>
+                    <h3>Adding Your Store to My Bud's is pretty simple. Your business must already be listed and registered on Google. Incentivising stores to register on Google encourages businesses to build their online presence and is a requirement to have a store on My Buds.  </h3>
+
+                </Segment>
                 <div>
                     <Grid columns={2}>
-                        <FontAwesomeIcon
-                        icon={faStore}
-                        className="fa-4x text-gray-300"></FontAwesomeIcon>
-                                <h1>Stores</h1>
-
-
-
                     <br></br>
                     <Grid.Row >
                         {store? <Item >
          <Item.Image size='small' src='https://i.pinimg.com/originals/4f/22/a1/4f22a1fc23e0b11caf9a833bf9065b6b.jpg' />
-         <Item.Header><h1> {store.store.namespace}</h1></Item.Header>
+         <h1> {store.store.namespace}</h1>
 
          <Item.Content>
            <Item.Meta>
@@ -239,11 +236,12 @@ render(){
                           textAlign='left'
                           >
                               <i class="large icons" >
-                                  <i class="building icon"></i>
+                                  <FontAwesomeIcon
+                                  icon={faStore}
+                                  className="fa-2x text-gray-300">
+                              </FontAwesomeIcon>
                                   <i class="top right corner add icon"></i>
                               </i>
-
-
                       </Segment>
                   </Grid.Column>
                     </Grid.Row>
@@ -254,6 +252,7 @@ render(){
                     <br></br>
         </div>
         {showStoreForm? <NewStoreForm storesDisplay={this.storesDisplay}/> : null}
+
     </Segment>
 
 
@@ -280,10 +279,14 @@ render(){
                                 </Feed.Label>
                                 <Feed.Content>
                                   <Feed.Summary>
+                                      <h3>
                                     Welcome To My Buds
+                                </h3>
                                   </Feed.Summary>
                                   <Feed.Extra text>
+                                      <h3>
                                       Through the Desktop View, Business Owners can add Stores, add Items, and stay up to date with their store's following. Focusing on business that do not have a strong internet presence, the ease of using My Buds as an engagement and retention tool allow smaller businesses to have an edge over more "Well Known" businesses on Google and other websites. To See the Mobile Version, Visit the Website through a Mobile Device or Adjust your browser's settings and refresh.
+                                  </h3>
                                   </Feed.Extra>
                                   <Feed.Meta>
 
@@ -503,14 +506,15 @@ render(){
                                          <br></br>
                                          <br></br>
 
+                                         <Segment padded textAlign="center" vertical>
+                                         <FontAwesomeIcon
+                                             icon={faBarcode}
+                                             className="fa-4x text-gray-300"></FontAwesomeIcon>
+                                         <h1>Items</h1>
+                                     </Segment>
 
+                        <Grid columns={2} textAlign="center">
 
-                        <Grid columns={2}>
-
-                            <FontAwesomeIcon
-                            icon={faBarcode}
-                            className="fa-4x text-gray-300"></FontAwesomeIcon>
-                        <h1>Items</h1>
 
 
                         <UserProductContainer
@@ -545,13 +549,6 @@ render(){
 
 
                     <br></br>
-
-
-
-
-
-
-
 <br></br>
 <br></br>
 
@@ -567,22 +564,13 @@ render(){
                 {this.strainReviewsDisplay()}
             </Card.Group>
         )
-}else if(this.props.activeItem === 'Personality Test'){
-
-        const user = "/" + this.props.user.username
-
-        return(
-            <Card.Group itemsPerRow={3} doubling raised>
-                {this.strainReviewsDisplay()}
-            </Card.Group>
-        )
 }else if(this.props.activeItem === 'Settings'){
 
-    const user = "/" + this.props.user.username
+
 
         return(
 
-                <EditProfile user={this.props.user}  submitHandler={this.props.submitHandler}/>
+                <EditProfile  submitHandler={this.props.submitHandler}/>
 
 )
 }else if(this.props.activeItem === 'd'){

@@ -53,16 +53,15 @@ console.log('from handle avatar',this.state)})
 }
 
 
-theSubmitHandler = (e) => {
+theSubmitHandler = (e, props) => {
+
 
     e.preventDefault()
 
+    console.log("the state once submit handler is hit", props)
 
+    props.storesDisplay(this.state)
 
-    let token = localStorage.getItem('token')
-
-    console.log("the state once submit handler is hit", this.state)
-    this.props.storesDisplay(this.state, true);
 
 };
 
@@ -205,22 +204,19 @@ render() {
   // </LoadScript>
 
     return(
-        <div>
+        <div class="ui form" encType="multipart/form-data">
+            {store? null : <Message>Store Must Be On Google and also be Registered as a Store Google</Message>}
+
+            <Icon name='building outline' circular color='grey' />
+            <h1>New Store</h1>
             {console.log(this.state)}
-            <Header as='h2' icon textAlign='center'>
-     <Icon name='building outline' circular color='grey' />
-     <h1>New Store</h1>
-     {store? null :  <Message
-    warning
-    header='Must be a Store on Google'
-  />}
-   </Header>
         <Segment>
             <SearchLocationInput onAddressSelect={this.onAddressSelect} onChange={() => null} />
         </Segment>
-        <Segment raised>
+
+        <Segment raised textAlign="left">
             <div class="ui form" encType="multipart/form-data" >
-             <form onSubmit={e => this.theSubmitHandler(e)} >
+             <form onSubmit={e => this.theSubmitHandler(e, this.props)} >
 
            <label>Name Space:</label>
                <input

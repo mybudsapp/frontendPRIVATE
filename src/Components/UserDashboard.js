@@ -25,7 +25,7 @@ import Avatar from "react-avatar";
 import {
   BasicFriendsFeed,
   FriendsPhotosFeed,
-  FriendsStrainFeed,
+  StoreFeed,
   RecentActivityFeed,
   AllUsersFeed,
 } from "./ActivityFeeds";
@@ -53,9 +53,9 @@ import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
 
+import "../assets/css/navigationbar.css";
 
 
-import "../assets/css/sb-admin-2.css";
 
 const getWidth = () => {
   const isSSR = typeof window === "undefined";
@@ -99,35 +99,12 @@ activeItem: "Feed"
       });
 
       console.log("whoa photos");
-    } else if (e.target.id === "strains") {
-      this.setState({
-        activityFeed: (
-          <FriendsStrainFeed user={this.props} history={this.props.history} />
-        ),
-      });
-      console.log("whoa strains");
     }
   };
 
   componentDidMount = () => {
-    // dashboard fetches members gallery, strain reviews, strains, and dispensaries
 
-    // fetch("http://localhost:3000/api/v1/dispensaries/", {
-    //   method: "GET",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     accepts: "application/json",
-    //   },
-    // }).then((res) => {
-    //   if (!res.ok) {
-    //     res.text().then((text) => alert(text));
-    //   } else {
-    //     return res.json().then((dispensaryData) => {
-    //       this.setState({ dispensary: true, dispensaries: dispensaryData });
-    //     });
-    //   }
-    // });
-
+      this.props.handleShowWelcome()
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });
@@ -194,38 +171,8 @@ extraImages: [
 
 
     return (
-      <React.Fragment>
-          <div id="custom-css-product">
-              <header className="main-header">
-                <div className="container content">
-                  <nav>
-                    <ul>
-                        <li>
-                        <p><Icon name='at' size="large" />Your User Name Here</p>
-                        </li>
-                  <li>
-                        <img src={home} alt="Home" /> Home
-                      </li>
-                      <li>
-                        <img src={notification} alt="Notifications" />
-                        Notifications
-                      </li>
-                    </ul>
-                  </nav>
+      <ResponsiveContainer functions={this.props}>
 
-
-                      <Input
-                          size='mini'
-      label={<Dropdown defaultValue='Strain' compact options={options} />}
-      labelPosition='right'
-      placeholder='Search on My Buds'
-    />
-{user? <Button onClick={this.props.logOutHandler}>Sign Out</Button> : null}
-
-                </div>
-
-              </header>
-          </div>
 
 
         <div id="wrapper">
@@ -281,15 +228,6 @@ extraImages: [
         </Button >
       </li>
 
-      <li className="nav-item">
-        <Button color='purple' to="/" className="nav-link" href="index.html">
-          <FontAwesomeIcon
-            icon={faGrin}
-            className="mr-2"
-          ></FontAwesomeIcon>
-      <span>Buddies</span>
-      </Button>
-    </li>
     <hr className="sidebar-divider my-0" />
     <li className="nav-item">
           <Button name='Settings' color="blue" className="nav-link" onClick={this.handleItemClick}>
@@ -300,15 +238,7 @@ extraImages: [
         <span>Settings</span>
         </Button>
       </li>
-      <li className="nav-item">
-            <Button name='Personality Test' color="blue" className="nav-link" onClick={this.props.handleShowPersonality}>
-              <FontAwesomeIcon
-                icon={faAddressCard}
-                className="mr-2"
-              ></FontAwesomeIcon>
-          <span>Personality Test</span>
-          </Button>
-        </li>
+
       <br></br>
 
       <br></br>
@@ -333,15 +263,15 @@ extraImages: [
 
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
-                <Segment vertical textAlign="center">
+                <Segment vertical textAlign="center" style={{paddingTop: 0}}>
                 <UserContentDisplay activeItem={activeItem}/>
             </Segment>
 
             </div>
           </div>
         </div>
-        <MobileNavBar active="home" />
-      </React.Fragment>
+
+    </ResponsiveContainer>
     );
   }
 }
@@ -349,34 +279,7 @@ extraImages: [
 class DesktopContainer extends Component {
   state = {};
 
-  componentDidMount() {
-    let token = localStorage.token;
 
-    if (token) {
-      fetch("http://localhost:3000/api/v1/current_user", {
-        method: "GET",
-        headers: {
-          Authorization: `${token}`,
-          "content-type": "application/json",
-          accepts: "application/json",
-        },
-      }).then((res) => {
-        if (!res.ok) {
-          res.text().then((text) => alert(text));
-        } else {
-          return res.json().then((userData) => {
-            this.setState({
-              user: { ...userData.user },
-              token: userData.jwt,
-              avatar: userData.user.avatar,
-            });
-          });
-        }
-      });
-    } else {
-      console.log("wowo");
-    }
-  }
 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
@@ -393,87 +296,57 @@ class DesktopContainer extends Component {
     const { fixed } = this.state;
     const { sidebarOpened } = this.state;
     const { visible } = this.state;
+    const options = [
+  { key: 'Products', text: 'Products', value: 'Products' },
+  { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
+  { key: 'Shop', text: 'Shop', value: 'Shop' },
+]
+    //using active item to display what needed to display,
+    // the component was saved to the state
+
+    const {user} = this.props
 
 
     return (
-      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        <Sidebar
-          as={Menu}
-          animation="push"
-          inverted
-          direction="top"
-          onHide={this.handleSidebarHide}
-          vertical
-          visible={visible}
-        >
-          {console.log("DASHBOARD STATE SHOULD HAVE SOME", this.state)}
-          <Menu.Item
-            as="a"
-            onClick={(e) => this.props.props.handleNewStrainReviewClick()}
-          >
-            New StrainReview
-          </Menu.Item>
-          <Menu.Item
-            as="a"
-            onClick={(e) => this.props.props.handleNewPostClick()}
-          >
-            New Post
-          </Menu.Item>
-          <Menu.Item
-            as="a"
-            onClick={(e) => this.props.props.handleNewPhotoClick()}
-          >
-            New Photo
-          </Menu.Item>
-        </Sidebar>
+      <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth} functions={this.props}>
 
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-          <Segment
-            inverted
-            textAlign="center"
-            style={{ minHeight: 50, padding: "1em 0em" }}
-            vertical
-          >
-            <Menu
-              fixed={fixed ? "top" : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size="large"
-            >
-              <Container>
-                <Menu.Item as={Link} to="/home" hover="active">
-                  Home
-                </Menu.Item>
-                <Menu.Item position="right">
-                  {this.state.user ? (
-                    <Button
-                      as={Link}
-                      to="/home"
-                      inverted={!fixed}
-                      onClick={() => this.props.logOutHandler}
-                    >
-                      {" "}
-                      Log Out{" "}
-                    </Button>
-                  ) : null}
-                  <Button
-                    as="a"
-                    inverted={!fixed}
-                    primary={fixed}
-                    style={{ marginLeft: "0.5em" }}
-                  >
-                    Settings
-                  </Button>
-                </Menu.Item>
-              </Container>
-            </Menu>
-          </Segment>
-        </Visibility>
+
+          <div id="custom-css-product">
+              <header className="main-header">
+                <div className="container content">
+                  <nav>
+                    <ul>
+                        <li>
+                        <p><Icon name='at' size="large" />Your User Name </p>
+
+                        </li>
+
+                        <Link to="/dashboard"  >
+                  <li>
+                        <img src={home} alt="Home" /> Home
+                      </li>
+                  </Link>
+                      <li>
+                        <img src={notification} alt="Notifications" />
+                        Notifications
+                      </li>
+                    </ul>
+                  </nav>
+
+
+                      <Input
+                          size='mini'
+      label={<Dropdown defaultValue='Strain' compact options={options} />}
+      labelPosition='right'
+      placeholder='Search on My Buds'
+    />
+{user? <Button onClick={this.props.logOutHandler}>Sign Out</Button> : null}
+
+                </div>
+
+              </header>
+          </div>
+
         {children}
       </Responsive>
     );
@@ -486,41 +359,11 @@ DesktopContainer.propTypes = {
 };
 
 class MobileContainer extends Component {
-  state = {
-    user: {
-      friendships: [],
-      strain_reviews: [],
-      gallery: [],
-    },
-  };
+    state = {
+   activeItem: "Feed"
+    };
 
   componentDidMount() {
-    let token = localStorage.token;
-
-    if (token) {
-      fetch("http://localhost:3000/api/v1/current_user", {
-        method: "GET",
-        headers: {
-          Authorization: `${token}`,
-          "content-type": "application/json",
-          accepts: "application/json",
-        },
-      }).then((res) => {
-        if (!res.ok) {
-          res.text().then((text) => alert(text));
-        } else {
-          return res.json().then((userData) => {
-            this.setState({
-              user: { ...userData.user },
-              token: userData.jwt,
-              avatar: userData.user.avatar,
-            });
-          });
-        }
-      });
-    } else {
-      console.log("wowo");
-    }
   }
 
   handleActivityFeedClick = (e) => {
@@ -539,13 +382,6 @@ class MobileContainer extends Component {
       });
 
       console.log("whoa photos");
-    } else if (e.target.id === "strains") {
-      this.setState({
-        activityFeed: (
-          <FriendsStrainFeed user={this.props} history={this.props.history} />
-        ),
-      });
-      console.log("whoa strains");
     }
   };
 
@@ -561,11 +397,14 @@ class MobileContainer extends Component {
     this.setState({ visible: false });
   };
 
+
+
   render() {
     const { children } = this.props;
     const { sidebarOpened } = this.state;
     const { visible } = this.state;
     const activityFeedToDisplay = this.state.activityFeed;
+    const { activeItem } = this.state;
     const options = [
   { key: 'Products', text: 'Products', value: 'Products' },
   { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
@@ -576,357 +415,19 @@ class MobileContainer extends Component {
 
 
     return (
-      <Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth}>
-        {console.log(this.state.user)}
-
-        <div id="custom-css-product">
-            <header className="main-header">
-              <div className="container content">
-                <nav>
-                  <ul>
-                      <li>
-                     <Icon name='at' size="large"></Icon> <p>Your UserName Here</p>
-                      </li>
-                <li>
-                      <img src={home} alt="Home" /> Home
-                    </li>
-                    <li>
-                      <img src={notification} alt="Notifications" />
-                      Notifications
-                    </li>
-                  </ul>
-                </nav>
+      <Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth} functions={this.props}>
 
 
-                    <Input
-                        size='mini'
-    label={<Dropdown defaultValue='Products' compact options={options} />}
-    labelPosition='right'
-    placeholder='Search on My Buds'
-  />
- <Button >Sign Out</Button>
+        <div id="content-wrapper" className="d-flex flex-column">
+          <div id="content">
+              <Segment vertical>
+              <UserContentDisplay activeItem={activeItem} />
+          </Segment>
 
-              </div>
-
-            </header>
-        </div>
-        <Segment
-          inverted
-          textAlign="center"
-          style={{ minHeight: 50, padding: "1em 0em" }}
-          vertical
-        >
-          This is a segment that I could put anything on
-        </Segment>
-
-        <div
-          className="ui three item menu"
-          onClick={(e) => this.handleActivityFeedClick(e)}
-        >
-          <Link to="/" className="item" id="feed">
-            <i className="fire large icon" id="feed" />
-          </Link>
-          <Link to="/" className="item" id="photos">
-            <i className="photo large icon" id="photo" />
-          </Link>
-          <Link to="/" className="item" id="strains">
-            <i className="leaf large icon" id="strains" />
-          </Link>
+          </div>
         </div>
 
-        <Segment>
-
-<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpaperaccess.com%2Fbeautiful-things&psig=AOvVaw39dgrQVi_5a8BPQgq6Mj4z&ust=1623299111571000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNidhczaifECFQAAAAAdAAAAABAD"></img>
-
-	<div class="container">
-
-		<div class="profile">
-
-			<div class="profile-image">
-
-				<img src="https://images.unsplash.com/photo-1513721032312-6a18a42c8763?w=152&h=152&fit=crop&crop=faces" alt=""></img>
-
-			</div>
-
-			<div class="profile-user-settings">
-
-				<h1 class="profile-user-name">janedoe_</h1>
-
-				<button class="btn profile-edit-btn">Edit Profile</button>
-
-				<button class="btn profile-settings-btn" aria-label="profile settings"><i class="fas fa-cog" aria-hidden="true"></i></button>
-
-			</div>
-
-			<div class="profile-stats">
-
-				<ul>
-					<li><span class="profile-stat-count">164</span> posts</li>
-					<li><span class="profile-stat-count">188</span> followers</li>
-					<li><span class="profile-stat-count">206</span> following</li>
-				</ul>
-
-			</div>
-
-			<div class="profile-bio">
-
-				<p><span class="profile-real-name">Jane Doe</span> Lorem ipsum dolor sit, amet consectetur adipisicing elit 📷✈️🏕️</p>
-
-			</div>
-
-		</div>
-
-
-	</div>
-
-
-
-
-<main>
-
-	<div class="container">
-
-		<div class="gallery">
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1511765224389-37f0e77cf0eb?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 56</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1497445462247-4330a224fdb1?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 89</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 5</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1426604966848-d7adac402bff?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 42</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://www.google.com/url?sa=i&url=https%3A%2F%2Fwallpaperaccess.com%2Fbeautiful-things&psig=AOvVaw39dgrQVi_5a8BPQgq6Mj4z&ust=1623299111571000&source=images&cd=vfe&ved=0CAIQjRxqFwoTCNidhczaifECFQAAAAAdAAAAABAD" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 38</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1498471731312-b6d2b8280c61?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 47</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1515023115689-589c33041d3c?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 94</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 3</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1504214208698-ea1916a2195a?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 52</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 4</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1515814472071-4d632dbc5d4a?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 66</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1511407397940-d57f68e81203?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Gallery</span><i class="fas fa-clone" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 45</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1518481612222-68bbe828ecd1?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 34</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 1</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1505058707965-09a4469a87e4?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 41</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 0</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-			<div class="gallery-item" tabindex="0">
-
-				<img src="https://images.unsplash.com/photo-1423012373122-fff0a5d28cc9?w=500&h=500&fit=crop" class="gallery-image" alt=""></img>
-
-				<div class="gallery-item-type">
-
-					<span class="visually-hidden">Video</span><i class="fas fa-video" aria-hidden="true"></i>
-
-				</div>
-
-				<div class="gallery-item-info">
-
-					<ul>
-						<li class="gallery-item-likes"><span class="visually-hidden">Likes:</span><i class="fas fa-heart" aria-hidden="true"></i> 30</li>
-						<li class="gallery-item-comments"><span class="visually-hidden">Comments:</span><i class="fas fa-comment" aria-hidden="true"></i> 2</li>
-					</ul>
-
-				</div>
-
-			</div>
-
-		</div>
-
-
-		<div class="loader"></div>
-
-	</div>
-
-
-</main>
-
-        </Segment>
-
-        <Menu fixed="bottom" inverted>
-          <Container>
-            <Menu.Item as="a" header>
-              My Buds
-            </Menu.Item>
-            <Menu.Item position="right"></Menu.Item>
-            <Menu.Item as={Link} to="/home">
-              Home
-            </Menu.Item>
-          </Container>
-        </Menu>
+        <MobileNavBar active="home" handleAddPostForm={this.props.handleAddPostForm}/>
 
       </Responsive>
     );

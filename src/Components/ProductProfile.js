@@ -42,6 +42,23 @@ import Chart from "react-apexcharts";
 import CommentDisplay from "../Components/CommentDisplay"
 import ProductReview from "../Components/ProductReview"
 
+
+
+const getWidth = () => {
+  const isSSR = typeof window === 'undefined'
+
+  return isSSR ? Responsive.onlyTablet.minWidth : window.innerWidth
+}
+
+
+
+
+
+
+
+
+
+
 class ProductProfile extends Component{
 
     state = {product:{
@@ -542,7 +559,7 @@ render(){
               <br></br>
               <br></br>
               <br></br>
-            <MobileNavBar/>
+            {getWidth() > 650? null : <MobileNavBar active="product" handleAddPostForm={this.props.handleAddPostForm}/>}
   </React.Fragment>
   );
 }

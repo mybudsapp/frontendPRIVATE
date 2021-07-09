@@ -8,51 +8,49 @@ const ProductCard = props => {
 //find out props to see if there is a user, if user then edit, if not,
 
 
+let displayCorrectImage = (product) => {
+
+if(product.producttype == "Clothes") {
+
+return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/plasticine/2x/clothes.png"></Item.Image>
+
+} else if (product.producttype == "Supplies") {
+
+return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/cotton/2x/length-1.png"></Item.Image>
+
+} else if (product.producttype == "Foods") {
+
+return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/office/2x/pizza.png"></Item.Image>
+
+} else if (product.producttype == "Accessories") {
+
+return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/emoji/2x/glasses-emoji.png"></Item.Image>
+
+    } else {
+return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/bubbles/2x/product.png"></Item.Image>
+}
+
+}
+
     return (
 
-            <Item id={props.product.id} name={props.product.productname} >
-                {console.log(props)}
-                <Item.Image size="small" id="productavatar" src="https://img.icons8.com/bubbles/2x/product.png"></Item.Image>
-
-                <Item.Header>{props.product.productname}</Item.Header>
-
-            <Item.Content >
-                <Item.Description>
-                      By
-                  <h3>
-                      {props.product.producer}
-                  </h3>
-                </Item.Description>
-            </Item.Content>
-
+            <Card id={props.product.id} name={props.product.productname} >
+                {displayCorrectImage(props.product)}
+            <Card.Content >
+                <h1>
+                    {props.product.productname}
+                </h1>
+                <Card.Description>
+                </Card.Description>
+            </Card.Content>
+            <Link to="/product">
                 <Button basic color='green'  id={props.product.id}>
-                  View Profile
+                  View Product
                 </Button>
-
-
-                  <Link>
-              <Button basic color='red'  id={props.product.id} onClick={e => props.deleteProductRequest(e)}>
-                X
-              </Button>
-          </Link>
-
-
-      </Item>
+            </Link>
+      </Card>
 
     )
-    // <Card.Content id={props.product.id} name={props.product.productname} centered>
-    //   <div  id={props.product.id} name={props.product.productname}>
-    //           <Image centered fluid id="productavatar" src="https://cdn.dribbble.com/users/2313464/screenshots/6379726/weed_3000_-_2000_2x.jpg"></Image>
-    //   </div>
-    //
-    //   <Card.Header>{props.product.productname}</Card.Header>
-    //   <Card.Meta>{console.log(props.product)}</Card.Meta>
-    //   <Card.Description>
-    //     {props.product.description}
-    //   </Card.Description>
-    // </Card.Content>
-    // <Card.Content centered>
-    //     <div>
 }
 
 export default withRouter(ProductCard)

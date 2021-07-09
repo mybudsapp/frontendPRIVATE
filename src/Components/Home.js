@@ -14,11 +14,36 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  Input,
+  Dropdown
 } from 'semantic-ui-react'
 import {Route, Link, Switch, withRouter} from 'react-router-dom'
+import MobileHeaderBar from "./MobileHeaderBar"
+import home from "../assets/img/home.svg";
+import notification from "../assets/img/notification.svg";
+import "../assets/css/sb-admin-2.css";
+import "../assets/css/style.css";
+import leatherworkervid from "../assets/vids/leatherworkervid.mp4"
+import mybudscell1 from "../assets/img/mybudscell1.png"
+import mybudscell2 from "../assets/img/mybudscell2.png"
 
-
-
+// <div class="jumbotron jumbotron-fluid">
+//
+// <video autoplay muted loop>
+//     <source src={leatherworkervid} data-src={leatherworkervid} type="video/mp4"/>
+//
+// </video>
+//
+//   <div class="container text-white">
+//
+//     <h1 class="display-4">Hello, world!</h1>
+//     <p class="lead">This is a simple hero unit, a simple jumbotron-style component for calling extra attention to featured content or information.</p>
+//     <hr class="my-4"/>
+//     <p>It uses utility classes for typography and spacing to space content out within the larger container.</p>
+//     <a class="btn btn-primary btn-lg" href="#" role="button">Learn more</a>
+//
+//   </div>
+// </div>
 
 
 
@@ -35,34 +60,28 @@ const getWidth = () => {
 const HomepageHeading = ({ mobile }) => (
 
 
-  <Container text>
 
-    <Header
-      as='h2'
-      content='My Buds'
-      inverted
-      style={{
-        fontSize: mobile ? '2em' : '4em',
-        fontWeight: 'normal',
-        marginBottom: 0,
-        marginTop: mobile ? '1.5em' : '3em',
-      }}
-    />
-    <Header
-      as='h2'
-      content='Do whatever you want when you want to.'
-      inverted
-      style={{
-        fontSize: mobile ? '1.5em' : '1.7em',
-        fontWeight: 'normal',
-        marginTop: mobile ? '0.5em' : '1.5em',
-      }}
-    />
-    <Button primary size='huge' as={Link} to='/signup'>
-      Get Started
-      <Icon name='right arrow' />
-    </Button>
-  </Container>
+    <div class="jumbotron jumbotron-fluid">
+
+<video autoPlay muted loop >
+    <source src={leatherworkervid} data-src={leatherworkervid} type="video/mp4"/>
+    <source src={leatherworkervid} data-src={leatherworkervid} type="video/webm"/>
+    <source src={leatherworkervid} data-src={leatherworkervid} type="video/ogg"/>
+
+</video>
+
+  <div class="container text-white">
+
+    <h1 class="display-4">My Buds</h1>
+    <p class="lead">community + ingenuity</p>
+    <hr class="my-4"/>
+    <a class="btn btn-primary btn-lg" href="/dashboard" role="button">Take a Tour</a>
+    <p></p>
+
+  </div>
+
+</div>
+
 )
 
 HomepageHeading.propTypes = {
@@ -73,13 +92,19 @@ HomepageHeading.propTypes = {
  * Neither Semantic UI nor Semantic UI React offer a responsive navbar, however, it can be implemented easily.
  * It can be more complicated, but you can create really flexible markup.
  */
+
+
+
+
+
+
+
+
+
+
 class DesktopContainer extends Component {
 
 state = {}
-
-
-
-
 
 
 
@@ -90,6 +115,12 @@ state = {}
 
     const { children } = this.props
     const { fixed } = this.state
+    const options = [
+  { key: 'Products', text: 'Products', value: 'Products' },
+  { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
+  { key: 'Shop', text: 'Shop', value: 'Shop' },
+]
+    const {user} = this.state
 
     return (
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
@@ -98,38 +129,43 @@ state = {}
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
         >
+        <div id="custom-css-product">
+            <header className="main-header">
+              <div className="container content">
+                <nav>
+                  <ul>
+                      <Link to="/dashboard"  >
+                <li>
+                      <img src={home} alt="Home" /> Home
+                    </li>
+                </Link>
+                    <li>
+
+                    </li>
+                  </ul>
+                </nav>
+
+
+                    <Input
+                        size='mini'
+    label={<Dropdown defaultValue='Strain' compact options={options} />}
+    labelPosition='right'
+    placeholder='Search on My Buds'
+  />
+{user? <Button onClick={this.props.logOutHandler}>Sign Out</Button> : null}
+
+              </div>
+
+            </header>
+        </div>
           <Segment
-            inverted
-            textAlign='center'
-            style={{ minHeight: 700, padding: '1em 0em' }}
             vertical
+            style={{
+                paddingTop: 0,
+                paddingBottom: 0
+            }}
+            textAlign="center"
           >
-            <Menu
-              fixed={fixed ? 'top' : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size='large'
-            >
-              <Container>
-                <Menu.Item as={Link} to='/home' hover='active'>
-                  Home
-                </Menu.Item>
-                <Menu.Item as={Link} to='/aboutus'>About Us</Menu.Item>
-                <Menu.Item position='right'>
-                    <Link to="/login">
-                  <Button as='a' inverted={!fixed}>
-                    Log in
-                  </Button>
-                    </Link>
-                    <Link to="/signup">
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Sign Up
-                  </Button>
-                    </Link>
-                </Menu.Item>
-              </Container>
-            </Menu>
             <HomepageHeading />
           </Segment>
         </Visibility>
@@ -160,7 +196,9 @@ class MobileContainer extends Component {
         getWidth={getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}
       >
-      <Segment textAlign="left" className="fixed-menu" >
+      <Segment textAlign="left" className="fixed-menu" style={{
+              marginBottom: 0
+          }}>
           <Icon name='bars' onClick={this.handleToggle} />
       </Segment>
         <Sidebar
@@ -178,15 +216,7 @@ class MobileContainer extends Component {
         </Sidebar>
 
         <Sidebar.Pusher dimmed={sidebarOpened}>
-          <Segment
-            inverted
-            textAlign='center'
-            style={{ minHeight: 350, padding: '1em 0em' }}
-            vertical
-          >
-
-            <HomepageHeading mobile handleToggle={this.handleToggle}/>
-          </Segment>
+          <HomepageHeading mobile handleToggle={this.handleToggle}/>
           {children}
         </Sidebar.Pusher>
       </Responsive>
@@ -211,26 +241,32 @@ ResponsiveContainer.propTypes = {
 
 const Home = () => (
   <ResponsiveContainer>
-    <Segment style={{ padding: '8em 0em' }} vertical>
+    <Segment style={{ padding: '4em 0em', background: '#BDB9BA'}} vertical>
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Grid.Column width={8}>
-            <h3 style={{ fontSize: '2em', color: 'black'}}>
-              An Application For Beginners and New Comers
-          </h3>
-            <p style={{ fontSize: '1.33em'}}>
-              We all need a helping hand or guidance when starting something new and experimental.
-              Why not be guided by your friends or people that have been where you have been?
-            </p>
-            <h3 style={{ fontSize: '2em', color: 'black'}}>
-              We Strive to Make Things Clear
-          </h3>
-            <p style={{ fontSize: '1.33em'}}>
-              some lorem epsum about my buds here
-            </p>
+          <br></br>
+            <span style={{ fontSize: '1.33em', color: 'black'}}>
+             Social media doesn't have to be all bad.
+         </span>
+            <br></br>
+            <br></br>
+                <span style={{ fontSize: '1.33em'}}>
+                 Pleasing, Easy, and Clever Mobile Design changed the world.
+             </span>
+             <br></br>
+             <br></br>
+                <span style={{ fontSize: '1.33em', color: 'white'}}>
+                    Customer Relationship Management Software for Small Businesses.
+                </span>
+
           </Grid.Column>
           <Grid.Column floated='right' width={6}>
-            <Image/>
+
+
+            <Image src={mybudscell1}/>
+
+
           </Grid.Column>
         </Grid.Row>
         <Grid.Row>
@@ -240,52 +276,7 @@ const Home = () => (
         </Grid.Row>
       </Grid>
     </Segment>
-    <Segment style={{ padding: '0em' }} vertical>
-      <Grid celled='internally' columns='equal' stackable>
-        <Grid.Row textAlign='center'>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <h3 as='h3' style={{ fontSize: '2em' }}>
-              "What a Company"
-          </h3>
-            <p style={{ fontSize: '1.33em' }}>That is what they all say about us</p>
-          </Grid.Column>
-          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
-            <h3 as='h3' style={{ fontSize: '2em' }}>
-              "I shouldn't have gone with their competitor."
-          </h3>
-          </Grid.Column>
-        </Grid.Row>
-      </Grid>
-    </Segment>
-    <Segment style={{ padding: '8em 0em' }} vertical>
-      <Container text>
-        <h3 as='h3' style={{ fontSize: '2em' }}>
-          Breaking The Grid, Grabs Your Attention
-      </h3>
-        <p >
-          Instead of focusing on content creation and hard work, we have learned how to master the
-          art of doing nothing by providing massive amounts of whitespace and generic content that
-          can seem massive, monolithic and worth your attention.
-        </p>
 
-        <Divider
-          className='header'
-          horizontal
-          style={{ margin: '3em 0em', textTransform: 'uppercase' }}
-        >
-
-        </Divider>
-        <h3 as='h3' style={{ fontSize: '2em' }}>
-          Did We Tell You About Our Bananas?
-      </h3>
-        <p style={{ fontSize: '1.33em' }}>
-          Yes I know you probably disregarded the earlier boasts as non-sequitur filler content, but
-          it's really true. It took years of gene splicing and combinatory DNA research, but our
-          bananas can really dance.
-        </p>
-
-      </Container>
-    </Segment>
     <Segment inverted vertical style={{ padding: '5em 0em' }}>
       <Container>
         <Grid divided inverted stackable>
@@ -293,28 +284,18 @@ const Home = () => (
             <Grid.Column width={3}>
               <h3 inverted as='h4' content='About' />
               <List link inverted>
-                <List.Item as='a'>Sitemap</List.Item>
-                <List.Item as='a'>Contact Us</List.Item>
-                <List.Item as='a'>Religious Ceremonies</List.Item>
-                <List.Item as='a'>Gazebo Plans</List.Item>
+                
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
               <h3 inverted as='h4' content='Services' />
               <List link inverted>
-                <List.Item as='a'>Banana Pre-Order</List.Item>
-                <List.Item as='a'>DNA FAQ</List.Item>
-                <List.Item as='a'>How To Access</List.Item>
-                <List.Item as='a'>Favorite X-Men</List.Item>
+                 JanCarlos Acevedo
+                 @ Mybudsapp@gmail.com
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
-              <h3>
-                Footer Header
-            </h3>
-              <p>
-                Extra space for a call to action inside the footer that could help re-engage users.
-              </p>
+
             </Grid.Column>
           </Grid.Row>
         </Grid>

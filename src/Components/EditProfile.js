@@ -146,7 +146,7 @@ class EditProfile extends Component {
 
             <React.Fragment>
             <Card fluid>
-              <Card.Content textAlign="center">
+              <Card.Content textAlign="left">
                   <Avatar size={67} round={true} src={avatar}></Avatar>
                  <h1>USERNAME</h1>
                  <h2>LOCATION</h2>

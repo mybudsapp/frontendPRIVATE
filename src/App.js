@@ -44,7 +44,8 @@ class App extends Component {
     personalityTestCompleted: false,
     firstTime: false,
     showWelcome: false,
-    showEdit: false
+    showEdit: false,
+    showAddPostForm: false
   };
 
   //----------------------Life Cycle Methods should go here--------------------//
@@ -886,6 +887,11 @@ console.log("ITSBEENHIOT")
   };
 
   //---------------------------------------------------------------------------------------
+  handleAddPostForm = () => {
+
+      console.log("ITITITITIT")
+      this.setState({ showAddPostForm: true });
+  }
 
   handleShowWelcome = () => {
     this.setState({ showWelcome: true });
@@ -1128,6 +1134,8 @@ console.log("ITSBEENHIOT")
 
     const { firstTime } = this.state;
 
+    const { showAddPostForm } = this.state;
+
     const onCompleteAction = (obj) => {
       console.log(obj);
       // YOUR LOGIC GOES HERE
@@ -1141,11 +1149,11 @@ console.log("ITSBEENHIOT")
       <React.Fragment>
 
         <Modal centered={true} size="lg" show={showWelcome}>
-          <Modal.Header>
-            <h3>Welcome to My Buds! (Proof of Concept)</h3>
+          <Modal.Header textAlign="center">
+            <h3>Welcome to My Buds! </h3>
           </Modal.Header>
           <Modal.Body>
-            <span>The New Customer Relationship Management Application for the new consumer and new age businesses!</span>
+            <span>This Proof of Concept was built and developed as a Pre-Cursor to a Native Application for Apple and Android Devices </span>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleCloseWelcome}>
@@ -1153,6 +1161,8 @@ console.log("ITSBEENHIOT")
             </Button>
           </Modal.Footer>
         </Modal>
+
+
 
         <Modal centered={true} size="lg" show={showPersonality}>
           <Modal.Header>
@@ -1229,8 +1239,7 @@ console.log("ITSBEENHIOT")
           />
             <Route
               path="/dashboard"
-              render={(props) => {
-                  return (
+              render={() => (
                     <UserDashboard
                       user={this.state.user}
                       handleViewUserProfile={this.handleViewUserProfile}
@@ -1250,23 +1259,14 @@ console.log("ITSBEENHIOT")
                       handleShowEdit={this.handleShowEdit}
                       handleShowEditClose={this.handleShowEditClose}
                       handleShowPersonality={this.handleShowPersonality}
+                      handleAddPostForm={this.handleAddPostForm}
                       handleShowWelcome={this.handleShowWelcome}
                       handleDeletePhoto={this.deletePhotoRequest}
                       logOutHandler={this.logOutHandler}
                       submitHandler={this.submitHandler}
                     />
-                  )}}
-            />
-          <Route
-            path="/edit"
-            render={() => (
-              <EditProfile
-                user={this.state.user}
-                avatar={this.state.avatar}
-                submitHandler={this.submitHandler}
-              />
             )}
-          />
+            />
           <Route
             path="/profile"
             render={() => (
@@ -1277,44 +1277,22 @@ console.log("ITSBEENHIOT")
                 strains={this.state.user.strains}
                 gallery={this.state.user.gallery}
                 handleEditClick={this.handleEditClick}
+                handleAddPostForm={this.handleAddPostForm}
                 handleNewPostClick={this.handleNewPostClick}
                 handleNewPhotoClick={this.handleNewPhotoClick}
                 handleNewStrainReviewClick={this.handleNewStrainReviewClick}
               />
             )}
           />
-          {this.state.otherUser ? (
-            <Route
-              path="/explore/:username"
-              exact={true}
-              render={(props) => {
-                if (this.state.otherUser) {
-                  return (
-                    <Profile
-                      user={this.state.otherUser}
-                      avatar={this.state.otherUser.avatar}
-                      history={this.props.history}
-                      handleViewUserProfile={this.handleViewUserProfile}
-                      handleNewPostClick={this.handleNewPostClick}
-                      handleNewPhotoClick={this.handleNewPhotoClick}
-                      handleNewStrainReviewClick={
-                        this.handleNewStrainReviewClick
-                      }
-                    />
-                  );
-                } else {
-                  return <GuestContainerLayout />;
-                }
-              }}
-            />
-          ) : null}
-          <Route path="/home" render={() => <Home user={this.state.user} />} />
+
+          <Route path="/home" render={() => <Home />} />
           <Route
             path="/explore"
             render={() => (
               <ExploreContainer
                 user={this.state.user}
                 avatar={this.state.avatar}
+                handleAddPostForm={this.handleAddPostForm}
                 handleViewUserProfile={this.handleViewUserProfile}
                 handleNewFriendRequest={this.handleNewFriendRequest}
                 handleViewStrainProfile={this.handleViewStrainProfile}
@@ -1326,76 +1304,11 @@ console.log("ITSBEENHIOT")
             path="/product"
             render={() => (
               <ProductProfile
+                  handleAddPostForm={this.handleAddPostForm}
                 strains={this.state.strains}
                 submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
               />
             )}
-          />
-          <Route
-            path="/strains/:name/:id"
-            render={() => (
-              <GuestContainerLayout
-                user={this.state.user}
-                strains={this.state.strains}
-                submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
-              />
-            )}
-          />
-
-          <Route
-            path="/:username/newstore"
-            render={() => (
-              <GuestContainerLayout
-                user={this.state.user}
-                strains={this.state.strains}
-                user={this.state.user}
-                submitHandler={this.submitStoreHandler}
-              />
-            )}
-          />
-          <Route
-            path="/:username/newstrain"
-            render={() => (
-              <GuestContainerLayout
-                user={this.state.user}
-                strains={this.state.strains}
-                user={this.state.user}
-                submitHandler={this.submitStrainHandler}
-              />
-            )}
-          />
-          <Route
-            path="/:namespace/editstore/:id"
-            render={() => (
-              <GuestContainerLayout
-                strains={this.state.strains}
-                user={this.state.user}
-                editStoreHandler={this.editStoreHandler}
-              />
-            )}
-          />
-          <Route
-            path="/:namespace/editstrain/:id"
-            render={() => (
-              <GuestContainerLayout
-                strains={this.state.strains}
-                user={this.state.user}
-                editStrainHandler={this.editStrainHandler}
-              />
-            )}
-          />
-          <Route
-            path="/strains/:strain_name/strainreview/:id"
-            render={() => (
-              <GuestContainerLayout
-                strains={this.state.strains}
-                submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
-              />
-            )}
-          />
-          <Route
-            path="/:username/newstrain"
-            render={() => <GuestContainerLayout strains={this.state.strains} />}
           />
           <Route path="/" component={Home} />
         </Switch>

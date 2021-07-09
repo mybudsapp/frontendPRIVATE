@@ -56,6 +56,8 @@ html {
 
 article, aside, figcaption, figure, footer, header, hgroup, main, nav, section {
   display: block;
+
+
 }
 
 body {
@@ -67,6 +69,8 @@ body {
   color: #858796;
   text-align: left;
   background-color: #fff;
+
+
 }
 
 [tabindex="-1"]:focus:not(:focus-visible) {
@@ -4969,24 +4973,16 @@ a.badge-dark:focus, a.badge-dark.focus {
   box-shadow: 0 0 0 0.2rem rgba(90, 92, 105, 0.5);
 }
 
-.jumbotron {
-  padding: 2rem 1rem;
-  margin-bottom: 2rem;
-  background-color: #eaecf4;
-  border-radius: 0.3rem;
-}
+
 
 @media (min-width: 576px) {
   .jumbotron {
     padding: 4rem 2rem;
+    
   }
 }
 
-.jumbotron-fluid {
-  padding-right: 0;
-  padding-left: 0;
-  border-radius: 0;
-}
+
 
 .alert {
   position: relative;
@@ -6083,6 +6079,7 @@ a.close.disabled {
   border-bottom: 1px solid #ebebeb;
   border-top-left-radius: calc(0.3rem - 1px);
   border-top-right-radius: calc(0.3rem - 1px);
+
 }
 
 .popover-header:empty {

@@ -13,31 +13,37 @@ import {
   Visibility,
   Label,
   Input,
-  Card,
+  Card
 } from 'semantic-ui-react'
 import Avatar from 'react-avatar'
 import Buds from '../mybuds-v2.png'
+import { Link } from "react-router-dom";
 
 const UserCard = (props) => {
 
     return(
       <Card>
       <Card.Content id={props.user.id} name={props.user.username}>
-        <div class="ui small image"  id={props.user.id} name={props.user.username}>
-                {props.user.avatar? <img src={props.user.avatar.url} name={props.user.username} onClick={(e) => props.handleViewUserProfile(e)}   id={props.user.id} name={props.user.username}/> : <img src={Buds} name={props.user.username} onClick={(e) => props.handleViewUserProfile(e)} id={props.user.id} name={props.user.username} alt="budsimage"/>}
-        </div>
 
-        <Card.Header>{props.user.username}</Card.Header>
-        <Card.Meta>{props.user.personality_type}</Card.Meta>
-        <Card.Description>
-          {props.user.bio}
+            <Image src={props.user.avatar} alt="Avatar" size='medium' circular></Image>
+
+
+
+        <Card.Meta><br></br></Card.Meta>
+        <Card.Description textAlign="center">
+          {props.user.username}
+        </Card.Description>
+        <Card.Description textAlign="center">
+          {props.user.location}
         </Card.Description>
       </Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
-          <Button basic color='green' onClick={(e) => props.handleViewUserProfile(e)} id={props.user.id}>
+            <Link to="/profile">
+          <Button basic color='green' id={props.user.id}>
             View Profile
           </Button>
+      </Link>
         </div>
       </Card.Content>
     </Card>

@@ -22,7 +22,24 @@ import PropTypes from 'prop-types'
 import {Route, Link, Switch, withRouter} from 'react-router-dom'
 import Avatar from 'react-avatar'
 import UserCard from './UserCard'
-import {BasicFriendsFeed, FriendsPhotosFeed, FriendsStrainFeed, RecentActivityFeed, AllUsersFeed, AllStrainsFeed} from "./ActivityFeeds"
+import MobileNavBar from '../Components/MobileNavBar'
+import {BasicFriendsFeed, FriendsPhotosFeed, StoreFeed, RecentActivityFeed, AllUsersFeed, AllProductsFeed} from "./ActivityFeeds"
+import "../assets/css/explorecontainer.css";
+import home from "../assets/img/home.svg";
+import notification from "../assets/img/notification.svg";
+import message from "../assets/img/message.svg";
+
+
+
+import "../assets/css/sb-admin-2.css";
+import "../assets/css/style.css";
+
+
+
+
+
+
+
 
 const getWidth = () => {
   const isSSR = typeof window === 'undefined'
@@ -43,7 +60,10 @@ handlePlusClick = () => {this.setState({ visible: true})}
 handleDoublePlusClick = () => { this.setState({ visible: false})}
 
 
+
+
 handleItemClick = (e, { name }) => {
+
 
       console.log(e, name)
 
@@ -53,18 +73,27 @@ handleItemClick = (e, { name }) => {
         })
         console.log("whoa")
 
-    }else if (name === "strains") {
+    }else if (name === "window shop") {
 
         this.setState({
-            Feed: <AllStrainsFeed user={this.props.user} history={this.props.history} handleViewStrainProfile={this.props.handleViewStrainProfile}/>
+            Feed: <AllProductsFeed user={this.props.user} history={this.props.history} handleViewStrainProfile={this.props.handleViewStrainProfile}/>
         })
 
         console.log("whoa strains")
 
+    }else if (name === "stores"){
+
+
+        let store = {namespace: "Geniune Leather", address: "123 Address St, City, State", id: 2}
+
+
+        this.setState({
+            Feed: <StoreFeed store={store} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+        })
     }else if (name === "Photos"){
 
         this.setState({
-            Feed: <FriendsStrainFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+            Feed: <FriendsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
         })
         console.log("whoa strains")
 
@@ -75,21 +104,21 @@ componentDidMount = () => {
 
     let token = localStorage.token;
 
-    fetch("http://localhost:3000/api/v1/current_user", {
+    fetch("http://localhost:3000/Products", {
       method: "GET",
       headers: {
-        Authorization: `${token}`,
         "content-type": "application/json",
-        accepts: "application/json"
+        accepts: "application/json",
       }
-    })
-      .then(resp => resp.json())
-      .then(userData => {
-        this.setState({
-          user: { ...userData.user },
-          avatar: userData.user.avatar
+    }).then((res) => {
+      if (!res.ok) {
+        res.text().then((text) => alert(text));
+      } else {
+        return res.json().then((products) => {
+          this.setState({products});
         });
-      })
+      }
+    });
 }
 
 
@@ -120,22 +149,19 @@ render(){
 //     if (i.id == this.props.user.id ) return true;
 //   }
 // }
+const styleObj = {
+fontSize: 50,
+textAlign: "center",
+textDecoration: "underline"
+}
 
     //find out if the person is a the user's friend or not, if a not a friend, display friend request button
 return(
     <ResponsiveContainer functions={this.props}>
 
-
-           <div fluid className="ui menu">
-            <div class="ui small image">
-
-            {this.props.avatar? <img src={this.props.avatar.url} name={this.props.user.username}/> : <Avatar name={this.props.username}/>}
-                </div>
-                <h2>{this.props.user.username}</h2>
-                </div>
-                <div>
-                    {console.log("ASDASD", arrayOfFriends)}
-                </div>
+        <Segment padded="very" vertical textAlign="center">
+                    <h3 style={styleObj}>Explore</h3>
+                </Segment>
                 <Menu fluid widths={4}>
                 <Menu.Item
                  name='users'
@@ -145,21 +171,21 @@ return(
                  Users
                 </Menu.Item>
                 <Menu.Item
-                 name='strains'
-                 active={activeItem === 'strains'}
+                 name='window shop'
+                 active={activeItem === 'window shop'}
                  onClick={this.handleItemClick}
                 >
-                 Strains
+                 Window Shop Products
                 </Menu.Item>
                 <Menu.Item
-                 name='photos'
-                 active={activeItem === 'photos'}
+                 name='stores'
+                 active={activeItem === 'stores'}
                  onClick={this.handleItemClick}
                 >
-                 Dispensaries
+                 Stores
                 </Menu.Item>
                 <Menu.Item
-                 name='photos'
+                 name='Photos'
                  active={activeItem === 'photos'}
                  onClick={this.handleItemClick}
                 >
@@ -172,13 +198,12 @@ return(
                 <Grid.Row columns={1}>
                 <Grid.Column>
 
+
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>
-
-                <Segment attached='bottom'>
                 {activityFeedToDisplay}
-                </Segment>
+
 </ResponsiveContainer>
 )
 }
@@ -241,77 +266,58 @@ class DesktopContainer extends React.Component {
     const { fixed } = this.state
     const { sidebarOpened } = this.state
     const { visible } = this.state
+    const options = [
+  { key: 'Products', text: 'Products', value: 'Products' },
+  { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
+  { key: 'Shop', text: 'Shop', value: 'Shop' },
+]
+const {user} = this.state
 
 
 
     return (
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-          <Sidebar
-              as={Menu}
-              animation='push'
-              inverted
-              direction='top'
-              onHide={this.handleSidebarHide}
-              vertical
-              visible={visible}
-              >
-              <Menu.Item as='a' onClick={(e) => this.props.props.handleNewStrainReviewClick()}>
-                  New StrainReview
-              </Menu.Item>
-              <Menu.Item as='a' onClick={(e) => this.props.props.handleNewPostClick()}>
-                  New Post
-              </Menu.Item>
-              <Menu.Item as='a' onClick={(e) => this.props.props.handleNewPhotoClick()}>
-                  New Photo
-              </Menu.Item>
 
 
-          </Sidebar>
 
-        <Visibility
-          once={false}
-          onBottomPassed={this.showFixedMenu}
-          onBottomPassedReverse={this.hideFixedMenu}
-        >
-          <Segment
-            inverted
-            textAlign='center'
-            style={{ minHeight: 50, padding: '1em 0em' }}
-            vertical
-          >
-            <Menu
-              fixed={fixed ? 'top' : null}
-              inverted={!fixed}
-              pointing={!fixed}
-              secondary={!fixed}
-              size='large'
-            >
-              <Container>
-              <Button as={Link} to='/dashboard' inverted={!fixed}>
-                  <Icon name='home' size='big'/>
-              </Button>
-                <Menu.Item position='right'>
-                    {this.state.user?  <Button
-                         as={Link} to='/home'
-                         inverted={!fixed} onClick={() => this.props.logOutHandler}> Log Out </Button> : null}
-                  <Button as='a' inverted={!fixed} primary={fixed} style={{ marginLeft: '0.5em' }}>
-                    Settings
-                  </Button>
-                </Menu.Item>
-              </Container>
-            </Menu>
-          </Segment>
-        </Visibility>
+          <div id="custom-css-product">
+              <header className="main-header">
+                <div className="container content">
+                  <nav>
+                    <ul>
+                        <li>
+                        <p><Icon name='at' size="large" />Your User Name Here</p>
+                        </li>
+                        <Link to="/dashboard">
+                  <li>
+                        <img src={home} alt="Home" /> Home
+                      </li>
+                  </Link>
+                      <li>
+                        <img src={notification} alt="Notifications" />
+                        Notifications
+                      </li>
+                    </ul>
+                  </nav>
+
+                      <Input
+                          size='mini'
+      label={<Dropdown defaultValue='Strain' compact options={options} />}
+      labelPosition='right'
+      placeholder='Search on My Buds'
+    />
+{user? <Link to="/home">
+    <Button >Sign Out</Button>
+</Link>
+    : null}
+
+                </div>
+
+              </header>
+          </div>
+
         {children}
-        <Segment
-            textAlign='center'
-            raised
-            circular inverted style={ {width:100, height:100} }
-            >
-                <Menu.Item as='a' onClick={(e) => this.handlePlusClick()} onDoubleClick={(e) => this.handleDoublePlusClick()}>
-                    <Icon name='plus square' size='big'/>
-                </Menu.Item>
-        </Segment>
+
       </Responsive>
     )
   }
@@ -325,58 +331,73 @@ DesktopContainer.propTypes = {
 
 
 class MobileContainer extends Component {
-  state = {user:{
-      friendships:[],
-      strain_reviews:[],
-      gallery:[]
-  }}
 
 
-  handleActivityFeedClick = (e) => {
+    state = {
+        user : {},
+        Feed: <RecentActivityFeed history={this.props.history} user={this.props}/>
 
-      if (e.target.id === "feed"){
+    }
 
-          this.setState({
-              activityFeed: <BasicFriendsFeed user={this.props} history={this.props.history}/>
-          })
-          console.log("whoa")
+    handlePlusClick = () => {this.setState({ visible: true})}
 
-      }else if (e.target.id === "photos") {
+    handleDoublePlusClick = () => { this.setState({ visible: false})}
 
-          this.setState({
-              activityFeed: <FriendsPhotosFeed user={this.props} history={this.props.history}/>
-          })
 
-          console.log("whoa photos")
+    handleItemClick = (e, { name }) => {
 
-      }else if (e.target.id === "strains"){
 
-          this.setState({
-              activityFeed: <FriendsStrainFeed user={this.props} history={this.props.history}/>
-          })
-          console.log("whoa strains")
+          console.log(e, name)
 
-      }
-  }
+        if (name === "users"){
+            this.setState({
+                Feed: <AllUsersFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+            })
+            console.log("whoa")
+
+        }else if (name === "window shop") {
+
+            this.setState({
+                Feed: <AllProductsFeed user={this.props.user} history={this.props.history} handleViewStrainProfile={this.props.handleViewStrainProfile}/>
+            })
 
 
 
+        }else if (name === "Photos"){
 
-  handleSidebarHide = () => this.setState({ sidebarOpened: false })
+            this.setState({
+                Feed: <FriendsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+            })
 
-  handleToggle = () => this.setState({ sidebarOpened: true })
 
-  handlePlusClick = () => {this.setState({ visible: true})}
+        }else if (name === "stores"){
 
-  handleDoublePlusClick = () => { this.setState({ visible: false})}
+            let store = {namespace: "Geniune Leather", address: "123 Address St, City, State", id: 2}
+
+            this.setState({
+                Feed: <StoreFeed store={store} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+            })
+            console.log("whoa strains")
+
+        }
+    }
+
+
+
 
   render() {
 
     const { children } = this.props
+
+    const activityFeedToDisplay = this.state.Feed
     const { sidebarOpened } = this.state
     const { visible } = this.state
-    const activityFeedToDisplay = this.state.activityFeed
-
+    const { activeItem } = this.state
+    const styleObj = {
+    fontSize: 50,
+    textAlign: "center",
+    textDecoration: "underline"
+    }
 
 
 
@@ -386,43 +407,57 @@ class MobileContainer extends Component {
         getWidth={getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}
       >
-      <Segment
-        inverted
-        textAlign='center'
-        style={{ minHeight: 50, padding: '1em 0em' }}
-        vertical
+
+      <Segment padded="very" vertical textAlign="center">
+                  <h3 style={styleObj}>Explore</h3>
+              </Segment>
+
+      <Menu fluid widths={4}>
+      <Menu.Item
+       name='users'
+       active={activeItem === 'users'}
+       onClick={this.handleItemClick}
       >
-sasd
-      </Segment>
+       Users
+      </Menu.Item>
+      <Menu.Item
+       name='window shop'
+       active={activeItem === 'window shop'}
+       onClick={this.handleItemClick}
+      >
+       Window Shop Products
+      </Menu.Item>
+      <Menu.Item
+       name='stores'
+       active={activeItem === 'stores'}
+       onClick={this.handleItemClick}
+      >
+       Stores
+      </Menu.Item>
+      <Menu.Item
+       name='Photos'
+       active={activeItem === 'photos'}
+       onClick={this.handleItemClick}
+      >
+       Photos
+      </Menu.Item>
+      <Menu.Menu position='centered'>
+      </Menu.Menu>
+      </Menu>
+      <Grid>
+      <Grid.Row columns={1}>
+      <Grid.Column>
 
-            <div className="ui three item menu" onClick={(e) => this.handleActivityFeedClick(e)}>
-              <a className="item" id="feed">
-                <i className="fire large icon" id="feed"/>
-              </a>
-              <a className="item" id="photos">
-                <i className="photo large icon" id="photo"/>
-              </a>
-              <a className="item" id="strains">
-                <i className="leaf large icon" id="strains"/>
-              </a>
-            </div>
 
-            <Segment>
-
-            </Segment>
-
-
-    <Menu fixed='bottom' inverted>
-      <Container>
-        <Menu.Item as='a' header>
-          My Buds
-        </Menu.Item>
-        <Menu.Item position='right'>
-
-        </Menu.Item>
-        <Menu.Item as={Link} to="/home">Home</Menu.Item>
-      </Container>
-    </Menu>
+      </Grid.Column>
+      </Grid.Row>
+      </Grid>
+      {activityFeedToDisplay}
+      <br></br>
+      <br></br>
+          <br></br>
+          <br></br>
+      <MobileNavBar active="explore" handleAddPostForm={this.props.handleAddPostForm}/>
       </Responsive>
 
     )
