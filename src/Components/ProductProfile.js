@@ -38,7 +38,7 @@ import c3 from "../assets/img/c3.jpg";
 import MobileNavBar from "../Components/MobileNavBar"
 
 import "../assets/css/bundle.css";
-import Chart from "react-apexcharts";
+
 import CommentDisplay from "../Components/CommentDisplay"
 import ProductReview from "../Components/ProductReview"
 
