@@ -284,14 +284,14 @@ const Home = () => (
             <Grid.Column width={3}>
               <h3 inverted as='h4' content='About' />
               <List link inverted>
-                
+
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
               <h3 inverted as='h4' content='Services' />
               <List link inverted>
                  JanCarlos Acevedo
-                 @ Mybudsapp@gmail.com
+                 @ admin@mybuds.app
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
