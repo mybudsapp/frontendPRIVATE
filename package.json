@@ -8,7 +8,7 @@
     "@fortawesome/react-fontawesome": "^0.1.14",
     "@react-google-maps/api": "^2.1.1",
     "activestorage": "^5.2.4",
-    "axios": "^0.19.2",
+    "axios": "^0.21.1",
     "bootstrap": "^4.5.2",
     "d3-ease": "^1.0.6",
     "d3-interpolate": "^1.4.0",
@@ -27,7 +27,8 @@
     "react-places-autocomplete": "^7.3.0",
     "react-quiz-component": "^0.3.4",
     "react-router-dom": "^5.2.0",
-    "react-scripts": "3.0.1",
+    "react-scripts": "^1.1.5",
+    "react-transition-group": "^2.9.0",
     "redux": "^4.0.5",
     "semantic-ui-react": "^0.87.3",
     "survey-react": "^1.7.25"
