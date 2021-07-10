@@ -290,8 +290,8 @@ const Home = () => (
             <Grid.Column width={3}>
               <h3 inverted as='h4' content='Services' />
               <List link inverted>
-                 JanCarlos Acevedo
-                 @ admin@mybuds.app
+                 developed by JanCarlos Acevedo
+                 | admin@mybuds.app
               </List>
             </Grid.Column>
             <Grid.Column width={7}>
