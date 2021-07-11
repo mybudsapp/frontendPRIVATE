@@ -81,9 +81,11 @@ class Profile extends Component {
           <div className="content">
             <nav>
               <ul>
+                  <Link to="/home">
                 <li>
                   <img src={home} alt="Home" /> Home
                 </li>
+            </Link>
                 <li>
                   <img src={notification} alt="Notifications" /> Notifications
                 </li>

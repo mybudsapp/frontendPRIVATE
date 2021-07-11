@@ -32,23 +32,22 @@ class AllUsersFeed extends React.Component {
     }
 
     componentDidMount = () => {
-        let token = localStorage.token
 
-        fetch("http://localhost:3000/users", {
-          method: "GET",
-          headers: {
-            Authorization: `${token}`,
-            "content-type": "application/json",
-            accepts: "application/json"
-          }
-        })
-          .then(resp => resp.json())
-          .then(usersData => {
             this.setState({
-              users: usersData
+                users: [
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                ]
           });
-          console.log(usersData)
-          })
+
     }
 
 
@@ -156,19 +155,24 @@ class AllProductsFeed extends React.Component {
 
         componentDidMount = () => {
 
-            fetch("http://localhost:3000/api/v1/products", {
-              method: "GET",
-              headers: {
-                "content-type": "application/json",
-                accepts: "application/json"
-              }
-            })
-              .then(resp => resp.json())
-              .then(productsData => {
+
                 this.setState({
-                  products: productsData
+                    products: [
+                        {id: 1, productname: "Product", producttype: "Clothes"},
+                        {id: 1, productname: "Product", producttype: "Supplies"},
+                        {id: 1, productname: "Product", producttype: "Foods"},
+                        {id: 1, productname: "Product", producttype: "Clothes"},
+                        {id: 1, productname: "Product", producttype: "Clothes"},
+                        {id: 1, productname: "Product", producttype: "Foods"},
+                        {id: 1, productname: "Product", producttype: "Accessories"},
+                        {id: 1, productname: "Product", producttype: "Foods"},
+                        {id: 1, productname: "Product", producttype: "Accessories"},
+                        {id: 1, productname: "Product", producttype: "Foods"},
+                        {id: 1, productname: "Product", producttype: "Foods"},
+                        {id: 1, productname: "Product", producttype: "Supplies"}
+                    ]
               });
-              })
+
         }
 
 
@@ -451,7 +455,12 @@ export const FriendsPhotosFeed = (props) => {
 )
 }else{
     return(
+        <div>
+        <Segment textAlign="center">
+             Explore new Friends and Shop Photos!
+    </Segment>
         <section class="post-list">
+
           <a href="" class="post">
             <figure class="post-image">
               <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
@@ -655,6 +664,7 @@ export const FriendsPhotosFeed = (props) => {
             </div>
           </a>
         </section>
+    </div>
     )
 }
 
@@ -925,10 +935,9 @@ export const RecentActivityFeed = (props) => {
 
 
 
-                   <Segment padded textAlign="center">
+                   <Segment textAlign="center">
                         Featuring an Explore component to My Buds helps users discover new friends, products, stores and more!
                </Segment>
-
 
                <section class="post-list">
                  <a href="" class="post">

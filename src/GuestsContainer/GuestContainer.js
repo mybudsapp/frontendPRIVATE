@@ -26,8 +26,10 @@ import EditStrainForm from '../Components/EditStrainForm'
 import Profile from '../Components/Profile.js'
 import ProductProfile from '../Components/ProductProfile.js'
 import StrainReview from '../Components/StrainReview.js'
+import PhotoForm from '../Components/PhotoForm'
 
 import Error from "../Components/Error";
+
 
 import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
@@ -46,6 +48,7 @@ import c3 from "../assets/img/c3.jpg";
 import MobileNavBar from "../Components/MobileNavBar"
 
 import "../assets/css/bundle.css";
+import "../assets/css/navigationbar.css";
 
 
 
@@ -61,6 +64,7 @@ const GuestContainerLayout = (props) => {
 ]
 
 return (
+    <div>
 <div id="custom-css-product">
     <header className="main-header">
       <div className="container content">
@@ -92,27 +96,11 @@ placeholder='Search on My Buds'
     <Container text style={{ marginTop: '2em' }}>
     <Switch>
         <Route
-            path="/strains/:name/strainreview/:id"
-            render={() => <StrainReview submitNewStrainReviewHandler={props.submitNewStrainReviewHandler} submitCommentHandler={props.submitCommentHandler} />}
+            path="/Post"
+            render={() => (<PhotoForm/>)}
             />
         <Route path="/product"
             render={() => <ProductProfile user={props.user}  submitCommentHandler={props.submitCommentHandler} submitNewStrainReviewHandler={props.submitNewStrainReviewHandler}/>} />
-        <Route
-            path="/:username/newstrain"
-            render={() => <NewStrainForm submitHandler={props.submitHandler} user={props.user} />}
-            />
-            <Route
-                path="/:username/editstrain/:id"
-                render={() => <EditStrainForm editStrainHandler={props.editStrainHandler} user={props.user} />}
-                />
-        <Route
-            path="/:username/newstore"
-            render={() => <NewStoreForm submitHandler={props.submitHandler} user={props.user} />}
-            />
-            <Route
-                path="/:namespace/editstore/:id"
-                render={() => <EditStoreForm editStoreHandler={props.editStoreHandler} user={props.user} store={props.store} />}
-                />
         <Route
             path="/signup"
             render={() => <Signup signupSubmitHandler={props.signupSubmitHandler} />}
@@ -130,44 +118,15 @@ placeholder='Search on My Buds'
           )
         }} />
         <Route path="/home" render={() => <Home/>} />
-        <Route path="/" component={Error} />
+        <Route path="/" render={() => <Home/>} />
     </Switch>
     </Container>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-        <br></br>
-            <br></br>
-            <br></br>
-
-    <div class="fixed-bottom">
-        <Segment>
-            <Grid columns={3} divided>
-  <Grid.Row>
-    <Grid.Column>
-      About Us
-    </Grid.Column>
-    <Grid.Column>
-      Sign Up
-    </Grid.Column>
-    <Grid.Column>
-      Log-In
-    </Grid.Column>
-    <Grid.Column>
-      Terms Of Service
-    </Grid.Column>
-    <Grid.Column>
-      Privacy
-    </Grid.Column>
-  </Grid.Row>
-</Grid>
-        </Segment>
-        </div>
-
-
-
 </div>
+<div>
+    <MobileNavBar active="post"/>
+</div>
+</div>
+
 )
 }
 

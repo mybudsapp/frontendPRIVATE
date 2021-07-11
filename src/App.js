@@ -1310,6 +1310,12 @@ console.log("ITSBEENHIOT")
               />
             )}
           />
+          <Route
+            path="/Post"
+            render={() => (
+             <GuestContainerLayout/>
+            )}
+          />
           <Route path="/" component={Home} />
         </Switch>
       </React.Fragment>

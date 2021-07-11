@@ -5,6 +5,11 @@ import mobileProduct from "../assets/img/product-3@2x.svg"
 import mobileSearch from "../assets/img/search@2x.svg"
 import mobileUser from "../assets/img/user@2x.svg"
 import mobileNotification from "../assets/img/notification@2x.svg"
+import {
+  faCamera,
+  faBarcode
+} from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import '../assets/css/navigationbar.css'
 
@@ -24,7 +29,9 @@ export default class MobileNavBar extends Component {
                 </li>
                 <li>
                   <Link to="product" class={this.props.active === "product" ? "active" : null}>
-                    <img src={mobileProduct} alt="product" />
+                      <FontAwesomeIcon
+                          icon={faBarcode}
+                          className="fa-1x text-gray-500"></FontAwesomeIcon>
                   </Link>
                 </li>
                 <li>
@@ -32,7 +39,14 @@ export default class MobileNavBar extends Component {
                     <img src={mobileSearch} alt="search" />
                   </Link>
                 </li>
-        
+                <li>
+                <Link to="/Post" class={this.props.active === "post" ? "active" : null}>
+                    <FontAwesomeIcon
+                        icon={faCamera}
+                        className="fa-1x text-gray-500"></FontAwesomeIcon>
+                </Link>
+              </li>
+
                 <li>
                   <Link to="/profile" class={this.props.active === "profile" ? "active" : null}>
                     <img src={mobileUser} alt="user" />

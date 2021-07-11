@@ -21,32 +21,29 @@ import { Link } from "react-router-dom";
 
 const UserCard = (props) => {
 
+
     return(
-      <Card>
-      <Card.Content id={props.user.id} name={props.user.username}>
-
-            <Image src={props.user.avatar} alt="Avatar" size='medium' circular></Image>
-
-
-
-        <Card.Meta><br></br></Card.Meta>
-        <Card.Description textAlign="center">
-          {props.user.username}
-        </Card.Description>
-        <Card.Description textAlign="center">
-          {props.user.location}
-        </Card.Description>
-      </Card.Content>
-      <Card.Content extra>
-        <div className='ui two buttons'>
-            <Link to="/profile">
-          <Button basic color='green' id={props.user.id}>
-            View Profile
-          </Button>
-      </Link>
-        </div>
-      </Card.Content>
-    </Card>
+        <Card>
+       <Image src={props.user.avatar} wrapped ui={false} />
+       <Card.Content>
+         <h2>{props.user.username}</h2>
+         <br></br>
+         <Card.Meta>
+           <span className='date'>Joined in 2015</span>
+         </Card.Meta>
+         <Card.Description>
+             <Link to="/profile">
+             <Button basic> View Profile</Button>
+         </Link>
+         </Card.Description>
+       </Card.Content>
+       <Card.Content extra>
+         <a>
+           <Icon name='user' />
+           22 Friends
+         </a>
+       </Card.Content>
+     </Card>
     )
 }
 

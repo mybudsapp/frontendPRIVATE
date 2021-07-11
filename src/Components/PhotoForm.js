@@ -1,7 +1,8 @@
 import React, {Component} from 'react'
-import {Card,Form, Label, Button} from 'semantic-ui-react'
+import {Card,Form, Label, Button,} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 import {useAlert} from 'react-alert'
+import MobileNavBar from "../Components/MobileNavBar"
 
 class PhotoForm extends Component {
 
@@ -53,8 +54,12 @@ theSubmitPhotoHandler = (e) => {
 render() {
 
     return(
-        <div class="ui form" encType="multipart/form-data">
-             <form onSubmit={this.theSubmitPhotoHandler} >
+
+            <Form size="large">
+        <div encType="multipart/form-data">
+
+
+
              <label>Photo</label>
                <input
                  encType="multipart/form-data"
@@ -62,17 +67,21 @@ render() {
                  placeholder="photo"
                  onChange={(e) => this.handleImage(e)}
                />
-           <label>Caption</label>
+           <label>Caption/Description</label>
                <input
                  type="text"
-                 placeholder="description"
+                 placeholder="what's this post about?"
                  value={this.state.description}
                  onChange={this.changeHandler}
                />
-                   <button>Submit</button>
-             </form>
+           <br></br>
+           <br></br>
+           <br></br>
+                   <Button type='submit'>Submit</Button>
+                   </div>
+         </Form>
 
-         </div>
+
 
     )
 }
