@@ -36,16 +36,16 @@ class AllUsersFeed extends React.Component {
             this.setState({
                 users: [
                   {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
-                ]
+                  {id:1, username: "@another Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@example Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@lorem Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@epsum Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@dolor Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@sit Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@amet Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@consectetur Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+              ]
           });
 
     }
@@ -122,11 +122,18 @@ class AllUsersFeed extends React.Component {
                 <Segment padded textAlign="center">
                     Users Meet New Users!
                 </Segment>
+                <Menu fluid stackable>
+                    <Menu.Item>
+              <Input icon='search' placeholder="Search By Name" onChange={this.handleSearch} />
+            </Menu.Item>
+                </Menu>
+
                 <Grid>
                 <Grid.Row>
             </Grid.Row>
             <Grid.Row columns={8}>
                 {this.searchedByNameUsers()}
+
             </Grid.Row>
         </Grid>
         </Segment>

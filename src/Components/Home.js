@@ -15,7 +15,9 @@ import {
   Sidebar,
   Visibility,
   Input,
-  Dropdown
+  Dropdown,
+  Reveal,
+  Transition
 } from 'semantic-ui-react'
 import {Route, Link, Switch, withRouter} from 'react-router-dom'
 import MobileHeaderBar from "./MobileHeaderBar"
@@ -26,6 +28,8 @@ import "../assets/css/style.css";
 import leatherworkervid from "../assets/vids/leatherworkervid.mp4"
 import mybudscell1 from "../assets/img/mybudscell1.png"
 import mybudscell2 from "../assets/img/mybudscell2.png"
+import mybudscomputer from "../assets/img/mybudscomputer.png"
+import mybudsipadshot from "../assets/img/mybudsipadshot.png"
 
 // <div class="jumbotron jumbotron-fluid">
 //
@@ -107,7 +111,6 @@ class DesktopContainer extends Component {
 state = {}
 
 
-
   hideFixedMenu = () => this.setState({ fixed: false })
   showFixedMenu = () => this.setState({ fixed: true })
 
@@ -129,8 +132,8 @@ state = {}
           onBottomPassed={this.showFixedMenu}
           onBottomPassedReverse={this.hideFixedMenu}
         >
-        <div id="custom-css-product">
-            <header className="main-header">
+        <div id="custom-css-product" >
+            <header className="main-header" >
               <div className="container content">
                 <nav>
                   <ul>
@@ -239,9 +242,26 @@ ResponsiveContainer.propTypes = {
   children: PropTypes.node,
 }
 
-const Home = () => (
+class Home extends Component {
+
+
+    state = { visible: false}
+
+
+
+
+componentDidMount = ()=> {
+    this.setState({
+        visible: !this.state.visible
+    })
+}
+
+
+render(){
+    const {visible} = this.state
+return(
   <ResponsiveContainer>
-    <Segment style={{ padding: '4em 0em', background: '#BDB9BA'}} vertical>
+    <Segment style={{ padding: '2em 0em', background: '#BDB9BA'}} vertical >
       <Grid container stackable verticalAlign='middle'>
         <Grid.Row>
           <Grid.Column width={8}>
@@ -257,14 +277,17 @@ const Home = () => (
              <br></br>
              <br></br>
                 <span style={{ fontSize: '1.33em', color: 'white'}}>
-                    Customer Relationship Management Software for Small Businesses.
+                    A Customer Relationship Management Application for Small Businesses.
                 </span>
+
+
 
           </Grid.Column>
           <Grid.Column floated='right' width={6}>
 
-
-            <Image src={mybudscell1}/>
+              <Transition visible={visible} animation='slide left' duration={2000}>
+              <Image src={mybudscell1} />
+          </Transition>
 
 
           </Grid.Column>
@@ -276,6 +299,61 @@ const Home = () => (
         </Grid.Row>
       </Grid>
     </Segment>
+
+
+    <Segment style={{ padding: '2em 0em', background: '#CBC7AB'}} vertical >
+      <Grid  verticalAlign='middle' stackable>
+        <Grid.Row textAlign='center'>
+          <Grid.Column >
+              <Transition visible={visible} animation='slide right' duration={1000}>
+              <Image src={mybudscomputer} style={{marginTop: 0}}/>
+          </Transition>
+          </Grid.Column>
+          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
+                      <p style={{ fontSize: '1.33em' }}>Responsive software that allows desktop management of products and customer interactions.</p>
+                          <br></br>
+                          <br></br>
+                          <span style={{ fontSize: '1.33em', color: 'white'}}>
+                              Giving small business insight into their business while simultaneously providing ways to promote products and services.
+                          </span>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Segment>
+
+    <Segment style={{ padding: '2em 0em', background: '#4D8098'}} vertical >
+      <Grid  verticalAlign='middle' stackable>
+        <Grid.Row textAlign='center'>
+          <Grid.Column >
+              <p style={{ fontSize: '1.33em', color: 'white' }}>Manage your online presence on the go.</p>
+              <br></br>
+              <br></br>
+              <span style={{ fontSize: '1.33em', color: 'black'}}>
+                  Flexibilty for the world that is forever changing.
+              </span>
+          </Grid.Column>
+          <Grid.Column style={{ paddingBottom: '5em', paddingTop: '5em' }}>
+                          <Transition visible={visible} animation='slide left' duration={1000}>
+                              <Image src={mybudsipadshot} style={{marginTop: 0}}/>
+                          </Transition>
+          </Grid.Column>
+        </Grid.Row>
+      </Grid>
+    </Segment>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
     <Segment inverted vertical style={{ padding: '5em 0em' }}>
       <Container>
@@ -301,7 +379,12 @@ const Home = () => (
         </Grid>
       </Container>
     </Segment>
+
+
+
   </ResponsiveContainer>
 )
+}
+}
 
 export default withRouter(Home);
