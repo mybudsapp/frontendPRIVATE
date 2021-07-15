@@ -67,7 +67,7 @@ class App extends Component {
 //              user: userData[0]
 //          }));
 //
-// console.log("stikdkdk", this.state)
+//     ("stikdkdk", this.state)
     // if (Boolean(token)) {
     //   fetch("http://localhost:3000/api/v1/users/sign_in", {
     //     method: "GET",
@@ -78,7 +78,7 @@ class App extends Component {
     //     },
     //   }).then((res) => {
     //       if (!res.ok) {
-    //         res.text().then(this.props.history.push("/home"))
+    //         res.text().then(this.props.history.fpush("/home"))
     //       } else {
     //         return res.json().then((userData) => {
     //       this.setState({
@@ -184,7 +184,7 @@ class App extends Component {
       } else {
         return res
           .json()
-          .then(res => console.log(res))
+          .then(res =>     (res))
           .then(window.location.reload());
       }
     });
@@ -211,7 +211,7 @@ class App extends Component {
 
     e.preventDefault()
 
-console.log("ITSBEENHIOT")
+    ("ITSBEENHIOT")
 
 
     if (newStore.avatar? true : false) {
@@ -239,7 +239,7 @@ console.log("ITSBEENHIOT")
               },
               body: JSON.stringify({ store: newStore }),
             },
-            console.log("PATCHESSSS", newStore)
+                ("PATCHESSSS", newStore)
           )
         )
         .then(window.location.reload());
@@ -359,10 +359,10 @@ console.log("ITSBEENHIOT")
               },
               body: JSON.stringify({ strain: newStrain }),
             },
-            console.log("PATCHESSSS", newStrain)
+                ("PATCHESSSS", newStrain)
           )
         )
-        .then(console.log("PATCHESSS", newStrain));
+        .then(    ("PATCHESSS", newStrain));
     } else {
       fetch(`http://localhost:3000/api/v1/strains/${strain_id}`, {
         method: "PATCH",
@@ -373,51 +373,16 @@ console.log("ITSBEENHIOT")
         body: JSON.stringify({ strain: newStrain }),
       })
         .then((res) => res.json())
-        .then(console.log("noPATTCHES", newStrain));
+        .then(    ("noPATTCHES", newStrain));
     }
   };
 
-  submitStrainHandler = (newStrain, user_id) => {
 
-      this.setState({
-          newStrain: newStrain
-      })
-
-
-    fetch("http://localhost:3000/api/v1/strains", {
-      method: "POST",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-      },
-      body: JSON.stringify({ strain: newStrain }),
-    }).then((res) => {
-        console.log()
-      if (!res.ok) {
-          res.text().then(text =>
-
-        this.setState({
-            errorMessage: text,
-        hasError: true
-        })
-
-    )} else {
-
-
-        return res
-          .json()
-          .then((strainData) => {
-            this.setState({ strain: { ...strainData.strain } });
-          })
-          .then(window.location.reload());
-      }
-    });
-  };
 
 
   submitFixedStrainRequest = () => {
 
-      console.log("ponderiver")
+          ("ponderiver")
 
       fetch("http://localhost:3000/api/v1/strains", {
         method: "POST",
@@ -472,7 +437,7 @@ console.log("ITSBEENHIOT")
   };
 
   handleViewStrainProfile = (e) => {
-    console.log("is this shit even being hit");
+        ("is this shit even being hit");
 
     fetch(`http://localhost:3000/api/v1/strains/${e.target.id}`)
       .then((res) => res.json())
@@ -514,10 +479,10 @@ console.log("ITSBEENHIOT")
               },
               body: JSON.stringify({ product: newProduct }),
             },
-            console.log("PATCHESSSS", newProduct)
+                ("PATCHESSSS", newProduct)
           )
         )
-        .then(console.log("PATCHESSS", newProduct));
+        .then(    ("PATCHESSS", newProduct));
     } else {
       fetch(`http://localhost:3000/api/v1/products/${product_id}`, {
         method: "PATCH",
@@ -528,7 +493,7 @@ console.log("ITSBEENHIOT")
         body: JSON.stringify({ product: newProduct }),
       })
         .then((res) => res.json())
-        .then(console.log("noPATTCHES", newProduct));
+        .then(    ("noPATTCHES", newProduct));
     }
   };
 
@@ -547,7 +512,7 @@ console.log("ITSBEENHIOT")
       },
       body: JSON.stringify({ product: newProduct }),
     }).then((res) => {
-        console.log()
+
       if (!res.ok) {
           res.text().then(text =>
 
@@ -572,7 +537,7 @@ console.log("ITSBEENHIOT")
 
   submitFixedProductRequest = () => {
 
-      console.log("ponderiver")
+          ("ponderiver")
 
       fetch("http://localhost:3000/api/v1/products", {
         method: "POST",
@@ -627,7 +592,7 @@ console.log("ITSBEENHIOT")
   };
 
   handleViewProductProfile = (e) => {
-    console.log("is this shit even being hit");
+        ("is this shit even being hit");
 
     fetch(`http://localhost:3000/api/v1/products/${e.target.id}`)
       .then((res) => res.json())
@@ -829,7 +794,7 @@ console.log("ITSBEENHIOT")
   //       deepIterator(error[message]);
   //     }
   //   } else {
-  //     console.log(error);
+  //         (error);
   //
   //     if (hasError) {
   //       alert(error);
@@ -845,21 +810,21 @@ console.log("ITSBEENHIOT")
 
   handleNewPhotoClick = () => {
     //should set new photo state to true and render new photo form component
-    console.log("wowowowowow buddy");
+        ("wowowowowow buddy");
     this.setState({
       displayPhotoForm: !this.state.displayPhotoForm,
     });
   };
 
   handleNewPostClick = () => {
-    console.log("wowowowowow");
+        ("wowowowowow");
     this.setState({
       displayPostForm: !this.state.displayPostForm,
     });
   };
 
   handleNewStrainReviewClick = () => {
-    console.log("from the new strain review click");
+        ("from the new strain review click");
     this.setState({
       displayStrainReviewForm: !this.state.displayStrainReviewForm,
     });
@@ -889,7 +854,7 @@ console.log("ITSBEENHIOT")
   //---------------------------------------------------------------------------------------
   handleAddPostForm = () => {
 
-      console.log("ITITITITIT")
+          ("ITITITITIT")
       this.setState({ showAddPostForm: true });
   }
 
@@ -936,18 +901,18 @@ console.log("ITSBEENHIOT")
         body: JSON.stringify({ survey: survey.data }),
       }).then((res) => {
         if (!res.ok) {
-          res.text().then((text) => console.log(text));
+          res.text().then((text) =>     (text));
         } else {
           return res.json().then(window.location.reload());
         }
       });
 
-      console.log(survey.data, "this is the numeical score");
+
 
       alert("Your New Personality Type is....." + this.state.user.personality_type);
     };
 
-    //change the first pages in the survey, explaining the points of the personalitytests
+
 
     var surveyJSON = {
       title: "Why is This Important?",
@@ -1137,13 +1102,12 @@ console.log("ITSBEENHIOT")
     const { showAddPostForm } = this.state;
 
     const onCompleteAction = (obj) => {
-      console.log(obj);
+
       // YOUR LOGIC GOES HERE
     };
 
-    console.log("within the state", this.state);
 
-    // const listOfFriends = {i need to fetch the user friends ID and match the friends id with list of users and bring to the app}
+
 
     return (
       <React.Fragment>

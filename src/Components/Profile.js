@@ -343,24 +343,7 @@ class DesktopContainer extends Component {
   };
 
   componentDidMount() {
-    let token = localStorage.token;
-
-    token
-      ? fetch("http://localhost:3000/api/v1/current_user", {
-          method: "GET",
-          headers: {
-            Authorization: `${token}`,
-            "content-type": "application/json",
-            accepts: "application/json",
-          },
-        })
-          .then((resp) => resp.json())
-          .then((userData) => {
-            this.setState({
-              user: { ...userData.user },
-            });
-          })
-      : console.log("fuck my life");
+    
   }
 
   hideFixedMenu = () => this.setState({ fixed: false });
@@ -382,7 +365,7 @@ class DesktopContainer extends Component {
 
     return (
       <Responsive getWidth={getWidth} minWidth={Responsive.onlyTablet.minWidth}>
-        {console.log(this.props, this.state)}
+
         <Sidebar
           as={Menu}
           animation="push"
@@ -417,7 +400,7 @@ class DesktopContainer extends Component {
     );
   }
 }
-// {children} in between Visibility and responsive
+
 
 DesktopContainer.propTypes = {
   children: PropTypes.node,
@@ -433,25 +416,7 @@ class MobileContainer extends Component {
   };
 
   componentDidMount() {
-    let token = localStorage.token;
 
-    token
-      ? fetch("http://localhost:3000/api/v1/current_user", {
-          method: "GET",
-          headers: {
-            Authorization: `${token}`,
-            "content-type": "application/json",
-            accepts: "application/json",
-          },
-        })
-          .then((resp) => resp.json())
-          .then((userData) => {
-            this.setState({
-              user: { ...userData.user },
-              avatar: userData.user.avatar,
-            });
-          })
-      : console.log("fuck my life");
   }
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false });
@@ -477,7 +442,7 @@ class MobileContainer extends Component {
         getWidth={getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}
       >
-        {console.log("MOVBIBI", this.props, this.state)}
+
         <Sidebar
           as={Menu}
           animation="overlay"

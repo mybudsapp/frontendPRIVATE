@@ -595,7 +595,7 @@ render(){
 //       const indicaBuddyScores = Object.values(indicaScoresFiltered)
 //
 //
-//     console.log(product, sativaBuddyScores, indicaBuddyScores)
+//     //(product, sativaBuddyScores, indicaBuddyScores)
 //
 //
 //
@@ -624,7 +624,7 @@ render(){
 //       },
 //   } ).then((res) => {
 //       if (!res.ok) {
-//         console.log(res)
+//         //(res)
 //       } else {
 //         return res.json().then((productData) => {
 //
@@ -743,7 +743,7 @@ render(){
     //   const indicaBuddyScores = Object.values(indicaScoresFiltered)
 
 
-    // console.log(product, sativaBuddyScores, indicaBuddyScores)
+    // //(product, sativaBuddyScores, indicaBuddyScores)
 
     // this.setState({
     //     series: [{ name: "Indica Buddies",
@@ -871,7 +871,7 @@ render(){
 //       <h2 className="text-center">Buddy Ratings</h2>
 //       <div className="row">
 //         <div className="col-6 d-flex flex-column justify-content-center align-items-center self-review-star">
-//           <span>4.0{console.log(product)}</span>
+//           <span>4.0{//(product)}</span>
 //           <div
 //             className="star"
 //             title="4.5 out of 5 - based on 23 Reviews"
@@ -1185,7 +1185,7 @@ render(){
 //       const indicaBuddyScores = Object.values(indicaScoresFiltered)
 //
 //
-//     console.log(product, sativaBuddyScores, indicaBuddyScores)
+//     //(product, sativaBuddyScores, indicaBuddyScores)
 //
 //
 // }

@@ -91,7 +91,7 @@ class StrainReview extends Component {
 
           let token = localStorage.token;
 
-          console.log("pondecomponet", strainID)
+          //("pondecomponet", strainID)
 
           fetch(`http://localhost:3000/api/v1/strains/${strainID}`).then(res => res.json()).then(strainData =>
             this.setState({
@@ -328,7 +328,7 @@ class DesktopContainer extends Component {
       let res = str.split("/")
       let strainID = last(res)
 
-      console.log("pondecomponet", strainID)
+      //("pondecomponet", strainID)
 
       fetch(`http://localhost:3000/api/v1/strains/${strainID}`).then(res => res.json()).then(strainData =>
         this.setState({
@@ -389,7 +389,7 @@ strain: {}}
       let res = str.split("/")
       let strainID = last(res)
 
-      console.log("pondecomponet", strainID)
+      //("pondecomponet", strainID)
 
       fetch(`http://localhost:3000/api/v1/strains/${strainID}`).then(res => res.json()).then(strainData =>
         this.setState({

@@ -90,7 +90,7 @@ activeItem: "Feed"
           <BasicFriendsFeed user={this.props} history={this.props.history} />
         ),
       });
-      console.log("whoa");
+      //("whoa");
     } else if (e.target.id === "photos") {
       this.setState({
         activityFeed: (
@@ -98,7 +98,7 @@ activeItem: "Feed"
         ),
       });
 
-      console.log("whoa photos");
+      //("whoa photos");
     }
   };
 
@@ -373,7 +373,7 @@ class MobileContainer extends Component {
           <BasicFriendsFeed user={this.props} history={this.props.history} />
         ),
       });
-      console.log("whoa");
+      //("whoa");
     } else if (e.target.id === "photos") {
       this.setState({
         activityFeed: (
@@ -381,7 +381,7 @@ class MobileContainer extends Component {
         ),
       });
 
-      console.log("whoa photos");
+      //("whoa photos");
     }
   };
 

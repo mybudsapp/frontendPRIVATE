@@ -56,7 +56,7 @@ componentDidCatch = (error, info) => {
 
 
      const responseGoogleSuccess = (response) => {
-         console.log(response.profileObj);
+         //(response.profileObj);
 
          debugger
 
@@ -69,14 +69,14 @@ componentDidCatch = (error, info) => {
          });
 }
 const responseGoogleFailure = (response) => {
-console.log("FUCK",response);
+//("FUCK",response);
 }
 
 
 
    return (
        <Segment basic>
-           {console.log(this.props)}
+        
              <Segment raised>
                       <h3>
                          Sign-Up with an Email

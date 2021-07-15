@@ -44,12 +44,8 @@ render(){
 
     }else{
     return <h1>even worse than we thought... Try Again</h1>
-    {console.log("bput", this.props.message)}
     }
-
-
-
-    }
+}
 }
 
 

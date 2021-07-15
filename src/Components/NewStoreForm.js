@@ -26,30 +26,26 @@ changeHandler = (e) => {
 
 
     e.preventDefault()
-    console.log(this.state)
+    //(this.state)
     e.target.files?
     this.setState({store:{
         image: e.target.files[0]
     }
-},  () => {
-console.log('from true statement and saving file from change handler',this.state)})
+})
      : this.setState({ store: {
     ...this.state.store,
     [e.target.placeholder]: e.target.value,
     user_id: e.target.parentElement.parentElement.getAttribute("user")
-}}, () => {
-console.log('from else if',this.state)
-})
+}})
 
 }
 
 handleAvatar = (e) => {
     e.preventDefault()
-    console.log(e.target.files)
+    //(e.target.files)
     this.setState({
         avatar: e.target.files[0]
-    },  () => {
-console.log('from handle avatar',this.state)})
+    })
 }
 
 
@@ -58,7 +54,7 @@ theSubmitHandler = (e, props) => {
 
     e.preventDefault()
 
-    console.log("the state once submit handler is hit", props)
+
 
     props.storesDisplay(this.state)
 
@@ -149,7 +145,7 @@ render() {
 
 //
 //      const responseGoogleSuccess = (response) => {
-//          console.log(response.profileObj);
+//          //(response.profileObj);
 //
 //          debugger
 //
@@ -162,7 +158,7 @@ render() {
 //          });
 // }
 // const responseGoogleFailure = (response) => {
-// console.log("FUCK",response);
+// //("FUCK",response);
 // }
 //
 //
@@ -209,7 +205,7 @@ render() {
 
             <Icon name='building outline' circular color='grey' />
             <h1>New Store</h1>
-            {console.log(this.state)}
+        
         <Segment>
             <SearchLocationInput onAddressSelect={this.onAddressSelect} onChange={() => null} />
         </Segment>

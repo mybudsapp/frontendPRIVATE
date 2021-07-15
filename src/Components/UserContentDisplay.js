@@ -58,7 +58,7 @@ galleryDisplay = () => {
                 let gallery = []
 
 
-                console.log(this.props)
+                //(this.props)
                 if(this.props.gallery){
                     gallery = this.props.gallery
                 }else{
@@ -132,7 +132,7 @@ buddiesDisplay = () => {
 
             let strainReviews = []
 
-            console.log("method", this.props.strainreviews)
+            //("method", this.props.strainreviews)
 
             if(this.props.strainreviews){
                 strainReviews = this.props.strainreviews

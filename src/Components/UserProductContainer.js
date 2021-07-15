@@ -215,7 +215,7 @@ class UserProductContainer extends Component{
     //                 </h1>
     //             </Grid.Column>
     //             <Grid.Column>
-    //                 <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+    //                 <Menu.Item as='a' onClick={(e) => //("ASDMNASDNASNDNASDN", this.props.user)}>
     //                     <i class="large icons">
     //                         <i class="diamond icon"></i>
     //                         <i class="top right corner add icon"></i>
@@ -251,7 +251,7 @@ class UserProductContainer extends Component{
                //                  circular style={ {width:80, height:80} }
                //                  >
                //                  <Link to={user + "/newstrain"}  >
-               //                      <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+               //                      <Menu.Item as='a' onClick={(e) => //("ASDMNASDNASNDNASDN", this.props.user)}>
                //                          <i class="large icons">
                //                              <i class="diamond icon"></i>
                //                              <i class="top right corner add icon"></i>
@@ -290,7 +290,7 @@ class UserProductContainer extends Component{
                //                                   circular style={ {width:80, height:80} }
                //                                   >
                //                                   <Link to={user + "/newstrain"}  >
-               //                                       <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+               //                                       <Menu.Item as='a' onClick={(e) => //("ASDMNASDNASNDNASDN", this.props.user)}>
                //                                           <i class="large icons">
                //                                               <i class="add icon"></i>
                //                                           </i>
@@ -321,7 +321,7 @@ class UserProductContainer extends Component{
                //                             circular style={ {width:80, height:80} }
                //                             >
                //                             <Link to={user + "/newstrain"}  >
-               //                                 <Menu.Item as='a' onClick={(e) => console.log("ASDMNASDNASNDNASDN", this.props.user)}>
+               //                                 <Menu.Item as='a' onClick={(e) => //("ASDMNASDNASNDNASDN", this.props.user)}>
                //                                     <i class="large icons">
                //                                         <i class="food icon"></i>
                //                                         <i class="top right corner add icon"></i>

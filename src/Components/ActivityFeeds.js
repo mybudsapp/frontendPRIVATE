@@ -53,7 +53,7 @@ class AllUsersFeed extends React.Component {
 
     handleClick = (e) => {
         //this should send person to profile of the user they pressed on
-        console.log("in the handle click", e.target.name)
+        //("in the handle click", e.target.name)
 
         this.props.history.push("/username/" + e.target.name)
     }
@@ -185,7 +185,7 @@ class AllProductsFeed extends React.Component {
 
         handleClick = (e) => {
             //this should send person to profile of the user they pressed on
-            console.log("in the handle click", e.target.name)
+            //("in the handle click", e.target.name)
 
             this.props.history.push("/product/" + e.target.name)
         }

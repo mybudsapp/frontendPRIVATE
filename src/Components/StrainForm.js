@@ -45,7 +45,7 @@ changeHandler = (e) => {
     // const isValid = this.validate();
     //
     //     if (isValid) {
-    //       console.log(this.state);
+    //       //(this.state);
     //       // clear form
     //       this.setState(initialState);
     //     }
@@ -59,18 +59,17 @@ changeHandler = (e) => {
     [e.target.name]: e.target.value
 
 }}, () => {
-console.log('from else if',this.state)
+//('from else if',this.state)
 })
 
 }
 
 handleAvatar = (e) => {
     e.preventDefault()
-    console.log(e.target.files)
+    //(e.target.files)
     this.setState({
         avatar: e.target.files[0]
-    },  () => {
-console.log('from handle avatar',this.state)})
+    })
 }
 
 
@@ -83,7 +82,7 @@ theSubmitHandler = (e) => {
 
 
 
-    console.log("the state once submit handler is hit", this.state)
+    //("the state once submit handler is hit", this.state)
     this.props.submitStrainHandler(this.state, token);
 
 

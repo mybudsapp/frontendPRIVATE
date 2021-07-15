@@ -10,7 +10,7 @@ import {createStore} from 'redux'
 
 
 function reducer(){
-    console.log("fake reducer function")
+    //("fake reducer function")
 }
 
 

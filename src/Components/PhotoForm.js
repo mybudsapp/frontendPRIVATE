@@ -16,7 +16,7 @@ changeHandler = (e) => {
     this.setState({
         [e.target.placeholder]: e.target.value
     })
-    console.log('fromchangehandler', this.state)
+    //('fromchangehandler', this.state)
 }
 
 
@@ -28,7 +28,7 @@ handleImage = (e) => {
         image: e.target.files[0]
     })
 
-    console.log("the handle image has been hit", this.state)
+    //("the handle image has been hit", this.state)
 
 }
 
@@ -39,7 +39,7 @@ theSubmitPhotoHandler = (e) => {
     let token = localStorage.getItem('token')
 
 
-    console.log("the state once submit handler is hit", this.state)
+    //("the state once submit handler is hit", this.state)
     this.props.submitPhotoHandler(this.state, token);
     this.setState({
             image:'',

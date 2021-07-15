@@ -43,10 +43,10 @@ state ={ username:'', password:''}
 
      const responseGoogleSuccess = (response) => {
          debugger
-  console.log(response);
+  //(response);
 }
 const responseGoogleFailure = (response) => {
-console.log("FUCK",response);
+//("FUCK",response);
 }
 
 

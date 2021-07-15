@@ -17,7 +17,7 @@ export default class MobileNavBar extends Component {
   render() {
     return (
       <div class="fixed-bottom">
-          {console.log(this.props)}
+         
         <nav class="footer-menu">
           <div class="container">
             <div class="menu">

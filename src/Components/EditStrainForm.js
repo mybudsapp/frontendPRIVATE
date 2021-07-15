@@ -15,30 +15,26 @@ changeHandler = (e) => {
 
 
     e.preventDefault()
-    console.log(this.state)
+    //(this.state)
     e.target.files?
     this.setState({strain:{
         image: e.target.files[0]
     }
-},  () => {
-console.log('from true statement and saving file from change handler',this.state)})
+})
      : this.setState({ strain: {
     ...this.state.strain,
     [e.target.placeholder]: e.target.value,
     strain_id: e.target.parentElement.parentElement.getAttribute("strain")
-}}, () => {
-console.log('from else if',this.state)
-})
+}})
 
 }
 
 handleAvatar = (e) => {
     e.preventDefault()
-    console.log(e.target.files)
+    //(e.target.files)
     this.setState({
         avatar: e.target.files[0]
-    },  () => {
-console.log('from handle avatar',this.state)})
+    })
 }
 
 
@@ -51,7 +47,7 @@ theSubmitHandler = (e) => {
 
 
 
-    console.log("the state once submit handler is hit", this.state)
+
     this.props.editStrainHandler(this.state, token);
 
 
@@ -98,7 +94,7 @@ render() {
 
 
         <Segment raised>
-            {console.log(strainID, this.props)}
+        
                 <img src="https://i0.wp.com/www.cssscript.com/wp-content/uploads/2018/03/Simple-Location-Picker.png?fit=561%2C421&ssl=1"></img>
 
             <div class="ui form" encType="multipart/form-data" user={this.props.user.id} strain={strainID} >

@@ -65,13 +65,13 @@ handleDoublePlusClick = () => { this.setState({ visible: false})}
 handleItemClick = (e, { name }) => {
 
 
-      console.log(e, name)
+      //(e, name)
 
     if (name === "users"){
         this.setState({
             Feed: <AllUsersFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
         })
-        console.log("whoa")
+        //("whoa")
 
     }else if (name === "window shop") {
 
@@ -79,7 +79,7 @@ handleItemClick = (e, { name }) => {
             Feed: <AllProductsFeed user={this.props.user} history={this.props.history} handleViewStrainProfile={this.props.handleViewStrainProfile}/>
         })
 
-        console.log("whoa strains")
+        //("whoa strains")
 
     }else if (name === "stores"){
 
@@ -95,7 +95,7 @@ handleItemClick = (e, { name }) => {
         this.setState({
             Feed: <FriendsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
         })
-        console.log("whoa strains")
+        //("whoa strains")
 
     }
 }
@@ -130,7 +130,7 @@ render(){
     const { sidebarOpened } = this.state
     const { visible } = this.state
     const { activeItem } = this.state
-    console.log("from the explore container", this.props)
+    //("from the explore container", this.props)
 
 
 
@@ -144,7 +144,7 @@ render(){
     // obect index [key]
 
 //     function areFriends(arrayOfFriends) {
-//         console.log("FUNktion", arrayOfFriends)
+//         //("FUNktion", arrayOfFriends)
 //   for (let i of arrayOfFriends) {
 //     if (i.id == this.props.user.id ) return true;
 //   }
@@ -241,7 +241,7 @@ class DesktopContainer extends React.Component {
 //                   }
 //               })
 //           } else {
-//               console.log('wowo')
+//               //('wowo')
 //           }
 // }
 
@@ -347,13 +347,13 @@ class MobileContainer extends Component {
     handleItemClick = (e, { name }) => {
 
 
-          console.log(e, name)
+          //(e, name)
 
         if (name === "users"){
             this.setState({
                 Feed: <AllUsersFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
             })
-            console.log("whoa")
+            //("whoa")
 
         }else if (name === "window shop") {
 
@@ -377,7 +377,7 @@ class MobileContainer extends Component {
             this.setState({
                 Feed: <StoreFeed store={store} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
             })
-            console.log("whoa strains")
+            //("whoa strains")
 
         }
     }

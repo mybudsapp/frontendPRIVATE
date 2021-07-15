@@ -16,35 +16,31 @@ class EditProfile extends Component {
     }
 
     componentDidMount = () => {
-        console.log('')
+        //('')
     }
 
     changeHandler = (e) => {
         e.preventDefault()
-        console.log(this.state)
+        //(this.state)
         e.target.files?
         this.setState({user:{
             avatar: e.target.files[0]
         }
-    },  () => {
-    console.log('from true statement and saving file from change handler',this.state)})
+    })
          : this.setState({ user: {
         ...this.state.user,
         [e.target.placeholder]: e.target.value
-    }}, () => {
-    console.log('from else if',this.state)
-})
+    }})
 
     }
 
     handleAvatar = (e) => {
         e.preventDefault()
-        console.log(e.target.files)
+        //(e.target.files)
         this.setState({
             avatar: e.target.files[0]
-        },  () => {
-    console.log('from handle avatar',this.state)})
-    }
+        })
+}
 
 
     theSubmitHandler = (e) => {
@@ -55,8 +51,8 @@ class EditProfile extends Component {
         let user_id = this.props.user.id
 
 
-        console.log("the state once submit handler is hit", this.state)
         this.props.submitHandler(this.state, token, user_id);
+
         this.setState({
             user :{
                 username: "",
@@ -141,7 +137,7 @@ class EditProfile extends Component {
     {key: "WY", text: "Wyoming", value: "Wyoming"},
     ]
 
-        console.log("in edit profile" , this.state)
+        //("in edit profile" , this.state)
         return(
 
             <React.Fragment>

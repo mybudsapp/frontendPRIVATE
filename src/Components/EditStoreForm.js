@@ -17,32 +17,28 @@ changeHandler = (e) => {
 
 
     e.preventDefault()
-    console.log(this.state)
+
     e.target.files?
     this.setState({store:{
         image: e.target.files[0]
     }
-},  () => {
-console.log('from true statement and saving file from change handler',this.state)})
+})
      : this.setState({ store: {
     ...this.state.store,
     [e.target.placeholder]: e.target.value,
     user_id: e.target.parentElement.parentElement.getAttribute("user"),
-    id: e.target.parentElement.parentElement.getAttribute("store")
-    // store_id: e.target.parentElement.parentElement.getAttribute()
-}}, () => {
-console.log('from else if',this.state)
-})
+    id: e.target.parentElement.parentElement.getAttribute("store"),
+    store_id: e.target.parentElement.parentElement.getAttribute()
+}})
 
 }
 
 handleAvatar = (e) => {
     e.preventDefault()
-    console.log(e.target.files)
+    //(e.target.files)
     this.setState({
         avatar: e.target.files[0]
-    },  () => {
-console.log('from handle avatar',this.state)})
+    })
 }
 
 
@@ -55,7 +51,7 @@ theSubmitHandler = (e) => {
 
 
 
-    console.log("the state once submit handler is hit", this.state)
+    
     this.props.submitHandler(this.state, token);
 
     // gotta make the set the new state for new dispensarh

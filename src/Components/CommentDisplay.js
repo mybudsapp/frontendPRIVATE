@@ -67,7 +67,7 @@ class CommentDisplay extends Component {
     //
     //      )
     //
-    //      savingCommentsToState(commentsToDisplay) } else { console.log()}
+    //      savingCommentsToState(commentsToDisplay) } else { //()}
     //
   }
 
@@ -165,7 +165,7 @@ class CommentDisplay extends Component {
   // <Header as='h3' dividing>
   //   Comments
   // </Header>
-  // {console.log(this.props)}
+  // {//(this.props)}
   // <Comment>
   //   <Comment.Avatar src='https://react.semantic-ui.com/images/avatar/small/matt.jpg' />
   //   <Comment.Content>
@@ -236,7 +236,7 @@ if(this.props.commentType === 'strain'){
         {comments?
           this.displayCommentTable()
            :
-          <Header>No Comments{console.log(comments)}</Header>
+          <Header>No Comments</Header>
            }
 
         <Form reply photoID={photoId} >

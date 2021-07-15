@@ -26,7 +26,7 @@ const ProfileMenuContainer = (props) => {
 //   }
 //
 //   handleClick = (display) => {
-// console.log("!@#!@#!@#444")
+// //("!@#!@#!@#444")
 
 
     // if(e.target.id === "gallery"){

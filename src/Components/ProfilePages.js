@@ -11,7 +11,7 @@ render(){
 return(
 
 <Segment>
-    {console.log('within gallery pages', this.props)}
+
 
         <Grid container columns={4}>
 
@@ -51,7 +51,7 @@ export const StrainReviews = () => (
   <Card fluid>
 
     <Card.Content textAlign="center">
-        {console.log("da display, should have users and display as props")}
+    
      <h2>mmhhwwwwwwwwmm</h2>
 
     </Card.Content>

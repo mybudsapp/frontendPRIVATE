@@ -13,7 +13,7 @@ const PhotoCard = props => {
 
         <Card id={props.photo.id} name={props.photo.name} raised>
 
-        {console.log(props.photo)}
+    
             <Card.Content id={props.photo.id} name={props.photo.name} centered>
               <div  id={props.photo.id} name={props.photo.name}>
                       <Image centered fluid id="photo" src={props.photo.url}></Image>
