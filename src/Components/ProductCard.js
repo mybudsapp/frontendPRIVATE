@@ -12,22 +12,22 @@ let displayCorrectImage = (product) => {
 
 if(product.producttype == "Clothes") {
 
-return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/plasticine/2x/clothes.png"></Item.Image>
+return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/plasticine/2x/clothes.png"></Item.Image>
 
 } else if (product.producttype == "Supplies") {
 
-return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/cotton/2x/length-1.png"></Item.Image>
+return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/cotton/2x/length-1.png"></Item.Image>
 
 } else if (product.producttype == "Foods") {
 
-return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/office/2x/pizza.png"></Item.Image>
+return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/office/2x/pizza.png"></Item.Image>
 
 } else if (product.producttype == "Accessories") {
 
-return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/emoji/2x/glasses-emoji.png"></Item.Image>
+return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/emoji/2x/glasses-emoji.png"></Item.Image>
 
     } else {
-return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/bubbles/2x/product.png"></Item.Image>
+return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/bubbles/2x/product.png"></Item.Image>
 }
 
 }
@@ -41,6 +41,7 @@ return <Item.Image size="small" id="productavatar" src="https://img.icons8.com/b
                     {props.product.productname}
                 </h1>
                 <Card.Description>
+                    {props.product.producer}
                 </Card.Description>
             </Card.Content>
             <Link to="/product">

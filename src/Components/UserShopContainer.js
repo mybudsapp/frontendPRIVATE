@@ -33,7 +33,7 @@ class UserShopContainer extends Component{
                     return null
                 }
                 return stores.map(store => {
-              return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest} showEdit={this.props.showEdit} handleShowEdit={this.props.handleShowEdit} handleShowEditClose={this.props.handleShowEditClose}raised/>
+              return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} showEdit={this.props.showEdit} handleShowEdit={this.props.handleShowEdit} handleShowEditClose={this.props.handleShowEditClose}raised/>
             })
         }
 
@@ -58,14 +58,15 @@ class UserShopContainer extends Component{
 
     render(){
 
-        const user = "/" + this.props.user.username
+
 
 
         return(
             <Segment raised>
-             <Item.Group divided>
+
+
       {this.dispensariesDisplay()}
-  </Item.Group>
+
 </Segment>
 
 

@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react'
-import {Card,Form, Label, Button, Segment} from 'semantic-ui-react'
+import {Card,Form, Label, Button, Segment, Select, Dropdown} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 const initialState = {
@@ -42,6 +42,7 @@ changeHandler = (e) => {
 
     e.preventDefault()
 
+
     // const isValid = this.validate();
     //
     //     if (isValid) {
@@ -51,13 +52,12 @@ changeHandler = (e) => {
     //     }
 
 
-
-
-
+    console.log(this.state)
 
         this.setState({
     ...this.state.product,
     user_id: e.target.parentElement.parentElement.getAttribute("user"),
+    store_id: e.target.getAttribute("storeID"),
     [e.target.name]: e.target.value
 })
 
@@ -72,120 +72,121 @@ handleAvatar = (e) => {
 }
 
 
-theSubmitHandler = (e) => {
-
-
-    e.preventDefault()
-
-    const setOfProducts = this.props.products.push(this.state)
 
 
 
-    //("the state once submit handler is hit", this.state)
-    this.props.submitProductHandler(setOfProducts);
+dispensariesOptions = (stores) => {
 
 
 
-    // gotta make the set the new state for new dispensarh
-    // this.setState({
-    //     newStrain :{
-    //         Mental:  '000',
-    //         Physical: '000',
-    //         Velocity: '000',
-    //         Flavor: '000',
-    //         Overall: '000'
-    //     }
-    // })
-    ;
-};
+    if(stores){
+        stores = stores
+    }else{
+        return <h1> Create a Store </h1>
+    }
+    return stores.map(store => {
+        return <option value={store.id} storeID={store.id} >{store.namespace}</option>;
+        })
+    }
 
 
 
+submitHandler = (e, product, props) => {
+
+    props.submitProductHandler(product)
+
+
+}
 
 
 render() {
 
-    const dispensariesOptions = () => {
+const productOptions = [
+  { key: 'Clothes', value: 'Clothes', text: 'Clothes' },
+  { key: 'Edibles', value: 'Edibles', text: 'Edibles' },
+  { key: 'Concentrates', value: 'Concentrates', text: 'Concentrates' },
+  { key: 'Accessories', value: 'Accessories', text: 'Accessories' }
+]
 
-        let stores = []
-
-        if(this.props.user.stores){
-            stores = this.props.user.stores
-        }else{
-            return <h1> No Dispensary </h1>
-        }
-        return stores.map(store => {
-            return <option value={store.id} >{store.namespace}</option>;
-            })
-        }
-
+// <select name="store"  onChange={this.changeHandler}>
+//     <option name="Create a Store">Create a Store</option>
+//     {this.dispensariesOptions(this.props.stores)}
+//  </select>
 
 
     return(
 
         <Segment raised textAlign="left">
-                <input
-                  type="file"
-                  placeholder="avatar"
-
-                  onChange={this.changeHandler}
-                />
-
-
-
-            <div class="ui form" encType="multipart/form-data"  >
-            <h3>New Product  </h3>
-             <form onSubmit={e => this.theSubmitHandler(e)} >
-
-             <label>Name:</label>
+            <div class="ui form" encType="multipart/form-data" userID={this.props.user.id}>
+             <Form onSubmit={e => this.submitHandler(e, this.state, this.props)}>
+                 <Form.Field>
+           <label>Product Name:</label>
                <input
                  type="text"
                  name="productname"
+                 placeholder="Product Name"
                  onChange={this.changeHandler}
                />
+       </Form.Field>
+               <br></br>
+               <br></br>
+               <Form.Field>
+           <label>Description:</label>
+           <input
+                 type="text"
+                 name="description"
+                 placeholder="Description"
+                 onChange={this.changeHandler}
+               />
+       </Form.Field>
            <br></br>
-           <label> Location: </label>
-            <select name="store"  onChange={this.changeHandler}>
-                <option value="error">Choose Which Location</option>
-                <option value="your store here" >Your Store Here</option>
-             </select>
-           <br></br>
+               <br></br>
+               <br></br>
+               <Form.Field>
            <label>Product Type:</label>
-               <select name="producttype" id="producttype" onChange={this.changeHandler}>
-                   <option value="error">Choose the Type</option>
-       <option value="Clothes">Clothes</option>
-       <option value="Food" >Food </option>
-       <option value="Supplies">Supplies</option>
-       <option value="Accessory">Accessory</option>
-   </select>
-   <br></br>
-   <label>Description:</label>
-       <input
-         type="text"
-         name="description"
-         onChange={this.changeHandler}
-       />
-   <br></br>
-   <br></br>
-        <label>Price Per Item:</label>
-         <br></br>
-            <input
-              type="integer"
-              name="price"
-              onChange={this.changeHandler}
-            />
-            <p>each</p>
-            <br></br>
-            <label>Company:</label>
-                <input
-                  type="text"
-                  name="producer"
-                  onChange={this.changeHandler}
-                />
+               <select name="producttype"  onChange={this.changeHandler}>
+                  <option name="Product Type">Product Type</option>
+                        <option name= 'Clothes' value= 'Clothes' >Clothes</option>
+                        <option name= 'Edibles' value= 'Edibles'>Edibles</option>
+                        <option name= 'Concentrates' value= 'Concentrates' >Concentrates</option>
+                        <option name= 'Accessories' value= 'Accessories' >Accessories</option>
+               </select>
+           </Form.Field>
+      <br></br>
+          <br></br>
+          <br></br>
+          <Form.Field>
+          <label>Producer/Manufacturer Name:</label>
+              <input
+                type="text"
+                name="producer"
+                placeholder="Producer/Manufacturer"
+                onChange={this.changeHandler}
+              />
+      </Form.Field>
 
-                   <button>Submit</button>
-             </form>
-
+      <br></br>
+      <Form.Field>
+          <label>Price Per Item:</label>
+              <input
+                  type="number"
+                name="price"
+                placeholder="$$$"
+                onChange={this.changeHandler}
+              />
+      </Form.Field>
+          <br></br>
+          <br></br>
+          <Form.Field>
+              <label>Located at Which Store</label>
+              <select name="store_id"  onChange={this.changeHandler}>
+                 <option name="Create a Store">Choose a Store</option>
+                 {this.dispensariesOptions(this.props.stores)}
+              </select>
+          </Form.Field>
+          <br></br>
+           <button type="button" onClick={e => this.submitHandler(e, this.state, this.props)}>Submit</button>
+           </Form>
          </div>
 
          </Segment>

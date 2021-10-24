@@ -1,6 +1,7 @@
 import React, { Component, useState } from "react";
 import formData from "form-data";
 import axios from "axios";
+
 import PhotoForm from "./Components/PhotoForm";
 import StrainForm from "./Components/StrainForm";
 import {
@@ -30,6 +31,7 @@ import "survey-react/survey.css";
 import * as Survey from "survey-react";
 import ProductProfile from "./Components/ProductProfile"
 
+
 class App extends Component {
   state = {
     user: {},
@@ -45,7 +47,9 @@ class App extends Component {
     firstTime: false,
     showWelcome: false,
     showEdit: false,
-    showAddPostForm: false
+    showAddPostForm: false,
+    productUpdated: false,
+    errorCode: 0
   };
 
   //----------------------Life Cycle Methods should go here--------------------//
@@ -56,40 +60,48 @@ class App extends Component {
     let token = localStorage.token;
 
 
-//     fetch("http://localhost:3000/user", {
-//        method: "GET",
-//        headers: {
-//          "content-type": "application/json",
-//          accepts: "application/json",
-//        },
-//      }).then((resp) => resp.json())
-//          .then((userData) => this.setState({
-//              user: userData[0]
-//          }));
-//
-//     ("stikdkdk", this.state)
-    // if (Boolean(token)) {
-    //   fetch("http://localhost:3000/api/v1/users/sign_in", {
-    //     method: "GET",
-    //     headers: {
-    //       Authorization: `${token}`,
-    //       "content-type": "application/json",
-    //       accepts: "application/json",
-    //     },
-    //   }).then((res) => {
-    //       if (!res.ok) {
-    //         res.text().then(this.props.history.fpush("/home"))
-    //       } else {
-    //         return res.json().then((userData) => {
-    //       this.setState({
-    //         user: { ...userData.user },
-    //         avatar: { ...userData.user.avatar}
-    //       });
-    //     })
-    //     .then(() => this.props.history.push("/dashboard/"));
-    // }})} else {
-    //     this.props.history.push("/home")
-    // }
+    // fetch("http://localhost:3000/user", {
+    //    method: "GET",
+    //    headers: {
+    //      "content-type": "application/json",
+    //      accepts: "application/json",
+    //    },
+    //  }).then((resp) => resp.json())
+    //      .then((userData) => console.log(userData[0]))
+    //
+
+    // fetch("http://localhost:3000/activities", {
+    //    method: "GET",
+    //    headers: {
+    //      "content-type": "application/json",
+    //      accepts: "application/json",
+    //    },
+    //  }).then((resp) => resp.json())
+    //      .then((userData) => console.log(userData))
+
+    if (Boolean(token)) {
+      fetch("http://localhost:3000/api/v1/users/sign_in", {
+        method: "GET",
+        headers: {
+          Authorization: `${token}`,
+          "content-type": "application/json",
+          accepts: "application/json",
+        },
+      }).then((res) => {
+          if (!res.ok) {
+            res.text().then(this.props.history.push("/home"))
+          } else {
+            return res.json().then((userData) => {
+
+          this.setState({
+            user: { ...userData.user },
+            avatar: { ...userData.user.avatar}
+          });
+        })
+        .then(() => this.props.history.push("/dashboard/"));
+    }})} else {
+        this.props.history.push("/home")
+    }
 
     // fetch("http://localhost:3000/api/v1/strains/", {
     //   method: "GET",
@@ -159,6 +171,11 @@ class App extends Component {
     // });
   };
 
+
+
+
+
+
   //---------------------------------------------------------------------------------------
 
 
@@ -211,7 +228,7 @@ class App extends Component {
 
     e.preventDefault()
 
-    ("ITSBEENHIOT")
+
 
 
     if (newStore.avatar? true : false) {
@@ -261,7 +278,10 @@ class App extends Component {
 
 
 
-  submitStoreHandler = (newStore, user_id) => {
+  submitStoreHandler = (newStore, storeInfo) => {
+
+      newStore.preventDefault()
+
 
 
     fetch("http://localhost:3000/api/v1/stores", {
@@ -270,7 +290,7 @@ class App extends Component {
         "content-type": "application/json",
         accepts: "application/json",
       },
-      body: JSON.stringify({ store: newStore }),
+      body: JSON.stringify({ store: storeInfo }),
     }).then((res) => {
       if (!res.ok) {
         res.text().then((text) => alert(text));
@@ -284,6 +304,7 @@ class App extends Component {
       }
     });
   };
+
 
   deleteStoreRequest = (e) => {
 
@@ -319,9 +340,17 @@ class App extends Component {
     this.setState({ showEdit: !this.state.showEdit });
   };
 
-  handleShowErrorClose = () =>{
+  handleHardErrorClose = () =>{
       this.setState({ hasError: !this.state.hasError})
+
+      window.location.reload()
   }
+
+  handleSoftErrorClose = () =>{
+      this.setState({ hasError: !this.state.hasError})
+
+  }
+
 
 
 
@@ -335,7 +364,6 @@ class App extends Component {
 
   //---------------------------Strain functions------------------------//
   editStrainHandler = (newStrain, strain_id) => {
-
 
 
     if (newStrain.avatar) {
@@ -382,7 +410,6 @@ class App extends Component {
 
   submitFixedStrainRequest = () => {
 
-          ("ponderiver")
 
       fetch("http://localhost:3000/api/v1/strains", {
         method: "POST",
@@ -449,6 +476,55 @@ class App extends Component {
     // this.props.history.push("/explore/" + String(this.state.otherStrain.strain_name))
   };
 
+
+
+  submitStrainHandler = (newStrainInfo, token) => {
+
+
+
+      console.log("!@#!@#!3", newStrainInfo)
+
+    fetch("http://localhost:3000/api/v1/strains", {
+      method: "POST",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+      },
+      body: JSON.stringify({ strain: newStrainInfo }),
+    }).then((res) => {
+
+      if (!res.ok) {
+          res.text().then(text =>
+
+        this.setState({
+            errorMessage: text,
+        hasError: true
+        })
+
+    )} else {
+
+
+        return res
+          .json()
+          .then((strainData) => {
+            this.setState({ strain: { ...strainData.strain } });
+          })
+          .then(window.location.reload());
+      }
+    });
+  };
+
+
+
+
+
+
+
+
+
+
+
+
   //---------------------------Products Functions------------------------//
 
 
@@ -493,51 +569,91 @@ class App extends Component {
         body: JSON.stringify({ product: newProduct }),
       })
         .then((res) => res.json())
-        .then(    ("noPATTCHES", newProduct));
+        .then(console.log("noPATTCHES", newProduct));
     }
   };
 
-  submitProductHandler = (newProduct, user_id) => {
+  submitProductHandler = (newProductInfo) => {
 
-      this.setState({
-          newProduct: newProduct
-      })
+      let token = localStorage.token;
 
+
+      console.log("!@#!@#!3", newProductInfo)
+
+  //   fetch("http://localhost:3000/api/v1/products", {
+  //     method: "POST",
+  //     headers: {
+  //         Authorization: `${token}`,
+  //       "content-type": "application/json",
+  //       accepts: "application/json",
+  //     },
+  //     body: JSON.stringify({ product: newProductInfo }),
+  // }).then(res => {
+  //     if (!res.ok) {
+  //          res.text().then(text =>
+  //       this.setState({
+  //           errorMessage: text,
+  //           hasError: true
+  //       })
+  //   )} else {
+  //       return res
+  //         .json()
+  //         .then((productData) => {
+  //           this.setState({
+  //               product: { ...productData.product },
+  //           productUpdated: !this.state.productUpdated });
+  //         });
+  //     }
+  //   });
 
     fetch("http://localhost:3000/api/v1/products", {
       method: "POST",
       headers: {
+          Authorization: `${token}`,
         "content-type": "application/json",
         accepts: "application/json",
       },
-      body: JSON.stringify({ product: newProduct }),
-    }).then((res) => {
+      body: JSON.stringify({ product: newProductInfo }),
+  }).then((response) => {
+      console.log(response)
+  if (response.ok) {
 
-      if (!res.ok) {
-          res.text().then(text =>
+    return response.json().then((productData) => {
+        console.log(productData)
+      this.setState({
+          ...this.state.user,
+          products: {...this.state.user.products.push(productData.product)},
+          errorCode: productData.errorCode,
+          hasError: true,
+      productUpdated: !this.state.productUpdated })
+  })
 
-        this.setState({
-            errorMessage: text,
-        hasError: true
-        })
+} else {
+    return response.json().then((errorData) => {
+        console.log(errorData)
 
-    )} else {
-
-
-        return res
-          .json()
-          .then((productData) => {
-            this.setState({ product: { ...productData.product } });
+        errorData.map(errormessage =>
+            this.setState({
+                      errorMessage: errormessage,
+                      hasError: true
+                  }))
+}).catch((error) => {
+    debugger
+    this.setState({
+              errorMessage: error,
+              hasError: true
           })
-          .then(window.location.reload());
-      }
-    });
-  };
+});
+
+
+
+}})
+};
 
 
   submitFixedProductRequest = () => {
 
-          ("ponderiver")
+
 
       fetch("http://localhost:3000/api/v1/products", {
         method: "POST",
@@ -545,26 +661,40 @@ class App extends Component {
           "content-type": "application/json",
           accepts: "application/json",
         },
-        body: JSON.stringify({ product: this.state.newProduct, sameGrower: true}),
-      }).then((res) => {
-        if (!res.ok) {
-            res.text().then(text =>
-
+        body: JSON.stringify({ product: this.state.productRequest, sameProductType: true}),
+      }).then((response) => {
+      if (response.ok) {
+        return response.json().then((productData) => {
           this.setState({
-              errorMessage: text,
-          hasError: true
-          })
+              ...this.state.user,
+              errorCode: productData.errorCode,
+              hasError: true,
+              products: {...this.state.user.products.push(productData.product)},
+          productUpdated: !this.state.productUpdated });
+      })
+    } else {
 
-      )} else {
+        return response.json().then((errorData) => {
+            console.log(errorData)
+                this.setState({
+                          errorMessage: errorData.message,
+                          errorCode: errorData.errorCode,
+                          hasError: true
+                      })
+    }).catch((error) => {
+        debugger
+        this.setState({
+                  errorMessage: error,
+                  hasError: true
+              })
+    });
 
-          return res
-            .json()
-            .then((productData) => {
-              this.setState({ product: { ...productData.strain } });
-            })
-            .then(window.location.reload());
-        }
-      });
+
+
+    }})
+
+
+
   }
 
 
@@ -641,31 +771,33 @@ class App extends Component {
   };
 
   loginSubmitHandler = (userInfo) => {
-    // fetch("http://localhost:3000/api/v1/users/sign_in", {
-    //   method: "POST",
-    //   headers: {
-    //     "content-type": "application/json",
-    //     accepts: "application/json",
-    //   },
-    //   body: JSON.stringify({ user: userInfo }),
-    // }).then((res) => {
-    //   if (!res.ok) {
-    //     res.text().then((text) => alert(text));
-    //   } else {
-    //     return res
-    //       .json()
-    //       .then((userData) => {
-    //         this.setState({
-    //           user: { ...userData.user },
-    //           token: userData.jwt
-    //         });
-    //       })
-    //       .then(() => localStorage.setItem("token", this.state.token))
+     fetch("http://localhost:3000/api/v1/users/sign_in", {
+       method: "POST",
+       headers: {
+         "content-type": "application/json",
+         accepts: "application/json",
+       },
+       body: JSON.stringify({ user: userInfo }),
+     }).then((res) => {
+       if (!res.ok) {
 
 
-          // .then(
+         res.text().then((text) => alert(text));
+       } else {
+         return res
+           .json()
+           .then((userData) => {
+             this.setState({
+               user: { ...userData.user },
+               token: userData.jwt
+             });
+           })
+           .then(() => localStorage.setItem("token", this.state.token))
+           .then(
               this.props.history.push("/dashboard/")
-          // );
+          )
+}
+})
 }
 
   submitHandler = (userinfo, token, user_id) => {
@@ -1156,13 +1288,18 @@ class App extends Component {
         <Modal centered={true} size="lg" show={hasError} >
 
           <Modal.Header>
-            <h3>Something Went Wrong...</h3>
+            <h3>Well Looka Here...</h3>
           </Modal.Header>
           <Modal.Body>
-           <Error message={this.state.errorMessage} submitFixedStrainRequest={this.submitFixedStrainRequest} closeErrorWindow={this.handleShowErrorClose}/>
+           <Error message={this.state.errorMessage}
+               errorCode={this.state.errorCode}
+               submitFixedStrainRequest={this.submitFixedStrainRequest}
+               submitFixedProductRequest={this.submitFixedProductRequest}
+               closeErrorWindow={this.handleHardErrorClose}
+               handleSoftErrorClose={this.handleSoftErrorClose}/>
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleShowErrorClose}>
+            <Button variant="secondary" onClick={this.handleSoftErrorClose}>
               Close
             </Button>
           </Modal.Footer>
@@ -1206,11 +1343,13 @@ class App extends Component {
               render={() => (
                     <UserDashboard
                       user={this.state.user}
+                      productUpdated={this.state.productUpdated}
                       handleViewUserProfile={this.handleViewUserProfile}
                       avatar={this.state.avatar}
                       history={this.props.history}
                       stores={this.state.user.stores}
                       deleteStoreRequest={this.deleteStoreRequest}
+                      submitStoreHandler={this.submitStoreHandler}
                       editStoreHandler={this.editStoreHandler}
                       strains={this.state.user.strains}
                       submitStrainHandler={this.submitStrainHandler}
@@ -1272,7 +1411,7 @@ class App extends Component {
                 strains={this.state.strains}
                 submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
               />
-            )}
+      ), console.log(this.state)}
           />
           <Route
             path="/Post"

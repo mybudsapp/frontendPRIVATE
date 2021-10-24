@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import {Responsive,Visibility, Label, Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Feed, Item} from "semantic-ui-react"
-
+import ProductsAdapter from "../Adapters/Adapter"
+import requests from '../Adapters/Requestobject'
 import {Link, withRouter} from 'react-router-dom'
 import StoreCard from "./StoreCard"
 import StrainCard from "./StrainCard"
@@ -15,6 +16,7 @@ import UserShopContainer from './UserShopContainer'
 import UserProductContainer from './UserProductContainer'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
+    faCannabis,
   faTachometerAlt,
   faCalendar,
   faDollarSign,
@@ -28,7 +30,9 @@ import {
   faFillDrip,
   faTshirt,
   faUtensils,
-  faToolbox
+  faToolbox,
+  faPlus,
+  faMinus
 } from "@fortawesome/free-solid-svg-icons";
 //
 
@@ -53,6 +57,8 @@ componentDidMount(){
 
 }
 
+
+
 galleryDisplay = () => {
 
                 let gallery = []
@@ -74,20 +80,7 @@ galleryDisplay = () => {
 
 
 
-submitProductHandler = (productObj, filter) => {
 
-
-
-
-
-    this.setState({
-        productObj,
-        newProductForm: !this.state.newProductForm
-    })
-
-
-
-}
 
 
 
@@ -185,9 +178,9 @@ render(){
 
     if(this.props.activeItem === 'Shops'){
 
-        const user = "yourUsername"
+
         const {showStoreForm} = this.state
-        const {store} = this.state
+
 
 
 
@@ -203,30 +196,6 @@ render(){
                     <Grid columns={2}>
                     <br></br>
                     <Grid.Row >
-                        {store? <Item >
-         <Item.Image size='small' src='https://i.pinimg.com/originals/4f/22/a1/4f22a1fc23e0b11caf9a833bf9065b6b.jpg' />
-         <h1> {store.store.namespace}</h1>
-
-         <Item.Content>
-           <Item.Meta>
-             {store.address}
-         </Item.Meta>
-         <Item.Description>
-             {store.store.description}
-         </Item.Description>
-         </Item.Content>
-         <Link>
-             <Button basic>Edit</Button>
-         </Link>
-     <Link>
-         <Button basic >Delete</Button>
-     </Link>
-     <Link>
-         <Button basic >Profile</Button>
-     </Link>
-
-
- </Item>: null}
                       <Grid.Column >
                           <br></br>
                       <Segment
@@ -245,13 +214,16 @@ render(){
                       </Segment>
                   </Grid.Column>
                     </Grid.Row>
+                    <Grid.Row>
+                    <UserShopContainer stores={this.props.user.stores} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest}/>
+                </Grid.Row>
                   </Grid>
                    <br></br>
                     <br></br>
                      <br></br>
                     <br></br>
         </div>
-        {showStoreForm? <NewStoreForm storesDisplay={this.storesDisplay}/> : null}
+        {showStoreForm? <NewStoreForm user={this.props.user} storesDisplay={this.storesDisplay} submitStoreHandler={this.props.submitStoreHandler}/> : null}
 
     </Segment>
 
@@ -267,7 +239,6 @@ render(){
                   <Segment padded='very'>
                       <Segment>
                           <h1>This Will Be Your Feed...</h1>
-
 
                       </Segment>
                       <Feed>
@@ -444,106 +415,58 @@ render(){
 
 
       )
-}else if(this.props.activeItem === 'Products'){
-        const {products} = this.state
+}else if(this.props.activeItem === 'Products' && !this.props.productUpdated){
+
 
 
             return(
 
-                <Segment padded='very'>
+                <Segment>
                 <div>
-                    <Segment>
-                        <h1>This Is Your Products Dashboard...</h1>
-                        <span>Introducing new Products to your customers is as easy ever, by adding an item to your store you create a post in the feeds of your buddies</span>
-
-                    </Segment>
-                        {this.state.newProductForm? <ProductForm  products={this.state.products} submitProductHandler={this.submitProductHandler}/> : null}
-
-                     <Segment>
-                                             <span>Add New Item To the Store</span>
-                                             <Label.Group color='olive' circular >
-                                             <Grid columns='equal' centered padded>
-                                                 <Grid.Row centered columns={4}>
-                        <Grid.Column>
-                         <Label onClick={this.newProductButtonPressed}><FontAwesomeIcon
-                             icon={faTshirt}
-                             className="fa-sm text-white-300"
-                             ></FontAwesomeIcon><span>Clothes</span></Label>
-
-                        </Grid.Column>
-
-                        <Grid.Column>
-                            <Label onClick={this.newProductButtonPressed}> <FontAwesomeIcon
-                                icon={faFillDrip}
-                                className="fa-sm text-white-300"
-                                ></FontAwesomeIcon> <span>Supplies</span></Label>
-
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Label onClick={this.newProductButtonPressed} >
-                            <FontAwesomeIcon
-                                icon={faUtensils}
-                                className="fa-sm text-white-300"
-                                ></FontAwesomeIcon>
-                            <span> Food</span> </Label>
-                        </Grid.Column>
-                        <Grid.Column>
-                            <Label onClick={this.newProductButtonPressed}>
-                            <FontAwesomeIcon
-                                icon={faToolbox}
-                                className="fa-sm text-white-300"
-                                ></FontAwesomeIcon>
-                             <span>Accessories</span></Label>
-                        </Grid.Column>
+                        {this.state.newProductForm? <ProductForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
 
 
-
-
-                             </Grid.Row>
-                     </Grid>
-                     </Label.Group>
-                                         </Segment>
-                                         <br></br>
-                                         <br></br>
-
-                                         <Segment padded textAlign="center" vertical>
+                                         <Segment padded textAlign="left" vertical>
                                          <FontAwesomeIcon
                                              icon={faBarcode}
                                              className="fa-4x text-gray-300"></FontAwesomeIcon>
                                          <h1>Items</h1>
                                      </Segment>
 
-                        <Grid columns={2} textAlign="center">
+                                     <br></br>
 
+                        <Grid columns={1} textAlign="center">
+                            <br></br>
+                            <Grid.Row>
 
-
-                        <UserProductContainer
-                            activeItem={this.props.activeItem}
-                            user={this.props.user}
-                            clothes={this.props.clothes}
-                            products={products}
-                            deleteStoreRequest={this.props.deleteStoreRequest}
-                            editStoreRequest={this.props.editStoreRequest}
-                            showEdit={this.props.showEdit}
-                            handleShowEdit={this.props.handleShowEdit}
-                            handleShowEditClose={this.props.handleShowEditClose}
-                            submitStrainHandler={this.props.submitStrainHandler}
-                            deleteStrainRequest={this.props.deleteStrainRequest}
-                            submitProductHandler={this.submitProductHandler}
-                            deleteProductRequest={this.props.deleteProductRequest}
-                            deleteStrainRequest={this.props.deleteStrainRequest}
-                            />
-
-                        <br></br>
-                        <Grid.Row >
-                            <Grid.Column>
-
+                                <Grid.Column centered>
+                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+                                    <FontAwesomeIcon
+                                        icon={faPlus}
+                                        className="fa-3x text-gray-300"></FontAwesomeIcon>
+                                    <h1>add items</h1>
+                                </Segment>
                             </Grid.Column>
+                            <Grid.Column>
+                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+                                    <FontAwesomeIcon
+                                        icon={faMinus}
+                                        className="fa-3x text-gray-300"></FontAwesomeIcon>
+                                    <h1>edit items</h1>
+                                </Segment>
+                            </Grid.Column>
+                            </Grid.Row>
+
+
+                            <br></br>
+
+                            <Grid.Row>
+                        </Grid.Row>
                           <Grid.Column>
                               <br></br>
 
+                              <UserProductContainer fetchProducts={requests.fetchProducts} products={this.props.user.products} strains={this.props.user.strains} token={localStorage.token}/>
                       </Grid.Column>
-                        </Grid.Row>
                       </Grid>
 
 
@@ -555,6 +478,50 @@ render(){
           </div>
       </Segment>
     )
+}else if(this.props.activeItem === 'Products' && this.props.productUpdated){
+
+
+            return(
+                <Segment padded='very'>
+                <div>
+                    {!this.state.newProductForm? <ProductForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+                        <Grid columns={1} textAlign="center">
+                            <br></br>
+                            <Grid.Row>
+
+                                <Grid.Column centered>
+                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+                                    <FontAwesomeIcon
+                                        icon={faPlus}
+                                        className="fa-3x text-gray-300"></FontAwesomeIcon>
+                                    <h1>add items</h1>
+                                </Segment>
+                            </Grid.Column>
+                            <Grid.Column>
+                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+                                    <FontAwesomeIcon
+                                        icon={faMinus}
+                                        className="fa-3x text-gray-300"></FontAwesomeIcon>
+                                    <h1>edit items</h1>
+                                </Segment>
+                            </Grid.Column>
+                            </Grid.Row>
+
+
+                            <br></br>
+
+                            <Grid.Row>
+                        </Grid.Row>
+                          <Grid.Column>
+                              <br></br>
+
+                              <ProductsAdapter fetchProducts={requests.fetchProducts} products={this.props.user.products} strains={this.props.user.strains} token={localStorage.token}/>
+                      </Grid.Column>
+                      </Grid>
+
+          </div>
+      </Segment>)
+
 }else if(this.props.activeItem === 'Buddies'){
 
         const user = "/" + this.props.user.username

@@ -19,7 +19,10 @@ const StrainCard = props => {
         <Item id={props.strain.id} name={props.strain.name} >
             <Item.Image size="small" id="strainavatar" src="https://cdn.dribbble.com/users/2313464/screenshots/6379726/weed_3000_-_2000_2x.jpg"></Item.Image>
 
-            <Item.Header>{props.strain.name}</Item.Header>
+            <h1>
+                {props.strain.name}
+
+            </h1>
 
         <Item.Content >
               <Item.Meta>{props.strain.strain_type}</Item.Meta>

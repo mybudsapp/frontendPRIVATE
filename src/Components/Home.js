@@ -65,7 +65,7 @@ const HomepageHeading = ({ mobile }) => (
 
 
 
-    <div class="jumbotron jumbotron-fluid">
+    <div className="jumbotron jumbotron-fluid">
 
 <video autoPlay muted loop >
     <source src={leatherworkervid} data-src={leatherworkervid} type="video/mp4"/>
@@ -74,13 +74,19 @@ const HomepageHeading = ({ mobile }) => (
 
 </video>
 
-  <div class="container text-white">
+  <div className="container text-white">
 
-    <h1 class="display-4">My Buds</h1>
-    <p class="lead">community + ingenuity</p>
-    <hr class="my-4"/>
-    <a class="btn btn-primary btn-lg" href="/dashboard" role="button">Take a Tour</a>
-    <p></p>
+    <h1 className="display-4">My Buds</h1>
+    <p className="lead">community + ingenuity</p>
+    <hr className="my-4"/>
+    <div>
+        <Link to="/signup">
+    <Button basic inverted>Sign Up</Button>
+</Link>
+<Link to="/login">
+    <Button basic inverted>Log In</Button>
+    </Link>
+</div>
 
   </div>
 
@@ -360,14 +366,12 @@ return(
         <Grid divided inverted stackable>
           <Grid.Row>
             <Grid.Column width={3}>
-              <h3 inverted as='h4' content='About' />
-              <List link inverted>
+              <h3 as='h4' content='About' />
 
-              </List>
             </Grid.Column>
             <Grid.Column width={3}>
-              <h3 inverted as='h4' content='Services' />
-              <List link inverted>
+              <h3 as='h4' content='Services' />
+              <List link >
                  developed by JanCarlos Acevedo
                  | admin@mybuds.app
               </List>

@@ -43,7 +43,8 @@ import {
   faSearchPlus,
   faGrin,
   faCogs,
-  faAddressCard
+  faAddressCard,
+  faUser
 } from "@fortawesome/free-solid-svg-icons";
 
 import MobileNavBar from "./MobileNavBar"
@@ -112,6 +113,8 @@ activeItem: "Feed"
   handleShowPersonality = () => {
 
   }
+
+
 
   render() {
     const activityFeedToDisplay = this.state.activityFeed;
@@ -238,6 +241,19 @@ extraImages: [
         <span>Settings</span>
         </Button>
       </li>
+      {
+            user?
+      <li className="nav-item">
+            <Button basic className="nav-link" onClick={this.props.logOutHandler}>
+              <FontAwesomeIcon
+                icon={faUser}
+                className="mr-2"
+              ></FontAwesomeIcon>
+          <span>Sign Out</span>
+          </Button>
+      </li> : null
+    }
+
 
       <br></br>
 
@@ -264,7 +280,8 @@ extraImages: [
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
                 <Segment vertical textAlign="center" style={{paddingTop: 0}}>
-                <UserContentDisplay activeItem={activeItem}/>
+                <UserContentDisplay activeItem={activeItem} productUpdated={this.props.productUpdated} submitStoreHandler={this.props.submitStoreHandler} submitProductHandler={this.props.submitProductHandler} submitStrainHandler={this.props.submitStrainHandler} user={this.props.user} newProduct={this.props.newProduct}/>
+                {console.log(this.props.user)}
             </Segment>
 
             </div>
@@ -316,11 +333,6 @@ class DesktopContainer extends Component {
                 <div className="container content">
                   <nav>
                     <ul>
-                        <li>
-                        <p><Icon name='at' size="large" />Your User Name </p>
-
-                        </li>
-
                         <Link to="/dashboard"  >
                   <li>
                         <img src={home} alt="Home" /> Home
@@ -329,7 +341,10 @@ class DesktopContainer extends Component {
                       <li>
                         <img src={notification} alt="Notifications" />
                         Notifications
-                      </li>
+                    </li>
+                    <li>
+
+                  </li>
                     </ul>
                   </nav>
 
@@ -340,7 +355,6 @@ class DesktopContainer extends Component {
       labelPosition='right'
       placeholder='Search on My Buds'
     />
-{user? <Button onClick={this.props.logOutHandler}>Sign Out</Button> : null}
 
                 </div>
 
@@ -421,7 +435,7 @@ class MobileContainer extends Component {
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
               <Segment vertical>
-              <UserContentDisplay activeItem={activeItem} />
+              <UserContentDisplay activeItem={activeItem} submitStoreHandler={this.props.submitStoreHandler} submitProductHandler={this.props.submitProductHandler} submitStrainHandler={this.props.submitStrainHandler}/>
           </Segment>
 
           </div>

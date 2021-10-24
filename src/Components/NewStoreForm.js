@@ -24,7 +24,6 @@ handleStateChange = (e) => {
 changeHandler = (e) => {
 
 
-
     e.preventDefault()
     //(this.state)
     e.target.files?
@@ -35,7 +34,7 @@ changeHandler = (e) => {
      : this.setState({ store: {
     ...this.state.store,
     [e.target.placeholder]: e.target.value,
-    user_id: e.target.parentElement.parentElement.getAttribute("user")
+    user_id: e.target.parentElement.parentElement.getAttribute("userId")
 }})
 
 }
@@ -205,14 +204,14 @@ render() {
 
             <Icon name='building outline' circular color='grey' />
             <h1>New Store</h1>
-        
+
         <Segment>
             <SearchLocationInput onAddressSelect={this.onAddressSelect} onChange={() => null} />
         </Segment>
 
-        <Segment raised textAlign="left">
-            <div class="ui form" encType="multipart/form-data" >
-             <form onSubmit={e => this.theSubmitHandler(e, this.props)} >
+        <Segment raised userID={this.props.user.id} textAlign="left">
+            <div class="ui form" encType="multipart/form-data" userID={this.props.user.id}>
+             <form onSubmit={e => this.props.submitStoreHandler(e, this.state)} >
 
            <label>Name Space:</label>
                <input
@@ -220,7 +219,8 @@ render() {
                  placeholder="namespace"
                  onChange={this.changeHandler}
                />
-           <label>Description:</label>
+           <label>Description:
+           {console.log("asdasdasd", this.props.user, this.state.user)}</label>
                <input
                  type="text"
                  placeholder="description"

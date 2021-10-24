@@ -18,6 +18,14 @@ import {
   Popup
 } from 'semantic-ui-react'
 import { GoogleLogin } from 'react-google-login';
+import FacebookLogin from 'react-facebook-login';
+
+
+
+
+
+
+
 
 class Signup extends Component {
  state = {
@@ -52,8 +60,13 @@ componentDidCatch = (error, info) => {
     alert(error)
 }
 
+
  render() {
 
+
+     const responseFacebook = (response) => {
+         console.log(response);
+     }
 
      const responseGoogleSuccess = (response) => {
          //(response.profileObj);
@@ -74,9 +87,11 @@ const responseGoogleFailure = (response) => {
 
 
 
+
    return (
+       <div>
        <Segment basic>
-        
+
              <Segment raised>
                       <h3>
                          Sign-Up with an Email
@@ -120,6 +135,12 @@ const responseGoogleFailure = (response) => {
                          type='password'
                        />}/>
                    <Form.Input type='date' fluid onChange={this.changeHandler} min="1900-01-01" max="2000-01-01"/>
+                       <FacebookLogin
+                         appId="576054099462971"
+                         fields="name,email,picture"
+                         callback={responseFacebook}
+   icon="fa-facebook"></FacebookLogin>
+
                            <GoogleLogin
                                clientId="692197655220-r5gp6i79ejhkslft6ifshug96d5vssa0.apps.googleusercontent.com"
                                buttonText="Login"
@@ -134,7 +155,8 @@ const responseGoogleFailure = (response) => {
                        </Form>
                            </Segment>
          </Segment>
-
+         <Segment padded></Segment>
+     </div>
    );
  }
 }
