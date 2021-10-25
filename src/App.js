@@ -351,6 +351,10 @@ class App extends Component {
 
   }
 
+  handleSoftSuccessfulClose = () => {
+      this.setState({successfullRequest: !this.state.successfullRequest})
+  }
+
 
 
 
@@ -616,38 +620,41 @@ class App extends Component {
       body: JSON.stringify({ product: newProductInfo }),
   }).then((response) => {
       console.log(response)
-  if (response.ok) {
-
-    return response.json().then((productData) => {
-        console.log(productData)
+  if (!response.ok) {
+    return response.json().then((errorData) => {
+        console.log(errorData)
       this.setState({
           ...this.state.user,
-          products: {...this.state.user.products.push(productData.product)},
-          errorCode: productData.errorCode,
+          errors: {...errorData.error},
+          message: errorData.message,
+          errorCode: [errorData.errorCode],
+          productRequest: newProductInfo,
           hasError: true,
       productUpdated: !this.state.productUpdated })
   })
 
 } else {
-    return response.json().then((errorData) => {
-        console.log(errorData)
-
-        errorData.map(errormessage =>
+    return response.json().then((productData) => {
+        console.log(productData)
             this.setState({
-                      errorMessage: errormessage,
-                      hasError: true
-                  }))
-}).catch((error) => {
+                ...this.state.user,
+                      products: {...this.state.user.products.push(productData.product)},
+                      productUpdated: !this.state.productUpdated,
+                      message: productData.message,
+                      successfullRequest: true
+                  })
+
+});
+
+
+
+}}).catch((error) => {
     debugger
     this.setState({
               errorMessage: error,
               hasError: true
           })
 });
-
-
-
-}})
 };
 
 
@@ -663,25 +670,34 @@ class App extends Component {
         },
         body: JSON.stringify({ product: this.state.productRequest, sameProductType: true}),
       }).then((response) => {
-      if (response.ok) {
-        return response.json().then((productData) => {
-          this.setState({
-              ...this.state.user,
-              errorCode: productData.errorCode,
-              hasError: true,
-              products: {...this.state.user.products.push(productData.product)},
-          productUpdated: !this.state.productUpdated });
-      })
-    } else {
-
+          console.log(response)
+      if (!response.ok) {
         return response.json().then((errorData) => {
             console.log(errorData)
+          this.setState({
+              ...this.state.user,
+              errors: {...errorData.error},
+              message: errorData.message,
+              errorCode: [errorData.errorCode],
+              hasError: true,
+          productUpdated: !this.state.productUpdated })
+      })
+
+    } else {
+        return response.json().then((productData) => {
+            console.log(productData)
                 this.setState({
-                          errorMessage: errorData.message,
-                          errorCode: errorData.errorCode,
-                          hasError: true
+                    ...this.state.user,
+                          products: {...this.state.user.products.push(productData.product)},
+                          productUpdated: !this.state.productUpdated,
+                          message: productData.message,
+                          hasError: !this.state.hasError,
+                          successfullRequest: true
                       })
-    }).catch((error) => {
+
+    });
+
+    }}).catch((error) => {
         debugger
         this.setState({
                   errorMessage: error,
@@ -691,11 +707,8 @@ class App extends Component {
 
 
 
-    }})
+    }
 
-
-
-  }
 
 
 
@@ -1233,6 +1246,8 @@ class App extends Component {
 
     const { showAddPostForm } = this.state;
 
+    const { successfullRequest } = this.state;
+
     const onCompleteAction = (obj) => {
 
       // YOUR LOGIC GOES HERE
@@ -1244,15 +1259,23 @@ class App extends Component {
     return (
       <React.Fragment>
 
-        <Modal centered={true} size="lg" show={showWelcome}>
+        <Modal centered={true} size="lg" show={successfullRequest}>
           <Modal.Header textAlign="center">
-            <h3>Welcome to My Buds! </h3>
+            <h3>My Buds! </h3>
           </Modal.Header>
           <Modal.Body>
-            <span>This Proof of Concept was built and developed as a Pre-Cursor to a Native Application for Apple and Android Devices </span>
+            <span>WooHoo! Successful! </span>
+
+                <Error message={this.state.message}
+                    errorCode={4}
+                    errors={this.state.errors}
+                    submitFixedProductRequest={this.submitFixedProductRequest}
+                    closeErrorWindow={this.handleHardErrorClose}
+                    handleSoftErrorClose={this.handleSoftErrorClose}/>
+
           </Modal.Body>
           <Modal.Footer>
-            <Button variant="secondary" onClick={this.handleCloseWelcome}>
+            <Button variant="secondary" onClick={this.handleSoftSuccessfulClose}>
               Close
             </Button>
           </Modal.Footer>
@@ -1291,8 +1314,9 @@ class App extends Component {
             <h3>Well Looka Here...</h3>
           </Modal.Header>
           <Modal.Body>
-           <Error message={this.state.errorMessage}
+           <Error message={this.state.message}
                errorCode={this.state.errorCode}
+               errors={this.state.errors}
                submitFixedStrainRequest={this.submitFixedStrainRequest}
                submitFixedProductRequest={this.submitFixedProductRequest}
                closeErrorWindow={this.handleHardErrorClose}
