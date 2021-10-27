@@ -49,7 +49,8 @@ class UserContentDisplay extends Component{
 
     state = {products: [],
         newStrainForm: false,
-        newProductForm: false
+        newProductForm: false,
+        productsUpdated: false
     }
 
 
@@ -64,7 +65,6 @@ galleryDisplay = () => {
                 let gallery = []
 
 
-                //(this.props)
                 if(this.props.gallery){
                     gallery = this.props.gallery
                 }else{
@@ -152,6 +152,14 @@ buddiesDisplay = () => {
                 newProductForm: !this.state.newProductForm
             })
 
+
+        }
+
+        productUpdated = () => {
+
+            this.setState({
+                productsUpdated: !this.state.productsUpdated
+            })
 
         }
 
@@ -447,8 +455,12 @@ render(){
                                     <h1>add items</h1>
                                 </Segment>
                             </Grid.Column>
+
+
                             <Grid.Column>
-                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+
+
+                                <Segment textAlign="center" circular onClick={this.props.editProductsButtonPressed}>
                                     <FontAwesomeIcon
                                         icon={faMinus}
                                         className="fa-3x text-gray-300"></FontAwesomeIcon>
@@ -465,7 +477,14 @@ render(){
                           <Grid.Column>
                               <br></br>
 
-                              <UserProductContainer fetchProducts={requests.fetchProducts} products={this.props.user.products} strains={this.props.user.strains} token={localStorage.token}/>
+                              <UserProductContainer
+                                  displayItemForEdit={this.props.displayItemForEdit}
+                                  editProducts={this.props.editProducts}
+                                  fetchProducts={requests.fetchProducts}
+                                  products={this.props.user.products}
+                                  updatedProducts={this.props.updatedProducts}
+                                  strains={this.props.user.strains}
+                                  token={localStorage.token}/>
                       </Grid.Column>
                       </Grid>
 
@@ -484,13 +503,13 @@ render(){
             return(
                 <Segment padded='very'>
                 <div>
-                    {!this.state.newProductForm? <ProductForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+                    {this.state.productsUpdated? <ProductForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
                         <Grid columns={1} textAlign="center">
                             <br></br>
                             <Grid.Row>
 
                                 <Grid.Column centered>
-                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+                                <Segment textAlign="center" circular onClick={this.productUpdated}>
                                     <FontAwesomeIcon
                                         icon={faPlus}
                                         className="fa-3x text-gray-300"></FontAwesomeIcon>
@@ -498,7 +517,7 @@ render(){
                                 </Segment>
                             </Grid.Column>
                             <Grid.Column>
-                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+                                <Segment textAlign="center" circular onClick={this.props.editProductsButtonPressed}>
                                     <FontAwesomeIcon
                                         icon={faMinus}
                                         className="fa-3x text-gray-300"></FontAwesomeIcon>
@@ -515,7 +534,7 @@ render(){
                           <Grid.Column>
                               <br></br>
 
-                              <ProductsAdapter fetchProducts={requests.fetchProducts} products={this.props.user.products} strains={this.props.user.strains} token={localStorage.token}/>
+                              <ProductsAdapter displayItemForEdit={this.props.displayItemForEdit} editProducts={this.props.editProducts} fetchProducts={requests.fetchProducts} products={this.props.user.products} strains={this.props.user.strains} token={localStorage.token}/>
                       </Grid.Column>
                       </Grid>
 

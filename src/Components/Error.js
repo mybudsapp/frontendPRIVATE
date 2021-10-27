@@ -39,8 +39,8 @@ render(){
             <Button onClick={this.props.submitFixedProductRequest}>Yes</Button><Button onClick={this.props.closeErrorWindow}>No</Button></div>)
     }else if(errorCode == 1){
                     return <div><p1>{this.props.message}</p1><button onClick={this.props.submitFixedProductRequest}>Yes</button></div>
-                    }else if(errorCode == 4){
-                                    return null
+    }else if(errorCode == 4){
+                                    return <div></div>
 }else{
         return <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
 

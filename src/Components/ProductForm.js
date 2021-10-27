@@ -85,7 +85,7 @@ dispensariesOptions = (stores) => {
         return <h1> Create a Store </h1>
     }
     return stores.map(store => {
-        return <option value={store.id} storeID={store.id} >{store.namespace}</option>;
+        return <option value={store.id} storeid={store.id} >{store.namespace}</option>;
         })
     }
 
@@ -165,16 +165,6 @@ const productOptions = [
               />
       </Form.Field>
 
-      <br></br>
-      <Form.Field>
-          <label>Price Per Item:</label>
-              <input
-                  type="number"
-                name="price"
-                placeholder="$$$"
-                onChange={this.changeHandler}
-              />
-      </Form.Field>
           <br></br>
           <br></br>
           <Form.Field>

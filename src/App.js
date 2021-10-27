@@ -3,6 +3,7 @@ import formData from "form-data";
 import axios from "axios";
 
 import PhotoForm from "./Components/PhotoForm";
+import EditProductForm from "./Components/EditProductForm"
 import StrainForm from "./Components/StrainForm";
 import {
   Route,
@@ -49,7 +50,8 @@ class App extends Component {
     showEdit: false,
     showAddPostForm: false,
     productUpdated: false,
-    errorCode: 0
+    errorCode: 0,
+    editProducts: false
   };
 
   //----------------------Life Cycle Methods should go here--------------------//
@@ -534,22 +536,30 @@ class App extends Component {
 
 
 
-  editProductHandler = (newProduct, product_id) => {
+  editProductSubmitHandler = (productUpdates, originalProduct) => {
+
+      let token = localStorage.getItem('token')
+
+
+      let productID = originalProduct.id
 
 
 
-    if (newProduct.avatar) {
+
+
+
+    if (productUpdates.avatar) {
       const fd = new formData();
 
-      fd.append("avatar", newProduct.avatar);
+      fd.append("avatar", productUpdates.avatar);
 
       axios
-        .patch(`http://localhost:3000/api/v1/products/${product_id}`, fd, {
+        .patch(`http://localhost:3000/api/v1/products/${productID}`, fd, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         })
         .then(
           fetch(
-            `http://localhost:3000/api/v1/products/${product_id}`,
+            `http://localhost:3000/api/v1/products/${productID}`,
             {
               method: "PATCH",
               headers: {
@@ -557,25 +567,81 @@ class App extends Component {
                 "content-type": "application/json",
                 accepts: "application/json",
               },
-              body: JSON.stringify({ product: newProduct }),
+              body: JSON.stringify({ productUpdates, originalProduct: originalProduct }),
             },
-                ("PATCHESSSS", newProduct)
+
           )
         )
-        .then(    ("PATCHESSS", newProduct));
+        .then(    ("PATCHESSS",productUpdates));
     } else {
-      fetch(`http://localhost:3000/api/v1/products/${product_id}`, {
+      fetch(`http://localhost:3000/api/v1/products/${productID}`, {
         method: "PATCH",
         headers: {
           "content-type": "application/json",
           accepts: "application/json",
         },
-        body: JSON.stringify({ product: newProduct }),
+        body: JSON.stringify({ productUpdates, originalProduct: originalProduct  }),
+      }).then((response) => {
+          console.log(response)
+      if (!response.ok) {
+        return response.json().then((errorData) => {
+            console.log(errorData)
+          this.setState({
+              ...this.state.user,
+              errors: {...errorData.error},
+              message: errorData.message,
+              errorCode: [errorData.errorCode],
+              productRequest: productUpdates,
+              hasError: true,
+          productUpdated: !this.state.productUpdated })
       })
-        .then((res) => res.json())
-        .then(console.log("noPATTCHES", newProduct));
+
+    } else {
+        return response.json().then((productData) => {
+
+            //const filteredProducts = this.state.user.products.filter(product => product.id !== productData.id)
+
+            const filteredProducts = this.state.user.products.filter(product => product.id !== productData.id)
+
+            filteredProducts.push(productData)
+
+
+
+            console.log(filteredProducts, productData)
+                this.setState(prev => ({
+                    ...prev,
+                    user: {...prev.user,
+                    products: filteredProducts},
+                          productUpdated: !this.state.productUpdated,
+                          message: productData.message,
+                          editProducts: !this.state.editProducts,
+                          showEdit: !this.state.showEdit,
+                          successfullRequest: true
+                      }))
+
+    });
+    }}).catch((error) => {
+        this.setState({
+                  errorMessage: error,
+                  hasError: true
+              })
+    });
+
     }
   };
+
+
+
+
+
+
+
+
+
+
+
+
+
 
   submitProductHandler = (newProductInfo) => {
 
@@ -584,31 +650,6 @@ class App extends Component {
 
       console.log("!@#!@#!3", newProductInfo)
 
-  //   fetch("http://localhost:3000/api/v1/products", {
-  //     method: "POST",
-  //     headers: {
-  //         Authorization: `${token}`,
-  //       "content-type": "application/json",
-  //       accepts: "application/json",
-  //     },
-  //     body: JSON.stringify({ product: newProductInfo }),
-  // }).then(res => {
-  //     if (!res.ok) {
-  //          res.text().then(text =>
-  //       this.setState({
-  //           errorMessage: text,
-  //           hasError: true
-  //       })
-  //   )} else {
-  //       return res
-  //         .json()
-  //         .then((productData) => {
-  //           this.setState({
-  //               product: { ...productData.product },
-  //           productUpdated: !this.state.productUpdated });
-  //         });
-  //     }
-  //   });
 
     fetch("http://localhost:3000/api/v1/products", {
       method: "POST",
@@ -660,9 +701,10 @@ class App extends Component {
 
   submitFixedProductRequest = () => {
 
+      let token = localStorage.getItem('token')
 
 
-      fetch("http://localhost:3000/api/v1/products", {
+      fetch(`http://localhost:3000/api/v1/products/`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
@@ -686,6 +728,9 @@ class App extends Component {
     } else {
         return response.json().then((productData) => {
             console.log(productData)
+
+
+
                 this.setState({
                     ...this.state.user,
                           products: {...this.state.user.products.push(productData.product)},
@@ -698,7 +743,7 @@ class App extends Component {
     });
 
     }}).catch((error) => {
-        debugger
+
         this.setState({
                   errorMessage: error,
                   hasError: true
@@ -709,7 +754,53 @@ class App extends Component {
 
     }
 
+editProductsButtonPressed = () => {
 
+    this.setState({
+        editProducts: !this.state.editProducts
+    })
+
+}
+
+displayItemForEdit = (product_id) => {
+
+    product_id.preventDefault()
+
+    const productID = product_id.target.parentElement.parentElement.parentElement.getAttribute("id")
+
+
+
+    fetch(`http://localhost:3000/api/v1/products/${productID}`, {
+      method: "GET",
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+    }}).then((response) => {
+        console.log(response)
+    if (!response.ok) {
+      return response.json().then((errorData) => {
+          console.log(errorData)
+        this.setState({
+            ...this.state.user,
+            errors: {...errorData.error},
+            message: errorData.message,
+            errorCode: [errorData.errorCode],
+            hasError: true,
+        productUpdated: !this.state.productUpdated })
+    })
+  } else {
+      return response.json().then((productData) => {
+          console.log(productData)
+          this.setState({
+              productToEdit: productData,
+              showEdit: true
+          })
+
+  });
+
+  }})
+
+}
 
 
 
@@ -734,18 +825,25 @@ class App extends Component {
     });
   };
 
-  handleViewProductProfile = (e) => {
-        ("is this shit even being hit");
 
-    fetch(`http://localhost:3000/api/v1/products/${e.target.id}`)
-      .then((res) => res.json())
-      .then((productData) =>
-        this.setState({
-          selectedProduct: { ...productData },
-        })
-      );
-    // this.props.history.push("/explore/" + String(this.state.otherStrain.strain_name))
-  };
+
+
+
+
+
+
+  // handleViewProductProfile = (e) => {
+  //       ("is this shit even being hit");
+  //
+  //   fetch(`http://localhost:3000/api/v1/products/${e.target.id}`)
+  //     .then((res) => res.json())
+  //     .then((productData) =>
+  //       this.setState({
+  //         selectedProduct: { ...productData },
+  //       })
+  //     );
+  //   // this.props.history.push("/explore/" + String(this.state.otherStrain.strain_name))
+  // };
 
 
 
@@ -1335,7 +1433,10 @@ class App extends Component {
             <h3>Edit</h3>
           </Modal.Header>
           <Modal.Body>
-           <EditStoreForm user={this.state.user} namespace={this.state.store_namespace} storeid={this.state.store_id} editStoreHandler={this.editStoreHandler}></EditStoreForm>
+           <EditProductForm productToEdit={this.state.productToEdit}
+               user={this.state.user}
+               stores={this.state.user.stores}
+               editProductSubmitHandler={this.editProductSubmitHandler} />
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleShowEditClose}>
@@ -1369,6 +1470,8 @@ class App extends Component {
                       user={this.state.user}
                       productUpdated={this.state.productUpdated}
                       handleViewUserProfile={this.handleViewUserProfile}
+                      editProducts={this.state.editProducts}
+                      editProductsButtonPressed={this.editProductsButtonPressed}
                       avatar={this.state.avatar}
                       history={this.props.history}
                       stores={this.state.user.stores}
@@ -1380,6 +1483,7 @@ class App extends Component {
                       deleteStrainRequest={this.deleteStrainRequest}
                       sendThisStrainToEdit={this.sendThisStrainToEdit}
                       products={this.state.user.products}
+                      updatedProducts={this.state.products}
                       submitProductHandler={this.submitProductHandler}
                       deleteProductRequest={this.deleteProductRequest}
                       submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
@@ -1389,6 +1493,7 @@ class App extends Component {
                       handleAddPostForm={this.handleAddPostForm}
                       handleShowWelcome={this.handleShowWelcome}
                       handleDeletePhoto={this.deletePhotoRequest}
+                      displayItemForEdit={this.displayItemForEdit}
                       logOutHandler={this.logOutHandler}
                       submitHandler={this.submitHandler}
                     />

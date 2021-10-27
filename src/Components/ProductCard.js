@@ -41,17 +41,18 @@ return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/bu
                     {props.product.productname}
                 </h1>
                 <Card.Description>
-                    {props.product.producer}
+                    {props.product.producer, console.log(props)}
                 </Card.Description>
             </Card.Content>
             <Link to="/product">
                 <Button basic color='green'  id={props.product.id}>
                   View Product
                 </Button>
+                {props.editProducts? <div><Button basic onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic>Delete</Button></div> : null}
             </Link>
       </Card>
 
     )
 }
 
-export default withRouter(ProductCard)
+export default ProductCard

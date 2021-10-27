@@ -280,8 +280,19 @@ extraImages: [
           <div id="content-wrapper" className="d-flex flex-column">
             <div id="content">
                 <Segment vertical textAlign="center" style={{paddingTop: 0}}>
-                <UserContentDisplay activeItem={activeItem} productUpdated={this.props.productUpdated} submitStoreHandler={this.props.submitStoreHandler} submitProductHandler={this.props.submitProductHandler} submitStrainHandler={this.props.submitStrainHandler} user={this.props.user} newProduct={this.props.newProduct}/>
-                {console.log(this.props.user)}
+                <UserContentDisplay
+                    activeItem={activeItem}
+                    updatedProducts={this.props.updatedProducts}
+                    productUpdated={this.props.productUpdated}
+                    submitStoreHandler={this.props.submitStoreHandler}
+                    submitProductHandler={this.props.submitProductHandler}
+                    submitStrainHandler={this.props.submitStrainHandler}
+                    user={this.props.user}
+                    displayItemForEdit={this.props.displayItemForEdit}
+                    editProductsButtonPressed={this.props.editProductsButtonPressed}
+                    editProducts={this.props.editProducts}
+                    newProduct={this.props.newProduct}/>
+                {console.log(this.props)}
             </Segment>
 
             </div>
@@ -435,7 +446,11 @@ class MobileContainer extends Component {
         <div id="content-wrapper" className="d-flex flex-column">
           <div id="content">
               <Segment vertical>
-              <UserContentDisplay activeItem={activeItem} submitStoreHandler={this.props.submitStoreHandler} submitProductHandler={this.props.submitProductHandler} submitStrainHandler={this.props.submitStrainHandler}/>
+              <UserContentDisplay
+                  activeItem={activeItem}
+                  submitStoreHandler={this.props.submitStoreHandler}
+                  submitProductHandler={this.props.submitProductHandler}
+                  submitStrainHandler={this.props.submitStrainHandler}/>
           </Segment>
 
           </div>
