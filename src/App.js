@@ -22,10 +22,11 @@ import Profile from "./Components/Profile.js";
 import EditProfile from "./Components/EditProfile.js";
 import EditStoreForm from './Components/EditStoreForm'
 import { useAlert } from "react-alert";
-import { Card, Segment, Menu, Sidebar, Icon, Button } from "semantic-ui-react";
+import { Card, Segment, Menu, Sidebar, Icon, Button, Image } from "semantic-ui-react";
 import Modal from "react-bootstrap/Modal";
 import Error from "./Components/Error";
 import StrainCard from "./Components/StrainCard";
+import ProductCard from "./Components/ProductCard";
 import Quiz from "react-quiz-component";
 import { quiz } from "./Components/quiz";
 import "survey-react/survey.css";
@@ -51,7 +52,8 @@ class App extends Component {
     showAddPostForm: false,
     productUpdated: false,
     errorCode: 0,
-    editProducts: false
+    editProducts: false,
+    showDelete: false
   };
 
   //----------------------Life Cycle Methods should go here--------------------//
@@ -340,6 +342,10 @@ class App extends Component {
 
   handleShowEditClose = () => {
     this.setState({ showEdit: !this.state.showEdit });
+  };
+
+  handleShowDeleteClose = () => {
+    this.setState({ showDelete: !this.state.showDelete });
   };
 
   handleHardErrorClose = () =>{
@@ -632,17 +638,6 @@ class App extends Component {
 
 
 
-
-
-
-
-
-
-
-
-
-
-
   submitProductHandler = (newProductInfo) => {
 
       let token = localStorage.token;
@@ -803,27 +798,90 @@ displayItemForEdit = (product_id) => {
 }
 
 
+displayItemForDelete = (e) => {
 
-  deleteProductRequest = (e) => {
+    e.preventDefault()
+
+    const productID = e.target.parentElement.parentElement.parentElement.getAttribute("id")
 
 
-    let product_id = e.target.parentElement.parentElement.getAttribute("id");
-
-
-    return fetch(`http://localhost:3000/api/v1/products/${product_id}`, {
-      method: "DELETE",
+    fetch(`http://localhost:3000/api/v1/products/${productID}`, {
+      method: "GET",
       headers: {
         "content-type": "application/json",
         accepts: "application/json",
-      },
-    }).then((res) => {
-      if (!res.ok) {
-        res.text().then((text) => alert(text));
-      } else {
-        window.location.reload();
       }
-    });
+  }).then((response) => {
+        console.log(response)
+    if (!response.ok) {
+      return response.json().then((errorData) => {
+          console.log(errorData)
+        this.setState({
+            ...this.state.user,
+            errors: {...errorData.error},
+            message: errorData.message,
+            errorCode: [errorData.errorCode],
+            hasError: true,
+        productUpdated: !this.state.productUpdated })
+    })
+
+  } else {
+      return response.json().then((productData) => {
+          this.setState({
+              productToDelete: productData,
+              showDelete: true
+          })
+
+  });
+  }}).catch((error) => {
+      this.setState({
+                errorMessage: error,
+                hasError: true
+            })
+  });
+
+
+
+
+}
+
+submitDeleteProductHandler = (e) => {
+
+    let token = localStorage.getItem('token');
+
+
+    console.log("ELDIABLOE ESTA EN EL SUBMIT", e.target)
+
+
+    e.preventDefault()
+
+    const productID = e.target.parentElement.parentElement.parentElement.getAttribute("id")
+
+
+    fetch(`http://localhost:3000/api/v1/products/${productID}`, {
+      method: 'DESTROY',
+      headers: {
+        "content-type": "application/json",
+        accepts: "application/json",
+      }
+  }).then((response) => {
+        console.log(response)
+    if (!response.ok) {
+      return response.json().then((errorData) => {
+          console.log(errorData)})
+
+  } else {
+     window.location.reload()
+
   };
+  }).catch((error) => {
+      this.setState({
+                errorMessage: error,
+                hasError: true
+            })
+  });
+
+};
 
 
 
@@ -832,18 +890,22 @@ displayItemForEdit = (product_id) => {
 
 
 
-  // handleViewProductProfile = (e) => {
-  //       ("is this shit even being hit");
-  //
-  //   fetch(`http://localhost:3000/api/v1/products/${e.target.id}`)
-  //     .then((res) => res.json())
-  //     .then((productData) =>
-  //       this.setState({
-  //         selectedProduct: { ...productData },
-  //       })
-  //     );
-  //   // this.props.history.push("/explore/" + String(this.state.otherStrain.strain_name))
-  // };
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
@@ -1445,6 +1507,23 @@ displayItemForEdit = (product_id) => {
           </Modal.Footer>
         </Modal>
 
+        <Modal centered={true} size="lg" show={this.state.showDelete} >
+
+          <Modal.Header>
+            <h3>Delete</h3>
+          </Modal.Header>
+          <Modal.Body>
+              <span>Are You Sure You Would Like to Delete this?</span>
+              <ProductCard submitDeleteProductHandler={this.submitDeleteProductHandler} product={this.state.productToDelete} showDelete={this.state.showDelete}
+                  />
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleShowDeleteClose}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
 
         <Switch>
           <Route
@@ -1494,6 +1573,7 @@ displayItemForEdit = (product_id) => {
                       handleShowWelcome={this.handleShowWelcome}
                       handleDeletePhoto={this.deletePhotoRequest}
                       displayItemForEdit={this.displayItemForEdit}
+                      displayItemForDelete={this.displayItemForDelete}
                       logOutHandler={this.logOutHandler}
                       submitHandler={this.submitHandler}
                     />

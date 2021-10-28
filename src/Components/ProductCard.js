@@ -32,27 +32,52 @@ return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/bu
 
 }
 
-    return (
-
-            <Card id={props.product.id} name={props.product.productname} >
+    if(!props.showDelete){
+    return <Card id={props.product.id} name={props.product.productname} >
                 {displayCorrectImage(props.product)}
             <Card.Content >
-                <h1>
+                <h2>
                     {props.product.productname}
-                </h1>
+                </h2>
                 <Card.Description>
                     {props.product.producer, console.log(props)}
                 </Card.Description>
             </Card.Content>
-            <Link to="/product">
-                <Button basic color='green'  id={props.product.id}>
+                <div className='ui two buttons'>
+                {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e)}>Delete</Button></div> : <Button basic color='green'  id={props.product.id}>
                   View Product
-                </Button>
-                {props.editProducts? <div><Button basic onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic>Delete</Button></div> : null}
-            </Link>
+                </Button>}
+            </div>
       </Card>
 
-    )
+
+}else{
+            return  <Card id={props.product.id} name={props.product.productname}>
+      <Card.Content>
+        {displayCorrectImage(props.product)}
+
+        <Card.Description>{props.product.productname}</Card.Description>
+        <Card.Meta>
+          By {props.product.producer}
+
+  </Card.Meta>
+    <Card.Meta></Card.Meta>
+      </Card.Content>
+      <Card.Content extra>
+        <div className='ui two buttons'>
+          <Button basic color='green' onClick={(e) => props.submitDeleteProductHandler(e)}>
+            Approve
+          </Button>
+          <Button basic color='red'>
+            Decline
+          </Button>
+        </div>
+      </Card.Content>
+    </Card>
+    }
+
+
+
 }
 
 export default ProductCard

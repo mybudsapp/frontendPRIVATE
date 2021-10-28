@@ -479,6 +479,7 @@ render(){
 
                               <UserProductContainer
                                   displayItemForEdit={this.props.displayItemForEdit}
+                                  displayItemForDelete={this.props.displayItemForDelete}
                                   editProducts={this.props.editProducts}
                                   fetchProducts={requests.fetchProducts}
                                   products={this.props.user.products}
@@ -534,7 +535,14 @@ render(){
                           <Grid.Column>
                               <br></br>
 
-                              <ProductsAdapter displayItemForEdit={this.props.displayItemForEdit} editProducts={this.props.editProducts} fetchProducts={requests.fetchProducts} products={this.props.user.products} strains={this.props.user.strains} token={localStorage.token}/>
+                              <ProductsAdapter
+                                  displayItemForDelete={this.props.displayItemForDelete} 
+                                  displayItemForEdit={this.props.displayItemForEdit}
+                                  editProducts={this.props.editProducts}
+                                  fetchProducts={requests.fetchProducts}
+                                  products={this.props.user.products}
+                                  strains={this.props.user.strains}
+                                  token={localStorage.token}/>
                       </Grid.Column>
                       </Grid>
 

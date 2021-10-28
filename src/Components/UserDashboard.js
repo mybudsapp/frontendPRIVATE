@@ -283,6 +283,7 @@ extraImages: [
                 <UserContentDisplay
                     activeItem={activeItem}
                     updatedProducts={this.props.updatedProducts}
+                    displayItemForDelete={this.props.displayItemForDelete}
                     productUpdated={this.props.productUpdated}
                     submitStoreHandler={this.props.submitStoreHandler}
                     submitProductHandler={this.props.submitProductHandler}

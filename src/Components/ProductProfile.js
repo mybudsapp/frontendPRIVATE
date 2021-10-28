@@ -86,34 +86,7 @@ render(){
     <React.Fragment>
         <div id="custom-css-product">
 
-              <header className="main-header">
-                <div className="content">
-                  <nav>
-                    <ul>
-                        <a href="/dashboard">
-                      <li >
-                        <img src={home} alt="Home" /> Home
-                      </li>
-                  </a>
-                      <li>
-                        <img src={notification} alt="Notifications" /> Notifications
-                      </li>
-                      <li>
-                        <img src={message} alt="Messages" /> Messages
-                      </li>
-                    </ul>
-                  </nav>
-
-                  <div className="side">
-                      <Input
-                          size='mini'
-        label={<Dropdown defaultValue='Products' compact options={options} />}
-        labelPosition='right'
-        placeholder='Search on My Buds'
-        />
-                  </div>
-                </div>
-              </header>
+    
 
                 <div className="page-detail" style={{ marginTop: "50px" }}>
                   <div className="container">

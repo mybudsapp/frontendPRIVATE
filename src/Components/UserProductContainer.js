@@ -60,7 +60,7 @@ componentDidMount = () => {
         }
 
 
-        clothesProductsDisplay = (products, editProducts, displayItemForEdit) => {
+        clothesProductsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete) => {
 
 
             let newProducts = []
@@ -71,7 +71,12 @@ componentDidMount = () => {
                 console.log(products, newProducts)
             if (newProducts.length > 0){
 
-                return products.filter(product => product.producttype === "Clothes").map(filteredProduct => <ProductCard product={filteredProduct} editProducts={editProducts} displayItemForEdit={displayItemForEdit}/>)
+                return products.filter(product => product.producttype === "Clothes").map(filteredProduct =>
+                    <ProductCard
+                        displayItemForDelete={displayItemForDelete}
+                        product={filteredProduct}
+                        editProducts={editProducts}
+                        displayItemForEdit={displayItemForEdit}/>)
 
             }else{
                 return  <Segment><h1>No Clothes</h1></Segment>
@@ -85,7 +90,7 @@ componentDidMount = () => {
 
 
 
-            concentratesDisplay = (products, editProducts, displayItemForEdit) => {
+            concentratesDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete) => {
 
 
                     const concentrateProducts = products.filter(product => product.producttype === "Concentrates")
@@ -93,7 +98,12 @@ componentDidMount = () => {
                     console.log(concentrateProducts.length)
 
                     if (concentrateProducts.length > 0){
-                        return concentrateProducts.map(filteredProduct => <ProductCard product={filteredProduct} editProducts={editProducts} displayItemForEdit={displayItemForEdit}/>)
+                        return concentrateProducts.map(filteredProduct =>
+                            <ProductCard
+                                displayItemForDelete={displayItemForDelete}
+                                product={filteredProduct}
+                                editProducts={editProducts}
+                                displayItemForEdit={displayItemForEdit}/>)
 
                     }else{
                         return  <Segment><h1>No Concentrates</h1></Segment>
@@ -104,14 +114,19 @@ componentDidMount = () => {
 
 }
 
-                foodItemsDisplay = (products, editProducts, displayItemForEdit) => {
+                foodItemsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete) => {
 
                     const edibleProducts = products.filter(product => product.producttype === "Edibles")
 
                     console.log(edibleProducts.length)
 
                     if (edibleProducts.length > 0){
-                        return edibleProducts.map(filteredProduct => <ProductCard product={filteredProduct} editProducts={editProducts} displayItemForEdit={displayItemForEdit}/>)
+                        return edibleProducts.map(filteredProduct =>
+                            <ProductCard
+                                displayItemForDelete={displayItemForDelete}
+                                product={filteredProduct}
+                                editProducts={editProducts}
+                                displayItemForEdit={displayItemForEdit}/>)
 
                     }else{
                         return  <Segment><h1>No Edibles</h1></Segment>
@@ -119,14 +134,19 @@ componentDidMount = () => {
                 }
 
 
-                    accessoriesProductsDisplay = (products, editProducts, displayItemForEdit) => {
+                    accessoriesProductsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete) => {
 
                         const accessoriesProducts = products.filter(product => product.producttype === "Accessories")
 
                         console.log(accessoriesProducts.length)
 
                         if (accessoriesProducts.length > 0){
-                            return accessoriesProducts.map(filteredProduct => <ProductCard product={filteredProduct} editProducts={editProducts} displayItemForEdit={displayItemForEdit}/>)
+                            return accessoriesProducts.map(filteredProduct =>
+                                <ProductCard
+                                    displayItemForDelete={displayItemForDelete}
+                                    product={filteredProduct}
+                                    editProducts={editProducts}
+                                    displayItemForEdit={displayItemForEdit}/>)
 
                         }else{
                             return  <Segment><h1>No Accessories</h1></Segment>
@@ -168,7 +188,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit): <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete): <span>No Items</span>}
 
                             </Card.Group>
 
@@ -207,7 +227,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.concentratesDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit) : <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.concentratesDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete) : <span>No Items</span>}
 
                             </Card.Group>
 
@@ -247,7 +267,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.foodItemsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit) : <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.foodItemsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete) : <span>No Items</span>}
 
                             </Card.Group>
 
@@ -287,7 +307,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.accessoriesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit) : <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.accessoriesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete) : <span>No Items</span>}
 
                             </Card.Group>
 
