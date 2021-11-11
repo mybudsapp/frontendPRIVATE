@@ -44,7 +44,8 @@ import {
   faGrin,
   faCogs,
   faAddressCard,
-  faUser
+  faUser,
+  faCannabis
 } from "@fortawesome/free-solid-svg-icons";
 
 import MobileNavBar from "./MobileNavBar"
@@ -211,7 +212,15 @@ extraImages: [
             <span>Shops</span>
             </Button>
           </li>
-
+          <li className="nav-item">
+          <Button color='olive' to="/" className="nav-link" name='Products' onClick={this.handleItemClick}>
+            <FontAwesomeIcon
+              icon={faCannabis}
+              className="mr-2"
+            ></FontAwesomeIcon>
+        <span>Strains</span>
+        </Button>
+      </li>
             <li className="nav-item">
             <Button color='olive' to="/" className="nav-link" name='Products' onClick={this.handleItemClick}>
               <FontAwesomeIcon
@@ -284,6 +293,7 @@ extraImages: [
                     activeItem={activeItem}
                     updatedProducts={this.props.updatedProducts}
                     displayItemForDelete={this.props.displayItemForDelete}
+                    storeproducts={this.props.storeproducts}
                     productUpdated={this.props.productUpdated}
                     submitStoreHandler={this.props.submitStoreHandler}
                     submitProductHandler={this.props.submitProductHandler}

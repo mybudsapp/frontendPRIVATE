@@ -4,7 +4,7 @@ import axios from './axios';
 import UserProductContainer from "../Components/UserProductContainer"
 
 
-export default function ProductsAdapter({fetchProducts, userProducts, strains, token, displayItemForEdit, editProducts, displayItemForDelete}){
+export default function ProductsAdapter({fetchProducts, userProducts, strains, token, displayItemForEdit, editProducts, displayItemForDelete, storeproducts}){
 
 
 
@@ -32,6 +32,6 @@ export default function ProductsAdapter({fetchProducts, userProducts, strains, t
     if (products === null) {
       return <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
     } else {
-     return <UserProductContainer fromAdpater="yes" displayItemForDelete={displayItemForDelete} displayItemForEdit={displayItemForEdit} editProducts={editProducts} products={products} strains={strains} token={token}/>
+     return <UserProductContainer fromAdpater="yes" storeproducts={storeproducts} displayItemForDelete={displayItemForDelete} displayItemForEdit={displayItemForEdit} editProducts={editProducts} products={products} strains={strains} token={token}/>
     }
 }

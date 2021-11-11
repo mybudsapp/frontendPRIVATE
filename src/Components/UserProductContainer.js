@@ -60,27 +60,111 @@ componentDidMount = () => {
         }
 
 
-        clothesProductsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete) => {
+        clothesProductsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete, storeRelationships) => {
 
 
             let newProducts = []
 
-             newProducts = products
+             newProducts = products.filter(product => product.producttype === "Clothes")
+
+             let relationships = []
+
+             relationships = storeRelationships
 
 
-                console.log(products, newProducts)
-            if (newProducts.length > 0){
 
-                return products.filter(product => product.producttype === "Clothes").map(filteredProduct =>
-                    <ProductCard
-                        displayItemForDelete={displayItemForDelete}
-                        product={filteredProduct}
-                        editProducts={editProducts}
-                        displayItemForEdit={displayItemForEdit}/>)
+             if (newProducts.length > 0){
 
-            }else{
-                return  <Segment><h1>No Clothes</h1></Segment>
-            }
+                 return newProducts.map(filteredProduct =>
+                     <ProductCard
+                         displayItemForDelete={displayItemForDelete}
+                         product={filteredProduct}
+                         editProducts={editProducts}
+                         displayItemForEdit={displayItemForEdit}/>)
+
+                     }else{
+                         return  <Segment><h1>No Clothes</h1></Segment>
+                     }
+             //const storeRelationshipsBelongToProduct = newProducts.filter(product => relationships.includes(product))
+
+
+
+             //
+             // let result = newProducts.filter(function (product) {
+             //     return !relationships.some(function (relationship) {
+             //         console.log(relationship)
+             //         return relationship; // return the ones with equal id
+             //     });
+             // });
+
+             //let onlyInRelationships = relationships.filter(relationship => !newProducts.includes(relationship));
+
+
+             // function productRelationships()
+             //
+             // return relationships.filter(relationship => relationship.product_id == product.id)
+
+             //const r = relationships.filter((relationship) => newProducts.find(product => relationship.product_id === product.id))
+
+             //const s = relationships.filter((relationship) => newProducts.find(product => relationship.store_id == product.store_id && relationship.product_id == product.id, console.log(relationship, product)))
+
+//              n.forEach((num1, index) => {
+//   const num2 = m[index];
+//   console.log(num1, num2);
+// });
+
+
+             // let diff = function(relationship,product) {
+             //     let ret = [];
+             //     relationships.sort();
+             //     products.sort();
+             //     for(let i = 0; i < relationships.length; i += 1) {
+             //         if(relationship.store_id == product.store_id && relationship.product_id == product.id){
+             //             ret.push(relationship);
+             //         }
+             //     }
+             //     return ret;
+             // };
+
+
+
+
+            //products.indexOf(relationships[i]) > -1,
+
+
+
+
+             //
+             // function comparer(otherArray){
+             //     return function(current){
+             //         return otherArray.filter(function(other){
+             //             return other.product_id == current.id && other.store_id == current.store_id
+             //         }).length == 0;
+             //     }
+             // }
+
+//let onlyInProducts = newProducts.filter(products => comparer(products, relationships));
+
+
+//let relationships = newProducts.store_products.filter(relationship => relationship.includes(storeproducts))
+
+// relationships.forEach((relationship, index) => {
+//     const product = newProducts[index];
+//     const relationshipToStore = console.log(relationship.product_id, product.id)
+// })
+
+
+//const matchingCondition = ({ product, relationship }) => product.id === relationship.product_id;
+
+// filter all items from B that satisfy a matching condition with at least one item from A
+// const matches = newProducts.filter(
+//   product => relationships.some(
+//     relationship => matchingCondition({  product, relationship  }, console.log(product.id === relationship.product_id))
+//   )
+// );
+//
+// console.log(matches)
+
 
      //return products.filter(product => product.producttype === "Clothes").map(filteredProduct => <ProductCard product={filteredProduct} editProducts={editProducts} displayItemForEdit={displayItemForEdit}/>)
 
@@ -90,7 +174,7 @@ componentDidMount = () => {
 
 
 
-            concentratesDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete) => {
+            concentratesDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete, storeproducts) => {
 
 
                     const concentrateProducts = products.filter(product => product.producttype === "Concentrates")
@@ -114,7 +198,7 @@ componentDidMount = () => {
 
 }
 
-                foodItemsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete) => {
+                foodItemsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete, storeproducts) => {
 
                     const edibleProducts = products.filter(product => product.producttype === "Edibles")
 
@@ -188,7 +272,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete): <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeRelationships): <span>No Items</span>}
 
                             </Card.Group>
 
@@ -227,7 +311,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.concentratesDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete) : <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.concentratesDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeproducts) : <span>No Items</span>}
 
                             </Card.Group>
 
@@ -267,7 +351,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.foodItemsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete) : <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.foodItemsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeproducts) : <span>No Items</span>}
 
                             </Card.Group>
 
@@ -307,7 +391,7 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.accessoriesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete) : <span>No Items</span>}
+                                {this.props.products.length > 0 ? this.accessoriesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeproducts) : <span>No Items</span>}
 
                             </Card.Group>
 

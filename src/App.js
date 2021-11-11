@@ -96,13 +96,19 @@ class App extends Component {
             res.text().then(this.props.history.push("/home"))
           } else {
             return res.json().then((userData) => {
-
+                console.log(userData)
           this.setState({
             user: { ...userData.user },
             avatar: { ...userData.user.avatar}
           });
         })
-        .then(() => this.props.history.push("/dashboard/"));
+        .then(() => this.props.history.push("/dashboard/")).catch((error) => {
+
+            this.setState({
+                      errorMessage: error,
+                      hasError: true
+                  })
+        });;
     }})} else {
         this.props.history.push("/home")
     }
@@ -661,7 +667,7 @@ class App extends Component {
         console.log(errorData)
       this.setState({
           ...this.state.user,
-          errors: {...errorData.error},
+          errors: {...errorData},
           message: errorData.message,
           errorCode: [errorData.errorCode],
           productRequest: newProductInfo,
@@ -699,13 +705,20 @@ class App extends Component {
       let token = localStorage.getItem('token')
 
 
+
+
+
+
+
+
+
       fetch(`http://localhost:3000/api/v1/products/`, {
         method: "POST",
         headers: {
           "content-type": "application/json",
           accepts: "application/json",
         },
-        body: JSON.stringify({ product: this.state.productRequest, sameProductType: true}),
+        body: JSON.stringify({ product: this.state.productRequest, newRelationship: true}),
       }).then((response) => {
           console.log(response)
       if (!response.ok) {
@@ -763,11 +776,12 @@ displayItemForEdit = (product_id) => {
 
     const productID = product_id.target.parentElement.parentElement.parentElement.getAttribute("id")
 
-
+    let token = localStorage.getItem("token");
 
     fetch(`http://localhost:3000/api/v1/products/${productID}`, {
       method: "GET",
       headers: {
+          Authorization: `${token}`,
         "content-type": "application/json",
         accepts: "application/json",
     }}).then((response) => {
@@ -798,48 +812,24 @@ displayItemForEdit = (product_id) => {
 }
 
 
-displayItemForDelete = (e) => {
+displayItemForDelete = (e, storeProducts) => {
 
     e.preventDefault()
+
 
     const productID = e.target.parentElement.parentElement.parentElement.getAttribute("id")
 
 
-    fetch(`http://localhost:3000/api/v1/products/${productID}`, {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-      }
-  }).then((response) => {
-        console.log(response)
-    if (!response.ok) {
-      return response.json().then((errorData) => {
-          console.log(errorData)
-        this.setState({
-            ...this.state.user,
-            errors: {...errorData.error},
-            message: errorData.message,
-            errorCode: [errorData.errorCode],
-            hasError: true,
-        productUpdated: !this.state.productUpdated })
-    })
+          const product = this.state.user.products.filter(x => x.id == productID)
 
-  } else {
-      return response.json().then((productData) => {
+          const relationships = this.state.user.store_products.filter(x => x.product_id == productID)
+
+
           this.setState({
-              productToDelete: productData,
+              productToDelete: product,
+              productRelationships: relationships,
               showDelete: true
           })
-
-  });
-  }}).catch((error) => {
-      this.setState({
-                errorMessage: error,
-                hasError: true
-            })
-  });
-
 
 
 
@@ -849,21 +839,20 @@ submitDeleteProductHandler = (e) => {
 
     let token = localStorage.getItem('token');
 
-
-    console.log("ELDIABLOE ESTA EN EL SUBMIT", e.target)
-
-
     e.preventDefault()
 
     const productID = e.target.parentElement.parentElement.parentElement.getAttribute("id")
 
+    const relationshipIDToDelete = e.target.parentElement.parentElement.parentElement.firstElementChild.children[3].childNodes[3].value
+
 
     fetch(`http://localhost:3000/api/v1/products/${productID}`, {
-      method: 'DESTROY',
+      method: 'DELETE',
       headers: {
         "content-type": "application/json",
-        accepts: "application/json",
-      }
+        accepts: "application/json"
+    },
+    body: JSON.stringify({ product: this.state.productRequest, relationshipToDelete: relationshipIDToDelete })
   }).then((response) => {
         console.log(response)
     if (!response.ok) {
@@ -1514,7 +1503,13 @@ submitDeleteProductHandler = (e) => {
           </Modal.Header>
           <Modal.Body>
               <span>Are You Sure You Would Like to Delete this?</span>
-              <ProductCard submitDeleteProductHandler={this.submitDeleteProductHandler} product={this.state.productToDelete} showDelete={this.state.showDelete}
+              <ProductCard
+                  submitDeleteProductHandler={this.submitDeleteProductHandler}
+                  userStoreProductRelationships={this.state.user.store_products}
+                  closeWindow={this.handleShowDeleteClose}
+                  productRelationships={this.state.productRelationships}
+                  product={this.state.productToDelete}
+                  showDelete={this.state.showDelete}
                   />
           </Modal.Body>
           <Modal.Footer>
@@ -1563,6 +1558,7 @@ submitDeleteProductHandler = (e) => {
                       sendThisStrainToEdit={this.sendThisStrainToEdit}
                       products={this.state.user.products}
                       updatedProducts={this.state.products}
+                      storeproducts={this.state.user.store_products}
                       submitProductHandler={this.submitProductHandler}
                       deleteProductRequest={this.deleteProductRequest}
                       submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}

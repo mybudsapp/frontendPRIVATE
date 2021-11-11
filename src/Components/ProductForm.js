@@ -1,6 +1,6 @@
 
 import React, {Component} from 'react'
-import {Card,Form, Label, Button, Segment, Select, Dropdown} from 'semantic-ui-react'
+import {Card,Form, Label, Button, Segment, Select, Dropdown, Divider} from 'semantic-ui-react'
 import PropTypes from 'prop-types'
 
 const initialState = {
@@ -56,8 +56,7 @@ changeHandler = (e) => {
 
         this.setState({
     ...this.state.product,
-    user_id: e.target.parentElement.parentElement.getAttribute("user"),
-    store_id: e.target.getAttribute("storeID"),
+    user_id: e.target.parentElement.parentElement.parentElement.getAttribute("userID"),
     [e.target.name]: e.target.value
 })
 
@@ -98,6 +97,22 @@ submitHandler = (e, product, props) => {
 
 }
 
+dispensariesOptionsForRetailPrice = (stores) => {
+
+
+    if(stores){
+        stores = stores
+    }else{
+        return <h1> Create a Store </h1>
+    }
+    return stores.map(store => {
+        return <option key={store.id} storeid={store.id} value={store.id}>{store.namespace}</option>;
+        })
+
+
+    }
+
+
 
 render() {
 
@@ -118,7 +133,28 @@ const productOptions = [
 
         <Segment raised textAlign="left">
             <div class="ui form" encType="multipart/form-data" userID={this.props.user.id}>
-             <Form onSubmit={e => this.submitHandler(e, this.state, this.props)}>
+                <Form onSubmit={e => this.submitHandler(e, this.state, this.props)}>
+                   <p>Add Retail Price or Change Retail Price</p>
+                <Form.Field>
+                <label>Retail Price:</label>
+                <input type="number" onChange={this.changeHandler} name="retail_price"></input>
+                <br></br>
+                <br></br>
+                </Form.Field>
+
+                <Form.Field>
+
+                <label>Located at Which Store:</label>
+                <select name="store_id"  onChange={this.changeHandler}>
+                   <option name="Choose a Store">Choose a Store</option>
+                   {this.dispensariesOptionsForRetailPrice(this.props.stores)}
+                </select>
+            </Form.Field>
+                <br></br>
+                <br></br>
+
+
+                <br></br>
                  <Form.Field>
            <label>Product Name:</label>
                <input
@@ -167,13 +203,6 @@ const productOptions = [
 
           <br></br>
           <br></br>
-          <Form.Field>
-              <label>Located at Which Store</label>
-              <select name="store_id"  onChange={this.changeHandler}>
-                 <option name="Create a Store">Choose a Store</option>
-                 {this.dispensariesOptions(this.props.stores)}
-              </select>
-          </Form.Field>
           <br></br>
            <button type="button" onClick={e => this.submitHandler(e, this.state, this.props)}>Submit</button>
            </Form>

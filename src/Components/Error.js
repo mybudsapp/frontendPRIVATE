@@ -15,11 +15,24 @@ class Error extends Component{
 
             let errorObject = Object.assign(errors)
 
+console.log(errorObject)
+        //     for (const [key, value] of Object.entries(errorObject)) {
+        //   return `${key} ${value}`;
+        // }
+        let keys = Object.keys(errorObject);
 
-            for (const [key, value] of Object.entries(errorObject)) {
-          return `${key} ${value}`;
-        }
-    }
+for (var i = 0; i < keys.length; i++) {
+    var val = errorObject[keys[i]];
+    console.log(i)
+    return `${val}`
+}
+
+
+}
+
+
+
+
 
 
 
@@ -36,7 +49,7 @@ render(){
             return (<div><p1>{this.props.message}</p1>
             <br></br>
             <br></br>
-            <Button onClick={this.props.submitFixedProductRequest}>Yes</Button><Button onClick={this.props.closeErrorWindow}>No</Button></div>)
+            </div>)
     }else if(errorCode == 1){
                     return <div><p1>{this.props.message}</p1><button onClick={this.props.submitFixedProductRequest}>Yes</button></div>
     }else if(errorCode == 4){

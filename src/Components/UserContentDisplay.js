@@ -54,7 +54,41 @@ class UserContentDisplay extends Component{
     }
 
 
-componentDidMount(){
+componentDidMount = () => {
+
+    let token = localStorage.getItem('token')
+
+  // 
+  //   fetch(`http://localhost:3000/api/v1/store_products/`, {
+  //     method: "GET",
+  //     headers: {
+  //         Authorization: `${token}`,
+  //       "content-type": "application/json",
+  //       accepts: "application/json",
+  //   }}).then((response) => {
+  //       console.log(response)
+  //   if (!response.ok) {
+  //     return response.json().then((errorData) => {
+  //         console.log(errorData)
+  //       this.setState({
+  //           ...this.state.user,
+  //           errors: {...errorData.error},
+  //           message: errorData.message,
+  //           errorCode: [errorData.errorCode],
+  //           hasError: true,
+  //       productUpdated: !this.state.productUpdated })
+  //   })
+  // } else {
+  //     return response.json().then((storeRelationships) => {
+  //         console.table(storeRelationships)
+  //         this.setState({
+  //             storeRelationships: storeRelationships
+  //         })
+  //
+  // });
+  //
+  // }})
+
 
 }
 
@@ -482,6 +516,7 @@ render(){
                                   displayItemForDelete={this.props.displayItemForDelete}
                                   editProducts={this.props.editProducts}
                                   fetchProducts={requests.fetchProducts}
+                                  storeRelationships={this.state.storeRelationships}
                                   products={this.props.user.products}
                                   updatedProducts={this.props.updatedProducts}
                                   strains={this.props.user.strains}
@@ -536,10 +571,12 @@ render(){
                               <br></br>
 
                               <ProductsAdapter
-                                  displayItemForDelete={this.props.displayItemForDelete} 
+                                  displayItemForDelete={this.props.displayItemForDelete}
                                   displayItemForEdit={this.props.displayItemForEdit}
+                                  storeproducts={this.state.storeProducts}
                                   editProducts={this.props.editProducts}
                                   fetchProducts={requests.fetchProducts}
+                                  storeproducts={this.props.storeproducts}
                                   products={this.props.user.products}
                                   strains={this.props.user.strains}
                                   token={localStorage.token}/>

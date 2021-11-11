@@ -12,11 +12,11 @@ let displayCorrectImage = (product) => {
 
 if(product.producttype == "Clothes") {
 
-return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/plasticine/2x/clothes.png"></Item.Image>
+return <Item.Image  floated='right' size="tiny" id="productavatar" src="https://img.icons8.com/plasticine/2x/clothes.png"></Item.Image>
 
 } else if (product.producttype == "Supplies") {
 
-return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/cotton/2x/length-1.png"></Item.Image>
+return <Item.Image  floated='right' size="tiny" id="productavatar" src="https://img.icons8.com/cotton/2x/length-1.png"></Item.Image>
 
 } else if (product.producttype == "Foods") {
 
@@ -32,6 +32,42 @@ return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/bu
 
 }
 
+const displayCurrentStoreRelationship = (productRelationships) => {
+
+    const productRelationshipsArray = productRelationships
+
+
+
+    // const uniqueRelationship = productRelationshipsArray.filter((thing, index, self) =>
+//
+//   index === self.findIndex((t) => (
+//
+//     t.id === thing.product_id && t.namespace === thing.namespace
+//   ))
+// )
+
+
+const uniq = new Set(productRelationshipsArray.map(e => JSON.stringify(e)));
+
+const res = Array.from(uniq).map(e => JSON.parse(e));
+
+console.log(res, "FEFR")
+
+    if (res.length > 0){
+
+        return res.map(relationship => {
+            return <option value={relationship.id} storeid={relationship.store_id}> {relationship.namespace} for ${relationship.retail_price} </option>;
+            })
+            }else{
+                return  <Segment><h1>No Relationship</h1></Segment>
+            }
+
+
+    }
+
+
+
+
     if(!props.showDelete){
     return <Card id={props.product.id} name={props.product.productname} >
                 {displayCorrectImage(props.product)}
@@ -40,11 +76,13 @@ return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/bu
                     {props.product.productname}
                 </h2>
                 <Card.Description>
-                    {props.product.producer, console.log(props)}
+                    By {props.product.producer}
                 </Card.Description>
+
+
             </Card.Content>
                 <div className='ui two buttons'>
-                {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e)}>Delete</Button></div> : <Button basic color='green'  id={props.product.id}>
+                {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e, props.storeProducts)}>Delete</Button></div> : <Button basic color='green'  id={props.product.id}>
                   View Product
                 </Button>}
             </div>
@@ -52,23 +90,37 @@ return <Item.Image size="tiny" id="productavatar" src="https://img.icons8.com/bu
 
 
 }else{
-            return  <Card id={props.product.id} name={props.product.productname}>
+
+
+            return  <Card id={props.product[0].id} name={props.product.productname}>
       <Card.Content>
-        {displayCorrectImage(props.product)}
+        {console.log(props.product[0], props)}
+            <br></br>
 
-        <Card.Description>{props.product.productname}</Card.Description>
+        <Card.Description>{props.product[0].productname}</Card.Description>
         <Card.Meta>
-          By {props.product.producer}
-
+                <br></br>
+          By {props.product[0].producer}
   </Card.Meta>
-    <Card.Meta></Card.Meta>
-      </Card.Content>
+    <Card.Meta>
+        <br></br>
+        <span>Will No longer be Sold in Which Store:</span>
+        <br></br>
+        <select name="store_product_id" >
+            <option name="Choose a Store">Choose a Store</option>
+            {displayCurrentStoreRelationship(props.productRelationships)}
+        </select>
+    </Card.Meta>
+
+
+
+</Card.Content>
       <Card.Content extra>
         <div className='ui two buttons'>
           <Button basic color='green' onClick={(e) => props.submitDeleteProductHandler(e)}>
             Approve
           </Button>
-          <Button basic color='red'>
+          <Button basic color='red' onClick={props.closeWindow}>
             Decline
           </Button>
         </div>
