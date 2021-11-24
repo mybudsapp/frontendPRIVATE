@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import {Responsive,Visibility, Label, Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Feed, Item} from "semantic-ui-react"
+import {Responsive,Visibility, Label, Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Feed, Item, Container} from "semantic-ui-react"
 import ProductsAdapter from "../Adapters/Adapter"
 import requests from '../Adapters/Requestobject'
 import {Link, withRouter} from 'react-router-dom'
@@ -14,6 +14,10 @@ import ProductForm from "./ProductForm"
 import NewStoreForm from "./NewStoreForm"
 import UserShopContainer from './UserShopContainer'
 import UserProductContainer from './UserProductContainer'
+import UserStrainContainer from './UserStrainContainer'
+import UserStrainReviewsContainer from './UserStrainReviewsContainer'
+import FeedPostCard from './FeedPostCard'
+import NewStrainForm from "./StrainForm"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
     faCannabis,
@@ -32,8 +36,10 @@ import {
   faUtensils,
   faToolbox,
   faPlus,
-  faMinus
+  faMinus,
+  faSync
 } from "@fortawesome/free-solid-svg-icons";
+import InfiniteScroll from 'react-infinite-scroll-component';
 //
 
 
@@ -58,7 +64,7 @@ componentDidMount = () => {
 
     let token = localStorage.getItem('token')
 
-  // 
+  //
   //   fetch(`http://localhost:3000/api/v1/store_products/`, {
   //     method: "GET",
   //     headers: {
@@ -214,6 +220,14 @@ buddiesDisplay = () => {
 
         }
 
+        refreshFeedButtonClicked = () => {
+            console.log("YIPPIE")
+        }
+
+        refreshNotificationButtonClicked = () => {
+            console.log("MEHNIGGGA")
+        }
+
 render(){
 
 
@@ -226,14 +240,9 @@ render(){
 
 
 
-
         return(
             <Segment padded='very' vertical>
-                <Segment>
-                    <h3>This Is Your Store's Dashboard...</h3>
-                    <h3>Adding Your Store to My Bud's is pretty simple. Your business must already be listed and registered on Google. Incentivising stores to register on Google encourages businesses to build their online presence and is a requirement to have a store on My Buds.  </h3>
 
-                </Segment>
                 <div>
                     <Grid columns={2}>
                     <br></br>
@@ -273,43 +282,334 @@ render(){
         )
     } else if(this.props.activeItem === 'Feed'){
 
+        const items = [
+        <Feed.Event>
+        <Feed.Label>
+        <img src='https://images.unsplash.com/photo-1535740451417-25dafb0667bb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
+        </Feed.Label>
+        <Feed.Content>
+        <Feed.Summary>
+        <Feed.User>Elliot Fu</Feed.User> added you as a friend
+        <Feed.Date>1 Hour Ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />4 Likes
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+    </Feed.Event>,
 
+        <Feed.Event>
+        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+        <Feed.Content>
+        <Feed.Summary>
+        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+        <Feed.Date>4 days ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Extra images>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+        </a>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+        </a>
+        </Feed.Extra>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />1 Like
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+    </Feed.Event>,
+        <Feed.Event>
+        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+        <Feed.Content>
+        <Feed.Summary>
+        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+        <Feed.Date>4 days ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Extra images>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+        </a>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+        </a>
+        </Feed.Extra>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />1 Like
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+    </Feed.Event>,
+        <Feed.Event>
+        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+        <Feed.Content>
+        <Feed.Summary>
+        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+        <Feed.Date>4 days ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Extra images>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+        </a>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+        </a>
+        </Feed.Extra>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />1 Like
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+    </Feed.Event>,
+        <Feed.Event>
+        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+        <Feed.Content>
+        <Feed.Summary>
+        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+        <Feed.Date>4 days ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Extra images>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+        </a>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+        </a>
+        </Feed.Extra>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />1 Like
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+    </Feed.Event>,
+        <Feed.Event>
+        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+        <Feed.Content>
+        <Feed.Summary>
+        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+        <Feed.Date>4 days ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Extra images>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+        </a>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+        </a>
+        </Feed.Extra>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />1 Like
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+    </Feed.Event>,
+
+        <Feed.Event>
+        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+        <Feed.Content>
+        <Feed.Summary>
+        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+        <Feed.Date>4 days ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Extra images>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+        </a>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+        </a>
+        </Feed.Extra>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />1 Like
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+    </Feed.Event>,
+        <Feed.Event>
+        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+        <Feed.Content>
+        <Feed.Summary>
+        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+        <Feed.Date>4 days ago</Feed.Date>
+        </Feed.Summary>
+        <Feed.Extra images>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+        </a>
+        <a href="/profile">
+        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+        </a>
+        </Feed.Extra>
+        <Feed.Meta>
+        <Feed.Like>
+        <Icon name='like' />1 Like
+        </Feed.Like>
+        </Feed.Meta>
+        </Feed.Content>
+        </Feed.Event>,
+            <Feed.Event>
+            <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+            <Feed.Content>
+            <Feed.Summary>
+            <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+            <Feed.Date>4 days ago</Feed.Date>
+            </Feed.Summary>
+            <Feed.Extra images>
+            <a href="/profile">
+            <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+            </a>
+            <a href="/profile">
+            <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+            </a>
+            </Feed.Extra>
+            <Feed.Meta>
+            <Feed.Like>
+            <Icon name='like' />1 Like
+            </Feed.Like>
+            </Feed.Meta>
+            </Feed.Content>
+            </Feed.Event>
+        ]
+
+        const style = {
+          height: 30,
+          border: "1px solid green",
+          margin: 6,
+          padding: 8
+        };
+
+
+        // <Container >
+        //     <Segment  textAlign="left">
+        //         Friend's Feed
+        //     </Segment>
+        //
+        //     <Segment  textAlign="right">
+        //         Notifications
+        //     </Segment>
+        // </Container>
 
         return(
 
 
-                  <Segment padded='very'>
-                      <Segment>
-                          <h1>This Will Be Your Feed...</h1>
 
-                      </Segment>
-                      <Feed>
-                          {this.mobileScreen(getWidth)?
+                  <Segment vertical padded='very' style={{'padding-top': 0}}>
+
+                          {
+                               this.mobileScreen(getWidth)?
                               <Visibility >
-                              <Feed.Event>
-                                <Feed.Label>
 
-                                </Feed.Label>
-                                <Feed.Content>
-                                  <Feed.Summary>
-                                      <h3>
-                                    Welcome To My Buds
-                                </h3>
-                                  </Feed.Summary>
-                                  <Feed.Extra text>
-                                      <h3>
-                                      Through the Desktop View, Business Owners can add Stores, add Items, and stay up to date with their store's following. Focusing on business that do not have a strong internet presence, the ease of using My Buds as an engagement and retention tool allow smaller businesses to have an edge over more "Well Known" businesses on Google and other websites. To See the Mobile Version, Visit the Website through a Mobile Device or Adjust your browser's settings and refresh.
-                                  </h3>
-                                  </Feed.Extra>
-                                  <Feed.Meta>
+                                  <Grid celled='internally' style={{height: '100vh'}}>
+                          <Grid.Row>
+                            <Grid.Column width={1}>
+                                <Segment.Group horizontal>
+                                <Segment vertical>Feed
+                                </Segment>
+                                <Segment vertical >
+                                    <a onClick={this.refreshFeedButtonClicked}>
+                                    <FontAwesomeIcon
+                                    icon={faSync}
+                                    className="fa-2x text-gray-300">
+                                </FontAwesomeIcon>
+                                <Label color='red' floating>
+        22
+      </Label>
+  </a>
 
-                                  </Feed.Meta>
-                                </Feed.Content>
-                              </Feed.Event>
+                            </Segment>
+                        </Segment.Group>
+
+                                <InfiniteScroll
+                                    dataLength={items.length}
+                                    loader={<h4>Loading...</h4>}
+                                    height={800}
+                                    scrollableTarget="infinite-scroll-component__outerdiv"
+                                    endMessage={
+                                <p style={{ textAlign: 'center' , height: '100%'}}>
+                                    <b>Yay! You have seen it all</b>
+                                </p>
+                            } >
+                            <FeedPostCard></FeedPostCard>
+                            <FeedPostCard></FeedPostCard>
+                      </InfiniteScroll>
+
+                            </Grid.Column>
+
+
+
+
+
+                            <Grid.Column width={1}>
+                                <Segment.Group horizontal>
+                                <Segment vertical>Notifications
+
+                                </Segment>
+                                <Segment vertical>
+                                    <a onClick={this.refreshNotificationButtonClicked}>
+                                    <FontAwesomeIcon
+                                    icon={faSync}
+                                    className="fa-2x text-gray-300">
+                                </FontAwesomeIcon>
+                                <Label color='red' floating>
+        22
+      </Label>
+  </a>
+                            </Segment>
+                        </Segment.Group>
+                                <InfiniteScroll
+                                    dataLength={items.length}
+                                    loader={<h4>Loading...</h4>}
+                                    height={800}
+                                    scrollableTarget="infinite-scroll-component__outerdiv"
+                                    endMessage={
+                                <p style={{ textAlign: 'center' , height: '100%'}}>
+                                    <b>Yay! You have seen it all</b>
+                                </p>
+                            }
+
+                      >
+
+                      <Feed>
+
+                      {items.map((i, index) => (
+                                  i
+                                ))}
+
+                            </Feed>
+                      </InfiniteScroll>
+                      </Grid.Column>
+                          <Grid.Column>
+
+
+
+                    <Feed>
+
+                       </Feed>
+
+                       </Grid.Column>
+
+                          </Grid.Row>
+
+                          <Grid.Row>
+
+                          </Grid.Row>
+                        </Grid>
+
+
                           </Visibility> : <Visibility >
+
+                          <FeedPostCard
+                              handleShowComment={this.props.handleShowComment}/>
                      <Feed.Event>
                        <Feed.Label>
-
                        </Feed.Label>
                        <Feed.Content>
                          <Feed.Summary>
@@ -329,128 +629,8 @@ render(){
 
 
 
-              <Feed.Event>
-                <Feed.Label>
-                  <img src='https://images.unsplash.com/photo-1535740451417-25dafb0667bb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
-                </Feed.Label>
-                <Feed.Content>
-                  <Feed.Summary>
-                    <Feed.User>Elliot Fu</Feed.User> added you as a friend
-                    <Feed.Date>1 Hour Ago</Feed.Date>
-                  </Feed.Summary>
-                  <Feed.Meta>
-                    <Feed.Like>
-                      <Icon name='like' />4 Likes
-                    </Feed.Like>
-                  </Feed.Meta>
-                </Feed.Content>
-              </Feed.Event>
 
-              <Feed.Event>
-                <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-                <Feed.Content>
-                  <Feed.Summary>
-                    <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-                    <Feed.Date>4 days ago</Feed.Date>
-                  </Feed.Summary>
-                  <Feed.Extra images>
-                    <a href="/profile">
-                      <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-                    </a>
-                    <a href="/profile">
-                      <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-                    </a>
-                  </Feed.Extra>
-                  <Feed.Meta>
-                    <Feed.Like>
-                      <Icon name='like' />1 Like
-                    </Feed.Like>
-                  </Feed.Meta>
-                </Feed.Content>
-              </Feed.Event>
-
-              <Feed.Event>
-                <Feed.Label image='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
-                <Feed.Content>
-                  <Feed.Summary>
-                    <a href="/profile">Drigo Marquez</a> added <a>2 new Photos</a>
-                    <Feed.Date>4 days ago</Feed.Date>
-                  </Feed.Summary>
-                  <Feed.Extra images>
-                    <a href="/profile">
-                      <img src='https://images.unsplash.com/photo-1581954548122-4dff8989c0f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80' />
-                    </a>
-                    <a href="/profile">
-                      <img src='https://images.unsplash.com/photo-1581954548218-415cd6ee5f4d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80' />
-                    </a>
-                  </Feed.Extra>
-                  <Feed.Meta>
-                    <Feed.Like>
-                      <Icon name='like' />1 Like
-                    </Feed.Like>
-                  </Feed.Meta>
-                </Feed.Content>
-              </Feed.Event>
-
-              <Feed.Event>
-                <Feed.Label image='https://images.unsplash.com/photo-1437913135140-944c1ee62782?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80' />
-                <Feed.Content>
-                  <Feed.Summary
-                    date='2 Days Ago'
-                    user='Jenny Hess'
-                    content=' add you as a friend'
-                  />
-                  <Feed.Meta>
-                    <Feed.Like>
-                      <Icon name='like' />8 Likes
-                    </Feed.Like>
-                  </Feed.Meta>
-                </Feed.Content>
-              </Feed.Event>
-
-              <Feed.Event>
-                <Feed.Label image='https://images.unsplash.com/photo-1609220136736-443140cffec6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-                <Feed.Content>
-                  <Feed.Summary>
-                    <a href="/profile">Joe Henderson</a> reviewed <a href="/storeprofile">Dos Amigo's Watches</a>
-                    <Feed.Date>3 days ago</Feed.Date>
-                  </Feed.Summary>
-                  <Feed.Extra text>
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-                  </Feed.Extra>
-                  <Feed.Meta>
-                    <Feed.Like>
-                      <Icon name='like' />5 Likes
-                    </Feed.Like>
-                  </Feed.Meta>
-                </Feed.Content>
-              </Feed.Event>
-
-              <Feed.Event>
-                <Feed.Label image='https://images.unsplash.com/photo-1602256927451-407682b34c4b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-                <Feed.Content>
-                  <Feed.Summary>
-                    <a href="/profile">Justen Kitsune</a> added <a>2 new photos</a> of you
-                    <Feed.Date>4 days ago</Feed.Date>
-                  </Feed.Summary>
-                  <Feed.Extra images>
-                    <a href="/profile">
-                      <img src='https://images.unsplash.com/photo-1517456793572-1d8efd6dc135?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-                    </a>
-                    <a href="/profile">
-                      <img src='https://images.unsplash.com/photo-1619537765491-c2b80c842e10?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80' />
-                    </a>
-                  </Feed.Extra>
-                  <Feed.Meta>
-                    <Feed.Like>
-                      <Icon name='like' />
-                      41 Likes
-                    </Feed.Like>
-                  </Feed.Meta>
-                </Feed.Content>
-            </Feed.Event>
-            </Feed>
-
+            {console.log(this.props)}
                   </Segment>
 
 
@@ -604,136 +784,139 @@ render(){
                 <EditProfile  submitHandler={this.props.submitHandler}/>
 
 )
-}else if(this.props.activeItem === 'd'){
+}else if(this.props.activeItem === 'Strains'){
+
+    let divStyle = {
+  paddingLeft: 10
+
+}
 
     return(
+        <div style={{paddingLeft: '2em'}}>
+           <Segment padded='very' vertical >
+               <div><h1></h1></div>
 
-           <Segment padded='very'>
-               <Feed>
-       <Feed.Event>
-         <Feed.Label>
-           <img src='https://images.unsplash.com/photo-1535740451417-25dafb0667bb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
-         </Feed.Label>
-         <Feed.Content>
-           <Feed.Summary>
-             <Feed.User>Elliot Fu</Feed.User> added you as a friend
-             <Feed.Date>1 Hour Ago</Feed.Date>
-           </Feed.Summary>
-           <Feed.Meta>
-             <Feed.Like>
-               <Icon name='like' />4 Likes
-             </Feed.Like>
-           </Feed.Meta>
-         </Feed.Content>
-       </Feed.Event>
+               <br></br>
+               {this.state.newStrainForm? <NewStrainForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+                   <Grid columns='equal'>
+        <Grid.Row >
+          <Grid.Column>
+            <Segment >
+                <Feed >
 
-       <Feed.Event>
-         <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-         <Feed.Content>
-           <Feed.Summary>
-             <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-             <Feed.Date>4 days ago</Feed.Date>
-           </Feed.Summary>
-           <Feed.Extra images>
-             <a href="/profile">
-               <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-             </a>
-             <a href="/profile">
-               <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-             </a>
-           </Feed.Extra>
-           <Feed.Meta>
-             <Feed.Like>
-               <Icon name='like' />1 Like
-             </Feed.Like>
-           </Feed.Meta>
-         </Feed.Content>
-       </Feed.Event>
+         <Feed.Event>
+           <Feed.Label image='https://react.semantic-ui.com/images/avatar/large/steve.jpg' />
+           <Feed.Content>
 
-       <Feed.Event>
-         <Feed.Label image='https://images.unsplash.com/photo-1500648767791-00dcc994a43e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
-         <Feed.Content>
-           <Feed.Summary>
-             <a href="/profile">Drigo Marquez</a> added <a>2 new Photos</a>
-             <Feed.Date>4 days ago</Feed.Date>
-           </Feed.Summary>
-           <Feed.Extra images>
-             <a href="/profile">
-               <img src='https://images.unsplash.com/photo-1581954548122-4dff8989c0f7?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80' />
-             </a>
-             <a href="/profile">
-               <img src='https://images.unsplash.com/photo-1581954548218-415cd6ee5f4d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=400&q=80' />
-             </a>
-           </Feed.Extra>
-           <Feed.Meta>
-             <Feed.Like>
-               <Icon name='like' />1 Like
-             </Feed.Like>
-           </Feed.Meta>
-         </Feed.Content>
-       </Feed.Event>
+                 <Feed.Summary>
+                     Personality Type
+                 </Feed.Summary>
+           </Feed.Content>
+         </Feed.Event>
+         <Feed.Summary>
+             You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+         </Feed.Summary>
+            <br></br>
+         <Feed.Summary>
+             You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+         </Feed.Summary>
+         <br></br>
+         <Feed.Summary>
+             You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+         </Feed.Summary>
 
-       <Feed.Event>
-         <Feed.Label image='https://images.unsplash.com/photo-1437913135140-944c1ee62782?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=750&q=80' />
-         <Feed.Content>
-           <Feed.Summary
-             date='2 Days Ago'
-             user='Jenny Hess'
-             content=' add you as a friend'
-           />
-           <Feed.Meta>
-             <Feed.Like>
-               <Icon name='like' />8 Likes
-             </Feed.Like>
-           </Feed.Meta>
-         </Feed.Content>
-       </Feed.Event>
-
-       <Feed.Event>
-         <Feed.Label image='https://images.unsplash.com/photo-1609220136736-443140cffec6?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-         <Feed.Content>
-           <Feed.Summary>
-             <a href="/profile">Joe Henderson</a> reviewed <a href="/storeprofile">Dos Amigo's Watches</a>
-             <Feed.Date>3 days ago</Feed.Date>
-           </Feed.Summary>
-           <Feed.Extra text>
-             Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
-           </Feed.Extra>
-           <Feed.Meta>
-             <Feed.Like>
-               <Icon name='like' />5 Likes
-             </Feed.Like>
-           </Feed.Meta>
-         </Feed.Content>
-       </Feed.Event>
-
-       <Feed.Event>
-         <Feed.Label image='https://images.unsplash.com/photo-1602256927451-407682b34c4b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-         <Feed.Content>
-           <Feed.Summary>
-             <a href="/profile">Justen Kitsune</a> added <a>2 new photos</a> of you
-             <Feed.Date>4 days ago</Feed.Date>
-           </Feed.Summary>
-           <Feed.Extra images>
-             <a href="/profile">
-               <img src='https://images.unsplash.com/photo-1517456793572-1d8efd6dc135?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-             </a>
-             <a href="/profile">
-               <img src='https://images.unsplash.com/photo-1619537765491-c2b80c842e10?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=401&q=80' />
-             </a>
-           </Feed.Extra>
-           <Feed.Meta>
-             <Feed.Like>
-               <Icon name='like' />
-               41 Likes
-             </Feed.Like>
-           </Feed.Meta>
-         </Feed.Content>
-       </Feed.Event>
      </Feed>
+                    </Segment>
 
+            <Segment raised>
+                Strain Reviews
+                <UserStrainReviewsContainer
+                    displayItemForEdit={this.props.displayItemForEdit}
+                    displayItemForDelete={this.props.displayItemForDelete}
+                    editStrains={this.props.editStrains}
+                    fetchStrains={requests.fetchStrains}
+                    storeRelationships={this.state.storeRelationships}
+                    strains={this.props.user.strains}
+                    updatedStrains={this.props.updatedStrains}
+                    token={localStorage.token}/>
+            </Segment>
+          </Grid.Column>
+          <Grid.Column width={6}>
+              <Segment >
+                  <Feed >
+
+           <Feed.Event>
+             <Feed.Content>
+                 <Image size='mini' circular src='https://i.pinimg.com/originals/4f/22/a1/4f22a1fc23e0b11caf9a833bf9065b6b.jpg' />
+                 <Feed.Summary>Shops / Dispensaries </Feed.Summary>
+
+             </Feed.Content>
+           </Feed.Event>
+           <Feed.Summary>
+               You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+           </Feed.Summary>
+              <br></br>
+           <Feed.Summary>
+               You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+           </Feed.Summary>
+           <br></br>
+           <Feed.Summary>
+               You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+           </Feed.Summary>
+
+       </Feed>
+                      </Segment>
+            <Segment raised>
+                Strain Products
+                <UserStrainContainer
+                    displayItemForEdit={this.props.displayItemForEdit}
+                    displayItemForDelete={this.props.displayItemForDelete}
+                    editStrains={this.props.editStrains}
+                    fetchStrains={requests.fetchStrains}
+                    storeRelationships={this.state.storeRelationships}
+                    strains={this.props.user.strains}
+                    updatedStrains={this.props.updatedStrains}
+                    token={localStorage.token}/>
+                <Segment textAlign="center" circular raised>
+                    <FontAwesomeIcon
+                        icon={faPlus}
+                        className="fa-3x text-gray-300"></FontAwesomeIcon>
+                    <h1>add items</h1>
+                </Segment>
+                <Segment textAlign="center" circular onClick={this.props.editProductsButtonPressed} raised>
+                    <FontAwesomeIcon
+                        icon={faMinus}
+                        className="fa-3x text-gray-300"></FontAwesomeIcon>
+                    <h1>edit items</h1>
+                </Segment>
+            </Segment>
+          </Grid.Column>
+
+
+          <Grid.Column>
+
+          </Grid.Column>
+        </Grid.Row>
+
+        <Grid.Row stretched>
+          <Grid.Column>
+
+
+
+          </Grid.Column>
+          <Grid.Column width={6}>
+
+          </Grid.Column>
+
+
+          <Grid.Column>
+
+          </Grid.Column>
+        </Grid.Row>
+
+      </Grid>
            </Segment>
-
+           </div>
 
   )}else{
     return null

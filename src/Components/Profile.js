@@ -152,12 +152,7 @@ class Profile extends Component {
                   <li>
                     <img src={url} alt="url" /> jancarlos.dev
                   </li>
-                  <li>
-                    <img src={joined} alt="joined" /> Joined January 2017
-                  </li>
-                  <li>
-                    <img src={born} alt="born" /> Born the 10th of January 1996
-                  </li>
+
                 </ul>
 
                 <div className="widget images">
@@ -165,166 +160,242 @@ class Profile extends Component {
                     <img src={images} alt="images" /> 360 Photos and videos
                   </strong>
                   <ul>
+
+
+
+
                     <li><img src="https://images.unsplash.com/photo-1537372660699-9b2f1b4d47d4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img> </li>
                     <li><img src="https://images.unsplash.com/photo-1622495546323-5dac33dedb01?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80" width="80" height="80"></img></li>
                     <li><img src="https://images.unsplash.com/photo-1623555448479-22c56bfc26ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80" width="80" height="80"></img></li>
                     <li><img src="https://images.unsplash.com/photo-1623557415599-b1c648cedc07?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" width="80" height="80"></img></li>
                     <li><img src="https://images.unsplash.com/photo-1623552564094-c659f7a8150c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img></li>
                     <li><img src="https://images.unsplash.com/photo-1623363435794-e12cc4b206db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=672&q=80" width="80" height="80"></img></li>
-                  </ul>
+                        <li><img src="https://images.unsplash.com/photo-1622495546323-5dac33dedb01?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80" width="80" height="80"></img></li>
+                        <li><img src="https://images.unsplash.com/photo-1623555448479-22c56bfc26ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80" width="80" height="80"></img></li>
+                        <li><img src="https://images.unsplash.com/photo-1623557415599-b1c648cedc07?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" width="80" height="80"></img></li>
+                        <li><img src="https://images.unsplash.com/photo-1623552564094-c659f7a8150c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img></li>
+                        <li><img src="https://images.unsplash.com/photo-1623363435794-e12cc4b206db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=672&q=80" width="80" height="80"></img></li>
+
+
+
+
+
+
+</ul>
                 </div>
+
               </aside>
             </div>
-            <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
-              <section className="timeline">
-                <nav>
-                  <Link to="/" className="active">
-                    Posts
-                  </Link>
-                  <Link to="/">Posts and Reviews</Link>
-                  <Link to="/">Medias</Link>
-                </nav>
+            <div>
+            <Segment textAlign="center">
+                 Explore new Friends and Shop Photos!
+        </Segment>
+            <section class="post-list">
 
-                <ul className="tweets">
-                  <li>
-                    <img src={avatar} alt="Avatar" />
-                    <div className="info">
-                      <strong>
-                        Ben Taylor <span>@potato</span>
-                      </strong>
-                      <p>
-                        This is awesome! We should make a project together as
-                        soon as possible
-                      </p>
-                      <div className="actions">
-                        <Link to="/">
-                          <img src={comments} alt="Comments" /> 9
-                        </Link>
-                        <Link to="/">
-                          <img src={retweet} alt="Retweet" /> 15
-                        </Link>
-                        <Link to="/">
-                          <img src={like} alt="Like" /> 20
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={avatar} alt="Avatar" />
-                    <div className="info">
-                      <strong>
-                        Ben Taylor <span>@potato</span>
-                      </strong>
-                      <p>
-                        This is awesome! We should make a project together as
-                        soon as possible
-                      </p>
-                      <div className="actions">
-                        <Link to="/">
-                          <img src={comments} alt="Comments" /> 9
-                        </Link>
-
-                        <Link to="/">
-                          <img src={like} alt="Like" /> 20
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={avatar} alt="Avatar" />
-                    <div className="info">
-                      <strong>
-                        Ben Taylor <span>@potato</span>
-                      </strong>
-                      <p>
-                        This is awesome! We should make a project together as
-                        soon as possible
-                      </p>
-                      <div className="actions">
-                        <Link to="/">
-                          <img src={comments} alt="Comments" /> 9
-                        </Link>
-
-                        <Link to="/">
-                          <img src={like} alt="Like" /> 20
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                  <li>
-                    <img src={avatar} alt="Avatar" />
-                    <div className="info">
-                      <strong>
-                        Ben Taylor <span>@potato</span>
-                      </strong>
-                      <p>
-                        This is awesome! We should make a project together as
-                        soon as possible
-                      </p>
-                      <div className="actions">
-                        <Link to="/">
-                          <img src={comments} alt="Comments" /> 9
-                        </Link>
-
-                        <Link to="/">
-                          <img src={like} alt="Like" /> 20
-                        </Link>
-                      </div>
-                    </div>
-                  </li>
-                </ul>
-              </section>
-            </div>
-            <div className="col-12 col-sm-12 col-md-12 col-lg-4 col-xl-4">
-              <aside className="widgets">
-                <div className="widget follow">
-                  <div className="title">
-                    <strong>Who to follow</strong>
-                    <Link to="/">Refresh</Link>
-                    <Link to="/">View all</Link>
-                  </div>
-
-                  <ul>
-                    <li>
-                      <div className="profile">
-                        <img src="https://images.unsplash.com/photo-1623589252717-5f82f490ad78?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Avatar" />
-                        <div className="info">
-                          <strong>
-                            Troy_jade <span>@troy_jade</span>
-                          </strong>
-                          <button>Follow</button>
-                        </div>
-                      </div>
-                      <Link to="/">X</Link>
-                    </li>
-                    <li>
-                      <div className="profile">
-                        <img src="https://images.unsplash.com/photo-1623113527138-b7b030cd9c0b?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt="Avatar" />
-                        <div className="info">
-                          <strong>
-                            Jojo_12 <span>@jojo_12</span>
-                          </strong>
-                          <button>Follow</button>
-                        </div>
-                      </div>
-                      <Link to="/">X</Link>
-                    </li>
-                    <li>
-                      <div className="profile">
-                        <img src="https://images.unsplash.com/photo-1623265041640-8973a7afe898?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=1351&q=80" alt="Avatar" />
-                        <div className="info">
-                          <strong>
-                            Spade <span>@spade_be</span>
-                          </strong>
-                          <button>Follow</button>
-                        </div>
-                      </div>
-                      <Link to="/">X</Link>
-                    </li>
-                  </ul>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
                 </div>
-              </aside>
-            </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                   <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                   <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                 </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                  <figure class="post-image">
+                    <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                  </figure>
+
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                    <figure class="post-image">
+                      <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                    </figure>
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+              <a href="" class="post">
+                <figure class="post-image">
+                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                </figure>
+                <div class="post-overlay">
+                  <p>
+                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                  </p>
+                </div>
+              </a>
+            </section>
+        </div>
           </div>
         </div>
         {getWidth() > 650? null : <MobileNavBar active="profile" handleAddPostForm={this.props.handleAddPostForm}/>}
@@ -343,7 +414,7 @@ class DesktopContainer extends Component {
   };
 
   componentDidMount() {
-    
+
   }
 
   hideFixedMenu = () => this.setState({ fixed: false });

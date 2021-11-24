@@ -102,23 +102,7 @@ handleItemClick = (e, { name }) => {
 
 componentDidMount = () => {
 
-    let token = localStorage.token;
 
-    fetch("http://localhost:3000/Products", {
-      method: "GET",
-      headers: {
-        "content-type": "application/json",
-        accepts: "application/json",
-      }
-    }).then((res) => {
-      if (!res.ok) {
-        res.text().then((text) => alert(text));
-      } else {
-        return res.json().then((products) => {
-          this.setState({products});
-        });
-      }
-    });
 }
 
 

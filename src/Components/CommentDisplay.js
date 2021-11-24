@@ -134,7 +134,7 @@ class CommentDisplay extends Component {
         );
       });
     } else {
-      return null;
+      return   null
     }
 
 
@@ -272,7 +272,9 @@ if(this.props.commentType === 'strain'){
           </Form>
       </Comment.Group>
   )
-  }
+}else{
+    return <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+}
 
 
 }

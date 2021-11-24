@@ -56,6 +56,7 @@ import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
 
 import "../assets/css/navigationbar.css";
+import "../assets/css/headerbar.css";
 
 
 
@@ -213,7 +214,7 @@ extraImages: [
             </Button>
           </li>
           <li className="nav-item">
-          <Button color='olive' to="/" className="nav-link" name='Products' onClick={this.handleItemClick}>
+          <Button color='green' to="/" className="nav-link" name='Strains' onClick={this.handleItemClick}>
             <FontAwesomeIcon
               icon={faCannabis}
               className="mr-2"
@@ -302,7 +303,10 @@ extraImages: [
                     displayItemForEdit={this.props.displayItemForEdit}
                     editProductsButtonPressed={this.props.editProductsButtonPressed}
                     editProducts={this.props.editProducts}
-                    newProduct={this.props.newProduct}/>
+                    newProduct={this.props.newProduct}
+                    handleShowComment={this.props.handleShowComment}
+                    />
+
                 {console.log(this.props)}
             </Segment>
 
@@ -355,7 +359,7 @@ class DesktopContainer extends Component {
                 <div className="container content">
                   <nav>
                     <ul>
-                        <Link to="/dashboard"  >
+                        <Link to="/dashboard" onClick={() => window.location.reload()}  >
                   <li>
                         <img src={home} alt="Home" /> Home
                       </li>
@@ -446,26 +450,29 @@ class MobileContainer extends Component {
   { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
   { key: 'Shop', text: 'Shop', value: 'Shop' },
 ]
-
+    const { handleShowComment} = this.props.props
 
 
 
     return (
       <Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth} functions={this.props}>
+          <MobileHeaderBar/>
 
 
-        <div id="content-wrapper" className="d-flex flex-column">
-          <div id="content">
+
               <Segment vertical>
+                  {console.log("buskljnwc", this.props.props)}
               <UserContentDisplay
                   activeItem={activeItem}
-                  submitStoreHandler={this.props.submitStoreHandler}
-                  submitProductHandler={this.props.submitProductHandler}
-                  submitStrainHandler={this.props.submitStrainHandler}/>
+                  submitStoreHandler={this.props.props.submitStoreHandler}
+                  submitProductHandler={this.props.props.submitProductHandler}
+                  submitStrainHandler={this.props.props.submitStrainHandler}
+                  handleShowComment={handleShowComment}
+                  user={this.props.props.user}
+                  />
+
           </Segment>
 
-          </div>
-        </div>
 
         <MobileNavBar active="home" handleAddPostForm={this.props.handleAddPostForm}/>
 
@@ -477,10 +484,11 @@ MobileContainer.propTypes = {
   children: PropTypes.node,
 };
 
-const ResponsiveContainer = ({ children, functions }) => (
+const ResponsiveContainer = (props) => (
   <div>
-    <DesktopContainer props={functions}>{children}</DesktopContainer>
-    <MobileContainer props={functions}>{children}</MobileContainer>
+    <DesktopContainer props={props.functions}>{props.children}</DesktopContainer>
+        {console.log(props)}
+    <MobileContainer handleShowComment={props.handleShowComment} props={props.functions}>{props.children}</MobileContainer>
   </div>
 );
 

@@ -32,6 +32,7 @@ import { quiz } from "./Components/quiz";
 import "survey-react/survey.css";
 import * as Survey from "survey-react";
 import ProductProfile from "./Components/ProductProfile"
+import CommentDisplay from "./Components/CommentDisplay"
 
 
 class App extends Component {
@@ -53,7 +54,8 @@ class App extends Component {
     productUpdated: false,
     errorCode: 0,
     editProducts: false,
-    showDelete: false
+    showDelete: false,
+    showComment: false
   };
 
   //----------------------Life Cycle Methods should go here--------------------//
@@ -1178,6 +1180,15 @@ submitDeleteProductHandler = (e) => {
       </div>
   }
 
+  handleShowComment = () => {
+      this.setState({showComment: true})
+
+  }
+
+  handleCloseComment = () => {
+      this.setState({showComment: !this.state.showComment})
+  }
+
 
   render() {
     const sendDataToServer = (survey) => {
@@ -1478,6 +1489,21 @@ submitDeleteProductHandler = (e) => {
           </Modal.Footer>
         </Modal>
 
+        <Modal centered={true} size="lg" show={this.state.showComment} >
+
+          <Modal.Header>
+            <h3>Comment</h3>
+          </Modal.Header>
+          <Modal.Body>
+           <CommentDisplay/>
+          </Modal.Body>
+          <Modal.Footer>
+            <Button variant="secondary" onClick={this.handleCloseComment}>
+              Close
+            </Button>
+          </Modal.Footer>
+        </Modal>
+
         <Modal centered={true} size="lg" show={this.state.showEdit} >
 
           <Modal.Header>
@@ -1572,6 +1598,7 @@ submitDeleteProductHandler = (e) => {
                       displayItemForDelete={this.displayItemForDelete}
                       logOutHandler={this.logOutHandler}
                       submitHandler={this.submitHandler}
+                      handleShowComment={this.handleShowComment}
                     />
             )}
             />

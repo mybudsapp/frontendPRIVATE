@@ -35,16 +35,16 @@ class AllUsersFeed extends React.Component {
 
             this.setState({
                 users: [
-                  {id:1, username: "@Sample Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@another Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@example Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@lorem Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@epsum Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@dolor Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@sit Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@amet Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@consectetur Username", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
+                  {id:1, username: "@Sample ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@another ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@123nnkj", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@example ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@lorem ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@epsum ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@dolor ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@sit ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@amet ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
+                  {id:1, username: "@consectetur ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
               ]
           });
 
@@ -98,7 +98,17 @@ class AllUsersFeed extends React.Component {
           );
       }
       return users.map(user => {
-          return <Grid.Column ><UserCard user={user} id={user.id} handleClick={this.handleClick} handleViewUserProfile={this.props.handleViewUserProfile}/></Grid.Column>;
+          return  <Feed.Event>
+      <Feed.Label>
+        <img src={user.avatar}></img>
+      </Feed.Label>
+      <Feed.Content>
+        <Feed.Summary>
+          {user.username}
+        </Feed.Summary>
+        <Feed.Extra text>anodnaiosdiaosd bio bio</Feed.Extra>
+      </Feed.Content>
+    </Feed.Event>;
           });
       };
 
@@ -126,16 +136,12 @@ class AllUsersFeed extends React.Component {
                     <Menu.Item>
               <Input icon='search' placeholder="Search By Name" onChange={this.handleSearch} />
             </Menu.Item>
-                </Menu>
-
-                <Grid>
-                <Grid.Row>
-            </Grid.Row>
-            <Grid.Row columns={8}>
+        </Menu>
+        <Feed>
                 {this.searchedByNameUsers()}
+            </Feed>
 
-            </Grid.Row>
-        </Grid>
+
         </Segment>
         )
     }

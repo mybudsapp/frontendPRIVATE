@@ -1,5 +1,5 @@
 .fixed-top {
-  display: none;
+
 }
 
 .header-menu {
@@ -8,8 +8,8 @@
   display: flex !important;
   justify-content: center;
   align-items: center;
-  height: 75px;
-  box-shadow: 0px 7px 20px;
+  height: 60px;
+  box-shadow: 0px 0px 7px;
 }
 
 .header-menu ul {

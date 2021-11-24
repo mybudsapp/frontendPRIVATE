@@ -221,7 +221,9 @@ button {
 }
 
 #custom-profile-css div.wrapper-content {
+    overflow: hidden;
   display: flex;
+  height: 100vh;
 }
 
 .profile img.avatar {
@@ -602,4 +604,97 @@ button {
 .jumbotron .container {
   z-index: 2;
   position: relative;
+}
+
+
+.window{
+  width:100%;
+
+  background-color:#ffffff;
+  display: flex;
+  flex-direction: column;
+}
+
+.window .footer{
+  display:flex;
+  align-items:flex-end;
+  padding:10px 10px;
+  justify-content:space-between;
+  background-color:#F9F9F9;
+  box-shadow:0 -2px 5px 0px #ddd;
+}
+.window .footer img{
+  opacity:0.2;
+}
+.window .footer img:first-child{
+  opacity:1;
+}
+.window .content{
+  display: flex;
+  flex-direction: column;
+  height:100%;
+}
+.content .post{
+  display: flex;
+  align-items:center;
+  justify-content:space-between;
+    padding-left: 0px;
+    padding-right: 0px;
+
+}
+.content .post *{
+  padding:5px 0px;
+}
+.content .post .profile-img{
+  border-radius:50%;
+
+}
+.content .post .name{
+  display: flex;
+  justify-content:flex-start;
+}
+.content .post .name p{
+  padding-left:5px;
+  font-weight:bold;
+  font-size:0.8em;
+  margin-right: 10px
+;
+}
+
+.content .likes{
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+}
+.content .likes *{
+  padding:5px 5px;
+  border: 5px;
+    height: 44px;
+    margin-right: 15px;
+
+
+}
+
+.content .likes p{
+    margin-right: 15px;
+    margin-top: 10px;
+    padding: 13px;
+
+
+}
+
+.feed bar {
+     position: sticky;
+     z-index: 1;
+}
+
+.content .like-count{
+  display: flex;
+  align-items: center;
+  padding:0px 10px;
+}
+.content .like-count p{
+  font-size:0.7em;
+  padding:5px;
+  font-weight:bold;
 }
