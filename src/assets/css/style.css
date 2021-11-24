@@ -87,7 +87,7 @@ button {
 
 .btn-tweet {
   height: 34px;
-  background: #3bb9e3;
+  background: #1cc88a;
 
   display: flex;
   align-items: center;
@@ -105,7 +105,7 @@ button {
 
     height:100%;
   width: 100%;
-  background: #3bb9e3;
+  background: #1cc88a;
 
 
   display: flex;
@@ -123,7 +123,7 @@ button {
 #custom-profile-css div.banner img{
     height:100%;
   width: 100%;
-  background: #3bb9e3;
+  background: #1cc88a;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -169,16 +169,17 @@ button {
   justify-content: center;
   padding: 0 15px;
   position: relative;
+  padding-right: 50px;
 }
 
 #custom-profile-css .bar .content ul li.active::after {
   content: "";
-  width: 100%;
+  width: 65px;
   height: 2px;
   position: absolute;
   bottom: 0;
   left: 0;
-  background: #3bb9e3;
+  background: #1cc88a;
 }
 
 #custom-profile-css .bar .content ul li span {
@@ -195,7 +196,7 @@ button {
 }
 
 #custom-profile-css .bar .content ul li.active strong {
-  color: #3bb9e3;
+  color: #1cc88a;
 }
 
 #custom-profile-css .bar .content .actions {
@@ -213,15 +214,15 @@ button {
   font-weight: bold;
   font-size: 14px;
   background: #fff;
-  color: #3bb9e3;
-  border: 1px solid #3bb9e3;
+  color: #1cc88a;
+  border: 1px solid #1cc88a;
   border-radius: 16px;
 
   margin-right: 20px;
 }
 
 #custom-profile-css div.wrapper-content {
-    overflow: hidden;
+
   display: flex;
   height: 100vh;
 }
@@ -279,7 +280,7 @@ button {
 
 #custom-profile-css div.wrapper-content aside.profile .widget strong {
   font-weight: normal;
-  color: #3bb9e3;
+  color: #1cc88a;
   font-size: 14px;
   display: flex;
   align-items: center;
@@ -338,7 +339,7 @@ button {
 
 #custom-profile-css div.wrapper-content section.timeline nav a {
   text-decoration: none;
-  color: #3bb9e3;
+  color: #1cc88a;
   font-size: 18px;
   font-weight: bold;
   margin-left: 20px;
@@ -436,7 +437,7 @@ button {
 
 #custom-profile-css div.wrapper-content aside.widgets .widget .title a {
   font-size: 12px;
-  color: #3bb9e3;
+  color: #1cc88a;
   text-decoration: none;
   position: relative;
   padding-left: 10px;
@@ -509,9 +510,9 @@ button {
   width: 90px;
   font-weight: bold;
   font-size: 14px;
-  color: #3bb9e3;
+  color: #1cc88a;
   background: #fff;
-  border: 1px solid #3bb9e3;
+  border: 1px solid #1cc88a;
   border-radius: 16px;
 }
 

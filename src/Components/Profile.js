@@ -36,7 +36,12 @@ import comments from "../assets/img/comments.svg";
 import retweet from "../assets/img/retweet.svg";
 import like from "../assets/img/like.svg";
 import logo from "../assets/img/logo.svg";
-
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import {
+    faCameraRetro,
+    faHandshake,
+    faFileAlt
+} from "@fortawesome/free-solid-svg-icons";
 import "../assets/css/style.css";
 import "../assets/css/navigationbar.css";
 
@@ -66,6 +71,18 @@ class Profile extends Component {
     }
   };
 
+  postButtonPressed = () => {
+      console.log("ASDASD123")
+  }
+
+  friendsButtonPressed = () => {
+
+  }
+
+  reviewsButtonPressed = () => {
+
+  }
+
   render() {
       const avatar = "https://images.unsplash.com/photo-1528763380143-65b3ac89a3ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=335&q=80"
       const options = [
@@ -81,7 +98,7 @@ class Profile extends Component {
           <div className="content">
             <nav>
               <ul>
-                  <Link to="/home">
+                  <Link to="/dashboard" >
                 <li>
                   <img src={home} alt="Home" /> Home
                 </li>
@@ -106,32 +123,47 @@ class Profile extends Component {
           </div>
         </header>
 
-        <div className="banner" >
-            <img class="object-fit_fill" src='https://images.unsplash.com/photo-1506765515384-028b60a970df?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=468&h=180&q=80'/>
-        </div>
+
+            <Segment placeholder vertical textAlign="center">
+   <span icon>
+     <Icon name='plus square outline' style={{"color": "#28a745"}}/>
+     Add Banner Background
+ </span>
+ <br></br>
+   <Button primary>Add Photo</Button>
+ </Segment>
+
 
         <div className="bar">
+
+
           <div className="content">
             <ul>
-              <li className="active">
-                <span>Post</span>
+                <li >
+                  <span>Buddy</span>
+                  <strong style={{"color": "#1cc88a"}}>Sativa</strong>
+                </li>
+              <li  >
+                <span >Post</span>
+                <a onClick={this.postButtonPressed}>
                 <strong>1234</strong>
+            </a>
               </li>
               <li>
-                <span>Followings</span>
-                <strong>124</strong>
+                <span>Friends</span>
+                <a onClick={this.friendsButtonPressed}>
+                <strong>1234</strong>
+                </a>
               </li>
               <li>
-                <span>Followers</span>
-                <strong>134</strong>
-              </li>
-              <li>
-                <span>Favorites</span>
+                <span>Reviews</span>
+                <a onClick={this.reviewsButtonPressed}>
                 <strong>14</strong>
+                </a>
               </li>
             </ul>
             <div className="actions">
-              <button>Follow</button>
+              <button>Friend Request</button>
             </div>
           </div>
         </div>
@@ -154,250 +186,272 @@ class Profile extends Component {
                   </li>
 
                 </ul>
-
-                <div className="widget images">
-                  <strong>
-                    <img src={images} alt="images" /> 360 Photos and videos
-                  </strong>
-                  <ul>
+           </aside>
 
 
 
 
-                    <li><img src="https://images.unsplash.com/photo-1537372660699-9b2f1b4d47d4?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img> </li>
-                    <li><img src="https://images.unsplash.com/photo-1622495546323-5dac33dedb01?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80" width="80" height="80"></img></li>
-                    <li><img src="https://images.unsplash.com/photo-1623555448479-22c56bfc26ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80" width="80" height="80"></img></li>
-                    <li><img src="https://images.unsplash.com/photo-1623557415599-b1c648cedc07?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" width="80" height="80"></img></li>
-                    <li><img src="https://images.unsplash.com/photo-1623552564094-c659f7a8150c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img></li>
-                    <li><img src="https://images.unsplash.com/photo-1623363435794-e12cc4b206db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=672&q=80" width="80" height="80"></img></li>
-                        <li><img src="https://images.unsplash.com/photo-1622495546323-5dac33dedb01?ixid=MnwxMjA3fDF8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=667&q=80" width="80" height="80"></img></li>
-                        <li><img src="https://images.unsplash.com/photo-1623555448479-22c56bfc26ab?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=839&q=80" width="80" height="80"></img></li>
-                        <li><img src="https://images.unsplash.com/photo-1623557415599-b1c648cedc07?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80" width="80" height="80"></img></li>
-                        <li><img src="https://images.unsplash.com/photo-1623552564094-c659f7a8150c?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80" width="80" height="80"></img></li>
-                        <li><img src="https://images.unsplash.com/photo-1623363435794-e12cc4b206db?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=672&q=80" width="80" height="80"></img></li>
+
+       </div>
 
 
 
 
 
 
-</ul>
-                </div>
 
-              </aside>
+       <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+           <section className="timeline">
+
+
+
+<Segment.Group>
+<Segment.Group horizontal>
+
+
+    <Segment textAlign="center">
+        <a onClick={this.postButtonPressed}>
+        <FontAwesomeIcon icon={faCameraRetro} style={{"color": "#1cc88a"}}/>
+            Posts</a></Segment>
+
+        <Segment textAlign="center"><a onClick={this.friendsButtonPressed}><FontAwesomeIcon icon={faHandshake} style={{"color": "#1cc88a"}}/>Friends</a></Segment>
+    <Segment textAlign="center"><a onClick={this.reviewsButtonPressed}><FontAwesomeIcon icon={faFileAlt} style={{"color": "#1cc88a"}}/>Reviews</a></Segment>
+</Segment.Group>
+
+
+<Segment>
+               <section class="post-list">
+
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <figure class="post-image">
+                               <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                           </figure>
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+               </section>
+
+           </Segment>
+
+</Segment.Group>
+
+
+
+
+           </section>
+
+
+
+
+       </div>
             </div>
+
+
+
+
+
+
             <div>
-            <Segment textAlign="center">
-                 Explore new Friends and Shop Photos!
-        </Segment>
-            <section class="post-list">
 
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                   <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                   <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                 </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                  <figure class="post-image">
-                    <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                  </figure>
-
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                    <figure class="post-image">
-                      <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                    </figure>
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-              <a href="" class="post">
-                <figure class="post-image">
-                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                </figure>
-                <div class="post-overlay">
-                  <p>
-                    <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                    <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                  </p>
-                </div>
-              </a>
-            </section>
         </div>
+
           </div>
-        </div>
+
         {getWidth() > 650? null : <MobileNavBar active="profile" handleAddPostForm={this.props.handleAddPostForm}/>}
       </div>
     );

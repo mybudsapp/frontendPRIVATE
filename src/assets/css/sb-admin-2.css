@@ -1200,7 +1200,7 @@ pre code {
   }
   .col-lg-3 {
     flex: 0 0 25%;
-    max-width: 25%;
+    max-width: 100%;
   }
   .col-lg-4 {
     flex: 0 0 33.33333%;
@@ -1337,7 +1337,7 @@ pre code {
   }
   .row-cols-xl-3 > * {
     flex: 0 0 33.33333%;
-    max-width: 33.33333%;
+    max-width: none;
   }
   .row-cols-xl-4 > * {
     flex: 0 0 25%;
@@ -1366,7 +1366,7 @@ pre code {
   }
   .col-xl-3 {
     flex: 0 0 25%;
-    max-width: 25%;
+    max-width: none;
   }
   .col-xl-4 {
     flex: 0 0 33.33333%;
@@ -4978,7 +4978,7 @@ a.badge-dark:focus, a.badge-dark.focus {
 @media (min-width: 576px) {
   .jumbotron {
     padding: 4rem 2rem;
-    
+
   }
 }
 
