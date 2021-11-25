@@ -42,7 +42,7 @@ import {
     faHandshake,
     faFileAlt
 } from "@fortawesome/free-solid-svg-icons";
-import "../assets/css/style.css";
+
 import "../assets/css/navigationbar.css";
 
 const getWidth = () => {
@@ -135,11 +135,9 @@ class Profile extends Component {
 
 
         <div className="bar">
-
-
           <div className="content">
             <ul>
-                <li >
+                <li className="personality" >
                   <span>Buddy</span>
                   <strong style={{"color": "#1cc88a"}}>Sativa</strong>
                 </li>

@@ -24,15 +24,18 @@ import Avatar from 'react-avatar'
 import UserCard from './UserCard'
 import MobileNavBar from '../Components/MobileNavBar'
 import {BasicFriendsFeed, FriendsPhotosFeed, StoreFeed, RecentActivityFeed, AllUsersFeed, AllProductsFeed} from "./ActivityFeeds"
-import "../assets/css/explorecontainer.css";
 import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
 
 
+import "../assets/css/explorecontainer.css";
 
 import "../assets/css/sb-admin-2.css";
 import "../assets/css/style.css";
+import MobileHeaderBar from "./MobileHeaderBar"
+//import "../assets/css/navigationbar.css";
+import "../assets/css/headerbar.css";
 
 
 
@@ -115,9 +118,6 @@ render(){
     const { visible } = this.state
     const { activeItem } = this.state
     //("from the explore container", this.props)
-
-
-
     const arrayOfFriends = this.props.user
 
 
@@ -141,11 +141,8 @@ textDecoration: "underline"
 
     //find out if the person is a the user's friend or not, if a not a friend, display friend request button
 return(
-    <ResponsiveContainer functions={this.props}>
-
-        <Segment padded="very" vertical textAlign="center">
-                    <h3 style={styleObj}>Explore</h3>
-                </Segment>
+    <ResponsiveContainer  functions={this.props}>
+        <MobileHeaderBar/>
                 <Menu fluid widths={4}>
                 <Menu.Item
                  name='users'
@@ -181,12 +178,12 @@ return(
                 <Grid>
                 <Grid.Row columns={1}>
                 <Grid.Column>
-
+                     {activityFeedToDisplay}
 
                 </Grid.Column>
                 </Grid.Row>
                 </Grid>
-                {activityFeedToDisplay}
+
 
 </ResponsiveContainer>
 )
@@ -390,12 +387,8 @@ class MobileContainer extends Component {
       <Responsive
         getWidth={getWidth}
         maxWidth={Responsive.onlyMobile.maxWidth}
+        style={{"width": "100%", "overflow": "hidden"}}
       >
-
-      <Segment padded="very" vertical textAlign="center">
-                  <h3 style={styleObj}>Explore</h3>
-              </Segment>
-
       <Menu fluid widths={4}>
       <Menu.Item
        name='users'
@@ -437,10 +430,6 @@ class MobileContainer extends Component {
       </Grid.Row>
       </Grid>
       {activityFeedToDisplay}
-      <br></br>
-      <br></br>
-          <br></br>
-          <br></br>
       <MobileNavBar active="explore" handleAddPostForm={this.props.handleAddPostForm}/>
       </Responsive>
 

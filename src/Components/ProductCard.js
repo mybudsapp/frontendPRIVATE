@@ -72,14 +72,21 @@ console.log(res, "FEFR")
     return <Card id={props.product.id} name={props.product.productname} >
                 {displayCorrectImage(props.product)}
             <Card.Content >
+                <strong>MCAODCMADCO</strong>
                 <h2>
                     {props.product.productname}
                 </h2>
                 <Card.Description>
-                    By {props.product.producer}
+
                 </Card.Description>
 
-
+                <Card.Content>
+       <Card.Meta>Ratings</Card.Meta>
+       <Card.Meta>Pricing</Card.Meta>
+       <Card.Description>
+        {props.product.productname}
+       </Card.Description>
+     </Card.Content>
             </Card.Content>
                 <div className='ui two buttons'>
                 {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e, props.storeProducts)}>Delete</Button></div> : <Button basic color='green'  id={props.product.id}>

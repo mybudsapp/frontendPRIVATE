@@ -569,6 +569,10 @@ button {
   #custom-profile-css .bar .content ul li {
     display: none;
   }
+  #custom-profile-css .bar .content ul li.personality{
+    display: flex;
+    margin-left: 90px;
+  }
   #custom-profile-css .actions button {
     margin-right: 0;
   }
@@ -674,6 +678,10 @@ button {
     margin-right: 15px;
 
 
+}
+
+.explorerequest {
+    
 }
 
 .content .likes p{

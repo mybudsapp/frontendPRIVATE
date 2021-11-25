@@ -18,6 +18,7 @@ import {
 import UserCard from './UserCard'
 import ProductCard from './ProductCard'
 import Buds from '../mybuds-v2.png'
+import "../assets/css/style.css";
 
 import Filter from './Search'
 
@@ -99,20 +100,29 @@ class AllUsersFeed extends React.Component {
       }
       return users.map(user => {
           return  <Feed.Event>
-      <Feed.Label>
-        <img src={user.avatar}></img>
+      <Feed.Label style={ {margin: "auto"}}>
+        <Image src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg"></Image>
       </Feed.Label>
       <Feed.Content>
         <Feed.Summary>
           {user.username}
         </Feed.Summary>
         <Feed.Extra text>anodnaiosdiaosd bio bio</Feed.Extra>
+            <a>
+            <div className="explorerequest" textAlign="right" vertical>
+                Friend Request
+            </div>
+        </a>
       </Feed.Content>
     </Feed.Event>;
           });
       };
 
+
+
     render(){
+
+
 
 
         // const filteredUsers = this.state.users.filter(rapper => rapper.name.includes(this.state.searchByName))
@@ -129,19 +139,23 @@ class AllUsersFeed extends React.Component {
         return(
 
             <Segment vertical>
+                <Segment.Group>
                 <Segment padded textAlign="center">
                     Users Meet New Users!
                 </Segment>
+                <Segment>
                 <Menu fluid stackable>
                     <Menu.Item>
               <Input icon='search' placeholder="Search By Name" onChange={this.handleSearch} />
             </Menu.Item>
         </Menu>
+    </Segment>
+    <Segment>
         <Feed>
                 {this.searchedByNameUsers()}
             </Feed>
-
-
+        </Segment>
+        </Segment.Group>
         </Segment>
         )
     }
@@ -228,11 +242,11 @@ class AllProductsFeed extends React.Component {
 
              products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType))
 
-          } else if (this.state.searchByType.includes("Supplies")) {
+         } else if (this.state.searchByType.includes("Concentrates")) {
 
               products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType))
 
-          } else if (this.state.searchByType.includes("Foods")) {
+          } else if (this.state.searchByType.includes("Edibles")) {
 
                   products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType))
 
@@ -314,9 +328,13 @@ class AllProductsFeed extends React.Component {
      <Filter handleAdvancedFilter={this.handleAdvancedFilter} handleTypeSubmit={this.handleTypeSubmit}/>
 
 
-                <Card.Group itemsPerRow={4} raised stackable doubling style={styleObj}>
-                {this.state.products.length > 0 ? this.displayFiltersSelected(products) : null}
+                <Segment.Group itemsPerRow={4} raised stackable doubling style={styleObj}>
+                    <Segment>
+                        <Card.Group itemsPerRow={2}>
+                {this.displayFiltersSelected(products)}
             </Card.Group>
+            </Segment>
+            </Segment.Group>
 
     </Segment>
             )
@@ -339,6 +357,7 @@ export const BasicFriendsFeed = (props) => {
               <a>Jenny Hess</a> Added to your <a>John Malone</a>
             </Feed.Summary>
           </Feed.Content>
+
         </Feed.Event>
 
         <Feed.Event>

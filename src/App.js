@@ -35,6 +35,10 @@ import ProductProfile from "./Components/ProductProfile"
 import CommentDisplay from "./Components/CommentDisplay"
 
 
+
+
+
+
 class App extends Component {
   state = {
     user: {},
@@ -1625,6 +1629,7 @@ submitDeleteProductHandler = (e) => {
             path="/explore"
             render={() => (
               <ExploreContainer
+
                 user={this.state.user}
                 avatar={this.state.avatar}
                 handleAddPostForm={this.handleAddPostForm}
