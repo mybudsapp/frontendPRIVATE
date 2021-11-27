@@ -122,7 +122,68 @@ class AllUsersFeed extends React.Component {
 
     render(){
 
+        const stateOptions = [
+        {key: "AL", value: "Alabama, AL", text: "Alabama, AL"},
+        {key: "AK", value: "Alaska", text: "Alaska, AK"},
+        {key: "AS", value: "Alaska", text: "American Samoa, AS"},
+        {key: "AZ", value: "Arizona", text: "Arizona, AZ"},
+        {key: "AR", value: "Arkansas", text: "Arkansas, AR"},
+        {key: "CA", value: "California", text: "California, CA"},
+        {key: "C0", value: "Colorado", text: "Colorado, CO"},
+        {key: "CT", value: "Connecticut", text: "Connecticut, CT"},
+        {key: "DE", value: "Delaware", text: "Delaware, DE"},
+        {key: "DC", value: "District Of Columbia", text: "District Of Columbia, DC"},
+        {key: "FL", value: "Florida", text: "Florida, FL"},
+        {key: "GA", value: "Georgia", text: "Georgia, GA"},
+        {key: "HI", value: "Hawaii", text: "Hawaii, HI"},
+        {key: "ID", value: "Idaho", text: "Idaho, ID"},
+        {key: "IL", value: "Illinois", text: "Illinois, IL"},
+        {key: "IN", value: "Indiana", text: "Indiana, IN"},
+        {key: "IA", value: "Iowa", text: "Iowa, IA"},
+        {key: "KS", value: "Kansas", text: "Kansas, KS"},
+        {key: "KY", value: "Kentucky", text: "Kentucky, KY"},
+        {key: "LA", value: "Louisiana", text: "Louisiana, LA"},
+        {key: "ME", value: "Maine", text: "Maine, ME"},
+        {key: "MD", value: "Maryland", text: "Maryland, MD"},
+        {key: "MA", value: "Massachusetts", text: "Massachusetts, MA"},
+        {key: "MI", value: "Michigan", text: "Michigan, MI"},
+        {key: "MN", value: "Minnesota", text: "Minnesota, MN"},
+        {key: "MS", value: "Mississippi", text: "Mississippi, MS"},
+        {key: "MO", value: "Missouri", text: "Missouri, MO"},
+        {key: "MT", value: "Montana", text: "Montana, MT"},
+        {key: "NE", value: "Nebraska", text: "Nebraska, NE"},
+        {key: "NV", value: "Nevada", text: "Nevada, NV"},
+        {key: "NH", value: "New Hampshire", text: "New Hampshire, NH"},
+        {key: "NJ", value: "New Jersey", text: "New Jersey, NJ"},
+        {key: "NM", value: "New Mexico", text: "New Mexico, NM"},
+        {key: "NY", value: "New York", text: "New York, NY"},
+        {key: "NC", value: "North Carolina", text: "North Carolina, NC"},
+        {key: "ND", value: "North Dakota", text: "North Dakota, ND"},
+        {key: "OH", value: "Ohio", text: "Ohio, OH"},
+        {key: "OK", value: "Oklahoma", text: "Oklahoma, OK"},
+        {key: "OR", value: "Oregon", text: "Oregon, OR"},
+        {key: "PA", value: "Pennsylvania", text: "Pennsylvania, PA"},
+        {key: "PR", value: "Puerto Rico", text: "Puerto Rico, PR"},
+        {key: "RI", value: "Rhode Island", text: "Rhode Island, RI"},
+        {key: "SC", value: "South Carolina", text: "South Carolina, SC"},
+        {key: "SD", value: "South Dakota", text: "South Dakota, SD"},
+        {key: "TN", value: "Tennessee", text: "Tennessee, TN"},
+        {key: "TX", value: "Texas", text: "Texas, TX"},
+        {key: "UT", value: "Utah", text: "Utah, UT"},
+        {key: "VT", value: "Vermont", text: "Vermont, VT"},
+        {key: "VI", value: "Virgin Islands", text: "Virgin Islands, VI"},
+        {key: "VA", value: "Virginia", text: "Virginia, VA"},
+        {key: "WA", value: "Washington", text: "Washington, WA"},
+        {key: "WV", value: "West Virginia", text: "West Virginia, WV"},
+        {key: "WI", value: "Wisconsin", text: "Wisconsin, WI"},
+        {key: "WY", value: "Wyoming", text: "Wyoming, WY"},
+        ]
 
+
+        const buddyOptions = [
+            {key: "Sativa", value: "Sativa", text: "Sativa"},
+            {key: "Indica", value: "Indica", text: "Indica"}
+        ]
 
 
         // const filteredUsers = this.state.users.filter(rapper => rapper.name.includes(this.state.searchByName))
@@ -138,24 +199,38 @@ class AllUsersFeed extends React.Component {
 
         return(
 
-            <Segment vertical>
-                <Segment.Group>
+            <Segment vertical style={{"padding": "0"}}>
+                <Segment.Group style={{"margin": "0"}}>
                 <Segment padded textAlign="center">
-                    Users Meet New Users!
+                    <Dropdown
+                        placeholder='Select Buddy Type'
+                        fluid
+                        search
+                        selection
+                        options={buddyOptions}
+                        />
+
                 </Segment>
-                <Segment>
-                <Menu fluid stackable>
-                    <Menu.Item>
-              <Input icon='search' placeholder="Search By Name" onChange={this.handleSearch} />
-            </Menu.Item>
-        </Menu>
+                <Segment padded textAlign="center">
+                    <Dropdown
+                        placeholder='Select State'
+                        fluid
+                        search
+                        selection
+                        options={stateOptions}
+                        />
+
+                </Segment>
+                <Segment padded textAlign="center">
+              <Input fluid icon='search' placeholder="Search By Name" onChange={this.handleSearch} />
+
     </Segment>
-    <Segment>
+</Segment.Group>
+    <Segment style={{"padding": "3px"}}>
         <Feed>
                 {this.searchedByNameUsers()}
             </Feed>
         </Segment>
-        </Segment.Group>
         </Segment>
         )
     }
@@ -185,18 +260,18 @@ class AllProductsFeed extends React.Component {
 
                 this.setState({
                     products: [
-                        {id: 1, productname: "Product", producttype: "Clothes"},
-                        {id: 1, productname: "Product", producttype: "Supplies"},
-                        {id: 1, productname: "Product", producttype: "Foods"},
-                        {id: 1, productname: "Product", producttype: "Clothes"},
-                        {id: 1, productname: "Product", producttype: "Clothes"},
-                        {id: 1, productname: "Product", producttype: "Foods"},
-                        {id: 1, productname: "Product", producttype: "Accessories"},
-                        {id: 1, productname: "Product", producttype: "Foods"},
-                        {id: 1, productname: "Product", producttype: "Accessories"},
-                        {id: 1, productname: "Product", producttype: "Foods"},
-                        {id: 1, productname: "Product", producttype: "Foods"},
-                        {id: 1, productname: "Product", producttype: "Supplies"}
+                        {id: 1, productname: "shirt", producttype: "Clothes"},
+                        {id: 1, productname: "bong", producttype: "Supplies"},
+                        {id: 1, productname: "pound cake", producttype: "Edibles"},
+                        {id: 1, productname: "heavy shorts", producttype: "Clothes"},
+                        {id: 1, productname: "black hat", producttype: "Clothes"},
+                        {id: 1, productname: "greay stareaberr", producttype: "Edibles"},
+                        {id: 1, productname: "holder", producttype: "Accessories"},
+                        {id: 1, productname: "crackers", producttype: "Edibles"},
+                        {id: 1, productname: "trayt", producttype: "Accessories"},
+                        {id: 1, productname: "pizza", producttype: "Edibles"},
+                        {id: 1, productname: "taco", producttype: "Edibles"},
+                        {id: 1, productname: "stapler", producttype: "Supplies"}
                     ]
               });
 
@@ -216,11 +291,11 @@ class AllProductsFeed extends React.Component {
         });
       };
 
-      handleTypeSubmit = submitInfo => {
+      handleType = submitInfo => {
 
 
           this.setState({
-              searchByType: [submitInfo]
+              searchByType: submitInfo.target.innerText
           })
 
       }
@@ -236,49 +311,56 @@ class AllProductsFeed extends React.Component {
 
           let products = this.state.products
 
+          let searchByName = this.state.searchByName
+
+          let searchedByNameproducts = (products) => {
+
+              if (this.state.searchByName === "") {
+                  products = this.state.products
+              } else {
+                  products = this.state.products.filter(product =>
+                      product.productname.toLowerCase().includes(this.state.searchByName.toLowerCase())
+                  );
+              }
+
+              return products.map(product => {
+                  return <ProductCard user={this.props.user}product={product} handleViewproductProfile={this.props.handleViewproductProfile} id={product.id}/>
+                  });
+              };
+
 
 
           if (this.state.searchByType.includes("Clothes")) {
 
-             products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType))
+            products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType) && product.productname.toLowerCase().includes(this.state.searchByName.toLowerCase()))
 
-         } else if (this.state.searchByType.includes("Concentrates")) {
 
-              products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType))
+         } else if (this.state.searchByType.includes("Concentrates") ) {
+
+              products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType) && product.productname.toLowerCase().includes(this.state.searchByName.toLowerCase()))
+
 
           } else if (this.state.searchByType.includes("Edibles")) {
 
-                  products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType))
+                  products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType) && product.productname.toLowerCase().includes(this.state.searchByName.toLowerCase()) )
+
 
               } else if (this.state.searchByType.includes("Accessories")) {
 
-                     products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType))
+                     products = this.state.products.filter(product => product.producttype.includes(this.state.searchByType) && product.productname.toLowerCase().includes(this.state.searchByName.toLowerCase()))
 
                   } else {
 
-                      return products.map(product => <ProductCard user={this.props.user} product={product} handleViewproductProfile={this.props.handleViewproductProfile} id={product.id}/>);
+                      return searchedByNameproducts(products);
           }
+
 
           return products.map(product => <ProductCard user={this.props.user} product={product} handleViewproductProfile={this.props.handleViewproductProfile} id={product.id}/>);
       }
 
       //needs to exclude the user that is doing the searching
 
-      searchedByNameproducts = () => {
-          let products = [];
 
-          if (this.state.searchByName === "") {
-              products = this.state.products
-          } else {
-              products = this.state.products.filter(product =>
-                  product.productname.toLowerCase().includes(this.state.searchByName.toLowerCase())
-              );
-          }
-
-          return products.map(product => {
-              return <ProductCard user={this.props.user}product={product} handleViewproductProfile={this.props.handleViewproductProfile} id={product.id}/>
-              });
-          };
 
 
 
@@ -313,28 +395,45 @@ class AllProductsFeed extends React.Component {
             //     })
             const {products} = this.state
             const styleObj = {paddingLeft: 4}
+            const {mobile} = this.props
 
+            const productCategories = [
+                {key: "Strains", value: "Strains", text: "Strains"},
+                {key: "Clothes", value: "Clothes", text: "Clothes"},
+                {key: "Edibles", value: "Edibles", text: "Edibles"},
+                {key: "Accessories", value: "Accessories", text: "Accessories"},
+                {key: "Concentrates", value: "Concentrates", text: "Concentrates"}
+            ]
 
 
             return(
-                <Segment vertical>
+                <Segment vertical style={{"paddingTop": "0"}}>
 
+
+                    <Segment.Group>
                     <Segment padded textAlign="center">
-                        Providing Flexibilty to the type of Stores are on My Buds and what types of items they sell, Stores can post products of different categories!
-                    </Segment>
+                  <Input fluid icon='search' placeholder="Search By Name" onChange={this.handleSearch} />
+        </Segment>
+        <Segment padded textAlign="center">
+            <Dropdown
+                placeholder='Select Category'
+                fluid
+                search
+                selection
+                onChange={e => this.handleType(e)}
+                options={productCategories}
+                />
 
-
-
-     <Filter handleAdvancedFilter={this.handleAdvancedFilter} handleTypeSubmit={this.handleTypeSubmit}/>
-
-
-                <Segment.Group itemsPerRow={4} raised stackable doubling style={styleObj}>
-                    <Segment>
-                        <Card.Group itemsPerRow={2}>
-                {this.displayFiltersSelected(products)}
-            </Card.Group>
+        </Segment>
+                    <Segment style={styleObj}>
+                        { mobile? <Card.Group itemsPerRow={2}>
+            {this.displayFiltersSelected()}
+        </Card.Group>: <Card.Group itemsPerRow={4}>
+{this.displayFiltersSelected()}
+</Card.Group> }
             </Segment>
-            </Segment.Group>
+
+        </Segment.Group>
 
     </Segment>
             )
@@ -420,11 +519,11 @@ export const BasicFriendsFeed = (props) => {
 
 }
 
-export const FriendsPhotosFeed = (props) => {
+export const BudsPhotosFeed = (props) => {
     if(props.user.friends > 1){
     return(
   <Card.Content>
-     <Card.Header>Friends Activity</Card.Header>
+
       <Feed>
         <Feed.Event>
           <Feed.Label image='https://react.semantic-ui.com/images/avatar/small/jenny.jpg' />
@@ -488,9 +587,6 @@ export const FriendsPhotosFeed = (props) => {
 }else{
     return(
         <div>
-        <Segment textAlign="center">
-             Explore new Friends and Shop Photos!
-    </Segment>
         <section class="post-list">
 
           <a href="" class="post">
@@ -768,10 +864,6 @@ export const StoreFeed = (props) => {
     return(
         <Card.Content>
 
-            <Segment padded textAlign="center">
-                Highlighting Local Businesses, based on location, provides exposure to those businesses closest to our user!
-            </Segment>
-
             <Menu fluid stackable>
                 <Menu.Item>
           <Input icon='search' placeholder='Search City...' />
@@ -964,12 +1056,6 @@ export const RecentActivityFeed = (props) => {
     return(
         <Card.Content>
            <div class="wrapper">
-
-
-
-                   <Segment textAlign="center">
-                        Featuring an Explore component to My Buds helps users discover new friends, products, stores and more!
-               </Segment>
 
                <section class="post-list">
                  <a href="" class="post">

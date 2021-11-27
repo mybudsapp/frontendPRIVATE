@@ -69,10 +69,13 @@ console.log(res, "FEFR")
 
 
     if(!props.showDelete){
-    return <Card id={props.product.id} name={props.product.productname} >
+        return <Card id={props.product.id} name={props.product.productname} >
+            <Link>
                 {displayCorrectImage(props.product)}
+            </Link>
+            <Link>
             <Card.Content >
-                <strong>MCAODCMADCO</strong>
+                <strong>{props.product.productname}</strong>
                 <h2>
                     {props.product.productname}
                 </h2>
@@ -89,10 +92,9 @@ console.log(res, "FEFR")
      </Card.Content>
             </Card.Content>
                 <div className='ui two buttons'>
-                {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e, props.storeProducts)}>Delete</Button></div> : <Button basic color='green'  id={props.product.id}>
-                  View Product
-                </Button>}
+                {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e, props.storeProducts)}>Delete</Button></div> : null}
             </div>
+        </Link>
       </Card>
 
 

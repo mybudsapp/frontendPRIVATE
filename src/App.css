@@ -136,7 +136,7 @@ color: white;
 
 /* Page content */
 .content {
-  padding: 16px;
+  padding: 8px;
 }
 
 /* The sticky class is added to the navbar with JS when it reaches its scroll position */

@@ -23,7 +23,7 @@ import {Route, Link, Switch, withRouter} from 'react-router-dom'
 import Avatar from 'react-avatar'
 import UserCard from './UserCard'
 import MobileNavBar from '../Components/MobileNavBar'
-import {BasicFriendsFeed, FriendsPhotosFeed, StoreFeed, RecentActivityFeed, AllUsersFeed, AllProductsFeed} from "./ActivityFeeds"
+import {BasicFriendsFeed, BudsPhotosFeed, StoreFeed, RecentActivityFeed, AllUsersFeed, AllProductsFeed} from "./ActivityFeeds"
 import home from "../assets/img/home.svg";
 import notification from "../assets/img/notification.svg";
 import message from "../assets/img/message.svg";
@@ -34,7 +34,7 @@ import "../assets/css/explorecontainer.css";
 import "../assets/css/sb-admin-2.css";
 import "../assets/css/style.css";
 import MobileHeaderBar from "./MobileHeaderBar"
-//import "../assets/css/navigationbar.css";
+import "../assets/css/navigationbar.css";
 import "../assets/css/headerbar.css";
 
 
@@ -54,7 +54,7 @@ class ExploreContainer extends React.Component{
 
 state = {
     user : {},
-    Feed: <RecentActivityFeed history={this.props.history} user={this.props}/>
+    Feed: <BudsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
 
 }
 
@@ -76,7 +76,7 @@ handleItemClick = (e, { name }) => {
         })
         //("whoa")
 
-    }else if (name === "window shop") {
+    }else if (name === "products") {
 
         this.setState({
             Feed: <AllProductsFeed user={this.props.user} history={this.props.history} handleViewStrainProfile={this.props.handleViewStrainProfile}/>
@@ -96,7 +96,7 @@ handleItemClick = (e, { name }) => {
     }else if (name === "Photos"){
 
         this.setState({
-            Feed: <FriendsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+            Feed: <BudsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
         })
         //("whoa strains")
 
@@ -142,7 +142,7 @@ textDecoration: "underline"
     //find out if the person is a the user's friend or not, if a not a friend, display friend request button
 return(
     <ResponsiveContainer  functions={this.props}>
-        <MobileHeaderBar/>
+
                 <Menu fluid widths={4}>
                 <Menu.Item
                  name='users'
@@ -152,11 +152,11 @@ return(
                  Users
                 </Menu.Item>
                 <Menu.Item
-                 name='window shop'
-                 active={activeItem === 'window shop'}
+                 name='products'
+                 active={activeItem === 'products'}
                  onClick={this.handleItemClick}
                 >
-                 Window Shop Products
+                 Products
                 </Menu.Item>
                 <Menu.Item
                  name='stores'
@@ -167,10 +167,10 @@ return(
                 </Menu.Item>
                 <Menu.Item
                  name='Photos'
-                 active={activeItem === 'photos'}
+                 active={activeItem === 'Strains'}
                  onClick={this.handleItemClick}
                 >
-                 Photos
+                 Strains
                 </Menu.Item>
                 <Menu.Menu position='centered'>
                 </Menu.Menu>
@@ -266,9 +266,6 @@ const {user} = this.state
                 <div className="container content">
                   <nav>
                     <ul>
-                        <li>
-                        <p><Icon name='at' size="large" />Your User Name Here</p>
-                        </li>
                         <Link to="/dashboard">
                   <li>
                         <img src={home} alt="Home" /> Home
@@ -316,8 +313,8 @@ class MobileContainer extends Component {
 
     state = {
         user : {},
-        Feed: <RecentActivityFeed history={this.props.history} user={this.props}/>
-
+        Feed: <BudsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>,
+        mobile: true
     }
 
     handlePlusClick = () => {this.setState({ visible: true})}
@@ -332,14 +329,14 @@ class MobileContainer extends Component {
 
         if (name === "users"){
             this.setState({
-                Feed: <AllUsersFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+                Feed: <AllUsersFeed user={this.props} mobile={this.state.mobile} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
             })
             //("whoa")
 
-        }else if (name === "window shop") {
+        }else if (name === "products") {
 
             this.setState({
-                Feed: <AllProductsFeed user={this.props.user} history={this.props.history} handleViewStrainProfile={this.props.handleViewStrainProfile}/>
+                Feed: <AllProductsFeed mobile={this.state.mobile} user={this.props.user} history={this.props.history} handleViewStrainProfile={this.props.handleViewStrainProfile}/>
             })
 
 
@@ -347,7 +344,7 @@ class MobileContainer extends Component {
         }else if (name === "Photos"){
 
             this.setState({
-                Feed: <FriendsPhotosFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+                Feed: <BudsPhotosFeed mobile={this.state.mobile} user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
             })
 
 
@@ -356,7 +353,7 @@ class MobileContainer extends Component {
             let store = {namespace: "Geniune Leather", address: "123 Address St, City, State", id: 2}
 
             this.setState({
-                Feed: <StoreFeed store={store} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+                Feed: <StoreFeed  mobile={this.state.mobile} store={store} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
             })
             //("whoa strains")
 
@@ -389,7 +386,7 @@ class MobileContainer extends Component {
         maxWidth={Responsive.onlyMobile.maxWidth}
         style={{"width": "100%", "overflow": "hidden"}}
       >
-      <Menu fluid widths={4}>
+      <Menu fluid widths={4} style={{"margin": "0 0"}} >
       <Menu.Item
        name='users'
        active={activeItem === 'users'}
@@ -398,11 +395,11 @@ class MobileContainer extends Component {
        Users
       </Menu.Item>
       <Menu.Item
-       name='window shop'
-       active={activeItem === 'window shop'}
+       name='products'
+       active={activeItem === 'products'}
        onClick={this.handleItemClick}
       >
-       Window Shop Products
+       Products
       </Menu.Item>
       <Menu.Item
        name='stores'
@@ -413,22 +410,15 @@ class MobileContainer extends Component {
       </Menu.Item>
       <Menu.Item
        name='Photos'
-       active={activeItem === 'photos'}
+       active={activeItem === 'strains'}
        onClick={this.handleItemClick}
       >
-       Photos
+        Strains
       </Menu.Item>
       <Menu.Menu position='centered'>
       </Menu.Menu>
       </Menu>
-      <Grid>
-      <Grid.Row columns={1}>
-      <Grid.Column>
 
-
-      </Grid.Column>
-      </Grid.Row>
-      </Grid>
       {activityFeedToDisplay}
       <MobileNavBar active="explore" handleAddPostForm={this.props.handleAddPostForm}/>
       </Responsive>

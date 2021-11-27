@@ -24,7 +24,7 @@ import { Route, Link, Switch, withRouter } from "react-router-dom";
 import Avatar from "react-avatar";
 import {
   BasicFriendsFeed,
-  FriendsPhotosFeed,
+  BudsPhotosFeed,
   StoreFeed,
   RecentActivityFeed,
   AllUsersFeed,
@@ -97,7 +97,7 @@ activeItem: "Feed"
     } else if (e.target.id === "photos") {
       this.setState({
         activityFeed: (
-          <FriendsPhotosFeed user={this.props} history={this.props.history} />
+          <BudsPhotosFeed user={this.props} history={this.props.history} />
         ),
       });
 
@@ -214,12 +214,12 @@ extraImages: [
             </Button>
           </li>
           <li className="nav-item">
-          <Button color='green' to="/" className="nav-link" name='Strains' onClick={this.handleItemClick}>
+          <Button color='green' to="/" className="nav-link" name='Reviews' onClick={this.handleItemClick}>
             <FontAwesomeIcon
               icon={faCannabis}
               className="mr-2"
             ></FontAwesomeIcon>
-        <span>Strains</span>
+        <span>Reviews</span>
         </Button>
       </li>
             <li className="nav-item">
@@ -417,7 +417,7 @@ class MobileContainer extends Component {
     } else if (e.target.id === "photos") {
       this.setState({
         activityFeed: (
-          <FriendsPhotosFeed user={this.props} history={this.props.history} />
+          <BudsPhotosFeed user={this.props} history={this.props.history} />
         ),
       });
 

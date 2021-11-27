@@ -236,11 +236,11 @@ if(this.props.commentType === 'strain'){
         {comments?
           this.displayCommentTable()
            :
-          <Header>No Comments</Header>
+          <span>No Comments</span>
            }
 
         <Form reply photoID={photoId} >
-          <Form.TextArea onChange={e => this.changeHandler(e)} />
+          <Form.TextArea placeholder="first to comment this post" onChange={e => this.changeHandler(e)} />
           <Button
             onClick={e => this.props.submitCommentHandler(this.state, e)}
             content="Add Reply"
@@ -273,7 +273,7 @@ if(this.props.commentType === 'strain'){
       </Comment.Group>
   )
 }else{
-    return <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
+    return
 }
 
 

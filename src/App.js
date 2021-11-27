@@ -33,7 +33,7 @@ import "survey-react/survey.css";
 import * as Survey from "survey-react";
 import ProductProfile from "./Components/ProductProfile"
 import CommentDisplay from "./Components/CommentDisplay"
-
+//import "./assets/css/style.css";
 
 
 
@@ -107,8 +107,7 @@ class App extends Component {
             user: { ...userData.user },
             avatar: { ...userData.user.avatar}
           });
-        })
-        .then(() => this.props.history.push("/dashboard/")).catch((error) => {
+        }).catch((error) => {
 
             this.setState({
                       errorMessage: error,
@@ -118,6 +117,10 @@ class App extends Component {
     }})} else {
         this.props.history.push("/home")
     }
+
+    //.then(() => this.props.history.push("/dashboard/"))
+
+
 
     // fetch("http://localhost:3000/api/v1/strains/", {
     //   method: "GET",
@@ -1420,6 +1423,7 @@ submitDeleteProductHandler = (e) => {
 
 
 
+
     return (
       <React.Fragment>
 
@@ -1499,7 +1503,7 @@ submitDeleteProductHandler = (e) => {
             <h3>Comment</h3>
           </Modal.Header>
           <Modal.Body>
-           <CommentDisplay/>
+           <CommentDisplay commentType="photo"/>
           </Modal.Body>
           <Modal.Footer>
             <Button variant="secondary" onClick={this.handleCloseComment}>
@@ -1648,7 +1652,7 @@ submitDeleteProductHandler = (e) => {
                 strains={this.state.strains}
                 submitNewStrainReviewHandler={this.submitNewStrainReviewHandler}
               />
-      ), console.log(this.state)}
+      )}
           />
           <Route
             path="/Post"

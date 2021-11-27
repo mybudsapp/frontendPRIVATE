@@ -236,45 +236,168 @@ render(){
 
 
         const {showStoreForm} = this.state
+        const items =[
+            <Feed.Event>
+            <Feed.Label>
+            <img src='https://images.unsplash.com/photo-1535740451417-25dafb0667bb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
+            </Feed.Label>
+            <Feed.Content>
+            <Feed.Summary>
+            <Feed.User>Elliot Fu</Feed.User> added you as a friend
+            <Feed.Date>1 Hour Ago</Feed.Date>
+            </Feed.Summary>
+            <Feed.Meta>
+            <Feed.Like>
+            <Icon name='like' />4 Likes
+            </Feed.Like>
+            </Feed.Meta>
+            </Feed.Content>
+        </Feed.Event>,
 
+            <Feed.Event>
+            <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
+            <Feed.Content>
+            <Feed.Summary>
+            <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
+            <Feed.Date>4 days ago</Feed.Date>
+            </Feed.Summary>
+            <Feed.Extra images>
+            <a href="/profile">
+            <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
+            </a>
+            <a href="/profile">
+            <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
+            </a>
+            </Feed.Extra>
+            <Feed.Meta>
+            <Feed.Like>
+            <Icon name='like' />1 Like
+            </Feed.Like>
+            </Feed.Meta>
+            </Feed.Content>
+        </Feed.Event>
+
+        ]
 
 
 
         return(
-            <Segment padded='very' vertical>
+            <Segment style={{"padding": "0px"}} vertical>
+                {showStoreForm? <NewStoreForm user={this.props.user} storesDisplay={this.storesDisplay} submitStoreHandler={this.props.submitStoreHandler}/> : null}
 
-                <div>
-                    <Grid columns={2}>
-                    <br></br>
-                    <Grid.Row >
+                <Visibility >
+
+                    <Grid celled='internally' style={{height: '100vh'}}>
+            <Grid.Row>
+              <Grid.Column width={1}>
+                  <Segment.Group horizontal>
+
+                      <Segment vertical>
+
+                      <FontAwesomeIcon
+                      icon={faStore}
+                      className="fa-2x text-gray-300"/>
+                  Stores
+      </Segment>
+      <Segment
+          onClick={this.newStoreFormButtonPressed}
+    >
+
+              <FontAwesomeIcon
+                  icon={faPlus}
+                  className="fa-2x text-gray-300">
+              </FontAwesomeIcon>
+
+
+      </Segment>
+      <Segment>
+
+              <FontAwesomeIcon
+                  icon={faMinus}
+                  className="fa-2x text-gray-300">
+              </FontAwesomeIcon>
+
+
+      </Segment>
+          </Segment.Group>
+
+              <UserShopContainer stores={this.props.user.stores} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest}/>
+
+              </Grid.Column>
+
+              <Grid.Column >
+                  <Segment.Group horizontal>
+                  <Segment vertical>Notifications </Segment>
+                  <Segment vertical>
+                      <a onClick={this.refreshNotificationButtonClicked}>
+                      <FontAwesomeIcon
+                      icon={faSync}
+                      className="fa-2x text-gray-300">
+                  </FontAwesomeIcon>
+                  <Label color='red' floating>
+22
+</Label>
+</a>
+              </Segment>
+          </Segment.Group>
+                  <InfiniteScroll
+                      dataLength={items.length}
+                      loader={<h4>Loading...</h4>}
+                      height={800}
+                      scrollableTarget="infinite-scroll-component__outerdiv"
+                      endMessage={
+                  <p style={{ textAlign: 'center' , height: '100%'}}>
+                      <b>Yay! You have seen it all</b>
+                  </p>
+              }
+
+        >
+
+        <Feed>
+
+        {items.map((i, index) => (
+                    i
+                  ))}
+
+              </Feed>
+        </InfiniteScroll>
+        </Grid.Column>
+
+            <Grid.Column>
+
+
+          <div>
+              <Grid columns={2}>
+                  <br></br>
+                  <Grid.Row >
                       <Grid.Column >
-                          <br></br>
-                      <Segment
-                          onClick={this.newStoreFormButtonPressed}
-                          raised
-                          circular style={ {width:80, height:80} }
-                          textAlign='left'
-                          >
-                              <i class="large icons" >
-                                  <FontAwesomeIcon
-                                  icon={faStore}
-                                  className="fa-2x text-gray-300">
-                              </FontAwesomeIcon>
-                                  <i class="top right corner add icon"></i>
-                              </i>
-                      </Segment>
-                  </Grid.Column>
-                    </Grid.Row>
-                    <Grid.Row>
-                    <UserShopContainer stores={this.props.user.stores} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest}/>
-                </Grid.Row>
-                  </Grid>
-                   <br></br>
-                    <br></br>
-                     <br></br>
-                    <br></br>
-        </div>
-        {showStoreForm? <NewStoreForm user={this.props.user} storesDisplay={this.storesDisplay} submitStoreHandler={this.props.submitStoreHandler}/> : null}
+
+                      </Grid.Column>
+                  </Grid.Row>
+                  <Grid.Row>
+
+                  </Grid.Row>
+              </Grid>
+              <br></br>
+              <br></br>
+              <br></br>
+              <br></br>
+          </div>
+
+
+
+         </Grid.Column>
+
+            </Grid.Row>
+
+            <Grid.Row>
+
+            </Grid.Row>
+          </Grid>
+
+
+            </Visibility>
+
 
     </Segment>
 
@@ -537,8 +660,8 @@ render(){
                                     <b>Yay! You have seen it all</b>
                                 </p>
                             } >
-                            <FeedPostCard></FeedPostCard>
-                            <FeedPostCard></FeedPostCard>
+                            <FeedPostCard handleShowComment={this.props.handleShowComment}/>
+
                       </InfiniteScroll>
 
                             </Grid.Column>
@@ -586,9 +709,8 @@ render(){
                             </Feed>
                       </InfiniteScroll>
                       </Grid.Column>
+
                           <Grid.Column>
-
-
 
                     <Feed>
 
@@ -784,23 +906,23 @@ render(){
                 <EditProfile  submitHandler={this.props.submitHandler}/>
 
 )
-}else if(this.props.activeItem === 'Strains'){
+}else if(this.props.activeItem === 'Reviews'){
 
     let divStyle = {
   paddingLeft: 10
 
 }
 
+// {this.state.newStrainForm? <NewStrainForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
     return(
-        <div style={{paddingLeft: '2em'}}>
-           <Segment padded='very' vertical >
-               <div><h1></h1></div>
+        <div>
 
-               <br></br>
-               {this.state.newStrainForm? <NewStrainForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+           <Segment style={{"padding": "0px", "margin-left": "20px"}} vertical >
                    <Grid columns='equal'>
         <Grid.Row >
           <Grid.Column>
+              <Segment.Group>
+
             <Segment >
                 <Feed >
 
@@ -816,18 +938,9 @@ render(){
          <Feed.Summary>
              You added <a>Jenny Hess</a> to your <a>coworker</a> group.
          </Feed.Summary>
-            <br></br>
-         <Feed.Summary>
-             You added <a>Jenny Hess</a> to your <a>coworker</a> group.
-         </Feed.Summary>
-         <br></br>
-         <Feed.Summary>
-             You added <a>Jenny Hess</a> to your <a>coworker</a> group.
-         </Feed.Summary>
 
      </Feed>
                     </Segment>
-
             <Segment raised>
                 Strain Reviews
                 <UserStrainReviewsContainer
@@ -840,78 +953,35 @@ render(){
                     updatedStrains={this.props.updatedStrains}
                     token={localStorage.token}/>
             </Segment>
+        </Segment.Group>
           </Grid.Column>
           <Grid.Column width={6}>
+              <Segment.Group>
               <Segment >
                   <Feed >
 
            <Feed.Event>
              <Feed.Content>
                  <Image size='mini' circular src='https://i.pinimg.com/originals/4f/22/a1/4f22a1fc23e0b11caf9a833bf9065b6b.jpg' />
-                 <Feed.Summary>Shops / Dispensaries </Feed.Summary>
+                 <Feed.Summary>Products </Feed.Summary>
 
              </Feed.Content>
            </Feed.Event>
            <Feed.Summary>
                You added <a>Jenny Hess</a> to your <a>coworker</a> group.
            </Feed.Summary>
-              <br></br>
-           <Feed.Summary>
-               You added <a>Jenny Hess</a> to your <a>coworker</a> group.
-           </Feed.Summary>
-           <br></br>
-           <Feed.Summary>
-               You added <a>Jenny Hess</a> to your <a>coworker</a> group.
-           </Feed.Summary>
 
        </Feed>
                       </Segment>
-            <Segment raised>
-                Strain Products
-                <UserStrainContainer
-                    displayItemForEdit={this.props.displayItemForEdit}
-                    displayItemForDelete={this.props.displayItemForDelete}
-                    editStrains={this.props.editStrains}
-                    fetchStrains={requests.fetchStrains}
-                    storeRelationships={this.state.storeRelationships}
-                    strains={this.props.user.strains}
-                    updatedStrains={this.props.updatedStrains}
-                    token={localStorage.token}/>
-                <Segment textAlign="center" circular raised>
-                    <FontAwesomeIcon
-                        icon={faPlus}
-                        className="fa-3x text-gray-300"></FontAwesomeIcon>
-                    <h1>add items</h1>
-                </Segment>
-                <Segment textAlign="center" circular onClick={this.props.editProductsButtonPressed} raised>
-                    <FontAwesomeIcon
-                        icon={faMinus}
-                        className="fa-3x text-gray-300"></FontAwesomeIcon>
-                    <h1>edit items</h1>
-                </Segment>
-            </Segment>
-          </Grid.Column>
-
-
-          <Grid.Column>
-
-          </Grid.Column>
-        </Grid.Row>
-
-        <Grid.Row stretched>
-          <Grid.Column>
+                      <Segment >
+                          Product Reviews
+                              </Segment>
+                  </Segment.Group>
 
 
 
           </Grid.Column>
-          <Grid.Column width={6}>
 
-          </Grid.Column>
-
-
-          <Grid.Column>
-
-          </Grid.Column>
         </Grid.Row>
 
       </Grid>

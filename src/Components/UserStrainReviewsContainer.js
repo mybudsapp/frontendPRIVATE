@@ -204,15 +204,7 @@ componentDidMount = () => {
                         <br></br>
                         <Segment  >
                             <Segment textAlign="center" vertical>
-                                {this.props.editstrains? <div>
-                                <FontAwesomeIcon
-                                        icon={faWrench}
-                                        className="fa-2x text-gray-300"
-                                        ></FontAwesomeIcon>
-
-                                    <h1>    Edit Clothes </h1>
-                                    </div>
-                                    : <div>
+                             <div>
 
                                 <FontAwesomeIcon
                                         icon={faCannabis}
@@ -220,13 +212,36 @@ componentDidMount = () => {
                                         ></FontAwesomeIcon>
 
                                     <h1>
-                                        Flower Strains Reviews
-                                    </h1></div>}
+                                        Indicas
+                                    </h1></div>
                             </Segment>
                             <br></br>
-                            <Card.Group itemsPerRow={4} divided>
-                                <br></br>
-                                 <span>No Items</span>
+                            <Card.Group  divided>
+                                <Card>
+         <Card.Content>
+           <Image
+             floated='right'
+             size='mini'
+             src='/images/avatar/large/steve.jpg'
+           />
+       <span>Steve Sanders</span>
+           <Card.Meta>Friends of Elliot</Card.Meta>
+           <Card.Description>
+             Steve wants to add you to the group <strong>best friends</strong>
+           </Card.Description>
+         </Card.Content>
+         <Card.Content extra>
+           <div className='ui two buttons'>
+             <Button basic color='green'>
+               Approve
+             </Button>
+             <Button basic color='red'>
+               Decline
+             </Button>
+           </div>
+         </Card.Content>
+       </Card>
+
 
                             </Card.Group>
 
@@ -243,15 +258,6 @@ componentDidMount = () => {
                         <br></br>
                         <Segment textAlign="center" >
                         <Segment vertical >
-                            {this.props.editstrains? <div>
-                            <FontAwesomeIcon
-                                    icon={faWrench}
-                                    className="fa-2x text-gray-300"
-                                    ></FontAwesomeIcon>
-
-                                <h1>    Edit Concentrates </h1>
-                                </div>
-                                : <div>
 
                             <FontAwesomeIcon
                                     icon={faFillDrip}
@@ -259,8 +265,8 @@ componentDidMount = () => {
                                     ></FontAwesomeIcon>
 
                                 <h1>
-                                    Concentrates
-                                </h1></div>}
+                                    Sativas
+                                </h1>
                             </Segment>
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
@@ -269,98 +275,10 @@ componentDidMount = () => {
 
                             </Card.Group>
 
-                            <Grid>
-
-
-
-
-                            </Grid>
-                            <br></br>
-                            <br></br>
-
                         </Segment>
-                        <br></br>
-                        <br></br>
-                        <Segment>
-                        <Segment vertical>
-                            {this.props.editstrains? <div>
-                            <FontAwesomeIcon
-                                    icon={faWrench}
-                                    className="fa-2x text-gray-300"
-                                    ></FontAwesomeIcon>
-
-                                <h1>    Edit Edibles </h1>
-                                </div>
-                                : <div>
-
-                            <FontAwesomeIcon
-                                    icon={faUtensils}
-                                    className="fa-2x text-gray-300"
-                                    ></FontAwesomeIcon>
-
-                                <h1>
-                                    Edibles
-                                </h1></div>}
-                            </Segment>
-                            <br></br>
-                            <Card.Group itemsPerRow={4} divided>
-                                <br></br>
-                                {this.props.strains.length > 0 ? this.foodItemsDisplay(this.props.strains, this.props.editstrains, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storestrains) : <span>No Items</span>}
-
-                            </Card.Group>
-
-                            <Grid>
-
-
-
-
-                            </Grid>
-                            <br></br>
-                            <br></br>
-                        </Segment>
-                        <br></br>
-                        <br></br>
-
-                        <Segment  >
-                            <Segment textAlign="center" vertical>
-                            {this.props.editstrains? <div>
-                            <FontAwesomeIcon
-                                    icon={faWrench}
-                                    className="fa-2x text-gray-300"
-                                    ></FontAwesomeIcon>
-
-                                <h1>    Edit Accessories </h1>
-                                </div>
-                                : <div>
-
-                            <FontAwesomeIcon
-                                    icon={faTshirt}
-                                    className="fa-2x text-gray-300"
-                                    ></FontAwesomeIcon>
-
-                                <h1>
-                                    Accessories
-                                </h1></div>}
-                            </Segment>
-                            <br></br>
-                            <Card.Group itemsPerRow={4} divided>
-                                <br></br>
-                                {this.props.strains.length > 0 ? this.accessoriesstrainsDisplay(this.props.strains, this.props.editstrains, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storestrains) : <span>No Items</span>}
-
-                            </Card.Group>
-
-                            <Grid>
-
-
-
-
-                            </Grid>
-                            <br></br>
-                            <br></br>
-                        </Segment>
-                        <br></br>
                     </div>
-                </div>)
+                </div>
+            )
         } else {
             return <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
 
