@@ -160,9 +160,10 @@ class Profile extends Component {
                 </a>
               </li>
             </ul>
-            <div className="actions">
+            {this.props.user? <div className="actions">
               <button>Friend Request</button>
-            </div>
+            </div>: null}
+
           </div>
         </div>
 

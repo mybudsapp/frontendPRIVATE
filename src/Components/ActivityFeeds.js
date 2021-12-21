@@ -226,7 +226,7 @@ class AllUsersFeed extends React.Component {
 
     </Segment>
 </Segment.Group>
-    <Segment style={{"padding": "3px"}}>
+    <Segment style={ {margin: "auto"}}>
         <Feed>
                 {this.searchedByNameUsers()}
             </Feed>

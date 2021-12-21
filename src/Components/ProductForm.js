@@ -64,6 +64,8 @@ changeHandler = (e) => {
 
 handleAvatar = (e) => {
     e.preventDefault()
+
+
     //(e.target.files)
     this.setState({
         avatar: e.target.files[0]
@@ -131,10 +133,18 @@ const productOptions = [
 
     return(
 
-        <Segment raised textAlign="left">
+        <Segment vertical textAlign="left">
             <div class="ui form" encType="multipart/form-data" userID={this.props.user.id}>
                 <Form onSubmit={e => this.submitHandler(e, this.state, this.props)}>
-                   <p>Add Retail Price or Change Retail Price</p>
+                    <Form.Field>
+                        <label>Product Profile Picture:</label>
+                        <input  type="file"
+                            encType="multipart/form-data"
+                            placeholder="avatar"
+                            onChange={(e) => this.handleAvatar(e)}/>
+                        <br></br>
+                        <br></br>
+                    </Form.Field>
                 <Form.Field>
                 <label>Retail Price:</label>
                 <input type="number" onChange={this.changeHandler} name="retail_price"></input>
@@ -142,8 +152,11 @@ const productOptions = [
                 <br></br>
                 </Form.Field>
 
-                <Form.Field>
 
+
+
+
+                <Form.Field>
                 <label>Located at Which Store:</label>
                 <select name="store_id"  onChange={this.changeHandler}>
                    <option name="Choose a Store">Choose a Store</option>
@@ -151,10 +164,7 @@ const productOptions = [
                 </select>
             </Form.Field>
                 <br></br>
-                <br></br>
 
-
-                <br></br>
                  <Form.Field>
            <label>Product Name:</label>
                <input
@@ -165,7 +175,7 @@ const productOptions = [
                />
        </Form.Field>
                <br></br>
-               <br></br>
+
                <Form.Field>
            <label>Description:</label>
            <input
@@ -176,8 +186,7 @@ const productOptions = [
                />
        </Form.Field>
            <br></br>
-               <br></br>
-               <br></br>
+
                <Form.Field>
            <label>Product Type:</label>
                <select name="producttype"  onChange={this.changeHandler}>
@@ -190,7 +199,6 @@ const productOptions = [
            </Form.Field>
       <br></br>
           <br></br>
-          <br></br>
           <Form.Field>
           <label>Producer/Manufacturer Name:</label>
               <input
@@ -201,10 +209,9 @@ const productOptions = [
               />
       </Form.Field>
 
+
           <br></br>
-          <br></br>
-          <br></br>
-           <button type="button" onClick={e => this.submitHandler(e, this.state, this.props)}>Submit</button>
+           <Button type="Button" onClick={e => this.submitHandler(e, this.state, this.props)}>Submit</Button>
            </Form>
          </div>
 

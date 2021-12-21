@@ -101,30 +101,8 @@ console.log(res, "FEFR")
 }else{
 
 
-            return  <Card id={props.product[0].id} name={props.product.productname}>
-      <Card.Content>
-        {console.log(props.product[0], props)}
-            <br></br>
-
-        <Card.Description>{props.product[0].productname}</Card.Description>
-        <Card.Meta>
-                <br></br>
-          By {props.product[0].producer}
-  </Card.Meta>
-    <Card.Meta>
-        <br></br>
-        <span>Will No longer be Sold in Which Store:</span>
-        <br></br>
-        <select name="store_product_id" >
-            <option name="Choose a Store">Choose a Store</option>
-            {displayCurrentStoreRelationship(props.productRelationships)}
-        </select>
-    </Card.Meta>
-
-
-
-</Card.Content>
-      <Card.Content extra>
+            return  <Card>
+    
         <div className='ui two buttons'>
           <Button basic color='green' onClick={(e) => props.submitDeleteProductHandler(e)}>
             Approve
@@ -133,7 +111,6 @@ console.log(res, "FEFR")
             Decline
           </Button>
         </div>
-      </Card.Content>
     </Card>
     }
 

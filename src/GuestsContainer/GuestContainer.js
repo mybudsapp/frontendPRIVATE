@@ -27,6 +27,7 @@ import Profile from '../Components/Profile.js'
 import ProductProfile from '../Components/ProductProfile.js'
 import StrainReview from '../Components/StrainReview.js'
 import PhotoForm from '../Components/PhotoForm'
+import MobileHeaderBar from '../Components/MobileHeaderBar'
 
 import Error from "../Components/Error";
 
@@ -47,7 +48,7 @@ import c3 from "../assets/img/c3.jpg";
 
 import MobileNavBar from "../Components/MobileNavBar"
 
-import "../assets/css/bundle.css";
+//import "../assets/css/bundle.css";
 import "../assets/css/navigationbar.css";
 
 
@@ -58,46 +59,49 @@ import "../assets/css/navigationbar.css";
 const GuestContainerLayout = (props) => {
 
     const options = [
-  { key: 'Strain', text: 'Strain', value: 'Strain' },
-  { key: 'Buddy', text: 'Buddy', value: 'Buddy' },
+  { key: 'Strains', text: 'Strain', value: 'Strain' },
+  { key: 'Buddies', text: 'Buddy', value: 'Buddy' },
   { key: 'Shop', text: 'Shop', value: 'Shop' },
 ]
 
 return (
     <div>
-<div id="custom-css-product">
-    <header className="main-header">
-      <div className="container content">
-        <nav>
-          <ul>
-              <Link to="/home">
-            <li>
-              <img src={home} alt="Home" /> Home
-            </li>
-        </Link>
-            <li>
-              <img src={notification} alt="Notifications" />
-              Notifications
-            </li>
-            <li>
-              <img src={message} alt="Messages" /> Messages
-            </li>
-          </ul>
-        </nav>
-        <Input
-            size='mini'
-label={<Dropdown defaultValue='Strain' compact options={options} />}
-labelPosition='right'
-placeholder='Search on My Buds'
-/>
-      </div>
-    </header>
+        <div id="custom-css-product">
+            <header className="main-header">
+              <div className="container content">
+
+                  <nav>
+                  <ul>
+                      <Link to="/dashboard" onClick={() => window.location.reload()}  >
+                <li>
+                      <img src={home} alt="Home" /> Home
+                    </li>
+                </Link>
+
+                  <li>
+
+                </li>
+                  </ul>
+                </nav>
+
+
+                    <Input
+                        size='mini'
+    label={<Dropdown defaultValue='Strains' compact options={options} />}
+    labelPosition='right'
+    placeholder='Search on My Buds'
+  />
+
+              </div>
+
+            </header>
+        </div>
 
     <Container text style={{ marginTop: '2em' }}>
     <Switch>
         <Route
             path="/Post"
-            render={() => (<PhotoForm/>)}
+            render={() => (<PhotoForm submitPostHandler={props.submitPostHandler}/>)}
             />
         <Route path="/product"
             render={() => <ProductProfile user={props.user}  submitCommentHandler={props.submitCommentHandler} submitNewStrainReviewHandler={props.submitNewStrainReviewHandler}/>} />
@@ -122,10 +126,8 @@ placeholder='Search on My Buds'
     </Switch>
     </Container>
 </div>
-<div>
-    <MobileNavBar active="post"/>
-</div>
-</div>
+
+
 
 )
 }

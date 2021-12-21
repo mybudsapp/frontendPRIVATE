@@ -45,6 +45,7 @@ import {
   faCogs,
   faAddressCard,
   faUser,
+   faPlus,
   faCannabis
 } from "@fortawesome/free-solid-svg-icons";
 
@@ -86,7 +87,7 @@ class UserDashboard extends React.Component {
 activeItem: "Feed"
   };
 
-  handleActivityFeedClick = (e) => {
+  handleMobileActivityClick = (e) => {
     if (e.target.id === "feed") {
       this.setState({
         activityFeed: (
@@ -94,7 +95,7 @@ activeItem: "Feed"
         ),
       });
       //("whoa");
-    } else if (e.target.id === "photos") {
+  } else if (e.target.id === "photos") {
       this.setState({
         activityFeed: (
           <BudsPhotosFeed user={this.props} history={this.props.history} />
@@ -185,14 +186,14 @@ extraImages: [
             className="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion"
             id="accordionSidebar"
           >
-          <li class="nav-item">
+          <li className="nav-item">
               <br></br>
 
             <Link
               to="/profile"
               className="sidebar-brand d-flex align-items-center justify-content-center"
             >
-            <Avatar round href="/profile" src="https://images.unsplash.com/photo-1528763380143-65b3ac89a3ff?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=335&q=80"></Avatar>
+            {this.props.user.avatar? <Image size='tiny' round={true} src={this.props.user.avatar.url} avatar/> : <Avatar color={Avatar.getRandomColor('sitebase', ['red', 'green', 'blue'])} name={this.props.username} />}
         </Link>
         <Link
           to="/dashboard"
@@ -275,7 +276,7 @@ extraImages: [
 
 
 
-      <div class="sidebar-card">
+      <div className="sidebar-card">
               <p class="text-center mb-2"><strong>Terms of Service</strong> </p>
               <p class="text-center mb-2"><strong>Privacy Policy</strong> </p>
               <p class="text-center mb-2"><strong>Licenses</strong></p>
@@ -297,13 +298,17 @@ extraImages: [
                     storeproducts={this.props.storeproducts}
                     productUpdated={this.props.productUpdated}
                     submitStoreHandler={this.props.submitStoreHandler}
+                    deleteStoreRequest={this.props.deleteStoreRequest}
                     submitProductHandler={this.props.submitProductHandler}
                     submitStrainHandler={this.props.submitStrainHandler}
                     user={this.props.user}
+                    submitEditHandler={this.props.submitEditHandler}
+                    displayStoreForEdit={this.props.displayStoreForEdit}
                     displayItemForEdit={this.props.displayItemForEdit}
                     editProductsButtonPressed={this.props.editProductsButtonPressed}
                     editProducts={this.props.editProducts}
                     newProduct={this.props.newProduct}
+                    editStoreHandler={this.props.editStoreHandler}
                     handleShowComment={this.props.handleShowComment}
                     />
 
@@ -323,6 +328,18 @@ class DesktopContainer extends Component {
   state = {};
 
 
+  handleItemClick = (e) => {
+
+      if(e.target.parentElement.parentElement.name === "Post") {
+
+          this.props.props.handleShowNewPost(true)
+
+      }else{
+          return null
+      }
+
+
+  }
 
   hideFixedMenu = () => this.setState({ fixed: false });
   showFixedMenu = () => this.setState({ fixed: true });
@@ -357,19 +374,23 @@ class DesktopContainer extends Component {
           <div id="custom-css-product">
               <header className="main-header">
                 <div className="container content">
-                  <nav>
+                        {console.log("deeknbout",this.props)}
+                    <nav>
                     <ul>
                         <Link to="/dashboard" onClick={() => window.location.reload()}  >
                   <li>
                         <img src={home} alt="Home" /> Home
                       </li>
                   </Link>
-                      <li>
-                        <img src={notification} alt="Notifications" />
-                        Notifications
-                    </li>
-                    <li>
 
+                    <li>
+                        <Link className={this.props.active === "post" ? "active" : null}>
+                            <a name="Post" onClick={e => this.handleItemClick(e)} >
+                            <FontAwesomeIcon
+                            icon={faPlus}
+                            className="fa-2x text-black-300"/>
+                    </a>
+                        </Link>
                   </li>
                     </ul>
                   </nav>
@@ -406,23 +427,45 @@ class MobileContainer extends Component {
   componentDidMount() {
   }
 
-  handleActivityFeedClick = (e) => {
-    if (e.target.id === "feed") {
+  handleMobileActivityClick = (e) => {
+
+
+
+    if (e.target.parentElement.parentElement.name === "feed") {
       this.setState({
+          activeItem: "home",
         activityFeed: (
           <BasicFriendsFeed user={this.props} history={this.props.history} />
         ),
       });
       //("whoa");
-    } else if (e.target.id === "photos") {
+  } else if (e.target.parentElement.parentElement.name === "notifications") {
       this.setState({
+          activeItem: "notifications",
         activityFeed: (
           <BudsPhotosFeed user={this.props} history={this.props.history} />
         ),
       });
 
       //("whoa photos");
-    }
+  } else if (e.target.parentElement.parentElement.name === "Settings") {
+      this.setState({
+          activeItem: "Settings"
+      });
+
+      //("whoa photos");
+  } else if (e.target.parentElement.parentElement.name === "post") {
+      this.setState({
+          activeItem: "post",
+        activityFeed: (
+          <BudsPhotosFeed user={this.props} history={this.props.history} />
+        ),
+      });
+
+      //("whoa photos");
+  } else {
+      return null
+  }
   };
 
   handleSidebarHide = () => this.setState({ sidebarOpened: false });
@@ -453,17 +496,18 @@ class MobileContainer extends Component {
     const { handleShowComment} = this.props.props
 
 
-
+    //mobile head bar needs active
     return (
       <Responsive getWidth={getWidth} maxWidth={Responsive.onlyMobile.maxWidth} functions={this.props}>
-          <MobileHeaderBar/>
+          <MobileHeaderBar active={this.state.activeItem} handleMobileActivityClick={this.handleMobileActivityClick}/>
 
 
 
-              <Segment vertical>
+              <Segment vertical style={{paddingTop: "60px", paddingBottom: "75px"}}>
                   {console.log("buskljnwc", this.props.props)}
               <UserContentDisplay
                   activeItem={activeItem}
+                  submitEditHandler={this.props.submitEditHandler}
                   submitStoreHandler={this.props.props.submitStoreHandler}
                   submitProductHandler={this.props.props.submitProductHandler}
                   submitStrainHandler={this.props.props.submitStrainHandler}
@@ -474,7 +518,7 @@ class MobileContainer extends Component {
           </Segment>
 
 
-        <MobileNavBar active="home" handleAddPostForm={this.props.handleAddPostForm}/>
+        <MobileNavBar active={this.state.activeItem} handleAddPostForm={this.props.handleAddPostForm}/>
 
       </Responsive>
     );

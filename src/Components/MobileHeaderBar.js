@@ -15,6 +15,10 @@ import mybudslogo from "../assets/img/mybudslogo.png"
 import {Image} from "semantic-ui-react";
 
 export default class MobileHeaderBar extends Component {
+    pressedButton = (e) => {
+        console.log(e)
+        this.props.handleMobileActivityClick(e)
+    }
   render() {
     return (
       <div class="fixed-top">
@@ -25,17 +29,33 @@ export default class MobileHeaderBar extends Component {
                         <ul>
                             <Image size='tiny' src={mybudslogo} alt="mybudslogo" />
 
-
                                 <li>
                               </li>
 
-                            
+                              <li>
+                                  <li >
+                                      <a onClick={e => this.pressedButton(e)} name="Settings">
+                                  <Link  class={this.props.active === "Settings" ? "active" : null}>
+                                      <FontAwesomeIcon
+                                      icon={faCog}
+                                      size="lg"
+                                          color="DarkGray"
+                                      />
+
+                                  </Link>
+                              </a>
+                                </li>
+                              </li>
+
+
                                 <li>
                                     <li>
+                                        <a onClick={e => this.pressedButton(e)} name="Settings">
                                     <Link to="/Post" class={this.props.active === "post" ? "active" : null}>
                                         <img src={notification} alt="Notifications" />
 
                                     </Link>
+                                </a>
                                   </li>
                                 </li>
                             </ul>

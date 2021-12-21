@@ -1,6 +1,6 @@
 import React, { Component, useState, useEffect } from "react";
 import {Link, withRouter} from 'react-router-dom';
-import {Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Item} from "semantic-ui-react"
+import {Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Item, Feed} from "semantic-ui-react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faTachometerAlt,
@@ -22,6 +22,7 @@ import {
   faCannabis,
   faWrench
 } from "@fortawesome/free-solid-svg-icons";
+
 import StrainForm from "./StrainForm"
 import StrainCard from "./StrainCard"
 import ProductCard from "./ProductCard"
@@ -247,8 +248,8 @@ componentDidMount = () => {
             return(
                 <div>
                     <div>
-                        <br></br>
-                        <Segment raised >
+
+                        <Segment >
                             <Segment textAlign="center" vertical>
                                 {this.props.editProducts? <div>
                                 <FontAwesomeIcon
@@ -367,7 +368,7 @@ componentDidMount = () => {
                         <br></br>
                         <br></br>
 
-                        <Segment raised >
+                        <Segment  >
                             <Segment textAlign="center" vertical>
                             {this.props.editProducts? <div>
                             <FontAwesomeIcon

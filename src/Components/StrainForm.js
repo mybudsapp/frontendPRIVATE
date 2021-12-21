@@ -66,6 +66,7 @@ changeHandler = (e) => {
 
 handleAvatar = (e) => {
     e.preventDefault()
+
     //(e.target.files)
     this.setState({
         avatar: e.target.files[0]
@@ -124,65 +125,74 @@ render() {
 
     return(
 
-        <Segment raised textAlign="left">
-                <input
-                  type="file"
-                  placeholder="avatar"
-
-                  onChange={this.changeHandler}
-                />
-
-
-
+        <Segment vertical textAlign="left">
             <div class="ui form" encType="multipart/form-data" user={this.props.user.id}  >
-            <h3>New Strain </h3>
-             <form onSubmit={e => this.theSubmitHandler(e)} >
+            <Form onSubmit={e => this.submitHandler(e, this.state, this.props)}>
+                <Form.Field>
+                    <label>Product Profile Picture:</label>
+                    <input  type="file"
+                        placeholder="avatar"
+                        onChange={(e) => this.handleAvatar(e)}></input>
+                    <br></br>
+                    <br></br>
+                </Form.Field>
+                <Form.Field>
+          <label>Strain Name:</label>
+              <input
+                type="text"
+                name="strain_name"
+                placeholder="Strain Name"
+                onChange={this.changeHandler}
+              />
+      </Form.Field>
 
-             <label>Name:</label>
-               <input
-                 type="text"
-                 name="strain_name"
-                 onChange={this.changeHandler}
-               />
-           <br></br>
-           <label> Location: </label>
-            <select name="store"  onChange={this.changeHandler}>
-                <option value="error">Choose Which Location</option>
-                {dispensariesOptions()}
-             </select>
-           <br></br>
-           <label>Strain Type:</label>
-               <select name="strain_type" id="strain_type" onChange={this.changeHandler}>
-                   <option value="error">Choose the Type</option>
-       <option value="Sativa">Sativa</option>
-       <option value="Indica" >Indica </option>
-       <option value="Hybrid">Hybrid</option>
-   </select>
-   <br></br>
-   <label>Description:</label>
-       <input
-         type="text"
-         name="description"
-         onChange={this.changeHandler}
-       />
-   <br></br>
-        <label>Price Per Gram:</label>
-         <br></br>
-            <input
-              type="integer"
-              name="price"
-              onChange={this.changeHandler}
-            />
-            <br></br>
-            <label>Company:</label>
-                <input
-                  type="text"
-                  name="growcompany"
-                  onChange={this.changeHandler}
-                />
+      <Form.Field>
+  <label>Description:</label>
+  <input
+        type="text"
+        name="description"
+        placeholder="Description"
+        onChange={this.changeHandler}
+      />
+</Form.Field>
+<Form.Field>
+<label>Price Per Gram:</label>
+<input type="number" onChange={this.changeHandler} name="retail_price"></input>
+<br></br>
+<br></br>
+</Form.Field>
 
-                   <button>Submit</button>
-             </form>
+<Form.Field>
+<label>Located at Which Store:</label>
+<select name="store_id"  onChange={this.changeHandler}>
+   <option name="Choose a Store">Choose a Store</option>
+
+   {dispensariesOptions()}
+</select>
+</Form.Field>
+
+<Form.Field>
+<label>Strain Type:</label>
+    <select name="strain_type" id="strain_type" onChange={this.changeHandler}>
+        <option value="error">Choose the Type</option>
+    <option value="Sativa">Sativa Dominant</option>
+    <option value="Indica">Indica Dominant</option>
+
+    </select>
+</Form.Field>
+
+<Form.Field>
+<label>Grower/Manufacturer Name:</label>
+    <input
+      type="text"
+      name="producer"
+      placeholder="Producer/Manufacturer"
+      onChange={this.changeHandler}
+    />
+</Form.Field>
+<Button type="Button" onClick={e => this.submitHandler(e, this.state, this.props)}>Submit</Button>
+            </Form>
+
 
          </div>
 

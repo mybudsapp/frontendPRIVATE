@@ -14,6 +14,7 @@ import {
   Segment,
   Sidebar,
   Visibility,
+  Form
 } from 'semantic-ui-react'
 
 
@@ -86,24 +87,27 @@ const responseGoogleFailure = (response) => {
 </li>
 <br></br>
 <Button size='huge'>
-<GoogleLogin
-    clientId="692197655220-r5gp6i79ejhkslft6ifshug96d5vssa0.apps.googleusercontent.com"
-    buttonText="Login"
-    onSuccess={responseGoogleSuccess}
-    onFailure={responseGoogleFailure}
-    cookiePolicy={'single_host_origin'}
-    />
 
 
 </Button>
+
+
 </ul>
 
 
 </div>
 
-   )
+)
  }
 }
 
+
+//<GoogleLogin
+//    clientId="692197655220-r5gp6i79ejhkslft6ifshug96d5vssa0.apps.googleusercontent.com"
+    //buttonText="Login"
+    //onSuccess={responseGoogleSuccess}
+    //onFailure={responseGoogleFailure}
+    //cookiePolicy={'single_host_origin'}
+//    />
 
 export default Login

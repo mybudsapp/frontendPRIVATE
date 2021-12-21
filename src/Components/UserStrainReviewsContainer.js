@@ -202,7 +202,7 @@ componentDidMount = () => {
                 <div>
                     <div>
                         <br></br>
-                        <Segment  >
+                        <div  >
                             <Segment textAlign="center" vertical>
                              <div>
 
@@ -253,10 +253,10 @@ componentDidMount = () => {
                             </Grid>
                             <br></br>
                             <br></br>
-                        </Segment>
+                        </div>
                         <br></br>
                         <br></br>
-                        <Segment textAlign="center" >
+                        <div>
                         <Segment vertical >
 
                             <FontAwesomeIcon
@@ -275,7 +275,7 @@ componentDidMount = () => {
 
                             </Card.Group>
 
-                        </Segment>
+                        </div>
                     </div>
                 </div>
             )

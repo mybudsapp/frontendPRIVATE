@@ -143,7 +143,7 @@ textDecoration: "underline"
 return(
     <ResponsiveContainer  functions={this.props}>
 
-                <Menu fluid widths={4}>
+                <Menu fluid widths={4} style={{"margin": "auto"}}>
                 <Menu.Item
                  name='users'
                  active={activeItem === 'users'}
@@ -386,7 +386,7 @@ class MobileContainer extends Component {
         maxWidth={Responsive.onlyMobile.maxWidth}
         style={{"width": "100%", "overflow": "hidden"}}
       >
-      <Menu fluid widths={4} style={{"margin": "0 0"}} >
+      <Menu fluid widths={4} style={{"margin": "auto"}} >
       <Menu.Item
        name='users'
        active={activeItem === 'users'}

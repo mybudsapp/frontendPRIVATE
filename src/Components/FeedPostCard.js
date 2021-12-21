@@ -48,17 +48,17 @@ render(){
 
     return (
         <div class="window">
-
+            {console.log(this.props)}
           <div class="content">
             <div class="post">
               <div class="name">
 
-                <p>Danielle Pierce</p>
+                <p>{this.props.username}</p>
               </div>
 
             </div>
             <div class="post-image">
-             <img src="https://images.unsplash.com/photo-1636834668100-6cce64251054?ixid=MnwxMjA3fDB8MHx0b3BpYy1mZWVkfDl8cVBZc0R6dkpPWWN8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt=""/>
+             {this.props.post? <img src={this.props.post.image_url} alt=""/> : null}
             </div>
             <div class="likes" >
               <div class="left-icons" >
@@ -91,7 +91,7 @@ render(){
 
             <div class="post">
             <div class="name">
-              <p>Danielle Pierce</p> <span>Back in Cali asdasdasd asd asd asd asd  asdasdasdasd </span>
+              <p>{this.props.username}</p> <span>Back in Cali asdasdasd asd asd asd asd  asdasdasdasd </span>
             </div>
 
             </div>

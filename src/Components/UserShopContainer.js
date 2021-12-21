@@ -27,14 +27,19 @@ class UserShopContainer extends Component{
 
                 let stores = []
 
-                if(this.props.stores){
+                if(this.props.stores.length){
                     stores = this.props.stores
+
+                    return stores.map(store => {
+                        return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} showEdit={this.props.showEdit} displayStoreForEdit={this.props.displayStoreForEdit} handleShowEditClose={this.props.handleShowEditClose}raised/>
+                    })
+
                 }else{
-                    return null
-                }
-                return stores.map(store => {
-              return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} showEdit={this.props.showEdit} handleShowEdit={this.props.handleShowEdit} handleShowEditClose={this.props.handleShowEditClose}raised/>
-            })
+
+                    return <span>Try Adding a Store</span>
+
+            }
+
         }
 
         followedShopsDisplay = () => {
@@ -42,14 +47,16 @@ class UserShopContainer extends Component{
 
                     let dispensaries = []
 
-                    if(this.props.dispensaries){
+                    if(this.props.dispensaries.length > 1){
+
                         dispensaries = this.props.dispensaries
+
+                        return dispensaries.map(store => {
+                            return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} raised/>
+                        })
                     }else{
-                        return null
+                        return <span>Try Following New Stores</span>
                     }
-                    return dispensaries.map(store => {
-                  return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} raised/>
-                })
             }
 
 
@@ -62,12 +69,11 @@ class UserShopContainer extends Component{
 
 
         return(
-            <Segment raised>
-
+            <div>
 
       {this.dispensariesDisplay()}
 
-</Segment>
+</div>
 
 
 

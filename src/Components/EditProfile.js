@@ -1,18 +1,22 @@
 import React, {Component} from "react";
 import Avatar from 'react-avatar'
 import StrainCard from "./StrainCard"
-import {Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Label} from "semantic-ui-react"
+import {Checkbox, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Label} from "semantic-ui-react"
 import avatar from "../assets/img/avatar.png"
 
 class EditProfile extends Component {
 
     state={
-        user: {
-            username: null,
-            bio: null,
-            personality_type : null,
-            location : null
-        }
+    }
+
+    handleStateChange = (e) => {
+
+
+        e.preventDefault()
+
+        this.setState({
+            State: e.target.innerText
+        })
     }
 
     componentDidMount = () => {
@@ -21,6 +25,8 @@ class EditProfile extends Component {
 
     changeHandler = (e) => {
         e.preventDefault()
+
+        console.log(this.state)
         //(this.state)
         e.target.files?
         this.setState({user:{
@@ -51,16 +57,14 @@ class EditProfile extends Component {
         let user_id = this.props.user.id
 
 
-        this.props.submitHandler(this.state, token, user_id);
+        this.props.submitEditHandler(this.state, token, user_id);
 
         this.setState({
-            user :{
                 username: "",
                 bio: "",
                 avatar: "",
                 personality_type: "",
                 location : ""
-            }
         });
     };
 
@@ -74,11 +78,6 @@ class EditProfile extends Component {
 
 
     render(){
-        const genderOptions = [
-      { key: 'm', text: 'Male', value: 'male' },
-      { key: 'f', text: 'Female', value: 'female' },
-      { key: 'o', text: 'Other', value: 'other' },
-    ]
 
     const stateOptions = [
         {key: "AL", text: "Alabama", value: "Alabama"},
@@ -122,7 +121,7 @@ class EditProfile extends Component {
     {key: "OR", text: "Oregon", value: "Oregon"},
     {key: "PA", text: "Pennsylvania", value: "Pennsylvania"},
     {key: "PR", text: "Puerto Rico", value: "Puerto Rico"},
-    {key: "PA", text: "Rhode Island", value: "Rhode Island"},
+    {key: "RI", text: "Rhode Island", value: "Rhode Island"},
     {key: "SC", text: "South Carolina", value: "South Carolina"},
     {key: "SD", text: "South Dakota", value: "South Dakota"},
     {key: "TN", text: "Tennessee", value: "Tennessee"},
@@ -140,84 +139,72 @@ class EditProfile extends Component {
         //("in edit profile" , this.state)
         return(
 
-            <React.Fragment>
-            <Card fluid>
-              <Card.Content textAlign="left">
-                  <Avatar size={67} round={true} src={avatar}></Avatar>
-                 <h1>USERNAME</h1>
-                 <h2>LOCATION</h2>
-                 <h3>BIO</h3>
-              </Card.Content>
-            </Card>
-            <Segment>
+            <div>
+                <Segment.Group>
+                    <Segment>
 
-                <h1>Edit Profile</h1>
-                    <Form>
-        <Form.Group widths='equal'>
-            <Form.Input fluid label='Avatar' encType="multipart/form-data" placeholder='avatar' type='file' value={this.state.user.avatar} onChange={(e) => this.handleAvatar(e)}/>
-          <Form.Field
-            id='form-input-control-first-name'
-            control={Input}
-            label='Username'
-            placeholder='Username'
-          />
-          <Form.Field
-            control={Select}
-            options={genderOptions}
-            label={{ children: 'Gender', htmlFor: 'form-select-control-gender' }}
-            placeholder='Gender'
-            search
-            searchInput={{ id: 'form-select-control-gender' }}
-          />
-        </Form.Group>
-        <Form.Field
-    id='form-textarea-control-opinion'
-    control={TextArea}
-    label='Bio'
-    placeholder='Bio'
-  />
+                        {this.props.user.avatar? <Avatar round={true} src={this.props.user.avatar.url} name={this.props.username} /> : <Avatar color={Avatar.getRandomColor('sitebase', ['red', 'green', 'blue'])} name={this.props.username} />}
+                    </Segment>
+                    <Segment.Group horizontal>
+                    <Segment>
+                 <span>{this.props.user.username}</span>
+             </Segment>
+                <Segment>
+                 <span>{this.props.user.state? this.props.user.state : "No State Chosen"}</span>
+             </Segment>
+    </Segment.Group>
+
+            <Segment textAlign="left">
+                    <Form >
+        <Form.Group widths={2}>
+            <Form.Input fluid label='Avatar' encType="multipart/form-data" placeholder='avatar' type='file'  onChange={(e) => this.handleAvatar(e)}/>
+          <Form.Input label='Username' name='username' placeholder='username' onChange={this.changeHandler} />
+  </Form.Group>
+  <Form.Input label='Bio' name='bio' placeholder='bio' onChange={this.changeHandler} />
+      <div>
+      <input type="checkbox" placeholder='friends_only' value="true" onChange={this.changeHandler}></input>
+      <label for="friends_only">Friends Only</label>
+ </div>
+ <br></br>
   <Form.Button onClick={(e) => this.theSubmitHandler(e)}>Submit</Form.Button>
-        <Divider section />
-        <h2>Edit Email</h2>
-<Form.Field>
-        <label>Email</label>
-      <input placeholder="email"/>
-    </Form.Field>
-      <Form.Button onClick={(e) => this.theSubmitHandler(e)}>Submit</Form.Button>
-    <Divider section />
-    <h3>Edit Password</h3>
-    <Form.Field>
-        <label>Old Password</label>
-      <input placeholder="password"/>
 
-      <label>New Password</label>
-        <input placeholder="new password"/>
-        </Form.Field>
+
+
+<h3>Password</h3>
+<br></br>
+<Form.Group widths={2}>
+
+
+      <Form.Input label='Old Password' name='Password' placeholder='Old Password' onChange={this.changeHandler} />
+
+
+
+          <Form.Input label='New Password' name='New Password' placeholder='New Password' onChange={this.changeHandler} />
+
+
+    </Form.Group>
           <Form.Button onClick={(e) => this.theSubmitHandler(e)}>Submit</Form.Button>
-      <Divider section />
-      <h3>Edit Location</h3>
-          <Form.Field>
-              <label>Current Location</label>
-                  <label>New City</label>
-                    <input placeholder="City"/>
-                    <label>New State</label>
-                        <Form.Field
-                          control={Select}
-                          options={stateOptions}
-                          label={{ children: 'State', htmlFor: 'form-select-control-state' }}
-                          placeholder='State'
-                          search
-                          searchInput={{ id: 'form-select-control-gender' }}
-                        />
-              </Form.Field>
-                <Form.Button onClick={(e) => this.theSubmitHandler(e)}>Submit</Form.Button>
 
+      <h3>Location</h3>
+      <br></br>
+          <Form.Group widths={2}>
+              <Form.Input label='City' name='City' placeholder='City' onChange={this.changeHandler} />
+
+
+                <Form.Field
+                control={Select}
+                label='State'
+                options={stateOptions}
+                placeholder='State'
+                onChange={this.handleStateChange}
+              />
+            </Form.Group>
+            <Form.Button onClick={(e) => this.theSubmitHandler(e)}>Submit</Form.Button>
   </Form>
             </Segment>
-            <br></br>
-            <br></br>
-            <br></br>
-      </React.Fragment>
+            </Segment.Group>
+
+      </div>
         )
     }
 

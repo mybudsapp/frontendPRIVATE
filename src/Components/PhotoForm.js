@@ -11,10 +11,11 @@ state = {
 
 
 changeHandler = (e) => {
-    e.preventDefault();
 
+
+    console.log(this.state)
     this.setState({
-        [e.target.placeholder]: e.target.value
+        [e.target.name]: e.target.value
     })
     //('fromchangehandler', this.state)
 }
@@ -38,12 +39,12 @@ theSubmitPhotoHandler = (e) => {
 
     let token = localStorage.getItem('token')
 
-
+    console.log(this.state)
     //("the state once submit handler is hit", this.state)
-    this.props.submitPhotoHandler(this.state, token);
+    this.props.submitPostHandler(this.state, token);
     this.setState({
             image:'',
-            description:''
+            caption:''
         }
     )
 };
@@ -64,20 +65,20 @@ render() {
                <input
                  encType="multipart/form-data"
                  type='file'
-                 placeholder="photo"
+                 name='image'
                  onChange={(e) => this.handleImage(e)}
                />
            <label>Caption/Description</label>
                <input
                  type="text"
                  placeholder="what's this post about?"
-                 value={this.state.description}
+                 name="caption"
                  onChange={this.changeHandler}
                />
            <br></br>
            <br></br>
            <br></br>
-                   <Button type='submit'>Submit</Button>
+                   <Button onClick={this.theSubmitPhotoHandler}type='submit'>Submit</Button >
                    </div>
          </Form>
 

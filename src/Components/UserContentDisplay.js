@@ -6,6 +6,7 @@ import {Link, withRouter} from 'react-router-dom'
 import StoreCard from "./StoreCard"
 import StrainCard from "./StrainCard"
 import PhotoCard from "./PhotoCard"
+import PhotoForm from "./PhotoForm"
 import EditProfile from "./EditProfile"
 import StrainReviewCard from './StrainReviewCard'
 import ProductCard from './ProductCard'
@@ -15,6 +16,7 @@ import NewStoreForm from "./NewStoreForm"
 import UserShopContainer from './UserShopContainer'
 import UserProductContainer from './UserProductContainer'
 import UserStrainContainer from './UserStrainContainer'
+import FeedPostContainer from './FeedPostContainer'
 import UserStrainReviewsContainer from './UserStrainReviewsContainer'
 import FeedPostCard from './FeedPostCard'
 import NewStrainForm from "./StrainForm"
@@ -321,7 +323,11 @@ render(){
       </Segment>
           </Segment.Group>
 
-              <UserShopContainer stores={this.props.user.stores} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} editStoreRequest={this.props.editStoreRequest}/>
+              <UserShopContainer
+                  stores={this.props.user.stores}
+                  user={this.props.user}
+                  deleteStoreRequest={this.props.deleteStoreRequest}
+                  displayStoreForEdit={this.props.displayStoreForEdit}/>
 
               </Grid.Column>
 
@@ -624,7 +630,7 @@ render(){
 
 
 
-                  <Segment vertical padded='very' style={{'padding-top': 0}}>
+                  <Segment vertical padded='very' style={{paddingTop: 0}}>
 
                           {
                                this.mobileScreen(getWidth)?
@@ -660,7 +666,7 @@ render(){
                                     <b>Yay! You have seen it all</b>
                                 </p>
                             } >
-                            <FeedPostCard handleShowComment={this.props.handleShowComment}/>
+                            <FeedPostContainer posts={this.props.posts} handleShowComment={this.props.handleShowComment} user={this.props.user}/>
 
                       </InfiniteScroll>
 
@@ -763,76 +769,78 @@ render(){
 
 
 
+    //<Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
+    //<Segment textAlign="center" circular onClick={this.props.editProductsButtonPressed}>
+
             return(
 
-                <Segment>
-                <div>
-                        {this.state.newProductForm? <ProductForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+                <Segment >
 
+                    <Grid>
+                        <Grid.Row>
+      <Grid.Column >
+          <Segment.Group>
+              <Segment>
+                  Products
+              </Segment>
+          <Segment.Group horizontal>
+              <Segment onClick={this.newProductButtonPressed}>
+                 Add
+              </Segment>
+              <Segment onClick={this.props.editProductsButtonPressed}>
+                  Edit
+              </Segment>
+          </Segment.Group>
+      </Segment.Group>
+          <Segment.Group>
+              <Segment>
+                  {this.state.newProductForm? <ProductForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+                  <UserProductContainer
+                      displayItemForEdit={this.props.displayItemForEdit}
+                      displayItemForDelete={this.props.displayItemForDelete}
+                      editProducts={this.props.editProducts}
+                      fetchProducts={requests.fetchProducts}
+                      storeRelationships={this.state.storeRelationships}
+                      products={this.props.user.products}
+                      updatedProducts={this.props.updatedProducts}
+                      strains={this.props.user.strains}
+                      token={localStorage.token}/>
+              </Segment>
+          </Segment.Group>
+      </Grid.Column>
+      <Grid.Column >
+          <Segment.Group>
+              <Segment>
+                  Medicated Products
+              </Segment>
+              <Segment.Group horizontal>
+                  <Segment onClick={this.newStrainButtonPressed}>
+                     Add
+                  </Segment>
+                  <Segment onClick={this.props.editProductsButtonPressed}>
+                      Edit
+                  </Segment>
+              </Segment.Group>
+          </Segment.Group>
+          <Segment.Group>
+              <Segment>
+                   {this.state.newStrainForm? <StrainForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+                  <UserStrainContainer
+                      displayItemForEdit={this.props.displayItemForEdit}
+                      displayItemForDelete={this.props.displayItemForDelete}
+                      editProducts={this.props.editProducts}
+                      fetchProducts={requests.fetchProducts}
+                      storeRelationships={this.state.storeRelationships}
+                      products={this.props.user.products}
+                      updatedProducts={this.props.updatedProducts}
+                      strains={this.props.user.strains}
+                      token={localStorage.token}/>
+              </Segment>
+          </Segment.Group>
+      </Grid.Column>
+</Grid.Row>
+                    </Grid>
 
-                                         <Segment padded textAlign="left" vertical>
-                                         <FontAwesomeIcon
-                                             icon={faBarcode}
-                                             className="fa-4x text-gray-300"></FontAwesomeIcon>
-                                         <h1>Items</h1>
-                                     </Segment>
-
-                                     <br></br>
-
-                        <Grid columns={1} textAlign="center">
-                            <br></br>
-                            <Grid.Row>
-
-                                <Grid.Column centered>
-                                <Segment textAlign="center" circular onClick={this.newProductButtonPressed}>
-                                    <FontAwesomeIcon
-                                        icon={faPlus}
-                                        className="fa-3x text-gray-300"></FontAwesomeIcon>
-                                    <h1>add items</h1>
-                                </Segment>
-                            </Grid.Column>
-
-
-                            <Grid.Column>
-
-
-                                <Segment textAlign="center" circular onClick={this.props.editProductsButtonPressed}>
-                                    <FontAwesomeIcon
-                                        icon={faMinus}
-                                        className="fa-3x text-gray-300"></FontAwesomeIcon>
-                                    <h1>edit items</h1>
-                                </Segment>
-                            </Grid.Column>
-                            </Grid.Row>
-
-
-                            <br></br>
-
-                            <Grid.Row>
-                        </Grid.Row>
-                          <Grid.Column>
-                              <br></br>
-
-                              <UserProductContainer
-                                  displayItemForEdit={this.props.displayItemForEdit}
-                                  displayItemForDelete={this.props.displayItemForDelete}
-                                  editProducts={this.props.editProducts}
-                                  fetchProducts={requests.fetchProducts}
-                                  storeRelationships={this.state.storeRelationships}
-                                  products={this.props.user.products}
-                                  updatedProducts={this.props.updatedProducts}
-                                  strains={this.props.user.strains}
-                                  token={localStorage.token}/>
-                      </Grid.Column>
-                      </Grid>
-
-
-
-                    <br></br>
-<br></br>
-<br></br>
-
-          </div>
       </Segment>
     )
 }else if(this.props.activeItem === 'Products' && this.props.productUpdated){
@@ -903,7 +911,7 @@ render(){
 
         return(
 
-                <EditProfile  submitHandler={this.props.submitHandler}/>
+                <EditProfile  user={this.props.user} submitEditHandler={this.props.submitEditHandler}/>
 
 )
 }else if(this.props.activeItem === 'Reviews'){
@@ -988,7 +996,35 @@ render(){
            </Segment>
            </div>
 
-  )}else{
+  )}else if(this.props.activeItem === 'Post'){
+
+      let divStyle = {
+    paddingLeft: 10
+
+  }
+
+  // {this.state.newStrainForm? <NewStrainForm  user={this.props.user} stores={this.props.user.stores} products={this.state.products} submitProductHandler={this.props.submitProductHandler}/> : null}
+      return(
+          <div>
+              {console.log(this.props)}
+             <Segment style={{"padding": "0px", "margin-left": "20px"}} vertical >
+                     <Grid columns='equal'>
+          <Grid.Row >
+            <Grid.Column>
+                <Segment.Group>
+                    <PhotoForm/>
+
+              <Segment >
+
+                      </Segment>
+          </Segment.Group>
+            </Grid.Column>
+      </Grid.Row>
+        </Grid>
+             </Segment>
+             </div>
+
+    )}else{
     return null
 }
 
