@@ -44,7 +44,7 @@ render(){
     const {errorCode} = this.props
 
     if(errorCode == 3){
-            return <div><p1>{this.errorsDisplay(errors)}</p1></div>
+            return <div><p1>{errors.join('')}</p1></div>
     }else if(errorCode == 2){
             return (<div><p1>{this.props.message}</p1>
             <br></br>

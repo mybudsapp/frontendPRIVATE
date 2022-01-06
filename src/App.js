@@ -110,7 +110,7 @@ class App extends Component {
             user: { ...userData.user },
             avatar: { ...userData.user.avatar}
           });
-        }).catch((error) => {
+      }).then(this.props.history.push("/dashboard")).catch((error) => {
 
             this.setState({
                       errorMessage: error,
@@ -245,32 +245,99 @@ class App extends Component {
 
 
 
+  // editStoreHandler = (e, newStore, store_id) => {
+  //   // needs token, auth???
+  //
+  //   e.preventDefault()
+  //
+  //
+  //   if (newStore.avatar? true : false) {
+  //     const fd = new formData();
+  //
+  //     fd.append("avatar", newStore.avatar);
+  //
+  //
+  //
+  //     fd.append("store", JSON.stringify(newStore))
+  //
+  //     let token = localStorage.getItem('token')
+  //
+  //     axios
+  //       .patch(
+  //         `http://localhost:3000/api/v1/stores/${store_id}`,
+  //         fd,
+  //         {
+  //           headers: { "Content-Type": "application/x-www-form-urlencoded" },
+  //         }
+  //     )
+  //       .then(window.location.reload());
+  //   } else {
+  //     fetch(`http://localhost:3000/api/v1/stores/${store_id}`, {
+  //       method: "PATCH",
+  //       headers: {
+  //         "content-type": "application/json",
+  //         accepts: "application/json",
+  //       },
+  //       body: JSON.stringify({ store: newStore }),
+  //     })
+  //       .then((res) => res.json())
+  //       .then(window.location.reload());
+  //   }
+  // };
+
+
   editStoreHandler = (e, newStore, store_id) => {
-    // needs token, auth???
-
-    e.preventDefault()
-
-
-    if (newStore.avatar? true : false) {
-      const fd = new formData();
-
-      fd.append("avatar", newStore.avatar);
-
-      
-
-      fd.append("store", JSON.stringify(newStore))
 
       let token = localStorage.getItem('token')
 
-      axios
-        .patch(
-          `http://localhost:3000/api/v1/stores/${store_id}`,
-          fd,
-          {
-            headers: { "Content-Type": "application/x-www-form-urlencoded" },
+
+    if (newStore.avatar) {
+
+      const fd = new formData();
+
+
+
+      for (const property in newStore) {
+          if(property === 'store'){
+               for (const store in newStore[property]){
+
+                   fd.append(`store[${store}]`, newStore[property][store])
+                   fd.append(`avatar`, newStore.avatar);
+
+               }} else if (property === 'storehours') {
+                   for (const storehours in newStore[property])
+                   fd.append(`storehours[${storehours}]`, newStore[property][storehours])
+                   fd.append(`avatar`, newStore.avatar);;
+               }
           }
-      )
-        .then(window.location.reload());
+
+
+
+      // for (const property in newStore) {
+      //     if(property === 'storehours'){
+      //          for (const storehours in newStore[property]){
+      //              fd.append(`storehours[${storehours}]`, newStore[property][storehours])
+      //          }} else {
+      //              fd.append(`${property}`, `${newStore.storehours[property]}`);
+      //          }
+      //     }
+
+
+
+
+
+      // for (const property in newStore.store) {
+      //     fd.append(`${property}`, `${newStore.store[property]}`);
+      // }
+
+      for (const property in newStore.storehours) {
+          fd.append(`${property}`, `${newStore.storehours[property]}`);
+      }
+
+      axios
+        .patch(`http://localhost:3000/api/v1/stores/${store_id}`, fd, {
+          headers: { "Content-Type": "application/x-www-form-urlencoded" },
+        })
     } else {
       fetch(`http://localhost:3000/api/v1/stores/${store_id}`, {
         method: "PATCH",
@@ -278,13 +345,47 @@ class App extends Component {
           "content-type": "application/json",
           accepts: "application/json",
         },
-        body: JSON.stringify({ store: newStore }),
+        body: JSON.stringify({ newStore, store_id }),
+      }).then((response) => {
+          console.log(response)
+      if (!response.ok) {
+        return response.json().then((errorData) => {
+            console.log(errorData)
+          this.setState({
+              ...this.state.user,
+              errors: {...errorData.error},
+              message: errorData.message,
+              errorCode: [errorData.errorCode],
+              newStoreRequest: newStore,
+              hasError: true })
       })
-        .then((res) => res.json())
-        .then(window.location.reload());
+    } else {
+        return response.json().then((storeData) => {
+
+            //const filteredProducts = this.state.user.products.filter(product => product.id !== productData.id)
+
+            console.log(storeData)
+                // this.setState(prev => ({
+                //     ...prev,
+                //     user: {...prev.user,
+                //     products: filteredProducts},
+                //           productUpdated: !this.state.productUpdated,
+                //           message: productData.message,
+                //           editProducts: !this.state.editProducts,
+                //           showProductEdit: !this.state.showProductEdit,
+                //           successfullRequest: true
+                //       }))
+
+    });
+    }}).catch((error) => {
+        this.setState({
+                  errorMessage: error,
+                  hasError: true
+              })
+    });
+
     }
   };
-
 
 
 
@@ -712,29 +813,25 @@ class App extends Component {
             Authorization: token,
           },
         }).then((response) => {
+            console.log(response)
 
-        console.log("^^^^", response)
-        if (response.statusText == 'OK') {
-
-
+        if (response.data.error) {
             this.setState({
                 ...this.state.user,
-                      products: {...this.state.user.products.push(response.data.product)},
-                      productUpdated: !this.state.productUpdated,
-                      successfullRequest: true
-                  })
+                errors: [response.data.error],
+                message: response.message,
+                errorCode: [response.data.errorCode],
+                hasError: true })
       } else {
-          debugger
           this.setState({
               ...this.state.user,
-              errors: {...response.errors},
-              message: response.message,
-              errorCode: [response.errorData.errorCode],
-              hasError: true })
+              products: this.state.user.products.push(response.data.product),
+              productUpdated: !this.state.productUpdated,
+              successfullRequest: true
+          })
       }
-
       }).catch((error) => {
-          debugger
+
           this.setState({
                     errorMessage: error,
                     hasError: true
@@ -898,17 +995,18 @@ displayItemForDelete = (e, storeProducts) => {
 
     e.preventDefault()
 
-
-    const productID = e.target.parentElement.parentElement.parentElement.getAttribute("id")
+    const productID = e.target.parentElement.parentElement.parentElement.parentElement.id
 
 
           const product = this.state.user.products.filter(x => x.id == productID)
 
+
           const relationships = this.state.user.store_products.filter(x => x.product_id == productID)
 
 
+
           this.setState({
-              productToDelete: product,
+              productToDelete: product[0],
               productRelationships: relationships,
               showDelete: true
           })
@@ -923,9 +1021,11 @@ submitDeleteProductHandler = (e) => {
 
     e.preventDefault()
 
-    const productID = e.target.parentElement.parentElement.parentElement.getAttribute("id")
+    const productID = e.target.parentElement.parentElement.id
 
-    const relationshipIDToDelete = e.target.parentElement.parentElement.parentElement.firstElementChild.children[3].childNodes[3].value
+
+    const relationshipIDToDelete = e.target.parentElement.parentElement.querySelector('option').value
+
 
 
     fetch(`http://localhost:3000/api/v1/products/${productID}`, {
@@ -961,8 +1061,8 @@ submitDeleteProductHandler = (e) => {
   //-----------------------UserHandlers Should Go Here---------------------------------
 
   signupSubmitHandler = (userInfo) => {
-      debugger
-    fetch("http://localhost:3000/api/v1/users", {
+
+    fetch("http://localhost:3000/api/v1/users/", {
       method: "POST",
       headers: {
         "content-type": "application/json",

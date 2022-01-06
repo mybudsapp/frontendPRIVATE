@@ -51,7 +51,7 @@ const uniq = new Set(productRelationshipsArray.map(e => JSON.stringify(e)));
 
 const res = Array.from(uniq).map(e => JSON.parse(e));
 
-console.log(res, "FEFR")
+console.log(res, productRelationships, "FEFR")
 
     if (res.length > 0){
 
@@ -69,41 +69,55 @@ console.log(res, "FEFR")
 
 
     if(!props.showDelete){
-        return <Card id={props.product.id} name={props.product.productname} >
+        return <Item id={props.product.id} name={props.product.productname} >
             <Link>
-                {displayCorrectImage(props.product)}
+                <Image size='tiny' src={props.product.profileimage_url} />
             </Link>
             <Link>
-            <Card.Content >
+            <Item.Content >
                 <strong>{props.product.productname}</strong>
                 <h2>
                     {props.product.productname}
                 </h2>
-                <Card.Description>
+                <Item.Description>
 
-                </Card.Description>
+                </Item.Description>
 
-                <Card.Content>
-       <Card.Meta>Ratings</Card.Meta>
-       <Card.Meta>Pricing</Card.Meta>
-       <Card.Description>
+                <Item.Content>
+       <Item.Meta>Ratings</Item.Meta>
+       <Item.Meta>Pricing</Item.Meta>
+       <Item.Description>
         {props.product.productname}
-       </Card.Description>
-     </Card.Content>
-            </Card.Content>
+    </Item.Description>
+</Item.Content>
+</Item.Content>
                 <div className='ui two buttons'>
                 {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e, props.storeProducts)}>Delete</Button></div> : null}
             </div>
         </Link>
-      </Card>
+    </Item>
 
 
 }else{
 
+            return  <Item id={props.product.id} name={props.product.productname}>
 
-            return  <Card>
-    
-        <div className='ui two buttons'>
+                <Item.Image size='tiny' src={props.product.profileimage_url} />
+
+
+            <Item.Content >
+                <strong>{props.product.productname}</strong>
+       <Item.Description>
+        {props.product.productname}
+    </Item.Description>
+
+</Item.Content>
+    <select>
+        {displayCurrentStoreRelationship(props.productRelationships)}
+    </select>
+        <br></br>
+<div className='ui two buttons'>
+        {console.log('relationship needs to pop up of the item and user to delete in submitdeletehandler',props)}
           <Button basic color='green' onClick={(e) => props.submitDeleteProductHandler(e)}>
             Approve
           </Button>
@@ -111,7 +125,7 @@ console.log(res, "FEFR")
             Decline
           </Button>
         </div>
-    </Card>
+    </Item>
     }
 
 

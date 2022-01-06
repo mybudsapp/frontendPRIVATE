@@ -8,7 +8,8 @@ const requests = {
     fetchMyFeed: "myfeed",
     fetchExploreFeed: "explorefeed",
     fetchStrains: "Strains",
-    fetchFeed: "activities"
+    fetchFeed: "activities",
+    fetchStores: "stores"
 }
 
 export default requests

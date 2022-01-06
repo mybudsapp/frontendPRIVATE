@@ -46,33 +46,12 @@ handleStoreHours = (e) => {
         }
 
     })
+
+    console.log(this.state)
 }
 
 
-theSubmitHandler = (e) => {
 
-
-    e.preventDefault()
-
-    let token = localStorage.getItem('token')
-
-
-
-
-    this.props.editProductSubmitHandler(this.state, token);
-
-    // gotta make the set the new state for new dispensarh
-    // this.setState({
-    //     newStrain :{
-    //         Mental:  '000',
-    //         Physical: '000',
-    //         Velocity: '000',
-    //         Flavor: '000',
-    //         Overall: '000'
-    //     }
-    // })
-    ;
-};
 
 
 
@@ -117,7 +96,7 @@ render() {
                  <label>Address:</label>
                    <input
                      type="text"
-                     placeholder="street address"
+                     placeholder="address"
                      value={this.state.state}
                      onChange={this.changeHandler}
                    />

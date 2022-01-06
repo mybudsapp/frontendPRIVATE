@@ -273,7 +273,10 @@ componentDidMount = () => {
                             <br></br>
                             <Card.Group itemsPerRow={4} divided>
                                 <br></br>
-                                {this.props.products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeRelationships): <span>No Items</span>}
+                                {console.log(products)}
+                                <Item.Group divided>
+                                {products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeRelationships): <span>No Items</span>}
+                            </Item.Group>
 
                             </Card.Group>
 

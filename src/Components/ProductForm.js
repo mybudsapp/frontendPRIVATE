@@ -141,7 +141,7 @@ const productOptions = [
                         <input  type="file"
                             encType="multipart/form-data"
                             placeholder="avatar"
-                            onChange={(e) => this.handleAvatar(e)}/>
+                            onChange={(e) => this.handleAvatar(e)} />
                         <br></br>
                         <br></br>
                     </Form.Field>

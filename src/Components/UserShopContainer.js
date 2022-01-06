@@ -70,7 +70,7 @@ class UserShopContainer extends Component{
 
         return(
             <div>
-
+                {console.log("the store props are getting these props =>", this.props )}
       {this.dispensariesDisplay()}
 
 </div>
