@@ -313,23 +313,6 @@ class App extends Component {
 
 
 
-      // for (const property in newStore) {
-      //     if(property === 'storehours'){
-      //          for (const storehours in newStore[property]){
-      //              fd.append(`storehours[${storehours}]`, newStore[property][storehours])
-      //          }} else {
-      //              fd.append(`${property}`, `${newStore.storehours[property]}`);
-      //          }
-      //     }
-
-
-
-
-
-      // for (const property in newStore.store) {
-      //     fd.append(`${property}`, `${newStore.store[property]}`);
-      // }
-
       for (const property in newStore.storehours) {
           fd.append(`${property}`, `${newStore.storehours[property]}`);
       }
@@ -337,7 +320,36 @@ class App extends Component {
       axios
         .patch(`http://localhost:3000/api/v1/stores/${store_id}`, fd, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
-        })
+        }).then((response) => {
+        if (!response.ok) {
+              console.log("holy j33333sse")
+            this.setState({
+                ...this.state.user,
+                errors: {...response.errorData.error},
+                message: response.errorData.message,
+                errorCode: [response.errorData.errorCode],
+                newStoreRequest: newStore,
+                hasError: true })
+        } else {
+          console.log("holy jesse")
+          this.setState({
+              ...this.state.user,
+              errors: {...response.data.error},
+              message: response.errorData.message,
+              errorCode: [response.data.errorCode],
+              updatedStore: response.data.store,
+              successfullRequest: true })
+      }}
+      ).catch((error) => {
+
+          console.log("somedubsheit")
+          this.setState({
+                    errorMessage: error,
+                    hasError: true
+                })
+      });
+
+
     } else {
       fetch(`http://localhost:3000/api/v1/stores/${store_id}`, {
         method: "PATCH",
@@ -347,45 +359,25 @@ class App extends Component {
         },
         body: JSON.stringify({ newStore, store_id }),
       }).then((response) => {
-          console.log(response)
-      if (!response.ok) {
-        return response.json().then((errorData) => {
-            console.log(errorData)
+
+          return response.json().then((data) => {
+
+
+              console.log("asdasdasdasdasdasd123123", data)
           this.setState({
               ...this.state.user,
-              errors: {...errorData.error},
-              message: errorData.message,
-              errorCode: [errorData.errorCode],
-              newStoreRequest: newStore,
-              hasError: true })
-      })
-    } else {
-        return response.json().then((storeData) => {
+              showStoreEdit: !this.state.showStoreEdit,
+              successfullRequest: true,
+              errorCode: [data.errorCode]
 
-            //const filteredProducts = this.state.user.products.filter(product => product.id !== productData.id)
+          })
 
-            console.log(storeData)
-                // this.setState(prev => ({
-                //     ...prev,
-                //     user: {...prev.user,
-                //     products: filteredProducts},
-                //           productUpdated: !this.state.productUpdated,
-                //           message: productData.message,
-                //           editProducts: !this.state.editProducts,
-                //           showProductEdit: !this.state.showProductEdit,
-                //           successfullRequest: true
-                //       }))
-
+      }).catch((error) => {
+        console.log(error)
     });
-    }}).catch((error) => {
-        this.setState({
-                  errorMessage: error,
-                  hasError: true
-              })
-    });
+})
 
-    }
-  };
+}};
 
 
 
@@ -1699,7 +1691,7 @@ submitDeleteProductHandler = (e) => {
         </Modal>
 
         <Modal centered={true} size="lg" show={this.state.showStoreEdit} >
-
+            {console.log("sadfasdfasdvsv234234", this.state)}
           <Modal.Body>
            <EditStoreForm
                storeToEdit={this.state.storeToEdit}

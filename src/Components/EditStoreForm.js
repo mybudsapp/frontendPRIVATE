@@ -144,10 +144,10 @@ render() {
               <br></br>
               <br></br>
              Opening:
-             <input type="time" id="Monday" placeholder="MondayOpeningTime" min="07:00" max="22:00" ></input>
+             <input type="time" id="Monday" placeholder="mondayOpeningTime" min="07:00" max="22:00" ></input>
                  <br></br>
                  <br></br>
- Closing: <input type="time" id="Monday" placeholder="MondayClosingTime" min="07:00" max="22:00" ></input>
+ Closing: <input type="time" id="Monday" placeholder="mondayClosingTime" min="07:00" max="22:00" ></input>
     </Segment>
     <Segment>
     <label>
@@ -156,11 +156,11 @@ render() {
     <br></br>
     <br></br>
    Opening:
-<input type="time" id="Tuesday" placeholder="TuesdayOpeningTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Tuesday" placeholder="tuesdayOpeningTime" min="07:00" max="22:00" ></input>
     <br></br>
     <br></br>
 Closing:
-<input type="time" id="Tuesday" placeholder="TuesdayClosingTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Tuesday" placeholder="tuesdayClosingTime" min="07:00" max="22:00" ></input>
 
 </Segment>
 <Segment>
@@ -170,10 +170,10 @@ Closing:
 <br></br>
 <br></br>
 Opening:
-<input type="time" id="Wednesday" placeholder="WednesdayOpeningTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Wednesday" placeholder="wednesdayOpeningTime" min="07:00" max="22:00" ></input>
     <br></br>
     <br></br>
-    Closing: <input type="time" id="Wednesday" placeholder="WednesdayClosingTime" min="07:00" max="22:00" ></input>
+    Closing: <input type="time" id="Wednesday" placeholder="wednesdayClosingTime" min="07:00" max="22:00" ></input>
 </Segment>
 <Segment>
 <label>
@@ -183,11 +183,11 @@ Opening:
 <br></br>
 <br></br>
 Opening:
-<input type="time" id="Thursday" placeholder="ThursdayOpeningTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Thursday" placeholder="thursdayOpeningTime" min="07:00" max="22:00" ></input>
     <br></br>
     <br></br>
 Closing:
-<input type="time" id="Thursday" placeholder="ThursdayClosingTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Thursday" placeholder="thursdayClosingTime" min="07:00" max="22:00" ></input>
 
 </Segment>
 <Segment>
@@ -198,11 +198,11 @@ Closing:
 <br></br>
 <br></br>
 Opening:
-<input type="time" id="Friday" placeholder="FridayOpeningTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Friday" placeholder="fridayOpeningTime" min="07:00" max="22:00" ></input>
     <br></br>
     <br></br>
 Closing:
-<input type="time" id="Friday" placeholder="FridayClosingTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Friday" placeholder="fridayClosingTime" min="07:00" max="22:00" ></input>
 
 </Segment>
 <Segment>
@@ -213,11 +213,11 @@ Closing:
 <br></br>
 <br></br>
 Opening:
-<input type="time" id="Saturday" placeholder="SaturdayOpeningTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Saturday" placeholder="saturdayOpeningTime" min="07:00" max="22:00" ></input>
     <br></br>
     <br></br>
     Closing:
-<input type="time" id="Saturday" placeholder="SaturdayClosingTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Saturday" placeholder="saturdayClosingTime" min="07:00" max="22:00" ></input>
 
 </Segment>
 <Segment>
@@ -228,11 +228,11 @@ Opening:
 <br></br>
 <br></br>
 Opening:
-<input type="time" id="Sunday" placeholder="SundayOpeningTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Sunday" placeholder="sundayOpeningTime" min="07:00" max="22:00" ></input>
     <br></br>
     <br></br>
     Closing:
-<input type="time" id="Sunday" placeholder="SundayClosingTime" min="07:00" max="22:00" ></input>
+<input type="time" id="Sunday" placeholder="sundayClosingTime" min="07:00" max="22:00" ></input>
 
 </Segment>
 
