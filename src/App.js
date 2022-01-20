@@ -19,6 +19,7 @@ import ExploreContainer from "./Components/ExploreContainer";
 import Home from "./Components/Home";
 import UserDashboard from "./Components/UserDashboard.js";
 import Profile from "./Components/Profile.js";
+import StoreProfile from "./Components/StoreProfile.js"
 import EditProfile from "./Components/EditProfile.js";
 import EditStoreForm from './Components/EditStoreForm'
 import { useAlert } from "react-alert";
@@ -47,6 +48,7 @@ class App extends Component {
     displayStrainReviewForm: false,
     displayPhotoForm: false,
     displayPostForm: false,
+    storeToProfile:{},
     otherUser: {},
     selectedStrain: {},
     show: true,
@@ -321,24 +323,27 @@ class App extends Component {
         .patch(`http://localhost:3000/api/v1/stores/${store_id}`, fd, {
           headers: { "Content-Type": "application/x-www-form-urlencoded" },
         }).then((response) => {
-        if (!response.ok) {
-              console.log("holy j33333sse")
+
+        if (response.status === 200) {
+            console.log("holy j33333sse" )
+
             this.setState({
                 ...this.state.user,
-                errors: {...response.errorData.error},
-                message: response.errorData.message,
-                errorCode: [response.errorData.errorCode],
-                newStoreRequest: newStore,
-                hasError: true })
+                updatedStore: response.data.store,
+                showStoreEdit: !this.state.showStoreEdit,
+                successfullRequest: true })
+
         } else {
           console.log("holy jesse")
           this.setState({
               ...this.state.user,
-              errors: {...response.data.error},
+              errors: {...response.errorData.error},
               message: response.errorData.message,
-              errorCode: [response.data.errorCode],
-              updatedStore: response.data.store,
-              successfullRequest: true })
+              errorCode: [response.errorData.errorCode],
+              newStoreRequest: newStore,
+              hasError: true })
+
+
       }}
       ).catch((error) => {
 
@@ -361,7 +366,6 @@ class App extends Component {
       }).then((response) => {
 
           return response.json().then((data) => {
-
 
               console.log("asdasdasdasdasdasd123123", data)
           this.setState({
@@ -1292,6 +1296,25 @@ submitDeleteProductHandler = (e) => {
     );
   };
 
+  handleViewStoreProfile = (e) => {
+
+
+    fetch(`http://localhost:3000/api/v1/stores/${e.target.parentElement.parentElement.parentElement.id}`).then(res =>
+        res.json().then((storeData) =>
+            this.setState({
+                storeToProfile: storeData
+            })
+        ).then(r =>
+
+            this.props.history.push(
+          "/store/" + String(this.state.storeToProfile.namespace)
+        ))
+        )
+  };
+
+
+
+
   handleClose = () => {
     this.setState({ show: false, firstTime: false });
   };
@@ -1818,6 +1841,7 @@ submitDeleteProductHandler = (e) => {
                       avatar={this.state.avatar}
                       history={this.props.history}
                       stores={this.state.user.stores}
+                      handleViewStoreProfile={this.handleViewStoreProfile}
                       deleteStoreRequest={this.deleteStoreRequest}
                       submitStoreHandler={this.submitStoreHandler}
                       strains={this.state.user.strains}
@@ -1863,13 +1887,24 @@ submitDeleteProductHandler = (e) => {
               />
             )}
           />
+          <Route
+            path="/store"
+            render={() => (
+              <StoreProfile
+                user={this.state.user}
+                store={this.state.storeToProfile}
+                avatar={this.state.avatar}
+                history={this.props.history}
+
+              />
+            )}
+          />
 
           <Route path="/home" render={() => <Home />} />
           <Route
             path="/explore"
             render={() => (
               <ExploreContainer
-
                 user={this.state.user}
                 avatar={this.state.avatar}
                 handleAddPostForm={this.handleAddPostForm}

@@ -37,7 +37,7 @@ export const ProductsAdapter = ({fetchProducts, userProducts, strains, token, di
     }
 }
 
-export const StoresAdapter = ({fetchStores, user, token, displayStoreForEdit, deleteStoreRequest, displayStoreForDelete}) => {
+export const StoresAdapter = ({fetchStores, user, token, displayStoreForEdit, deleteStoreRequest, displayStoreForDelete, handleViewStoreProfile}) => {
 
     const [stores, setStores] = useState([]);
 
@@ -62,6 +62,6 @@ export const StoresAdapter = ({fetchStores, user, token, displayStoreForEdit, de
     if (stores === null) {
       return <img src="https://upload.wikimedia.org/wikipedia/commons/b/b1/Loading_icon.gif" />
     } else {
-     return <UserShopContainer fromAdpater="yes" displayStoreForEdit={displayStoreForEdit} deleteStoreRequest={deleteStoreRequest} user={user} stores={stores} />
+     return <UserShopContainer fromAdpater="yes" handleViewStoreProfile={handleViewStoreProfile} displayStoreForEdit={displayStoreForEdit} deleteStoreRequest={deleteStoreRequest} user={user} stores={stores} />
     }
 }

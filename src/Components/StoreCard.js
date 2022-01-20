@@ -44,7 +44,7 @@ const StoreCard = props => {
          <Button basic onClick={(e) => props.deleteStoreRequest(e)}>Delete</Button>
      </Link>
      <Link>
-         <Button basic>Profile</Button>
+         <Button basic onClick={(e) => props.handleViewStoreProfile(e)}>Profile</Button>
      </Link>
 
 

@@ -31,7 +31,7 @@ class UserShopContainer extends Component{
                     stores = this.props.stores
 
                     return stores.map(store => {
-                        return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} showEdit={this.props.showEdit} displayStoreForEdit={this.props.displayStoreForEdit} handleShowEditClose={this.props.handleShowEditClose}raised/>
+                        return <StoreCard store={store} handleViewStoreProfile={this.props.handleViewStoreProfile} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} showEdit={this.props.showEdit} displayStoreForEdit={this.props.displayStoreForEdit} handleShowEditClose={this.props.handleShowEditClose}raised/>
                     })
 
                 }else{
@@ -49,10 +49,11 @@ class UserShopContainer extends Component{
 
                     if(this.props.dispensaries.length > 1){
 
+
                         dispensaries = this.props.dispensaries
 
                         return dispensaries.map(store => {
-                            return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} raised/>
+                            return <StoreCard store={store} user={this.props.user} deleteStoreRequest={this.props.deleteStoreRequest} handleViewStoreProfile={this.props.handleViewStoreProfile} raised/>
                         })
                     }else{
                         return <span>Try Following New Stores</span>

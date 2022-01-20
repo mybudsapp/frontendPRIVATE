@@ -102,36 +102,61 @@ button {
 }
 
 #custom-profile-css div.banner {
-
-    height:100%;
+  height: 200px;
   width: 100%;
   background: #1cc88a;
-
-
-  display: flex;
+  display: grid;
   align-items: center;
   justify-content: center;
-
-
-  object-fit: cover;
-
-
-
+  object-fit: contain;
   color: #fff;
+  overflow: hidden;
+  position: relative;
 }
 
 #custom-profile-css div.banner img{
-    height:100%;
+  height: 100%;
   width: 100%;
-  background: #1cc88a;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: cover;
+  color: #fff;
+  position: absolute;
+
+}
+
+#custom-profile-css div.store-profile-avatar {
+  height: 100px;
+  width: 150px;
+
+  margin: auto;
   display: flex;
   align-items: center;
   justify-content: center;
   object-fit: contain;
-
-
-
   color: #fff;
+
+
+}
+
+
+
+#custom-profile-css div.store-profile-avatar img{
+  height: 100%;
+  width: 100%;
+  border-radius: 30px;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  object-fit: contain;
+  color: #fff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+
+
 }
 
 .object-fit_fill { object-fit: contain}
@@ -151,7 +176,7 @@ button {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding-left: 285px;
+  padding-left: 355px;
   height: 100%;
 }
 
@@ -681,7 +706,7 @@ button {
 }
 
 .explorerequest {
-    
+
 }
 
 .content .likes p{

@@ -328,6 +328,7 @@ render(){
               <Adapter.StoresAdapter
                   stores={this.props.user.stores}
                   fetchStores={requests.fetchStores}
+                  handleViewStoreProfile={this.props.handleViewStoreProfile}
                   user={this.props.user}
                   deleteStoreRequest={this.props.deleteStoreRequest}
                   displayStoreForEdit={this.props.displayStoreForEdit}

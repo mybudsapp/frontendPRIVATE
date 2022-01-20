@@ -298,6 +298,7 @@ extraImages: [
                     storeproducts={this.props.storeproducts}
                     productUpdated={this.props.productUpdated}
                     submitStoreHandler={this.props.submitStoreHandler}
+                    handleViewStoreProfile={this.props.handleViewStoreProfile}
                     deleteStoreRequest={this.props.deleteStoreRequest}
                     submitProductHandler={this.props.submitProductHandler}
                     submitStrainHandler={this.props.submitStrainHandler}
