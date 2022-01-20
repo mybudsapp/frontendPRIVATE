@@ -366,11 +366,9 @@ return(
               </List>
             </Grid.Column>
             <Grid.Column width={3}>
+                INFO/
               <h3 inverted as='h4' content='Services' />
-              <List link inverted>
-                 developed by JanCarlos Acevedo
-                 | admin@mybuds.app
-              </List>
+             admin@mybuds.app
             </Grid.Column>
             <Grid.Column width={7}>
 
