@@ -286,7 +286,7 @@ render(){
 
         return(
             <Segment style={{"padding": "0px"}} vertical>
-                {showStoreForm? <NewStoreForm user={this.props.user} storesDisplay={this.storesDisplay} submitStoreHandler={this.props.submitStoreHandler}/> : null}
+                {this.state.showStoreForm? <NewStoreForm user={this.props.user}  submitStoreHandler={this.props.submitStoreHandler}/> : null}
 
                 <Visibility >
 

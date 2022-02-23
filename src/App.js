@@ -503,7 +503,9 @@ class App extends Component {
       this.setState({successfullRequest: !this.state.successfullRequest})
   }
 
-
+  handleNewPostClose = () => {
+      this.setState({showNewPost: !this.state.showNewPost})
+  }
 
 
 
@@ -1162,49 +1164,96 @@ submitDeleteProductHandler = (e) => {
 
 
   submitPostHandler = (userInfo, token) => {
-    const fd = new formData();
-
-    let user_id = this.state.user.id;
-
-    fd.append("image", userInfo.image);
-    fd.append("caption", userInfo.caption);
 
 
+    if (userInfo.store_id) {
 
-    axios
-      .post(`http://localhost:3000/api/v1/posts/`, fd, {
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
-          Authorization: token,
-        },
-      }).then((response) => {
+        const fd = new formData();
 
-          console.log(response)
-      if (response.statusText == 'OK') {
+        let user_id = this.state.user.id;
 
-          this.setState({
-              ...this.state.user,
-                    newpost: response.data.post,
-                    showPost: true
-                })
+        fd.append("image", userInfo.image);
+        fd.append("caption", userInfo.caption);
+        fd.append("store_id", userInfo.store_id)
+
+        axios
+          .post(`http://localhost:3000/api/v1/posts/`, fd, {
+            headers: {
+              "Content-Type": "application/x-www-form-urlencoded",
+              Authorization: token,
+            },
+          }).then((response) => {
+              console.log(response)
+          if (response.statusText == 'OK') {
+
+              this.setState({
+                  ...this.state.user,
+                        newpost: response.data.post,
+                        showPost: true
+                    })
+        } else {
+            this.setState({
+                ...this.state.user,
+                errors: {...response.errorData},
+                message: response.errorData.message,
+                errorCode: [response.errorData.errorCode],
+                hasError: true })
+        }
+
+        }).catch((error) => {
+
+            this.setState({
+                      errorMessage: error,
+                      hasError: true
+                  })
+        })
+
+
 
     } else {
 
-        this.setState({
-            ...this.state.user,
-            errors: {...response.errorData},
-            message: response.errorData.message,
-            errorCode: [response.errorData.errorCode],
-            hasError: true })
+        const fd = new formData();
+
+        let user_id = this.state.user.id;
+
+        fd.append("image", userInfo.image);
+        fd.append("caption", userInfo.caption);
+
+
+        axios
+        .post(`http://localhost:3000/api/v1/posts/`, fd, {
+            headers: {
+                "Content-Type": "application/x-www-form-urlencoded",
+                Authorization: token,
+            },
+        }).then((response) => {
+            console.log(response)
+            if (response.statusText == 'OK') {
+
+                this.setState({
+                    ...this.state.user,
+                    newpost: response.data.post,
+                    showPost: true
+                })
+            } else {
+                this.setState({
+                    ...this.state.user,
+                    errors: {...response.errorData},
+                    message: response.errorData.message,
+                    errorCode: [response.errorData.errorCode],
+                    hasError: true })
+                }
+
+            }).catch((error) => {
+                debugger
+                this.setState({
+                    errorMessage: error,
+                    hasError: true
+                })
+            })
     }
 
-    }).catch((error) => {
-        debugger
-        this.setState({
-                  errorMessage: error,
-                  hasError: true
-              })
-    });
+
   };
 
 
@@ -1370,8 +1419,9 @@ submitDeleteProductHandler = (e) => {
   }
 
   handleShowPostClose = () =>{
-      this.setState({showNewPost: !this.state.showNewPost})
+      this.setState({showPost: !this.state.showPost})
   }
+
 
   increment = () =>
   this.setState((prevState) => ({
@@ -1760,11 +1810,11 @@ submitDeleteProductHandler = (e) => {
             New Post
           </Modal.Header>
           <Modal.Body>
-              <PhotoForm/>
+              <PhotoForm user={this.state.user} stores={this.state.user.stores} submitPostHandler={this.submitPostHandler}/>
 
           </Modal.Body>
           <Modal.Footer>
-              <Button variant="secondary" onClick={this.handleShowPostClose}>
+              <Button variant="secondary" onClick={this.handleNewPostClose}>
                 Close
               </Button>
           </Modal.Footer>
@@ -1792,16 +1842,15 @@ submitDeleteProductHandler = (e) => {
         </Modal>
 
         <Modal centered={true} size="lg" show={this.state.showPost}  >
-
+            Success!
         <Modal.Header>
 
         </Modal.Header>
         <Modal.Body>
         <FeedPostCard username={this.state.user.username} post={this.state.newpost} handleShowComment={this.handleShowComment}/>
-
         </Modal.Body>
         <Modal.Footer>
-          <Button variant="secondary" onClick={this.handleShowDeleteClose}>
+          <Button variant="secondary" onClick={this.handleShowPostClose}>
             Close
           </Button>
         </Modal.Footer>

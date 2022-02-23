@@ -49,6 +49,19 @@ theSubmitPhotoHandler = (e) => {
     )
 };
 
+storeOptions = (stores) => {
+
+    if(stores){
+        stores = stores
+    }else{
+        return <h1> No Stores </h1>
+    }
+    return stores.map(store => {
+        return <option key={store.id} storeid={store.id} value={store.id}>{store.namespace}</option>;
+        })
+
+
+}
 
 
 
@@ -59,7 +72,13 @@ render() {
             <Form size="large">
         <div encType="multipart/form-data">
 
+            {this.props.stores?
+                <select name="store_id"  onChange={this.changeHandler}>
+               <option name="Choose a Store">Store Post?</option>
+               {this.storeOptions(this.props.stores)}
+           </select> : null}
 
+           <br></br>
 
              <label>Photo</label>
                <input
@@ -68,6 +87,8 @@ render() {
                  name='image'
                  onChange={(e) => this.handleImage(e)}
                />
+           <br></br>
+           <br></br>
            <label>Caption/Description</label>
                <input
                  type="text"

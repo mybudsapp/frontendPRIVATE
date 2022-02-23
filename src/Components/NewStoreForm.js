@@ -206,6 +206,7 @@ render() {
             <h1>New Store</h1>
 
         <Segment>
+            
             <SearchLocationInput onAddressSelect={this.onAddressSelect} onChange={() => null} />
         </Segment>
 
