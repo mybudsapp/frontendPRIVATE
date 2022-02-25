@@ -1,7 +1,6 @@
 import React, { Component } from "react";
 import {Responsive,Visibility, Label, Grid, Card, Segment, Menu, Image, Icon, Header, Divider, Button, Form, Input, TextArea, Select, Feed, Item} from "semantic-ui-react"
-import { Line, Bar, Radar} from "react-chartjs-2";
-import Chart from 'chart.js/auto'
+import FeedDisplayer from './FeedDisplayer'
 import {Link, withRouter} from 'react-router-dom'
 import StoreCard from "./StoreCard"
 import StrainCard from "./StrainCard"
@@ -46,7 +45,8 @@ class UserContentDisplay extends Component{
 
     state = {products: [],
         newStrainForm: false,
-        newProductForm: false
+        newProductForm: false,
+        feedToDisplay: false
     }
 
 
@@ -179,6 +179,18 @@ buddiesDisplay = () => {
             }
 
         }
+
+changeDisplayFeed = () => {
+
+
+        this.setState({
+            feedToDisplay: !this.state.feedToDisplay
+        })
+}
+
+
+
+
 
 render(){
 
@@ -347,7 +359,7 @@ const radardata = {
                       <Segment>
                           <h1>This Will Be Your Feed...</h1>
                       </Segment>
-                      <Feed>
+                      
                           {this.mobileScreen(getWidth)?
                               <Visibility >
                               <Feed.Event>
@@ -390,33 +402,21 @@ const radardata = {
                  </Visibility>
                       }
 
-            </Feed>
 
 
 
 
-            <Segment.Group>
-                <Segment>
-                    Interactions
-                </Segment>
-                <Segment>
-                        <Line data={linedata} />
-                </Segment>
 
-                <Segment>
-                    Sales
-                </Segment>
-                <Segment>
-                        <Bar data={bardata} />
-                </Segment>
-
-                <Segment>
-                    Most Bought Category
-                </Segment>
-                <Segment>
-                        <Radar data={radardata} />
-                </Segment>
-
+            <Segment.Group >
+                    <Segment.Group horizontal>
+                        <Segment name="insight" onClick={this.changeDisplayFeed}>
+                            Insight Feed
+                        </Segment>
+                        <Segment name="friend" onClick={this.changeDisplayFeed}>
+                            Friends Feed
+                        </Segment>
+                    </Segment.Group>
+                    <FeedDisplayer businessFeed={this.state.feedToDisplay}/>
             </Segment.Group>
                   </Segment.Group>
 
