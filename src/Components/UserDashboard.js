@@ -103,8 +103,12 @@ activeItem: "Feed"
   };
 
   componentDidMount = () => {
-
-      this.props.handleShowWelcome()
+      if(localStorage.token == "good to go"){
+          this.props.handleShowWelcome()
+          
+      }else{
+          this.props.history.push("/Home")
+      }
   };
 
   handleItemClick = (e, { name }) => this.setState({ activeItem: name });

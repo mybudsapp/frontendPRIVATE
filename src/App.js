@@ -28,7 +28,8 @@ import Quiz from "react-quiz-component";
 import { quiz } from "./Components/quiz";
 import "survey-react/survey.css";
 import * as Survey from "survey-react";
-import ProductProfile from "./Components/ProductProfile"
+import ProductProfile from "./Components/ProductProfile";
+import PassWordWall from "./Components/PassWordWall";
 
 class App extends Component {
   state = {
@@ -885,6 +886,22 @@ class App extends Component {
   }
 
 
+
+  passwordHandler = (password) => {
+
+
+        
+      if(password.Password == "ThankYou4coming") {
+
+          localStorage.setItem("token", "good to go")
+
+          this.props.history.push("/welcome")
+      } else {
+          this.props.history.push("/Home")
+      }
+
+  }
+
   render() {
     const sendDataToServer = (survey) => {
       //send Ajax request to your web server.
@@ -1202,7 +1219,16 @@ class App extends Component {
             )}
           />
             <Route
-              path="/dashboard"
+              path="/enterpassword"
+              render={() => (
+                    <PassWordWall
+                        passwordHandler={this.passwordHandler}
+
+                    />
+            )}
+            />
+            <Route
+              path="/welcome"
               render={() => (
                     <UserDashboard
                       user={this.state.user}

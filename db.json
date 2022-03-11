@@ -6,6 +6,9 @@
   "Products": [
       {"id": 1, "productname": "Product", "producttype": "Clothes"}, {"id": 1, "productname": "Product", "producttype": "Supplies"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Clothes"}, {"id": 1, "productname": "Product", "producttype": "Clothes"}, {"id": 1, "productname": "Product", "producttype": "Foods"},
       {"id": 1, "productname": "Product", "producttype": "Accessories"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Accessories"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Foods"}, {"id": 1, "productname": "Product", "producttype": "Supplies"}
+  ],
+  "password": [
+    {"password": "ThankYou4coming"}
   ]
 
 }

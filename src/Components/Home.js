@@ -79,7 +79,7 @@ const HomepageHeading = ({ mobile }) => (
     <h1 class="display-4">My Buds</h1>
     <p class="lead">community + ingenuity</p>
     <hr class="my-4"/>
-    <a class="btn btn-primary btn-lg" href="/dashboard" role="button">Take a Tour</a>
+    <a class="btn btn-primary btn-lg" href="/enterpassword" role="button">Take a Tour</a>
     <p></p>
 
   </div>
@@ -137,7 +137,7 @@ state = {}
               <div className="container content">
                 <nav>
                   <ul>
-                      <Link to="/dashboard"  >
+                      <Link to="/enterpassword"  >
                 <li>
                       <img src={home} alt="Home" /> Home
                     </li>
@@ -214,7 +214,7 @@ class MobileContainer extends Component {
         >
             <Menu.Item as='a' href="/product">Product Page</Menu.Item>
             <Menu.Item as='a'href="/profile">Profile</Menu.Item>
-          <Menu.Item as='a' href="/dashboard">Dashboard</Menu.Item>
+          <Menu.Item as='a' href="/enterpassword">Dashboard</Menu.Item>
           <Menu.Item as='a' href="/explore">Explore</Menu.Item>
         </Sidebar>
 
