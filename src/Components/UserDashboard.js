@@ -105,7 +105,7 @@ activeItem: "Feed"
   componentDidMount = () => {
       if(localStorage.token == "good to go"){
           this.props.handleShowWelcome()
-          
+
       }else{
           this.props.history.push("/Home")
       }
@@ -325,7 +325,7 @@ class DesktopContainer extends Component {
 
                         </li>
 
-                        <Link to="/dashboard"  >
+                        <Link to="/welcome"  >
                   <li>
                         <img src={home} alt="Home" /> Home
                       </li>
