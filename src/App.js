@@ -890,8 +890,8 @@ class App extends Component {
   passwordHandler = (password) => {
 
 
-        
-      if(password.Password == "ThankYou4coming") {
+
+      if(password.Password == "FreshTires44@") {
 
           localStorage.setItem("token", "good to go")
 
