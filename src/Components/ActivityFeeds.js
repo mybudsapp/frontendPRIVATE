@@ -15,6 +15,7 @@ import {
   Divider,
   Input
 } from 'semantic-ui-react'
+import { Route, Link, Switch, withRouter } from "react-router-dom";
 import UserCard from './UserCard'
 import ProductCard from './ProductCard'
 import Buds from '../mybuds-v2.png'
@@ -34,22 +35,32 @@ class AllUsersFeed extends React.Component {
 
     componentDidMount = () => {
 
-            this.setState({
-                users: [
-                  {id:1, username: "@Sample ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@another ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@123nnkj", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@example ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@lorem ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@epsum ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@dolor ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@sit ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@amet ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"},
-                  {id:1, username: "@consectetur ", location: "USA", avatar: "https://images.pexels.com/photos/6204323/pexels-photo-6204323.jpeg?auto=compress&cs=tinysrgb&dpr=2&h=650&w=940"}
-              ]
-          });
+        let token = localStorage.getItem("token");
 
-    }
+        fetch(`http://localhost:3000/api/v1/users/`, {
+          method: "GET",
+          headers: {
+              Authorization: `${token}`,
+            "content-type": "application/json",
+            accepts: "application/json",
+        }}).then((response) => {
+            console.log(response)
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+              console.log(errorData)
+            this.setState({
+            errors: {...errorData.error}
+        }) })
+      } else {
+          return response.json().then((userData) => {
+              this.setState({
+                  users: userData})
+
+      })
+  }})
+
+}
+
 
 
     handleClick = (e) => {
@@ -98,22 +109,21 @@ class AllUsersFeed extends React.Component {
               user.username.toLowerCase().includes(this.state.searchByName.toLowerCase())
           );
       }
+
+
       return users.map(user => {
-          return  <Feed.Event>
-      <Feed.Label style={ {margin: "auto"}}>
-        <Image src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg"></Image>
+          return  <Feed.Event id={user.id}>
+
+      <Feed.Label onClick={(e) => this.props.displayOtherUser(e)}  id={user.id} style={ {margin: "auto"}} >
+        <Image src="https://react.semantic-ui.com/images/avatar/small/jenny.jpg" ></Image>
       </Feed.Label>
       <Feed.Content>
-        <Feed.Summary>
+        <Feed.Summary id={user.id}>
           {user.username}
         </Feed.Summary>
-        <Feed.Extra text>anodnaiosdiaosd bio bio</Feed.Extra>
-            <a>
-            <div className="explorerequest" textAlign="right" vertical>
-                Friend Request
-            </div>
-        </a>
       </Feed.Content>
+
+
     </Feed.Event>;
           });
       };
@@ -202,26 +212,6 @@ class AllUsersFeed extends React.Component {
             <Segment vertical style={{"padding": "0"}}>
                 <Segment.Group style={{"margin": "0"}}>
                 <Segment padded textAlign="center">
-                    <Dropdown
-                        placeholder='Select Buddy Type'
-                        fluid
-                        search
-                        selection
-                        options={buddyOptions}
-                        />
-
-                </Segment>
-                <Segment padded textAlign="center">
-                    <Dropdown
-                        placeholder='Select State'
-                        fluid
-                        search
-                        selection
-                        options={stateOptions}
-                        />
-
-                </Segment>
-                <Segment padded textAlign="center">
               <Input fluid icon='search' placeholder="Search By Name" onChange={this.handleSearch} />
 
     </Segment>
@@ -257,23 +247,31 @@ class AllProductsFeed extends React.Component {
 
         componentDidMount = () => {
 
+            let token = localStorage.getItem("token");
 
+            fetch(`http://localhost:3000/api/v1/products/`, {
+              method: "GET",
+              headers: {
+                  Authorization: `${token}`,
+                "content-type": "application/json",
+                accepts: "application/json",
+            }}).then((response) => {
+                console.log(response)
+            if (!response.ok) {
+              return response.json().then((errorData) => {
+                  console.log(errorData)
                 this.setState({
-                    products: [
-                        {id: 1, productname: "shirt", producttype: "Clothes"},
-                        {id: 1, productname: "bong", producttype: "Supplies"},
-                        {id: 1, productname: "pound cake", producttype: "Edibles"},
-                        {id: 1, productname: "heavy shorts", producttype: "Clothes"},
-                        {id: 1, productname: "black hat", producttype: "Clothes"},
-                        {id: 1, productname: "greay stareaberr", producttype: "Edibles"},
-                        {id: 1, productname: "holder", producttype: "Accessories"},
-                        {id: 1, productname: "crackers", producttype: "Edibles"},
-                        {id: 1, productname: "trayt", producttype: "Accessories"},
-                        {id: 1, productname: "pizza", producttype: "Edibles"},
-                        {id: 1, productname: "taco", producttype: "Edibles"},
-                        {id: 1, productname: "stapler", producttype: "Supplies"}
-                    ]
-              });
+                errors: {...errorData.error}
+            }) })
+          } else {
+              return response.json().then((productsData) => {
+
+                  this.setState({
+                      products: productsData})
+
+          })
+      }})
+
 
         }
 
@@ -324,7 +322,7 @@ class AllProductsFeed extends React.Component {
               }
 
               return products.map(product => {
-                  return <ProductCard user={this.props.user}product={product} handleViewproductProfile={this.props.handleViewproductProfile} id={product.id}/>
+                  return <ProductCard user={this.props.user} product={product}  handleViewproductProfile={this.props.handleViewproductProfile} id={product.id}/>
                   });
               };
 
@@ -428,7 +426,7 @@ class AllProductsFeed extends React.Component {
                     <Segment style={styleObj}>
                         { mobile? <Card.Group itemsPerRow={2}>
             {this.displayFiltersSelected()}
-        </Card.Group>: <Card.Group itemsPerRow={4}>
+        </Card.Group>: <Card.Group centered>
 {this.displayFiltersSelected()}
 </Card.Group> }
             </Segment>

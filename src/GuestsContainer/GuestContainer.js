@@ -107,7 +107,7 @@ return (
             render={() => <ProductProfile user={props.user}  submitCommentHandler={props.submitCommentHandler} submitNewStrainReviewHandler={props.submitNewStrainReviewHandler}/>} />
         <Route
             path="/signup"
-            render={() => <Signup signupSubmitHandler={props.signupSubmitHandler} />}
+            render={() => <Signup signupSubmitHandler={props.signupSubmitHandler} loginHandler={props.loginSubmitHandler} />}
             />
         <Route
             path="/login"

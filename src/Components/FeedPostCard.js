@@ -19,7 +19,7 @@ import {
   faWrench,
   faFireAlt
 } from "@fortawesome/free-solid-svg-icons";
-import { faComment } from '@fortawesome/free-regular-svg-icons'
+
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 
@@ -76,22 +76,15 @@ render(){
                                 ></FontAwesomeIcon>
                   }
                       </i>
-
-
                       <i onClick={(e) => this.commentButtonPressed(e, this.props)}>
-              <FontAwesomeIcon
-                      icon={faComment}
-                      className="fa-2x text-black-300"
-                      ></FontAwesomeIcon>
                       </i>
               </div>
-              <p>24 plugs</p>
             </div>
 
 
             <div class="post">
             <div class="name">
-              <p>{this.props.username}</p> <span>Back in Cali asdasdasd asd asd asd asd  asdasdasdasd </span>
+              <p>{this.props.username}</p>
             </div>
 
             </div>

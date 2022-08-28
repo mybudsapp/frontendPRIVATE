@@ -17,7 +17,7 @@ export default class MobileNavBar extends Component {
   render() {
     return (
       <div class="fixed-bottom">
-         
+
         <nav class="footer-menu">
           <div class="container">
             <div class="menu">
@@ -40,7 +40,8 @@ export default class MobileNavBar extends Component {
                   </Link>
                 </li>
                 <li>
-                <Link to="/Post" class={this.props.active === "post" ? "active" : null}>
+                    {console.log(this.props)}
+                <Link onClick={this.props.handleAddPostForm} class={this.props.active === "post" ? "active" : null}>
                     <FontAwesomeIcon
                         icon={faCamera}
                         className="fa-1x text-gray-500"></FontAwesomeIcon>

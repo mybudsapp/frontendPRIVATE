@@ -72,7 +72,7 @@ render() {
             <Form size="large">
         <div encType="multipart/form-data">
 
-            {this.props.stores?
+            {this.props.stores > 1?
                 <select name="store_id"  onChange={this.changeHandler}>
                <option name="Choose a Store">Store Post?</option>
                {this.storeOptions(this.props.stores)}

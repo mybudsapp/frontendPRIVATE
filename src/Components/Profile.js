@@ -15,10 +15,13 @@ import {
   Visibility,
   Card,
   Input,
-  Dropdown
+  Dropdown,
+  Dimmer,
+  Loader
 } from "semantic-ui-react";
 import React, { Component } from "react";
 import PropTypes from "prop-types";
+import FeedPostCard from "../Components/FeedPostCard"
 import { Route, Link, Switch, withRouter } from "react-router-dom";
 
 import Avatar from "react-avatar";
@@ -52,7 +55,49 @@ const getWidth = () => {
 };
 
 class Profile extends Component {
-  state = { activeItem: "" };
+  state = { activeItem: "",
+  friendship: false};
+
+
+
+
+  componentDidMount = () => {
+
+
+  }
+
+
+  postsDisplay = () => {
+
+
+      let posts = []
+
+       if (posts.length > 0){
+
+           return posts.map(post =>
+               <section class="post-list">
+
+                   <a href="" class="post">
+                       <figure class="post-image">
+                           <FeedPostCard post={post}/>
+                       </figure>
+                       <div class="post-overlay">
+                           <p>
+                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                           </p>
+                       </div>
+                   </a>
+
+               </section>
+               )
+
+               }else{
+                   return  <Segment><h1>No Clothes</h1></Segment>
+               }
+           }
+
+
 
   //distribute each part of the profile into the activeItem from user object
   handleClick = (e) => {
@@ -91,369 +136,319 @@ class Profile extends Component {
     { key: 'Shop', text: 'Shop', value: 'Shop' },
   ]
 
+  if(this.props.otherUserView == true){
 
-    return (
-      <div id="custom-profile-css">
-        <header className="main-header">
-          <div className="content">
-            <nav>
-              <ul>
-                  <Link to="/dashboard" >
-                <li>
-                  <img src={home} alt="Home" /> Home
-                </li>
-            </Link>
-                <li>
-                  <img src={notification} alt="Notifications" /> Notifications
-                </li>
-                <li>
-                  <img src={message} alt="Messages" /> Messages
-                </li>
-              </ul>
-            </nav>
+      return(
+          <div id="custom-profile-css">
+              <header className="main-header">
+                  <div className="content">
+                      <nav>
+                          <ul>
+                              <Link to="/dashboard" >
+                                  <li>
+                                      <img src={home} alt="Home" /> Home
+                                      </li>
+                                  </Link>
+                              </ul>
+                              {console.log(this.props, "other user true")}
+                          </nav>
 
-            <div className="side">
-                <Input
-                    size='mini'
-  label={<Dropdown defaultValue='Products' compact options={options} />}
-  labelPosition='right'
-  placeholder='Search on My Buds'
-  />
-            </div>
-          </div>
-        </header>
+                          <div className="side">
+                              <Input
+                                  size='mini'
+                                  label={<Dropdown defaultValue='Products' compact options={options} />}
+                                  labelPosition='right'
+                                  placeholder='Search on My Buds'
+                                  />
+                          </div>
+                      </div>
+                  </header>
 
 
-            <Segment placeholder vertical textAlign="center">
-   <span icon>
-     <Icon name='plus square outline' style={{"color": "#28a745"}}/>
-     Add Banner Background
- </span>
- <br></br>
-   <Button primary>Add Photo</Button>
- </Segment>
+                  <Segment placeholder vertical textAlign="center">
+                      <span icon>
+                          <Icon name='plus square outline' style={{"color": "#28a745"}}/>
+                          Add Banner Background
+                      </span>
+                      <br></br>
+                      <Button primary>Add Photo</Button>
+                  </Segment>
 
 
-        <div className="bar">
-          <div className="content">
-            <ul>
-                <li className="personality" >
-                  <span>Buddy</span>
-                  <strong style={{"color": "#1cc88a"}}>Sativa</strong>
-                </li>
-              <li  >
-                <span >Post</span>
-                <a onClick={this.postButtonPressed}>
-                <strong>1234</strong>
-            </a>
-              </li>
-              <li>
-                <span>Friends</span>
-                <a onClick={this.friendsButtonPressed}>
-                <strong>1234</strong>
-                </a>
-              </li>
-              <li>
-                <span>Reviews</span>
-                <a onClick={this.reviewsButtonPressed}>
-                <strong>14</strong>
-                </a>
-              </li>
-            </ul>
-            {this.props.user? <div className="actions">
-              <button>Friend Request</button>
-            </div>: null}
+                  <div className="bar">
+                      <div className="content">
+                          <ul>
+                              <li className="personality" >
+                                  <span>Buddy</span>
+                                  <strong style={{"color": "#1cc88a"}}>{}</strong>
+                              </li>
+                              <li  >
+                                  <span >Post</span>
+                                  <a onClick={this.postButtonPressed}>
+                                      <strong></strong>
+                                  </a>
+                              </li>
+                              <li>
+                                  <span>Friends</span>
+                                  <a onClick={this.friendsButtonPressed}>
+                                      <strong></strong>
+                                  </a>
+                              </li>
+                              <li>
+                                  <span>Reviews</span>
+                                  <a onClick={this.reviewsButtonPressed}>
+                                      <strong></strong>
+                                  </a>
+                              </li>
+                          </ul>
+                          {this.props.friendship? <div className="actions">
+                              <button onClick={this.props.deleteFriendshipRequest}>UnFriend</button>
+                          </div>: <div className="actions">
+                              <button onClick={this.props.sendFriendRequest}> Friend Request</button>
+                          </div>}
 
-          </div>
-        </div>
+                      </div>
+                      {console.log(this.props.friendship, "PROFILE")}
+                  </div>
 
-        <div className="wrapper-content container content">
-          <div className="row mb-3">
-            <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
-              <aside className="profile">
-                <img className="avatar" src={avatar} alt="Beatriz Cantilho" />
-                <h1>Your Username Here</h1>
-                <span>@yourusernamehere</span>
-                <p>Software developer and sometimes gamer</p>
+                  <div className="wrapper-content container content">
+                      <div className="row mb-3">
+                          <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                              <aside className="profile">
+                                  <img className="avatar" src={avatar} alt="Beatriz Cantilho" />
+                                  <h1>{this.props.otherUser.username}</h1>
+                                  <span>@{this.props.otherUser.username}</span>
+                                  <ul className="list">
+                                      <li>
+                                          <img src={place} alt="place" /> Halifax, Canadá
+                                          </li>
+                                          <li>
+                                              <img src={url} alt="url" /> jancarlos.dev
+                                              </li>
 
-                <ul className="list">
-                  <li>
-                    <img src={place} alt="place" /> Halifax, Canadá
-                  </li>
-                  <li>
-                    <img src={url} alt="url" /> jancarlos.dev
-                  </li>
-
-                </ul>
-           </aside>
-
-
+                                          </ul>
+                                      </aside>
+                                  </div>
+                                  <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+                                      <section className="timeline">
 
 
 
-       </div>
+                                          <Segment.Group>
+                                              <Segment.Group horizontal>
 
 
+                                                  <Segment textAlign="center">
+                                                      <a onClick={this.postButtonPressed}>
+                                                          <FontAwesomeIcon icon={faCameraRetro} style={{"color": "#1cc88a"}}/>
+                                                          Posts</a></Segment>
 
+                                                      <Segment textAlign="center"><a onClick={this.friendsButtonPressed}><FontAwesomeIcon icon={faHandshake} style={{"color": "#1cc88a"}}/>Friends</a></Segment>
+                                                      <Segment textAlign="center"><a onClick={this.reviewsButtonPressed}><FontAwesomeIcon icon={faFileAlt} style={{"color": "#1cc88a"}}/>Reviews</a></Segment>
+                                                  </Segment.Group>
 
+3
+                                                  <Segment>
+                                                      <section class="post-list">
 
+                                                          <a href="" class="post">
+                                                              <figure class="post-image">
+                                                                  <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
+                                                              </figure>
+                                                              <div class="post-overlay">
+                                                                  <p>
+                                                                      <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
+                                                                      <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
+                                                                  </p>
+                                                              </div>
+                                                          </a>
 
+                                                      </section>
 
-       <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
-           <section className="timeline">
+                                                  </Segment>
 
-
-
-<Segment.Group>
-<Segment.Group horizontal>
-
-
-    <Segment textAlign="center">
-        <a onClick={this.postButtonPressed}>
-        <FontAwesomeIcon icon={faCameraRetro} style={{"color": "#1cc88a"}}/>
-            Posts</a></Segment>
-
-        <Segment textAlign="center"><a onClick={this.friendsButtonPressed}><FontAwesomeIcon icon={faHandshake} style={{"color": "#1cc88a"}}/>Friends</a></Segment>
-    <Segment textAlign="center"><a onClick={this.reviewsButtonPressed}><FontAwesomeIcon icon={faFileAlt} style={{"color": "#1cc88a"}}/>Reviews</a></Segment>
-</Segment.Group>
-
-
-<Segment>
-               <section class="post-list">
-
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <figure class="post-image">
-                               <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                           </figure>
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-                   <a href="" class="post">
-                       <figure class="post-image">
-                           <img src="https://images.unsplash.com/photo-1624456735729-03594a40c5fb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=634&q=80" alt=""/>
-                       </figure>
-                       <div class="post-overlay">
-                           <p>
-                               <span class="post-likes"><i class="fa fa-heart" aria-hidden="true"></i> 150</span>
-                               <span class="post-comments"><i class="fa fa-comment" aria-hidden="true"></i> 10</span>
-                           </p>
-                       </div>
-                   </a>
-               </section>
-
-           </Segment>
-
-</Segment.Group>
+                                              </Segment.Group>
 
 
 
 
-           </section>
+                                          </section>
 
 
 
 
-       </div>
-            </div>
+                                      </div>
+                                  </div>
 
 
 
 
 
 
-            <div>
+                                  <div>
 
-        </div>
+                                  </div>
 
-          </div>
+                              </div>
 
-        {getWidth() > 650? null : <MobileNavBar active="profile" handleAddPostForm={this.props.handleAddPostForm}/>}
-      </div>
-    );
+                              {getWidth() > 650? null : <MobileNavBar active="profile" handleAddPostForm={this.props.handleAddPostForm}/>}
+                          </div>)
+                  }else{
+                         return(
+                             <div id="custom-profile-css">
+                                 <header className="main-header">
+                                     <div className="content">
+                                         <nav>
+                                             <ul>
+                                                 {console.log(this.props, "other user false")}
+                                                 <Link to="/dashboard" >
+                                                     <li>
+                                                         <img src={home} alt="Home" /> Home
+                                                         </li>
+                                                     </Link>
+                                                 </ul>
+                                             </nav>
+
+                                             <div className="side">
+                                                 <Input
+                                                     size='mini'
+                                                     label={<Dropdown defaultValue='Products' compact options={options} />}
+                                                     labelPosition='right'
+                                                     placeholder='Search on My Buds'
+                                                     />
+                                             </div>
+                                         </div>
+                                     </header>
+
+
+                                     <Segment placeholder vertical textAlign="center">
+                                         <span icon>
+                                             <Icon name='plus square outline' style={{"color": "#28a745"}}/>
+                                             Add Banner Background
+                                         </span>
+                                         <br></br>
+                                         <Button primary>Add Photo</Button>
+                                     </Segment>
+
+
+                                     <div className="bar">
+                                         <div className="content">
+                                             <ul>
+                                                 <li className="personality" >
+                                                     <span>Buddy</span>
+                                                     <strong style={{"color": "#1cc88a"}}>{}</strong>
+                                                 </li>
+                                                 <li  >
+                                                     <span >Post</span>
+                                                     <a onClick={this.postButtonPressed}>
+                                                         <strong></strong>
+                                                     </a>
+                                                 </li>
+                                                 <li>
+                                                     <span>Friends</span>
+                                                     <a onClick={this.friendsButtonPressed}>
+                                                         <strong></strong>
+                                                     </a>
+                                                 </li>
+                                                 <li>
+                                                     <span>Reviews</span>
+                                                     <a onClick={this.reviewsButtonPressed}>
+                                                         <strong></strong>
+                                                     </a>
+                                                 </li>
+                                             </ul>
+                                             {this.props.user? <div className="actions">
+                                                 <button>Friend Request</button>
+                                             </div>: null}
+
+                                         </div>
+                                     </div>
+
+                                     <div className="wrapper-content container content">
+                                         <div className="row mb-3">
+                                             <div className="col-12 col-sm-12 col-md-12 col-lg-3 col-xl-3">
+                                                 <aside className="profile">
+                                                     <img className="avatar" src={avatar} alt="Beatriz Cantilho" />
+                                                     <h1>Your Username Here</h1>
+                                                     <span>@yourusernamehere</span>
+                                                     <p>Software developer and sometimes gamer</p>
+
+                                                     <ul className="list">
+                                                         <li>
+                                                             <img src={place} alt="place" /> Halifax, Canadá
+                                                             </li>
+                                                             <li>
+                                                                 <img src={url} alt="url" /> jancarlos.dev
+                                                                 </li>
+
+                                                             </ul>
+                                                         </aside>
+
+
+
+
+
+                                                     </div>
+
+
+
+
+
+
+
+                                                     <div className="col-12 col-sm-12 col-md-12 col-lg-5 col-xl-5">
+                                                         <section className="timeline">
+
+
+
+                                                             <Segment.Group>
+                                                                 <Segment.Group horizontal>
+
+
+                                                                     <Segment textAlign="center">
+                                                                         <a onClick={this.postButtonPressed}>
+                                                                             <FontAwesomeIcon icon={faCameraRetro} style={{"color": "#1cc88a"}}/>
+                                                                             Posts</a></Segment>
+
+                                                                         <Segment textAlign="center"><a onClick={this.friendsButtonPressed}><FontAwesomeIcon icon={faHandshake} style={{"color": "#1cc88a"}}/>Friends</a></Segment>
+                                                                         <Segment textAlign="center"><a onClick={this.reviewsButtonPressed}><FontAwesomeIcon icon={faFileAlt} style={{"color": "#1cc88a"}}/>Reviews</a></Segment>
+                                                                     </Segment.Group>
+
+
+                                                                     <Segment>
+                                                                         {this.postsDisplay()}
+
+                                                                     </Segment>
+
+                                                                 </Segment.Group>
+
+
+
+
+                                                             </section>
+
+
+
+
+                                                         </div>
+                                                     </div>
+
+
+
+
+
+
+                                                     <div>
+
+                                                     </div>
+
+                                                 </div>
+
+                                                 {getWidth() > 650? null : <MobileNavBar active="profile" handleAddPostForm={this.props.handleAddPostForm}/>}
+                                             </div>
+                         )
+                      }
+
   }
 }
 

@@ -217,40 +217,10 @@ componentDidMount = () => {
                             </Segment>
                             <br></br>
                             <Card.Group  divided>
-                                <Card>
-         <Card.Content>
-           <Image
-             floated='right'
-             size='mini'
-             src='/images/avatar/large/steve.jpg'
-           />
-       <span>Steve Sanders</span>
-           <Card.Meta>Friends of Elliot</Card.Meta>
-           <Card.Description>
-             Steve wants to add you to the group <strong>best friends</strong>
-           </Card.Description>
-         </Card.Content>
-         <Card.Content extra>
-           <div className='ui two buttons'>
-             <Button basic color='green'>
-               Approve
-             </Button>
-             <Button basic color='red'>
-               Decline
-             </Button>
-           </div>
-         </Card.Content>
-       </Card>
-
 
                             </Card.Group>
 
-                            <Grid>
-
-
-
-
-                            </Grid>
+                        
                             <br></br>
                             <br></br>
                         </div>

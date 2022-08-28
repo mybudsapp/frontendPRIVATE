@@ -51,7 +51,7 @@ const uniq = new Set(productRelationshipsArray.map(e => JSON.stringify(e)));
 
 const res = Array.from(uniq).map(e => JSON.parse(e));
 
-console.log(res, productRelationships, "FEFR")
+console.log(props, productRelationships, "FEFR")
 
     if (res.length > 0){
 
@@ -69,33 +69,34 @@ console.log(res, productRelationships, "FEFR")
 
 
     if(!props.showDelete){
-        return <Item id={props.product.id} name={props.product.productname} >
+
+        return <Card id={props.product.id} name={props.product.productname} style={{"paddingLeft": "50px"}} onClick={e => props.handleViewproductProfile(e)}>
             <Link>
                 <Image size='tiny' src={props.product.profileimage_url} />
             </Link>
             <Link>
-            <Item.Content >
+            <Card.Content >
                 <strong>{props.product.productname}</strong>
                 <h2>
                     {props.product.productname}
                 </h2>
-                <Item.Description>
+                <Card.Description>
 
-                </Item.Description>
+                </Card.Description>
 
-                <Item.Content>
-       <Item.Meta>Ratings</Item.Meta>
-       <Item.Meta>Pricing</Item.Meta>
-       <Item.Description>
+                <Card.Content>
+       <Card.Meta>Ratings</Card.Meta>
+       <Card.Meta>Pricing</Card.Meta>
+       <Card.Description>
         {props.product.productname}
-    </Item.Description>
-</Item.Content>
-</Item.Content>
+    </Card.Description>
+</Card.Content>
+</Card.Content>
                 <div className='ui two buttons'>
                 {props.editProducts? <div className='ui two buttons'><Button basic color='violet' onClick={(e) => props.displayItemForEdit(e)}>Edit</Button><Button basic color='red' onClick={(e) => props.displayItemForDelete(e, props.storeProducts)}>Delete</Button></div> : null}
             </div>
         </Link>
-    </Item>
+    </Card>
 
 
 }else{

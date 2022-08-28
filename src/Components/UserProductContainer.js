@@ -61,7 +61,7 @@ componentDidMount = () => {
         }
 
 
-        clothesProductsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete, storeRelationships) => {
+        clothesProductsDisplay = (products, editProducts, displayItemForEdit, displayItemForDelete, storeRelationships, handleViewproductProfile) => {
 
 
             let newProducts = []
@@ -81,12 +81,14 @@ componentDidMount = () => {
                          displayItemForDelete={displayItemForDelete}
                          product={filteredProduct}
                          editProducts={editProducts}
-                         displayItemForEdit={displayItemForEdit}/>)
+                         displayItemForEdit={displayItemForEdit}
+                         handleViewproductProfile={handleViewproductProfile}/>)
 
                      }else{
                          return  <Segment><h1>No Clothes</h1></Segment>
                      }
              //const storeRelationshipsBelongToProduct = newProducts.filter(product => relationships.includes(product))
+
 
 
 
@@ -275,7 +277,7 @@ componentDidMount = () => {
                                 <br></br>
                                 {console.log(products)}
                                 <Item.Group divided>
-                                {products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeRelationships): <span>No Items</span>}
+                                {products.length > 0 ? this.clothesProductsDisplay(this.props.products, this.props.editProducts, this.props.displayItemForEdit, this.props.displayItemForDelete, this.props.storeRelationships, this.props.handleViewproductProfile): <span>No Items</span>}
                             </Item.Group>
 
                             </Card.Group>

@@ -293,6 +293,7 @@ extraImages: [
                 <Segment vertical textAlign="center" style={{paddingTop: 0}}>
                 <UserContentDisplay
                     activeItem={activeItem}
+                    acceptFriendRequest={this.props.acceptFriendRequest}
                     updatedProducts={this.props.updatedProducts}
                     displayItemForDelete={this.props.displayItemForDelete}
                     storeproducts={this.props.storeproducts}
@@ -311,6 +312,8 @@ extraImages: [
                     newProduct={this.props.newProduct}
                     editStoreHandler={this.props.editStoreHandler}
                     handleShowComment={this.props.handleShowComment}
+                    handleShowPersonality={this.props.handleShowPersonality}
+                    handleViewproductProfile={this.props.handleViewproductProfile}
                     />
 
                 {console.log(this.props)}
@@ -508,18 +511,21 @@ class MobileContainer extends Component {
                   {console.log("buskljnwc", this.props.props)}
               <UserContentDisplay
                   activeItem={activeItem}
+                  acceptFriendRequest={this.props.acceptFriendRequest}
                   submitEditHandler={this.props.submitEditHandler}
                   submitStoreHandler={this.props.props.submitStoreHandler}
                   submitProductHandler={this.props.props.submitProductHandler}
                   submitStrainHandler={this.props.props.submitStrainHandler}
                   handleShowComment={handleShowComment}
+                  handleShowPersonality={this.props.handleShowPersonality}
+                  handleViewproductProfile={this.props.handleViewproductProfile}
                   user={this.props.props.user}
                   />
 
           </Segment>
 
 
-        <MobileNavBar active={this.state.activeItem} handleAddPostForm={this.props.handleAddPostForm}/>
+        <MobileNavBar active={this.state.activeItem} handleAddPostForm={this.props.props.handleAddPostForm}/>
 
       </Responsive>
     );

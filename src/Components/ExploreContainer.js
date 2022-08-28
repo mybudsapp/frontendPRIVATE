@@ -72,7 +72,7 @@ handleItemClick = (e, { name }) => {
 
     if (name === "users"){
         this.setState({
-            Feed: <AllUsersFeed user={this.props} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+            Feed: <AllUsersFeed user={this.props} history={this.props.history} displayOtherUser={this.props.displayOtherUser} handleViewUserProfile={this.props.handleViewUserProfile}/>
         })
         //("whoa")
 
@@ -200,32 +200,6 @@ class DesktopContainer extends React.Component {
       }
   }
 
-//   componentDidMount(){
-//       let token = localStorage.token
-//
-//       if (token) {
-//       fetch("http://localhost:3000/api/v1/current_user", {
-//                 method: "GET",
-//                 headers: {
-//                     Authorization: `${token}`,
-//                   "content-type": "application/json",
-//                   accepts: "application/json"
-//                 }
-//               })
-//               .then(res => {
-//                   if(!res.ok) {
-//                       res.text().then(text => alert(text))
-//                   } else {
-//                       return res.json().then(userData => {
-//                           this.setState({ user: { ...userData.user }, token: userData.jwt, avatar: userData.user.avatar });
-//                       })
-//                   }
-//               })
-//           } else {
-//               //('wowo')
-//           }
-// }
-
 
 
  logOutHandler = () => {
@@ -324,12 +298,10 @@ class MobileContainer extends Component {
 
     handleItemClick = (e, { name }) => {
 
-
           //(e, name)
-
         if (name === "users"){
             this.setState({
-                Feed: <AllUsersFeed user={this.props} mobile={this.state.mobile} history={this.props.history} handleViewUserProfile={this.props.handleViewUserProfile}/>
+                Feed: <AllUsersFeed user={this.props} mobile={this.state.mobile} history={this.props.history} displayOtherUser={this.props.displayOtherUser} handleViewUserProfile={this.props.handleViewUserProfile}/>
             })
             //("whoa")
 

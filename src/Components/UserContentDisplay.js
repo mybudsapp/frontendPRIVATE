@@ -98,7 +98,7 @@ componentDidMount = () => {
   //
   // }})
 
-
+  console.log(this.props, "componentDidMount")
 }
 
 
@@ -159,7 +159,39 @@ buddiesDisplay = () => {
 
             }
 
+            pendingRequestsDisplay = (user, props) => {
 
+
+                 if (user.pending_requests){
+
+                     return user.pending_requests.map(pendingFriend =>
+                         <Card>
+                         <Card.Content friendrequestid={pendingFriend.id}>
+                           <Image
+                             floated='right'
+                             size='mini'
+                             src={pendingFriend.url}
+                           />
+                       <span>{pendingFriend.username}</span>
+                           <Card.Meta>{pendingFriend.personality_type}</Card.Meta>
+                         </Card.Content>
+                         <Card.Content>
+                             {console.log(pendingFriend)}
+                           <div className='ui two buttons'>
+                             <Button basic color='green' onClick={e => this.props.acceptFriendRequest(e)}>
+                               Accept
+                             </Button>
+                             <Button basic color='red'>
+                               Decline
+                             </Button>
+                           </div>
+                         </Card.Content>
+                     </Card>
+                        )
+                         }else{
+                             return  <Segment><h1>No Pending Requests</h1></Segment>
+                         }
+                     }
 
 
     strainReviewsDisplay = () => {
@@ -239,48 +271,7 @@ render(){
 
 
         const {showStoreForm} = this.state
-        const items =[
-            <Feed.Event>
-            <Feed.Label>
-            <img src='https://images.unsplash.com/photo-1535740451417-25dafb0667bb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
-            </Feed.Label>
-            <Feed.Content>
-            <Feed.Summary>
-            <Feed.User>Elliot Fu</Feed.User> added you as a friend
-            <Feed.Date>1 Hour Ago</Feed.Date>
-            </Feed.Summary>
-            <Feed.Meta>
-            <Feed.Like>
-            <Icon name='like' />4 Likes
-            </Feed.Like>
-            </Feed.Meta>
-            </Feed.Content>
-        </Feed.Event>,
-
-            <Feed.Event>
-            <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-            <Feed.Content>
-            <Feed.Summary>
-            <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-            <Feed.Date>4 days ago</Feed.Date>
-            </Feed.Summary>
-            <Feed.Extra images>
-            <a href="/profile">
-            <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-            </a>
-            <a href="/profile">
-            <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-            </a>
-            </Feed.Extra>
-            <Feed.Meta>
-            <Feed.Like>
-            <Icon name='like' />1 Like
-            </Feed.Like>
-            </Feed.Meta>
-            </Feed.Content>
-        </Feed.Event>
-
-        ]
+        const items =[]
 
 
 
@@ -418,202 +409,7 @@ render(){
         )
     } else if(this.props.activeItem === 'Feed'){
 
-        const items = [
-        <Feed.Event>
-        <Feed.Label>
-        <img src='https://images.unsplash.com/photo-1535740451417-25dafb0667bb?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=334&q=80' />
-        </Feed.Label>
-        <Feed.Content>
-        <Feed.Summary>
-        <Feed.User>Elliot Fu</Feed.User> added you as a friend
-        <Feed.Date>1 Hour Ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />4 Likes
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-    </Feed.Event>,
 
-        <Feed.Event>
-        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-        <Feed.Content>
-        <Feed.Summary>
-        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-        <Feed.Date>4 days ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Extra images>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-        </a>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-        </a>
-        </Feed.Extra>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />1 Like
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-    </Feed.Event>,
-        <Feed.Event>
-        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-        <Feed.Content>
-        <Feed.Summary>
-        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-        <Feed.Date>4 days ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Extra images>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-        </a>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-        </a>
-        </Feed.Extra>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />1 Like
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-    </Feed.Event>,
-        <Feed.Event>
-        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-        <Feed.Content>
-        <Feed.Summary>
-        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-        <Feed.Date>4 days ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Extra images>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-        </a>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-        </a>
-        </Feed.Extra>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />1 Like
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-    </Feed.Event>,
-        <Feed.Event>
-        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-        <Feed.Content>
-        <Feed.Summary>
-        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-        <Feed.Date>4 days ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Extra images>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-        </a>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-        </a>
-        </Feed.Extra>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />1 Like
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-    </Feed.Event>,
-        <Feed.Event>
-        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-        <Feed.Content>
-        <Feed.Summary>
-        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-        <Feed.Date>4 days ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Extra images>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-        </a>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-        </a>
-        </Feed.Extra>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />1 Like
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-    </Feed.Event>,
-
-        <Feed.Event>
-        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-        <Feed.Content>
-        <Feed.Summary>
-        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-        <Feed.Date>4 days ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Extra images>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-        </a>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-        </a>
-        </Feed.Extra>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />1 Like
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-    </Feed.Event>,
-        <Feed.Event>
-        <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-        <Feed.Content>
-        <Feed.Summary>
-        <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-        <Feed.Date>4 days ago</Feed.Date>
-        </Feed.Summary>
-        <Feed.Extra images>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-        </a>
-        <a href="/profile">
-        <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-        </a>
-        </Feed.Extra>
-        <Feed.Meta>
-        <Feed.Like>
-        <Icon name='like' />1 Like
-        </Feed.Like>
-        </Feed.Meta>
-        </Feed.Content>
-        </Feed.Event>,
-            <Feed.Event>
-            <Feed.Label image='https://images.unsplash.com/photo-1613437636004-bb0f5786558d?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=752&q=80' />
-            <Feed.Content>
-            <Feed.Summary>
-            <a href="/profile">Helen's Boutique</a> added <a>2 New Products</a>
-            <Feed.Date>4 days ago</Feed.Date>
-            </Feed.Summary>
-            <Feed.Extra images>
-            <a href="/profile">
-            <img src='https://images.unsplash.com/photo-1505740420928-5e560c06d30e?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=750&q=80' />
-            </a>
-            <a href="/profile">
-            <img src='https://images.unsplash.com/photo-1523275335684-37898b6baf30?ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&ixlib=rb-1.2.1&auto=format&fit=crop&w=689&q=80' />
-            </a>
-            </Feed.Extra>
-            <Feed.Meta>
-            <Feed.Like>
-            <Icon name='like' />1 Like
-            </Feed.Like>
-            </Feed.Meta>
-            </Feed.Content>
-            </Feed.Event>
-        ]
 
         const style = {
           height: 30,
@@ -622,6 +418,12 @@ render(){
           padding: 8
         };
 
+
+
+
+
+
+        const items = []
 
         // <Container >
         //     <Segment  textAlign="left">
@@ -673,6 +475,8 @@ render(){
                                     <b>Yay! You have seen it all</b>
                                 </p>
                             } >
+
+
                             <FeedPostContainer posts={this.props.posts} handleShowComment={this.props.handleShowComment} user={this.props.user}/>
 
                       </InfiniteScroll>
@@ -695,7 +499,7 @@ render(){
                                     className="fa-2x text-gray-300">
                                 </FontAwesomeIcon>
                                 <Label color='red' floating>
-        22
+        21
       </Label>
   </a>
                             </Segment>
@@ -707,6 +511,7 @@ render(){
                                     scrollableTarget="infinite-scroll-component__outerdiv"
                                     endMessage={
                                 <p style={{ textAlign: 'center' , height: '100%'}}>
+                                    <br></br>
                                     <b>Yay! You have seen it all</b>
                                 </p>
                             }
@@ -715,9 +520,11 @@ render(){
 
                       <Feed>
 
-                      {items.map((i, index) => (
-                                  i
-                                ))}
+                          <Card.Group  divided>
+
+                              {this.pendingRequestsDisplay(this.props.user)}
+
+                          </Card.Group>
 
                             </Feed>
                       </InfiniteScroll>
@@ -811,6 +618,7 @@ render(){
                       products={this.props.user.products}
                       updatedProducts={this.props.updatedProducts}
                       strains={this.props.user.strains}
+                      handleViewproductProfile={this.props.handleViewproductProfile}
                       token={localStorage.token}/>
               </Segment>
           </Segment.Group>
@@ -962,16 +770,19 @@ render(){
                 <Feed >
 
          <Feed.Event>
-           <Feed.Label image='https://react.semantic-ui.com/images/avatar/large/steve.jpg' />
+           <Feed.Label image={this.props.user.avatar.url} />
            <Feed.Content>
 
                  <Feed.Summary>
-                     Personality Type
+                     Personality Type : {this.props.user.personality_type}
                  </Feed.Summary>
+                 <br></br>
+                 {this.props.user.username}
            </Feed.Content>
          </Feed.Event>
          <Feed.Summary>
-             You added <a>Jenny Hess</a> to your <a>coworker</a> group.
+
+             <Button onClick={this.props.handleShowPersonality}>Take Your Personality Test</Button>
          </Feed.Summary>
 
      </Feed>
@@ -1002,9 +813,7 @@ render(){
 
              </Feed.Content>
            </Feed.Event>
-           <Feed.Summary>
-               You added <a>Jenny Hess</a> to your <a>coworker</a> group.
-           </Feed.Summary>
+
 
        </Feed>
                       </Segment>

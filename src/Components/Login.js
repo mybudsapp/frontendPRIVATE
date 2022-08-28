@@ -55,7 +55,7 @@ const responseGoogleFailure = (response) => {
 
 
    return(
-       <div class="ui form">
+       <div className="ui form">
 <form onSubmit={this.submitHandler}>
   <label>Username</label>
 <input

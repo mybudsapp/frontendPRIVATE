@@ -64,7 +64,9 @@ class App extends Component {
     showDelete: false,
     showComment: false,
     showPost: false,
-    percent: 33
+    percent: 33,
+    otherUserView: false,
+    friendship: false
   };
 
   //----------------------Life Cycle Methods should go here--------------------//
@@ -501,10 +503,12 @@ class App extends Component {
 
   handleSoftSuccessfulClose = () => {
       this.setState({successfullRequest: !this.state.successfullRequest})
+
+      window.location.reload(true)
   }
 
   handleNewPostClose = () => {
-      this.setState({showNewPost: !this.state.showNewPost})
+      this.setState({showAddPostForm: !this.state.showAddPostForm})
   }
 
 
@@ -800,7 +804,7 @@ class App extends Component {
       fd.append("producttype" , newProductInfo.producttype)
       fd.append("retail_price", newProductInfo.retail_price)
       fd.append("store_id" , newProductInfo.store_id)
-      fd.append("user_id" , user_id)
+
 
 
 
@@ -1300,11 +1304,265 @@ submitDeleteProductHandler = (e) => {
     });
   };
 
-  //---------------------------------------------------------------------------------------
+  //-----------------------FRIEND REQUEST, ADD FRIEND, DECLINE FRIENDREQUEST----------------------------------------------------------------
+
+
+  sendFriendRequest = () => {
+
+      let token = localStorage.token;
+
+      fetch("http://localhost:3000/api/v1/friend_requests", {
+        method: "POST",
+        headers: {
+            Authorization: `${token}`,
+          "content-type": "application/json",
+          accepts: "application/json",
+      }, body: JSON.stringify({ otherUser: this.state.otherUser })}).then((response) => {
+
+          console.log(response)
+
+      if (!response.ok) {
+        return response.json().then((errorData) => {
+            console.log(errorData)
+          this.setState({
+              errors: {...errorData.error}
+      })
+  })} else {
+        return response.json().then((successfullRequest) => {
+            this.setState({
+                successfullRequest: true
+            })
+        })
+
+  }})
+}
+
+  acceptFriendRequest = (e) => {
+
+      const friendREQUESTID = e.target.parentElement.parentElement.parentElement.children[0].getAttribute('friendrequestid')
+
+      let token = localStorage.token;
+
+        fetch(`http://localhost:3000/api/v1/friend_requests/${friendREQUESTID}`,{
+          method: "PATCH",
+          headers: {
+              Authorization: `${token}`,
+            "content-type": "application/json",
+            accepts: "application/json",
+        },body: JSON.stringify({ friendResponse: "Accepted" })}).then((response) => {
+
+            console.log(response)
+
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+              console.log(errorData)
+            this.setState({
+                errors: {...errorData.error}
+        })
+    })} else {
+          return response.json().then((successfullRequest) => {
+              this.setState({
+                  successfullRequest: true
+              })
+          })
+
+    }}
+        )
+  }
+
+  declineFriendRequest = (e) => {
+      const friendREQUESTID = e.target.parentElement.parentElement.parentElement.children[0].getAttribute('friendrequestid')
+
+      let token = localStorage.token;
+
+        fetch(`http://localhost:3000/api/v1/friend_requests/${friendREQUESTID}`,{
+          method: "PATCH",
+          headers: {
+              Authorization: `${token}`,
+            "content-type": "application/json",
+            accepts: "application/json",
+        },body: JSON.stringify({ friendResponse: "Declined" })}).then((response) => {
+
+            console.log(response)
+
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+              console.log(errorData)
+            this.setState({
+                errors: {...errorData.error}
+        })
+    })} else {
+          return response.json().then((successfullRequest) => {
+              this.setState({
+                  successfullRequest: true
+              })
+          })
+
+    }}
+        )
+  }
+
+  deleteFriendshipRequest = () => {
+      this.setState({
+          deleteFriendRequestDisplay: true
+      })
+  }
+
+  deleteFriend = () => {
+
+
+
+      let token = localStorage.token;
+
+        fetch(`http://localhost:3000/api/v1/friends/udpate`,{
+          method: "PATCH",
+          headers: {
+              Authorization: `${token}`,
+            "content-type": "application/json",
+            accepts: "application/json",
+        },body: JSON.stringify({ deleteFriend: "True", otherUserID: this.state.otherUser.id })}).then((response) => {
+
+            console.log(response)
+
+        if (!response.ok) {
+          return response.json().then((errorData) => {
+              console.log(errorData)
+            this.setState({
+                errors: {...errorData.error}
+        })
+    })} else {
+          return response.json().then((successfullRequest) => {
+              this.setState({
+                  successfullRequest: true
+              })
+          })
+
+    }}
+        )
+  }
+
+
+
+
+
+
+
+
+
 
 
 
   //----------------------------Small Event Handlers Should Go Here-----------------------
+
+
+handleViewproductProfile = (e) => {
+
+    debugger
+    let token = localStorage.getItem("token");
+
+    let productID = e.target.parentElement.parentElement.children[0].getAttribute("id")
+
+    fetch(`http://localhost:3000/api/v1/products/${productID}`, {
+      method: "GET",
+      headers: {
+          Authorization: `${token}`,
+        "content-type": "application/json",
+        accepts: "application/json",
+    }})
+      .then((res) => res.json())
+      .then((productData) =>
+        this.setState({
+          productProfile: { ...productData},
+        })
+      );
+    this.props.history.push(
+      "/product/" + String(this.state.productProfile.productname)
+    );
+
+
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  displayOtherUser = (e) => {
+
+
+      let token = localStorage.getItem("token");
+
+      let otherUserId = e.target.parentElement.parentElement.getAttribute('id')
+
+
+      fetch(`http://localhost:3000/api/v1/users/${otherUserId}`, {
+        method: "GET",
+        headers: {
+            Authorization: `${token}`,
+          "content-type": "application/json",
+          accepts: "application/json",
+      }}).then((response) => {
+          console.log(response)
+
+      if (!response.ok) {
+        return response.json().then((errorData) => {
+            console.log(errorData)
+          this.setState({
+              errors: {...errorData.error}
+      })
+  })} else {
+        return response.json().then((otherUserData) => {
+
+
+
+
+            const user = this.state.user
+            const otherUser = otherUserData.user
+
+            console.log(otherUserData, ")(*()*()*)")
+
+            // const friendshipExists = otherUserData.user.friends.forEach(friend => Object.values(friend).includes(user.id))
+            //
+            //  debugger
+
+
+            if(otherUser.friends.filter(friend => friend.id == Object.values(friend).includes(user.id))){
+
+                    this.setState({
+                        friendship: true,
+                        otherUser: otherUser,
+                        otherUserView: true
+                    })
+
+            }else {
+                this.setState({
+                    otherUser: otherUserData,
+                    otherUserView: true
+                })
+            }
+
+                this.props.history.push("/profile/" + String(this.state.otherUser.username))
+
+    })
+}})
+
+    }
+
+
+
+
+
+
 
   handleEditClick = () => {
     this.props.history.push("/edit");
@@ -1375,7 +1633,7 @@ submitDeleteProductHandler = (e) => {
   //---------------------------------------------------------------------------------------
   handleAddPostForm = () => {
 
-          ("ITITITITIT")
+         console.log("POST HIT")
       this.setState({ showAddPostForm: true });
   }
 
@@ -1422,6 +1680,9 @@ submitDeleteProductHandler = (e) => {
       this.setState({showPost: !this.state.showPost})
   }
 
+  handleDeleteFriendRequestDisplay = () => {
+      this.setState({deleteFriendRequestDisplay: !this.state.deleteFriendRequestDisplay})
+  }
 
   increment = () =>
   this.setState((prevState) => ({
@@ -1445,15 +1706,13 @@ submitDeleteProductHandler = (e) => {
         body: JSON.stringify({ survey: survey.data }),
       }).then((res) => {
         if (!res.ok) {
-          res.text().then((text) =>     (text));
+          res.text().then((text) => (text));
         } else {
-          return res.json().then(window.location.reload());
+          return res.json().then(user =>
+              alert("Your New Personality Type is....." + user.user.personality_type)
+          );
         }
       });
-
-
-
-      alert("Your New Personality Type is....." + this.state.user.personality_type);
     };
 
 
@@ -1467,17 +1726,23 @@ submitDeleteProductHandler = (e) => {
             {
               type: "expression",
               name: "question1",
-              title: "So why is this important?",
-              description: "bn b nb nb nb nb nb nb nb nb ",
+              title: "What Does It Mean to Be Indica",
+              description: "The indica personality type is someone who enjoys traditionl ways of enjoying life, relaxing on the beach or enjo",
               hideNumber: true,
             },
             {
               type: "expression",
               name: "question1",
-              title: "So why is this important?",
+              title: "What Does It Mean to Be Sativa",
               description: "bn b nb nb nb nb nb nb nb nb ",
               hideNumber: true,
-            },
+            },{
+              type: "expression",
+              name: "question1",
+              title: "What Does It Mean for your Profile and Reviews",
+              description: "bn b nb nb nb nb nb nb nb nb ",
+              hideNumber: true,
+            }
           ],
         },
         {
@@ -1804,7 +2069,25 @@ submitDeleteProductHandler = (e) => {
           </Modal.Footer>
         </Modal>
 
-        <Modal centered={true} size="lg"  show={this.state.showNewPost} >
+
+        <Modal centered={true} size="lg"  show={this.state.deleteFriendRequestDisplay} >
+
+          <Modal.Header>
+            Are you sure you want to delete {this.state.otherUser.username} from your Bud life?
+          </Modal.Header>
+
+          <Modal.Footer>
+              <Button variant="secondary" onClick={this.deleteFriend}>
+                No longer Homies
+              </Button>
+              <Button variant="secondary" onClick={this.handleDeleteFriendRequestDisplay}>
+                Close
+              </Button>
+          </Modal.Footer>
+
+        </Modal>
+
+        <Modal centered={true} size="lg"  show={this.state.showAddPostForm} >
 
           <Modal.Header>
             New Post
@@ -1868,6 +2151,7 @@ submitDeleteProductHandler = (e) => {
               return (
                 <GuestContainerLayout
                   signupSubmitHandler={this.signupSubmitHandler}
+
                 />
               );
             }}
@@ -1890,6 +2174,7 @@ submitDeleteProductHandler = (e) => {
                       avatar={this.state.avatar}
                       history={this.props.history}
                       stores={this.state.user.stores}
+                      handleViewproductProfile={this.handleViewproductProfile}
                       handleViewStoreProfile={this.handleViewStoreProfile}
                       deleteStoreRequest={this.deleteStoreRequest}
                       submitStoreHandler={this.submitStoreHandler}
@@ -1913,9 +2198,10 @@ submitDeleteProductHandler = (e) => {
                       displayItemForEdit={this.displayItemForEdit}
                       displayItemForDelete={this.displayItemForDelete}
                       logOutHandler={this.logOutHandler}
+                      acceptFriendRequest={this.acceptFriendRequest}
                       submitEditHandler={this.submitEditHandler}
                       handleShowComment={this.handleShowComment}
-                      handleShowNewPost={this.handleShowNewPost}
+
                     />
             )}
             />
@@ -1923,11 +2209,16 @@ submitDeleteProductHandler = (e) => {
             path="/profile"
             render={() => (
               <Profile
-                user={this.state.user}
                 avatar={this.state.avatar}
+                friendship={this.state.friendship}
+                otherUserView={this.state.otherUserView}
+                currentUser={this.state.user}
+                otherUser={this.state.otherUser}
                 history={this.props.history}
                 strains={this.state.user.strains}
                 gallery={this.state.user.gallery}
+                sendFriendRequest={this.sendFriendRequest}
+                deleteFriendshipRequest={this.deleteFriendshipRequest}
                 handleEditClick={this.handleEditClick}
                 handleAddPostForm={this.handleAddPostForm}
                 handleNewPostClick={this.handleNewPostClick}
@@ -1956,6 +2247,7 @@ submitDeleteProductHandler = (e) => {
               <ExploreContainer
                 user={this.state.user}
                 avatar={this.state.avatar}
+                displayOtherUser={this.displayOtherUser}
                 handleAddPostForm={this.handleAddPostForm}
                 handleViewUserProfile={this.handleViewUserProfile}
                 handleNewFriendRequest={this.handleNewFriendRequest}
