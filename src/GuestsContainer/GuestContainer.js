@@ -65,39 +65,7 @@ const GuestContainerLayout = (props) => {
 ]
 
 return (
-    <div>
-        <div id="custom-css-product">
-            <header className="main-header">
-              <div className="container content">
 
-                  <nav>
-                  <ul>
-                      <Link to="/dashboard" onClick={() => window.location.reload()}  >
-                <li>
-                      <img src={home} alt="Home" /> Home
-                    </li>
-                </Link>
-
-                  <li>
-
-                </li>
-                  </ul>
-                </nav>
-
-
-                    <Input
-                        size='mini'
-    label={<Dropdown defaultValue='Strains' compact options={options} />}
-    labelPosition='right'
-    placeholder='Search on My Buds'
-  />
-
-              </div>
-
-            </header>
-        </div>
-
-    <Container text style={{ marginTop: '2em' }}>
     <Switch>
         <Route
             path="/Post"
@@ -123,9 +91,9 @@ return (
         }} />
         <Route path="/home" render={() => <Home/>} />
         <Route path="/" render={() => <Home/>} />
+        
     </Switch>
-    </Container>
-</div>
+
 
 
 
