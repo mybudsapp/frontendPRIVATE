@@ -5,27 +5,7 @@ body {
 }
 
 /* Create a container for the form */
-.signup-container {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    flex: 1 1 auto;
-    height: 100%;
-    padding-bottom: 150px;
-    background-color: white;
-}
 
-/* Center and fix the sign-up form on the page */
-.signup-form {
-flex-direction: column;
-align-items: center;
-flex: 1 0 auto;
-width: 80%;
-padding: 20px;
-margin: 30px;
-
-
-}
 
 .form-label{
 margin-bottom: 10px;
@@ -84,7 +64,7 @@ font-weight: 750;
 }
 
 @media (max-width: 768px) {
-  .fixed-bottom {
+  .fixed-menu {
       position: fixed;
        right: 0;
        bottom: 0;

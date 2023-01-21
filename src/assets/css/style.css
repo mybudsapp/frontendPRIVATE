@@ -733,18 +733,32 @@ button {
   font-weight:bold;
 }
 
-
-.container_logo-signup {
+.signup-container {
     display: flex;
+    flex-direction: column;
+    flex: 1 1 auto;
+    height: 100%;
+    padding: 70px;
+    background-color: white;
+}
+
+/* Center and fix the sign-up form on the page */
+.signup-form {
+    flex-direction: column;
     align-items: center;
-    justify-content: center;
+    flex: 1 0 auto;
+    width: 80%;
+    padding: 20px;
+    margin: 30px;
+
+
 }
 
 .logo-signup{
-    width: 100vw;
+    width: 700px;
     height: 50vh;
-   object-fit: cover;
-   margin-bottom: 25px;
+    object-fit: cover;
+    margin-bottom: 25px;
 }
 
 .Google-container{
@@ -760,23 +774,58 @@ button {
 }
 
 .terms-of-use{
-font-size: .875rem;
-font-weight: 400;
-padding: 20px 60px;
+    font-size: .875rem;
+    font-weight: 400;
+    padding: 20px 60px;
 }
 
-.googleButton{
-    display: inline-block;
-padding: 0.35em 1.2em;
-border: 0.1em solid #FFFFFF;
-margin: 0 0.3em 0.3em 0;
-border-radius: 0.12em;
-box-sizing: border-box;
-text-decoration: none;
-font-family: 'Roboto',sans-serif;
-font-weight: 300;
-background-color: inherit;
-text-align: center;
-transition: all 0.2s;
-    width: 100%;
+@media (min-width: 400px) and (max-width: 700.98px) {
+
+
+    .container_logo-signup {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .logo-signup{
+        width: 800px;
+        height: 100px;
+        object-fit: cover;
+        margin-bottom: 25px;
+    }
+
+    .Google-container{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        box-sizing: border-box;
+        margin-bottom: 20px;
+    }
+
+    .Google-container h1{
+        margin-right: 10px;
+    }
+
+    .terms-of-use{
+        font-size: .875rem;
+        font-weight: 400;
+        padding: 20px 60px;
+    }
+
+    .googleButton{
+        display: inline-block;
+        padding: 0.35em 1.2em;
+        border: 0.1em solid #FFFFFF;
+        margin: 0 0.3em 0.3em 0;
+        border-radius: 0.12em;
+        box-sizing: border-box;
+        text-decoration: none;
+        font-family: 'Roboto',sans-serif;
+        font-weight: 300;
+        background-color: inherit;
+        text-align: center;
+        transition: all 0.2s;
+        width: 100%;
+    }
 }

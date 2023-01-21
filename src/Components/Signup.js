@@ -166,8 +166,8 @@ registerButtonPressed = () => {
 
    return (
 
-       <div class="signup-container" >
-      <div >
+       <div >
+      <div class="signup-container">
 <div class="container_logo-signup">
 
     <img class="logo-signup" src={logo}></img>
